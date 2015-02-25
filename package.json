@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react": "^0.12.2"
+    "react": "^0.12.2",
+    "flux": "^2.0.1",
+    "object-assign": "^2.0.0"
   },
   "devDependencies": {
     "webpack": "^1.5.3",

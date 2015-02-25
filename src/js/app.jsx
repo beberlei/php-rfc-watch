@@ -5,12 +5,7 @@
 var React = require('react')
 var RfcEventTimeline = require('./RfcEventTimeline');
 var RfcList = require('./RfcList');
-
-var events = [
-    {type: "UserVoted", option: "No", user: "otherlei", vote: {title: "Scalar Type Hints", id: "1234"}, date: "2015-02-29 14:14"},
-    {type: "UserVoted", option: "Yes", user: "beberlei", vote: {title: "Scalar Type Hints", id: "1234"}, date: "2015-02-28 14:16"},
-    {type: "VoteOpened", user: "beberlei", vote: {title: "Scalar Type Hints", id: "1234"}, date: "2015-02-28 14:14"}
-];
+var EventsStore = require('./store/events.js');
 
 var rfcs = [
     {title: "Scalar Type Hints", id: "1234", showEvents: true},
@@ -32,4 +27,8 @@ var App = React.createClass({
     }
 });
 
-React.render(<App events={events} rfcs={rfcs} />, document.getElementById('content'));
+EventsStore.on('change', function() {
+    React.render(<App events={EventsStore.getAllActive()} rfcs={rfcs} />, document.getElementById('content'));
+});
+
+React.render(<App events={EventsStore.getAllActive()} rfcs={rfcs} />, document.getElementById('content'));

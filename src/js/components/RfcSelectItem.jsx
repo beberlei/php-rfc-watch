@@ -1,11 +1,15 @@
 var React = require('react');
+var Dispatcher = require('./../dispatcher');
 
 module.exports = React.createClass({
     getInitialState: function() {
         return {visible: true}
     },
     handleChange: function (ev) {
-        this.setState({visible: !this.state.visible});
+        var newVisibility = !this.state.visible;
+        this.setState({visible: newVisibility});
+
+        Dispatcher.emitView('RfcVisibilityToggled', {Id: this.props.rfc.id, Visible: newVisibility});
     },
     render: function() {
         return (
