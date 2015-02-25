@@ -1,0 +1,20 @@
+{
+  "name": "php-rfc-watch",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve-assets": "webpack-dev-server --progress --colors --port 8090"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "webpack": "^1.5.3",
+    "webpack-dev-server": "^1.7.0",
+    "jsx-loader": "^0.12.2",
+    "http-server": "^0.7.4"
+  }
+}
