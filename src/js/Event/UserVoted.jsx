@@ -13,8 +13,7 @@ module.exports = React.createClass({
 
                     <h3 className="timeline-header">User voted</h3>
                     <div className="timeline-body">
-                        <strong>{this.props.data.user}</strong> voted <strong>{this.props.data.option}</strong>
-                        on RFC <a>{this.props.data.vote.title}</a>
+                        <strong>{this.props.data.user}</strong> voted <strong>{this.props.data.option}</strong> on RFC <a>{this.props.data.vote.title}</a>
                     </div>
                 </div>
             </li>

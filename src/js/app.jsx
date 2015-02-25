@@ -4,6 +4,7 @@
 
 var React = require('react')
 var RfcEventTimeline = require('./RfcEventTimeline');
+var RfcList = require('./RfcList');
 
 var events = [
     {type: "UserVoted", option: "No", user: "otherlei", vote: {title: "Scalar Type Hints", id: "1234"}, date: "2015-02-29 14:14"},
@@ -11,7 +12,24 @@ var events = [
     {type: "VoteOpened", user: "beberlei", vote: {title: "Scalar Type Hints", id: "1234"}, date: "2015-02-28 14:14"}
 ];
 
-React.render(
-  <RfcEventTimeline events={events} />,
-  document.getElementById('content')
-);
+var rfcs = [
+    {title: "Scalar Type Hints", id: "1234", showEvents: true},
+    {title: "Coercive Type Hints", id: "1235", showEvents: true}
+];
+
+var App = React.createClass({
+    render: function() {
+        return (
+            <div className="row">
+                <div className="col-md-8">
+                    <RfcEventTimeline events={this.props.events} />
+                </div>
+                <div className="col-md-4">
+                    <RfcList rfcs={this.props.rfcs} />
+                </div>
+            </div>
+        )
+    }
+});
+
+React.render(<App events={events} rfcs={rfcs} />, document.getElementById('content'));
