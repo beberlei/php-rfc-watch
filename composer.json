@@ -17,7 +17,8 @@
         "doctrine/couchdb": "dev-master",
         "doctrine/couchdb-odm": "dev-master",
         "doctrine/couchdb-odm-bundle": "dev-master",
-        "qafoolabs/no-framework-bundle": "~2.2"
+        "qafoolabs/no-framework-bundle": "~2.2",
+        "kriswallsmith/buzz": "0.13.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

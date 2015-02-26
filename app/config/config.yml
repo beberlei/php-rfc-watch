@@ -28,6 +28,6 @@ twig:
 
 doctrine_couch_db:
     client:
-        dbname: phprfcwatch
+        dbname: rfcwatch
     odm:
         auto_mapping: true
