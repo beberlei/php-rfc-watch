@@ -8,19 +8,9 @@ framework:
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
-    form:            ~
-    csrf_protection: ~
-    validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
         assets_base_url: "%assets_base_url%"
-    default_locale:  "%locale%"
-    trusted_hosts:   ~
-    trusted_proxies: ~
-    session:
-        handler_id:  ~
-    fragments:       ~
-    http_method_override: true
 
 twig:
     debug:            "%kernel.debug%"
