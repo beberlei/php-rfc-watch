@@ -32,6 +32,10 @@ var App = React.createClass({
                                 This project is built with Symfony2, React.JS,  Webpack and Doctrine CouchDB ODM.
                                 You can look at the source code on <a href="https://github.com/beberlei/php-rfc-watch">Github</a>.
                             </p>
+
+                            <p>
+                                I have written a blog post on how to integrate <a href="http://www.whitewashing.de/2015/02/26/integrate_symfony_and_webpack.html">Symfony with Webpack and React.js</a> if you are interested.
+                            </p>
                         </div>
                     </div>
                 </div>
