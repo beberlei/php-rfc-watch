@@ -34,16 +34,27 @@ class DefaultController extends Controller
         $result = [];
 
         foreach ($rfcs as $rfc) {
-            $result['rfcs'][] = ['id' => $rfc->getId(), 'title' => $rfc->getTitle()];
+            $result['rfcs'][] = ['id' => $rfc->getId(), 'title' => $rfc->getTitle(), 'url' => $rfc->getUrl()];
         }
+
+        usort($events, function ($a, $b) {
+            $a = $a->getDate()->format('U');
+            $b = $b->getDate()->format('U');
+
+            if ($a == $b) {
+                return 0;
+            }
+
+            return $a > $b ? -1 : 1;
+        });
 
         foreach ($events as $event) {
             $result['events'][] = [
                 'type' => $event->getType(),
                 'option' => $event->getOption(),
                 'user' => $event->getUser(),
-                'vote' => ['id' => $event->getRfc()->getId(), 'title' => $event->getRfc()->getTitle()],
-                'date' => $event->getDate()->format('Y-m-d H:i:s'),
+                'vote' => ['id' => $event->getRfc()->getId(), 'title' => $event->getRfc()->getTitle(), 'url' => $event->getRfc()->getUrl()],
+                'date' => (int)$event->getDate()->format('U')*1000,
             ];
         }
 

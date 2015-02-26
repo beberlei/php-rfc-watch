@@ -2,13 +2,10 @@ var Dispatcher = require('./../dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
-var events = [
-    {type: "UserVoted", option: "No", user: "otherlei", vote: {title: "Scalar Type Hints", id: "1234"}, date: "2015-02-29 14:14"},
-    {type: "UserVoted", option: "Yes", user: "beberlei", vote: {title: "Scalar Type Hints", id: "1234"}, date: "2015-02-28 14:16"},
-    {type: "VoteOpened", user: "beberlei", vote: {title: "Scalar Type Hints", id: "1234"}, date: "2015-02-28 14:14"}
-];
+var events = [];
+var rfcs = [];
 
-var visibleRfcs = ["1234", "1235"];
+var visibleRfcs = [];
 
 var in_array = function(needle, list) {
     var length = list.length;
@@ -24,6 +21,26 @@ var in_array = function(needle, list) {
 };
 
 var eventsStore = assign({}, EventEmitter.prototype, {
+    fetchSuccess: function (data) {
+        events = data.events;
+        rfcs = data.rfcs;
+
+        for (var idx in rfcs) {
+            var rfc = rfcs[idx];
+            visibleRfcs.push(rfc.id);
+        }
+
+        this.emit('change');
+    },
+    fetch: function() {
+        $.ajax({
+            url: "/data.json",
+            success: this.fetchSuccess.bind(this),
+        });
+    },
+    getRfcs: function() {
+        return rfcs;
+    },
     getAllActive: function () {
         return events.filter(function (ev) {
             return in_array(ev.vote.id, visibleRfcs);

@@ -2,7 +2,8 @@ var React = require('react')
 
 module.exports = React.createClass({
     time: function() {
-        return '12:05';
+        var d = new Date(this.props.data.date);
+        return d.toLocaleString();
     },
     render: function() {
         return (
@@ -14,7 +15,7 @@ module.exports = React.createClass({
                     <h3 className="timeline-header">Vote opened</h3>
                     <div className="timeline-body">
                         <strong>{this.props.data.user}</strong> opened vote
-                        on RFC <a>{this.props.data.vote.title}</a>
+                        on RFC <a href={this.props.data.vote.url}>{this.props.data.vote.title}</a>
                     </div>
                 </div>
             </li>

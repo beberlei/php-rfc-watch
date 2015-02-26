@@ -121,10 +121,12 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
             $changedVotes = $votes->diff($rfc->getVotes());
 
             foreach ($changedVotes->getNewVotes() as $username => $option) {
+                $now = new \DateTime('now', new \DateTimeZone('UTC'));
                 $documentManager->persist(new Event($rfc, 'UserVoted', $username, $option, $now));
             }
 
             foreach ($changedVotes->getRemovedVotes() as $username => $option) {
+                $now = new \DateTime('now', new \DateTimeZone('UTC'));
                 $documentManager->persist(new Event($rfc, 'UserVoteRemoved', $username, $option, $now));
             }
 

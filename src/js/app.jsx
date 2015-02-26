@@ -7,11 +7,6 @@ var RfcEventTimeline = require('./RfcEventTimeline');
 var RfcList = require('./RfcList');
 var EventsStore = require('./store/events.js');
 
-var rfcs = [
-    {title: "Scalar Type Hints", id: "1234", showEvents: true},
-    {title: "Coercive Type Hints", id: "1235", showEvents: true}
-];
-
 var App = React.createClass({
     render: function() {
         return (
@@ -28,7 +23,8 @@ var App = React.createClass({
 });
 
 EventsStore.on('change', function() {
-    React.render(<App events={EventsStore.getAllActive()} rfcs={rfcs} />, document.getElementById('content'));
+    React.render(<App events={EventsStore.getAllActive()} rfcs={EventsStore.getRfcs()} />, document.getElementById('content'));
 });
+EventsStore.fetch();
 
-React.render(<App events={EventsStore.getAllActive()} rfcs={rfcs} />, document.getElementById('content'));
+//React.render(<App events={EventsStore.getAllActive()} rfcs={rfcs} />, document.getElementById('content'));
