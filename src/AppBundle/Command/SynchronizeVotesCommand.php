@@ -36,6 +36,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
             $rfcs[$rfc->getUrl()] = $rfc;
         }
 
+        // TODO: Discover RFCs in voting automatically
         $rfcUrls = array('https://wiki.php.net/rfc/scalar_type_hints_v5');
 
         $curl = new Curl();

@@ -19,7 +19,7 @@ class Event
     /**
      * @CouchDB\Field(type="string")
      */
-    private $type;
+    private $eventType;
 
     /**
      * @CouchDB\Field(type="string")
@@ -44,9 +44,34 @@ class Event
     public function __construct(RequestForComment $rfc, $type, $user, $option, DateTime $date)
     {
         $this->rfc = $rfc;
-        $this->type = $type;
+        $this->eventType = $type;
         $this->user = $user;
         $this->option = $option;
         $this->date = $date;
+    }
+
+    public function getRfc()
+    {
+        return $this->rfc;
+    }
+
+    public function getType()
+    {
+        return $this->eventType;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function getOption()
+    {
+        return $this->option;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
     }
 }
