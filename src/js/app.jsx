@@ -27,4 +27,6 @@ EventsStore.on('change', function() {
 });
 EventsStore.fetch();
 
-//React.render(<App events={EventsStore.getAllActive()} rfcs={rfcs} />, document.getElementById('content'));
+setInterval(function() {
+    EventsStore.fetch();
+}, 60000);

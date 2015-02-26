@@ -37,7 +37,10 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         }
 
         // TODO: Discover RFCs in voting automatically
-        $rfcUrls = array('https://wiki.php.net/rfc/scalar_type_hints_v5');
+        $rfcUrls = [
+            'https://wiki.php.net/rfc/engine_exceptions_for_php7',
+            'https://wiki.php.net/rfc/scalar_type_hints_v5',
+        ];
 
         $curl = new Curl();
         $curl->setOption(CURLOPT_TIMEOUT, 15);
@@ -91,6 +94,8 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                             break;
                     }
                 }
+
+                break; // only one form!
             }
 
             $votes = new Votes($votes);
