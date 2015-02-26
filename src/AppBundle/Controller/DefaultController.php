@@ -34,7 +34,12 @@ class DefaultController extends Controller
         $result = [];
 
         foreach ($rfcs as $rfc) {
-            $result['rfcs'][] = ['id' => $rfc->getId(), 'title' => $rfc->getTitle(), 'url' => $rfc->getUrl()];
+            $result['rfcs'][] = [
+                'id' => $rfc->getId(),
+                'title' => $rfc->getTitle(),
+                'url' => $rfc->getUrl(),
+                'results' => $rfc->getCurrentResults(),
+            ];
         }
 
         usort($events, function ($a, $b) {

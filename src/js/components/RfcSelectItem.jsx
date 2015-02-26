@@ -1,6 +1,8 @@
 var React = require('react');
 var Dispatcher = require('./../dispatcher');
 
+var VoteResults = require('./VoteResults.jsx');
+
 module.exports = React.createClass({
     getInitialState: function() {
         return {visible: true}
@@ -19,6 +21,7 @@ module.exports = React.createClass({
                         <input type="checkbox" checked={this.state.visible} onChange={this.handleChange} />
                         {this.props.rfc.title}
                     </label>
+                    <VoteResults results={this.props.rfc.results} />
                 </div>
             </li>
         );

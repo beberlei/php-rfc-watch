@@ -105,4 +105,23 @@ class RequestForComment
     {
         return new Votes($this->currentVotes);
     }
+
+    public function getCurrentResults()
+    {
+        $results = array();
+
+        foreach ($this->currentVotes as $_ => $vote) {
+            if (!isset($results[$vote])) {
+                $results[$vote] = ['votes' => 0, 'share' => 0, 'option' => $vote];
+            }
+            $results[$vote]['votes']++;
+        }
+
+        $total = count($this->currentVotes);
+        foreach ($results as $vote => $data) {
+            $results[$vote]['share'] = $data['votes'] / $total;
+        }
+
+        return array_values($results);
+    }
 }
