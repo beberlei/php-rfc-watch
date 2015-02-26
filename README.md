@@ -20,7 +20,10 @@ Installation for Debian/Ubuntu:
 Open two terminals with:
 
     $ npm run serve-assets
-
     $ php app/console server:run
 
 Open up `http://localhost:8000`.
+
+Import the current state by calling:
+
+    $ php app/console rfc-watch:synchronize
