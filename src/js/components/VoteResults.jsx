@@ -15,7 +15,7 @@ module.exports = React.createClass({
     render: function() {
         return (
             <ul>
-                <li>Votes casted: {this.computeTotalVotesCasted()}</li>
+                <li>Votes cast: {this.computeTotalVotesCasted()}</li>
                 {this.props.results.map(this.renderVote)}
             </ul>
         );

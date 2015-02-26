@@ -16,6 +16,24 @@ var App = React.createClass({
                 </div>
                 <div className="col-md-4">
                     <RfcList rfcs={this.props.rfcs} />
+
+                    <div className="box">
+                        <div className="box-header">
+                            <h3 className="box-title">About</h3>
+                        </div>
+                        <div className="box-body">
+                            <p>
+                                No need to frantically refresh the voting pages for RFCs anymore.
+                                You will get both the results and an event based stream of all the votes
+                                for RFCs.
+                            </p>
+
+                            <p>
+                                This project is built with Symfony2, React.JS,  Webpack and Doctrine CouchDB ODM.
+                                You can look at the source code on <a href="https://github.com/beberlei/php-rfc-watch">Github</a>.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
