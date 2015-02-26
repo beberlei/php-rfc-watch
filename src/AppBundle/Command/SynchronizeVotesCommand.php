@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 use AppBundle\CouchDocument\RequestForComment;
 use AppBundle\CouchDocument\Event;
+use AppBundle\Model\Vote;
 use AppBundle\Model\Votes;
 
 use Buzz\Browser;
@@ -79,15 +80,20 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                                 continue;
                             }
                             $username = $matches[1];
+                            $time = new \DateTime;
 
                             $option = -1;
                             foreach ($xpath->evaluate('td', $row) as $optionNode) {
                                 if ($optionNode->getAttribute('style') == 'background-color:#AFA') {
+                                    $imgTitle = $xpath->evaluate('img[@title]', $optionNode);
+                                    if ($imgTitle && $imgTitle->length > 0) {
+                                        $time = \DateTime::createFromFormat('Y/m/d H:i', $imgTitle->item(0)->getAttribute('title'), new \DateTimeZone('UTC'));
+                                    }
                                     break;
                                 }
                                 $option++;
                             }
-                            $votes[$username] = $options[$option];
+                            $votes[$username] = new Vote($options[$option], $time);
                             break;
                     }
                 }
@@ -124,14 +130,12 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
 
             $changedVotes = $votes->diff($rfc->getVotes());
 
-            foreach ($changedVotes->getNewVotes() as $username => $option) {
-                $now = new \DateTime('now', new \DateTimeZone('UTC'));
-                $documentManager->persist(new Event($rfc, 'UserVoted', $username, $option, $now));
+            foreach ($changedVotes->getNewVotes() as $username => $vote) {
+                $documentManager->persist(new Event($rfc, 'UserVoted', $username, $vote->getOption(), $vote->getTime()));
             }
 
             foreach ($changedVotes->getRemovedVotes() as $username => $option) {
-                $now = new \DateTime('now', new \DateTimeZone('UTC'));
-                $documentManager->persist(new Event($rfc, 'UserVoteRemoved', $username, $option, $now));
+                $documentManager->persist(new Event($rfc, 'UserVoteRemoved', $username, $vote->getOption(), $vote->getTime()));
             }
 
             $rfc->setVotes($votes);
