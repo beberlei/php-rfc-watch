@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve-assets": "webpack-dev-server --progress --colors --port 8090"
+    "serve-assets": "webpack-dev-server --progress --colors --port 8090 --content-base web/"
   },
   "author": "",
   "license": "ISC",
