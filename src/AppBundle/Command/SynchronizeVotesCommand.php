@@ -31,7 +31,6 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
     {
         $documentManager = $this->getContainer()->get('doctrine_couchdb.odm.default_document_manager');
         $rfcRepository = $documentManager->getRepository(RequestForComment::CLASS);
-        $now = new \DateTime('now', new \DateTimeZone('UTC'));
 
         $rfcs = [];
         foreach ($rfcRepository->findAll() as $rfc) {
@@ -122,7 +121,19 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                 $rfc->setAuthor($author);
                 $rfcs[$rfcUrl] = $rfc;
 
-                $documentManager->persist(new Event($rfc, 'VoteOpened', $author, null, $now));
+                // Guess at the approximate start time based on the first vote.
+                $start = array_reduce(iterator_to_array($votes), function (\DateTime $start, Vote $vote) {
+                    if ($start > $vote->getTime()) {
+                        return clone $vote->getTime();
+                    }
+                    return $start;
+                }, new \DateTime);
+
+                // Subtract another minute so the vote opening always appears
+                // before the first vote.
+                $start->sub(new \DateInterval('PT1M'));
+
+                $documentManager->persist(new Event($rfc, 'VoteOpened', $author, null, $start));
                 $documentManager->persist($rfc);
             } else {
                 $rfc = $rfcs[$rfcUrl];
