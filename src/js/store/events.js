@@ -5,6 +5,7 @@ var assign = require('object-assign');
 var events = [];
 var rfcs = [];
 
+var fetchedBefore = false;
 var visibleRfcs = [];
 
 var in_array = function(needle, list) {
@@ -25,11 +26,12 @@ var eventsStore = assign({}, EventEmitter.prototype, {
         events = data.events;
         rfcs = data.rfcs;
 
-        if (visibleRfcs.length == 0) {
+        if (!fetchedBefore) {
             for (var idx in rfcs) {
                 var rfc = rfcs[idx];
                 visibleRfcs.push(rfc.id);
             }
+            fetchedBefore = true;
         }
 
         this.emit('change');
