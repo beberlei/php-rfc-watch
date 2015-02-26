@@ -55,12 +55,12 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
             $xpath = new \DOMXpath($dom);
 
             $nodes = $xpath->evaluate('//form[@name="doodle__form"]');
+            $votes = array();
 
             foreach ($nodes as $form) {
                 $output->writeln(sprintf('Found Form for <info>%s</info>', $rfcUrl));
                 $rows = $xpath->evaluate('table[@class="inline"]/tbody/tr', $form);
 
-                $votes = array();
                 foreach ($rows as $row) {
                     switch ((string)$row->getAttribute('class')) {
                         case 'row0':
@@ -121,6 +121,8 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
 
                 $documentManager->persist(new Event($rfc, 'VoteOpened', $author, null, $now));
                 $documentManager->persist($rfc);
+            } else {
+                $rfc = $rfcs[$rfcUrl];
             }
 
             $changedVotes = $votes->diff($rfc->getVotes());

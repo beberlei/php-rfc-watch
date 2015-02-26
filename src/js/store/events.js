@@ -25,9 +25,11 @@ var eventsStore = assign({}, EventEmitter.prototype, {
         events = data.events;
         rfcs = data.rfcs;
 
-        for (var idx in rfcs) {
-            var rfc = rfcs[idx];
-            visibleRfcs.push(rfc.id);
+        if (visibleRfcs.length == 0) {
+            for (var idx in rfcs) {
+                var rfc = rfcs[idx];
+                visibleRfcs.push(rfc.id);
+            }
         }
 
         this.emit('change');
