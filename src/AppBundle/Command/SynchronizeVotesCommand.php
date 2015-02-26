@@ -14,6 +14,7 @@ use AppBundle\Model\Votes;
 
 use Buzz\Browser;
 use Buzz\Client\Curl;
+use Symfony\Component\CssSelector\CssSelector;
 
 class SynchronizeVotesCommand extends ContainerAwareCommand
 {
@@ -36,15 +37,11 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
             $rfcs[$rfc->getUrl()] = $rfc;
         }
 
-        // TODO: Discover RFCs in voting automatically
-        $rfcUrls = [
-            'https://wiki.php.net/rfc/engine_exceptions_for_php7',
-            'https://wiki.php.net/rfc/scalar_type_hints_v5',
-        ];
-
         $curl = new Curl();
         $curl->setOption(CURLOPT_TIMEOUT, 15);
         $browser = new Browser($curl);
+
+        $rfcUrls = $this->getRfcsInVoting($browser);
 
         $newEvents = [];
 
@@ -143,5 +140,23 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         }
 
         $documentManager->flush();
+    }
+
+    private function getRfcsInVoting(Browser $browser)
+    {
+        $response   = $browser->get('https://wiki.php.net/rfc');
+        $document   = $response->toDomDocument();
+        $xPath      = new \DOMXPath($document);
+        $rfcs       = [];
+        foreach ($xPath->query(CssSelector::toXPath('#in_voting_phase + .level2 .li')) as $listing) {
+            /** @var \DOMNode $listing */
+            /** @var \DOMElement $link */
+            $link   = $xPath->query(CssSelector::toXPath('a'), $listing)->item(0);
+            $rfcs[] = $link->getAttribute('href');
+        }
+
+        return array_map(function ($link) {
+            return 'https://wiki.php.net' . $link;
+        }, $rfcs);
     }
 }
