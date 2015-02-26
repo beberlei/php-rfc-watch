@@ -13,7 +13,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        assets_base_url: "http://localhost:8090"
+        assets_base_url: "%assets_base_url%"
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
