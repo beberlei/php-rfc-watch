@@ -4,10 +4,10 @@
     display: inline-block;
 }
 .vote-results {
-    height: 4px,
-    line-height: 4px,
-    border-radius: 2px,
-    overflow: hidden,
-    white-space: nowrap,
+    height: 4px;
+    line-height: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+    white-space: nowrap;
     margin: 5px 0
 }
