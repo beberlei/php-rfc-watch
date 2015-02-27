@@ -4,7 +4,7 @@ var moment = require('./../vendor/moment.timezone');
 
 module.exports = React.createClass({
     time: function() {
-        var time = moment(this.props.date).local().format('YY-MM-DD hh:mm');
+        var time = moment(this.props.date).local().format('YY-MM-DD HH:mm');
         return time;
     },
     render: function() {
