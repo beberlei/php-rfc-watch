@@ -96,8 +96,8 @@ class RequestForComment
     public function setVotes(Votes $votes)
     {
         $this->currentVotes = array();
-        foreach ($votes as $username => $option) {
-            $this->currentVotes[$username] = $option;
+        foreach ($votes as $username => $vote) {
+            $this->currentVotes[$username] = $vote->getOption();
         }
     }
 

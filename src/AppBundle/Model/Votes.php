@@ -58,17 +58,25 @@ class Votes implements IteratorAggregate, Countable
 
     public function diff(Votes $other)
     {
-        $added = array_diff_assoc($this->votes, $other->votes);
-        $removed = array_diff_assoc($other->votes, $this->votes);
+        if (is_string(current($this->votes))) {
+            $ourVotes = array_map(function ($vote) {
+                return new Vote($vote);
+            });
+        } else {
+            $ourVotes = $this->votes;
+        }
+
+        $added = array_diff_assoc($ourVotes, $other->votes);
+        $removed = array_diff_assoc($other->votes, $ourVotes);
 
         $newVotes = Votes::emptyVote();
-        foreach ($added as $username => $option) {
-            $newVotes = $newVotes->addVote($username, $option);
+        foreach ($added as $username => $vote) {
+            $newVotes = $newVotes->addVote($username, $vote);
         }
 
         $removedVotes = Votes::emptyVote();
-        foreach ($removed as $username => $option) {
-            $removedVotes = $removedVotes->addVote($username, $option);
+        foreach ($removed as $username => $vote) {
+            $removedVotes = $removedVotes->addVote($username, $vote);
         }
 
         return new VotesDiff($newVotes, $removedVotes);

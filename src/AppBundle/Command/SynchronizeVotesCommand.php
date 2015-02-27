@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 use AppBundle\CouchDocument\RequestForComment;
 use AppBundle\CouchDocument\Event;
+use AppBundle\Model\Vote;
 use AppBundle\Model\Votes;
 
 use Buzz\Browser;
@@ -30,7 +31,6 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
     {
         $documentManager = $this->getContainer()->get('doctrine_couchdb.odm.default_document_manager');
         $rfcRepository = $documentManager->getRepository(RequestForComment::CLASS);
-        $now = new \DateTime('now', new \DateTimeZone('UTC'));
 
         $rfcs = [];
         foreach ($rfcRepository->findAll() as $rfc) {
@@ -79,15 +79,20 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                                 continue;
                             }
                             $username = $matches[1];
+                            $time = new \DateTime;
 
                             $option = -1;
                             foreach ($xpath->evaluate('td', $row) as $optionNode) {
                                 if ($optionNode->getAttribute('style') == 'background-color:#AFA') {
+                                    $imgTitle = $xpath->evaluate('img[@title]', $optionNode);
+                                    if ($imgTitle && $imgTitle->length > 0) {
+                                        $time = \DateTime::createFromFormat('Y/m/d H:i', $imgTitle->item(0)->getAttribute('title'), new \DateTimeZone('UTC'));
+                                    }
                                     break;
                                 }
                                 $option++;
                             }
-                            $votes[$username] = $options[$option];
+                            $votes[$username] = new Vote($options[$option], $time);
                             break;
                     }
                 }
@@ -116,7 +121,19 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                 $rfc->setAuthor($author);
                 $rfcs[$rfcUrl] = $rfc;
 
-                $documentManager->persist(new Event($rfc, 'VoteOpened', $author, null, $now));
+                // Guess at the approximate start time based on the first vote.
+                $start = array_reduce(iterator_to_array($votes), function (\DateTime $start, Vote $vote) {
+                    if ($start > $vote->getTime()) {
+                        return clone $vote->getTime();
+                    }
+                    return $start;
+                }, new \DateTime);
+
+                // Subtract another minute so the vote opening always appears
+                // before the first vote.
+                $start->sub(new \DateInterval('PT1M'));
+
+                $documentManager->persist(new Event($rfc, 'VoteOpened', $author, null, $start));
                 $documentManager->persist($rfc);
             } else {
                 $rfc = $rfcs[$rfcUrl];
@@ -124,14 +141,12 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
 
             $changedVotes = $votes->diff($rfc->getVotes());
 
-            foreach ($changedVotes->getNewVotes() as $username => $option) {
-                $now = new \DateTime('now', new \DateTimeZone('UTC'));
-                $documentManager->persist(new Event($rfc, 'UserVoted', $username, $option, $now));
+            foreach ($changedVotes->getNewVotes() as $username => $vote) {
+                $documentManager->persist(new Event($rfc, 'UserVoted', $username, $vote->getOption(), $vote->getTime()));
             }
 
             foreach ($changedVotes->getRemovedVotes() as $username => $option) {
-                $now = new \DateTime('now', new \DateTimeZone('UTC'));
-                $documentManager->persist(new Event($rfc, 'UserVoteRemoved', $username, $option, $now));
+                $documentManager->persist(new Event($rfc, 'UserVoteRemoved', $username, $vote->getOption(), $vote->getTime()));
             }
 
             $rfc->setVotes($votes);
