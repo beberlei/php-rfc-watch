@@ -8,12 +8,9 @@ module.exports = React.createClass({
     renderVoteProgress: function (vote, idx) {
         var style = {
             width: Math.round(vote.share * 100, 2) + "%",
-            height: "4px",
-            verticalAlign: "top",
-            display: "inline-block",
             backgroundColor: "hsl(" + (490 - idx * 70) % 360 + ", 80%, 50%)"
         };
-        return <div class="progress-bar" style={style}></div>
+        return <div className="progress-bar" style={style}></div>
     },
     computeTotalVotesCasted: function () {
         var total = 0;
@@ -23,18 +20,9 @@ module.exports = React.createClass({
         return total;
     },
     render: function () {
-        var style = {
-            height: "4px",
-            lineHeight: "4px",
-            borderRadius: "2px",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            margin: "5px 0"
-        };
-
         return (
             <div>
-                <div style={style}>
+                <div className="vote-results">
                     {this.props.results.map(this.renderVoteProgress)}
                 </div>
 
