@@ -6,9 +6,13 @@ module.exports = React.createClass({
         return <li>{vote.option}: {vote.votes} ({share}%)</li>;
     },
     renderVoteProgress: function (vote, idx) {
+        var opt = vote.option.toLowerCase();
+        var color = (opt.indexOf('yes') == 0)
+            ? 'green'
+            : (opt.indexOf('no') == 0 ? 'red' : 'orange');
         var style = {
             width: Math.round(vote.share * 100, 2) + "%",
-            backgroundColor: "hsl(" + (490 - idx * 70) % 360 + ", 80%, 50%)"
+            backgroundColor: color
         };
         return <div className="progress-bar" style={style}></div>
     },

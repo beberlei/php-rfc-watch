@@ -122,6 +122,22 @@ class RequestForComment
             $results[$vote]['share'] = $data['votes'] / $total;
         }
 
-        return array_values($results);
+        $result = array_values($results);
+
+        // magic happening here
+        usort($result, function ($a, $b) {
+            $aYes = stripos($a['option'], 'yes') === 0;
+            $bYes = stripos($b['option'], 'yes') === 0;
+
+            if ($aYes && !$bYes) {
+                return -1;
+            } else if ($bYes && !$aYes) {
+                return 1;
+            }
+
+            return strcmp($a['option'], $b['option']);
+        });
+
+        return $result;
     }
 }
