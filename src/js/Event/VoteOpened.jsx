@@ -1,5 +1,7 @@
 var React = require('react')
 
+var Date = require('./../components/Date');
+
 module.exports = React.createClass({
     render: function() {
         return (
