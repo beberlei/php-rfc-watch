@@ -23,6 +23,9 @@ module.exports = React.createClass({
                     </label>
                     <VoteResults results={this.props.rfc.results} />
                 </div>
+                <p>
+                    <a href={this.props.rfc.url}>Go to RFC</a>
+                </p>
             </li>
         );
     }
