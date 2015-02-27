@@ -59,7 +59,7 @@ class DefaultController extends Controller
                 'option' => $event->getOption(),
                 'user' => $event->getUser(),
                 'vote' => ['id' => $event->getRfc()->getId(), 'title' => $event->getRfc()->getTitle(), 'url' => $event->getRfc()->getUrl()],
-                'date' => (int)$event->getDate()->format('U')*1000,
+                'date' => $event->getDate()->format('Y-m-d H:i:s'),
             ];
         }
 
