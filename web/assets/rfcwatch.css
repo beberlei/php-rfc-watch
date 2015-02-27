@@ -1,13 +1,24 @@
-.vote-results .progress-bar {
-    height: 4px;
-    vertical-align: top;
-    display: inline-block;
-}
 .vote-results {
     height: 4px;
     line-height: 4px;
     border-radius: 2px;
     overflow: hidden;
     white-space: nowrap;
-    margin: 5px 0
+    margin: 5px 0;
+}
+
+.vote-results .progress-bar {
+    height: 4px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.vote-results .progress-bar:first-of-type {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.vote-results .progress-bar:last-of-type {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
