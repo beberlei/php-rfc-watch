@@ -22,3 +22,7 @@
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
 }
+
+.timeline-item .fa-clock-o {
+    margin-right: 4px;
+}
