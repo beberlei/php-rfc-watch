@@ -62,7 +62,7 @@ class DefaultController extends Controller
             ];
             // TODO: Cleanup somehow
             if ($event->getType() == 'VoteClosed') {
-                $vote['results'] = $rfc->getCurrentResults();
+                $vote['results'] = $event->getRfc()->getCurrentResults();
             }
             $result['events'][] = [
                 'type' => $event->getType(),
