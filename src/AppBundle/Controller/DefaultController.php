@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -59,7 +60,7 @@ class DefaultController extends Controller
                 'option' => $event->getOption(),
                 'user' => $event->getUser(),
                 'vote' => ['id' => $event->getRfc()->getId(), 'title' => $event->getRfc()->getTitle(), 'url' => $event->getRfc()->getUrl()],
-                'date' => $event->getDate()->format('Y-m-d H:i:s'),
+                'date' => $event->getDate()->format(DateTime::ISO8601),
             ];
         }
 
