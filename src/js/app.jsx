@@ -36,6 +36,11 @@ var App = React.createClass({
                             <p>
                                 I have written a blog post on how to integrate <a href="http://www.whitewashing.de/2015/02/26/integrate_symfony_and_webpack.html">Symfony with Webpack and React.js</a> if you are interested.
                             </p>
+
+                            <div data-gratipay-username="beberlei" data-gratipay-readystatus="ready">
+                                <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,900" />
+                                <a className="gratipay-profile-link gratipay-button gratipay-my-tip-button" target="_top" href="https://gratipay.com/beberlei/">Gratipay</a>
+                            </div>
                         </div>
                     </div>
                 </div>
