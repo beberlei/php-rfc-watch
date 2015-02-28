@@ -42,8 +42,12 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         $browser = new Browser($curl);
 
         $rfcUrls = $this->getRfcsInVoting($browser);
-
-        $newEvents = [];
+        $rfcUrls = array_unique(
+            array_merge(
+                $rfcUrls,
+                array_keys(array_filter($rfcs, function ($rfc) { return $rfc->isOpen(); }))
+            )
+        );
 
         foreach ($rfcUrls as $rfcUrl) {
             $response = $browser->get($rfcUrl);
@@ -52,7 +56,9 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
             $xpath = new \DOMXpath($dom);
 
             $nodes = $xpath->evaluate('//form[@name="doodle__form"]');
+
             $votes = array();
+            $voteWasClosed = false;
 
             foreach ($nodes as $form) {
                 $output->writeln(sprintf('Found Form for <info>%s</info>', $rfcUrl));
@@ -74,6 +80,11 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                             break;
                         default:
                             $username = trim($xpath->evaluate('string(td[1])', $row));
+
+                            if ($username === 'This poll has been closed.') {
+                                $voteWasClosed = true;
+                                continue;
+                            }
 
                             if (!preg_match('(\(([^\)]+)\))', $username, $matches)) {
                                 continue;
@@ -150,6 +161,12 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
             }
 
             $rfc->setVotes($votes);
+
+            if ($voteWasClosed && $rfc->isOpen()) {
+                $rfc->closeVote();
+                $documentManager->persist(new Event($rfc, 'VoteClosed', $rfc->getAuthor(), null, new \DateTime('now')));
+            }
+
 
             $output->writeln(sprintf('..Found <info>%d</info> changes in votes.', count($changedVotes)));
         }

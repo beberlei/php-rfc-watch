@@ -83,6 +83,16 @@ class RequestForComment
         return $this->status;
     }
 
+    public function isOpen()
+    {
+        return $this->status === self::OPEN;
+    }
+
+    public function closeVote()
+    {
+        $this->status = self::CLOSE;
+    }
+
     public function setAuthor($author)
     {
         $this->author = $author;

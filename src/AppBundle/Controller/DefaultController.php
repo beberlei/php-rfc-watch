@@ -55,11 +55,20 @@ class DefaultController extends Controller
         });
 
         foreach ($events as $event) {
+            $vote = [
+                'id' => $event->getRfc()->getId(),
+                'title' => $event->getRfc()->getTitle(),
+                'url' => $event->getRfc()->getUrl()
+            ];
+            // TODO: Cleanup somehow
+            if ($event->getType() == 'VoteClosed') {
+                $vote['results'] = $rfc->getCurrentResults();
+            }
             $result['events'][] = [
                 'type' => $event->getType(),
                 'option' => $event->getOption(),
                 'user' => $event->getUser(),
-                'vote' => ['id' => $event->getRfc()->getId(), 'title' => $event->getRfc()->getTitle(), 'url' => $event->getRfc()->getUrl()],
+                'vote' => $vote,
                 'date' => $event->getDate()->format(DateTime::ISO8601),
             ];
         }
