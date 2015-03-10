@@ -4,8 +4,132 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c3889833b36d34dffd236477b0386cb",
+    "hash": "616585b78ec9882aaa10003122f9d809",
     "packages": [
+        {
+            "name": "appneta/traceview-bundle",
+            "version": "dev-master",
+            "target-dir": "AppNeta/TraceViewBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/appneta/AppNetaTraceViewBundle.git",
+                "reference": "01eee7551065226af9ec01b57dc50402bdfa2a80"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/appneta/AppNetaTraceViewBundle/zipball/01eee7551065226af9ec01b57dc50402bdfa2a80",
+                "reference": "01eee7551065226af9ec01b57dc50402bdfa2a80",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/symfony": "~2.1"
+            },
+            "suggest": {
+                "appneta/traceview-twig": "`AppNeta/TraceViewTwig` provides additional information about Twig template rendering time and helpers for adding real user monitoring JavaScript.",
+                "ext-oboe": "`AppNeta/TraceViewBundle` will not report data unless the `php-oboe` extension is enabled at v1.4.4 or higher."
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "AppNeta\\TraceViewBundle": ""
+                },
+                "files": [
+                    "Resources/stubs/api.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Meickle",
+                    "email": "jmeickle@appneta.com",
+                    "homepage": "https://github.com/Eronarn",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "AppNeta",
+                    "email": "traceviewsupport@appneta.com",
+                    "homepage": "https://github.com/appneta",
+                    "role": "Sponsor"
+                }
+            ],
+            "description": "Additional integration with AppNeta TraceView for Symfony2 (or anything else using EventDispatcher/HTTPKernel).",
+            "homepage": "https://github.com/appneta/AppNetaTraceViewBundle",
+            "keywords": [
+                "apm",
+                "appneta",
+                "monitoring",
+                "performance",
+                "symfony",
+                "traceview"
+            ],
+            "time": "2014-10-23 18:13:13"
+        },
+        {
+            "name": "appneta/traceview-twig",
+            "version": "dev-master",
+            "target-dir": "AppNeta/TraceViewTwig",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/appneta/AppNetaTraceViewTwig.git",
+                "reference": "f1c3d2ee4b2ab21c6fcffa469b45d80655ed58e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/appneta/AppNetaTraceViewTwig/zipball/f1c3d2ee4b2ab21c6fcffa469b45d80655ed58e7",
+                "reference": "f1c3d2ee4b2ab21c6fcffa469b45d80655ed58e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2",
+                "twig/extensions": "~1.0",
+                "twig/twig": "~1.0"
+            },
+            "suggest": {
+                "ext-oboe": "`AppNeta/TraceViewTwig` will not report data unless the `php-oboe` extension is enabled at v1.4.4 or higher."
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "AppNeta\\TraceViewTwig": ""
+                },
+                "files": [
+                    "Resources/stubs/api.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Meickle",
+                    "email": "jmeickle@appneta.com",
+                    "homepage": "https://github.com/Eronarn",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "AppNeta",
+                    "email": "traceviewsupport@appneta.com",
+                    "homepage": "https://github.com/appneta",
+                    "role": "Sponsor"
+                }
+            ],
+            "description": "Additional Twig integration for AppNeta TraceView.",
+            "homepage": "https://github.com/appneta/AppNetaTraceViewTwig",
+            "keywords": [
+                "apm",
+                "appneta",
+                "monitoring",
+                "performance",
+                "traceview",
+                "twig"
+            ],
+            "time": "2014-10-23 18:06:13"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.3",
@@ -1322,7 +1446,9 @@
     "stability-flags": {
         "doctrine/couchdb": 20,
         "doctrine/couchdb-odm": 20,
-        "doctrine/couchdb-odm-bundle": 20
+        "doctrine/couchdb-odm-bundle": 20,
+        "appneta/traceview-twig": 20,
+        "appneta/traceview-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
