@@ -40,6 +40,7 @@ class DefaultController extends Controller
                 'title' => $rfc->getTitle(),
                 'url' => $rfc->getUrl(),
                 'results' => $rfc->getCurrentResults(),
+                'status' => $rfc->getStatus(),
             ];
         }
 
