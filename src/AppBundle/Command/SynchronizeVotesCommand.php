@@ -42,6 +42,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         $browser = new Browser($curl);
 
         $rfcUrls = $this->getRfcsInVoting($browser);
+
         $rfcUrls = array_unique(
             array_merge(
                 $rfcUrls,
@@ -98,6 +99,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                                     $imgTitle = $xpath->evaluate('img[@title]', $optionNode);
                                     if ($imgTitle && $imgTitle->length > 0) {
                                         $time = \DateTime::createFromFormat('Y/m/d H:i', $imgTitle->item(0)->getAttribute('title'), new \DateTimeZone('UTC'));
+                                        $time->modify('-60 minute'); // hardcode how far both servers are away from each other timezone-wise
                                     }
                                     break;
                                 }
