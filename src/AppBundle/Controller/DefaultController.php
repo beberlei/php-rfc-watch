@@ -29,7 +29,7 @@ class DefaultController extends Controller
         $rfcRepository = $documentManager->getRepository(RequestForComment::CLASS);
         $eventRepository = $documentManager->getRepository(Event::CLASS);
 
-        $rfcs = $rfcRepository->findAll();
+        $rfcs = array_reverse($rfcRepository->findAll());
         $events = $eventRepository = $eventRepository->findAll();
 
         $result = [];
