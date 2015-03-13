@@ -15,6 +15,8 @@ module.exports = React.createClass({
 
         var className = 'fa ' + vote + ' ' + bg;
 
+        var peopleUrl = "http://people.php.net/" + this.props.data.user;
+
         return (
             <li>
                 <i className={className}></i>
@@ -23,7 +25,7 @@ module.exports = React.createClass({
 
                     <h3 className="timeline-header">User voted</h3>
                     <div className="timeline-body">
-                        <strong>{this.props.data.user}</strong> voted <strong>{this.props.data.option}</strong> on RFC <a href={this.props.data.vote.url}>{this.props.data.vote.title}</a>
+                        <strong><a href={peopleUrl}>{this.props.data.user}</a></strong> voted <strong>{this.props.data.option}</strong> on RFC <a href={this.props.data.vote.url}>{this.props.data.vote.title}</a>
                     </div>
                 </div>
             </li>
