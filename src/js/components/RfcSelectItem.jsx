@@ -25,7 +25,7 @@ module.exports = React.createClass({
                 </div>
                 <p>
                     <a href={this.props.rfc.url}>Go to RFC</a>
-                    {this.props.rfc.status == 'close' ? 'Voting has closed' : ''}
+                    {this.props.rfc.status == 'close' ? ' Voting has closed' : ''}
                 </p>
             </li>
         );
