@@ -13,7 +13,6 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
-        "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/couchdb": "dev-master",
         "doctrine/couchdb-odm": "dev-master",
         "doctrine/couchdb-odm-bundle": "dev-master",
@@ -28,7 +27,6 @@
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
         "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
@@ -36,7 +34,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ],
         "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",

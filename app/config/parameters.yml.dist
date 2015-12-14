@@ -1,5 +1,0 @@
-# This file is auto-generated during the composer install
-parameters:
-    locale: en
-    secret: ThisTokenIsNotSoSecretChangeIt
-    assets_base_url: "http://localhost:8090"

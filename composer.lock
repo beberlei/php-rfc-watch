@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bea26f7a74855d0c0aaa0b80817ca8b4",
-    "content-hash": "8d159443568822c29c96be3df73f0464",
+    "hash": "132728b79fa45dfa6ce3f6a5b51ef541",
+    "content-hash": "3ee42039d9fe7b364f0064b779971484",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -403,12 +403,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineCouchDBBundle.git",
-                "reference": "baec4ef83bac81b8753af39440b71e852f8788d0"
+                "reference": "7b1204c6655e607c7114e7cbfbf5de0f5d9ba93a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineCouchDBBundle/zipball/baec4ef83bac81b8753af39440b71e852f8788d0",
-                "reference": "baec4ef83bac81b8753af39440b71e852f8788d0",
+                "url": "https://api.github.com/repos/doctrine/DoctrineCouchDBBundle/zipball/7b1204c6655e607c7114e7cbfbf5de0f5d9ba93a",
+                "reference": "7b1204c6655e607c7114e7cbfbf5de0f5d9ba93a",
                 "shasum": ""
             },
             "require": {
@@ -445,7 +445,7 @@
                 "persistence",
                 "symfony"
             ],
-            "time": "2015-12-14 19:43:24"
+            "time": "2015-12-14 20:07:33"
         },
         {
             "name": "doctrine/inflector",
@@ -621,57 +621,6 @@
                 "parser"
             ],
             "time": "2014-09-09 13:34:57"
-        },
-        {
-            "name": "incenteev/composer-parameter-handler",
-            "version": "v2.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Incenteev/ParameterHandler.git",
-                "reference": "d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc",
-                "reference": "d7ce7f06136109e81d1cb9d57066c4d4a99cf1cc",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/yaml": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "composer/composer": "1.0.*@dev",
-                "phpspec/prophecy-phpunit": "~1.0",
-                "symfony/filesystem": "~2.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Incenteev\\ParameterHandler\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christophe Coevoet",
-                    "email": "stof@notk.org"
-                }
-            ],
-            "description": "Composer script handling your ignored parameter file",
-            "homepage": "https://github.com/Incenteev/ParameterHandler",
-            "keywords": [
-                "parameters management"
-            ],
-            "time": "2015-11-10 17:04:01"
         },
         {
             "name": "kriswallsmith/buzz",

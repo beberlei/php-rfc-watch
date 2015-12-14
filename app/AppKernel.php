@@ -36,6 +36,14 @@ class AppKernel extends Kernel
     protected function getEnvParameters()
     {
         $parameters = parent::getEnvParameters();
+        $parameters['secret'] = sha1(microtime(true));
+
+        if ($this->getEnvironment() === 'prod') {
+            $parameters['assets_base_url'] = '';
+        } else {
+            $parameters['assets_base_url'] = 'http://localhost:8090';
+        }
+        $parameters['locale'] = 'en';
 
         if (isset($_SERVER['COUCHDB_URL'])) {
             $parameters['couchdb_url'] = $_SERVER['COUCHDB_URL'];
