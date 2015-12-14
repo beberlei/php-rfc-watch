@@ -32,4 +32,17 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
+
+    protected function getEnvParameters()
+    {
+        $parameters = parent::getEnvParameters();
+
+        if (isset($_SERVER['COUCHDB_URL'])) {
+            $parameters['couchdb_url'] = $_SERVER['COUCHDB_URL'];
+        } else {
+            $parameters['couchdb_url'] = 'http://localhost:5984/rfcwatch';
+        }
+
+        return $parameters;
+    }
 }

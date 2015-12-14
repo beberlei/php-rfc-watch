@@ -403,20 +403,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineCouchDBBundle.git",
-                "reference": "5edd1117d2ddc05b512f15f9ba8cc093cc65adfc"
+                "reference": "baec4ef83bac81b8753af39440b71e852f8788d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineCouchDBBundle/zipball/5edd1117d2ddc05b512f15f9ba8cc093cc65adfc",
-                "reference": "5edd1117d2ddc05b512f15f9ba8cc093cc65adfc",
+                "url": "https://api.github.com/repos/doctrine/DoctrineCouchDBBundle/zipball/baec4ef83bac81b8753af39440b71e852f8788d0",
+                "reference": "baec4ef83bac81b8753af39440b71e852f8788d0",
                 "shasum": ""
             },
             "require": {
                 "doctrine/couchdb": "@dev",
                 "doctrine/couchdb-odm": "@dev",
                 "php": ">=5.3.2",
-                "symfony/doctrine-bridge": "~2.0",
-                "symfony/framework-bundle": "~2.0"
+                "symfony/doctrine-bridge": "~2.3|~3.0",
+                "symfony/framework-bundle": "~2.3|~3.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -445,7 +445,7 @@
                 "persistence",
                 "symfony"
             ],
-            "time": "2015-09-02 12:04:27"
+            "time": "2015-12-14 19:43:24"
         },
         {
             "name": "doctrine/inflector",
