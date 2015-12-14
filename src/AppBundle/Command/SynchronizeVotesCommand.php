@@ -24,6 +24,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         $this
             ->setName('rfc-watch:synchronize')
             ->setDescription('Synchronize the Current votes from wiki.php.net to RFC Watch')
+            ->addOption('daemon', 'd', InputOption::VALUE_NONE, 'Daemon')
         ;
     }
 
@@ -32,148 +33,158 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         $documentManager = $this->getContainer()->get('doctrine_couchdb.odm.default_document_manager');
         $rfcRepository = $documentManager->getRepository(RequestForComment::CLASS);
 
-        $rfcs = [];
-        foreach ($rfcRepository->findAll() as $rfc) {
-            $rfcs[$rfc->getUrl()] = $rfc;
-        }
+        $daemon = $input->getOption('daemon');
 
-        $curl = new Curl();
-        $curl->setOption(CURLOPT_TIMEOUT, 15);
-        $browser = new Browser($curl);
+        do {
+            $rfcs = [];
+            foreach ($rfcRepository->findAll() as $rfc) {
+                $rfcs[$rfc->getUrl()] = $rfc;
+            }
 
-        $rfcUrls = $this->getRfcsInVoting($browser);
+            $curl = new Curl();
+            $curl->setOption(CURLOPT_TIMEOUT, 15);
+            $browser = new Browser($curl);
 
-        $rfcUrls = array_unique(
-            array_merge(
-                $rfcUrls,
-                array_keys(array_filter($rfcs, function ($rfc) { return $rfc->isOpen(); }))
-            )
-        );
+            $rfcUrls = $this->getRfcsInVoting($browser);
 
-        foreach ($rfcUrls as $rfcUrl) {
-            $response = $browser->get($rfcUrl);
+            $rfcUrls = array_unique(
+                array_merge(
+                    $rfcUrls,
+                    array_keys(array_filter($rfcs, function ($rfc) { return $rfc->isOpen(); }))
+                )
+            );
 
-            $dom = $response->toDomDocument();
-            $xpath = new \DOMXpath($dom);
+            foreach ($rfcUrls as $rfcUrl) {
+                $response = $browser->get($rfcUrl);
 
-            $nodes = $xpath->evaluate('//form[@name="doodle__form"]');
+                $dom = $response->toDomDocument();
+                $xpath = new \DOMXpath($dom);
 
-            $votes = array();
-            $voteWasClosed = false;
+                $nodes = $xpath->evaluate('//form[@name="doodle__form"]');
 
-            foreach ($nodes as $form) {
-                $output->writeln(sprintf('Found Form for <info>%s</info>', $rfcUrl));
-                $rows = $xpath->evaluate('table[@class="inline"]/tbody/tr', $form);
+                $votes = array();
+                $voteWasClosed = false;
 
-                foreach ($rows as $row) {
-                    switch ((string)$row->getAttribute('class')) {
-                        case 'row0':
-                            // do nothing;
-                            break;
-                        case 'row1':
-                            $options = array();
-                            foreach ($xpath->evaluate('td', $row) as $optionNode) {
-                                $option = trim($optionNode->nodeValue);
-                                if ($option !== "Real name") {
-                                    $options[] = $option;
-                                }
-                            }
-                            break;
-                        default:
-                            $username = trim($xpath->evaluate('string(td[1])', $row));
+                foreach ($nodes as $form) {
+                    $output->writeln(sprintf('Found Form for <info>%s</info>', $rfcUrl));
+                    $rows = $xpath->evaluate('table[@class="inline"]/tbody/tr', $form);
 
-                            if ($username === 'This poll has been closed.') {
-                                $voteWasClosed = true;
-                                continue;
-                            }
-
-                            if (!preg_match('(\(([^\)]+)\))', $username, $matches)) {
-                                continue;
-                            }
-                            $username = $matches[1];
-                            $time = new \DateTime;
-
-                            $option = -1;
-                            foreach ($xpath->evaluate('td', $row) as $optionNode) {
-                                if ($optionNode->getAttribute('style') == 'background-color:#AFA') {
-                                    $imgTitle = $xpath->evaluate('img[@title]', $optionNode);
-                                    if ($imgTitle && $imgTitle->length > 0) {
-                                        $time = \DateTime::createFromFormat('Y/m/d H:i', $imgTitle->item(0)->getAttribute('title'), new \DateTimeZone('UTC'));
-                                        $time->modify('-60 minute'); // hardcode how far both servers are away from each other timezone-wise
+                    foreach ($rows as $row) {
+                        switch ((string)$row->getAttribute('class')) {
+                            case 'row0':
+                                // do nothing;
+                                break;
+                            case 'row1':
+                                $options = array();
+                                foreach ($xpath->evaluate('td', $row) as $optionNode) {
+                                    $option = trim($optionNode->nodeValue);
+                                    if ($option !== "Real name") {
+                                        $options[] = $option;
                                     }
-                                    break;
                                 }
-                                $option++;
-                            }
-                            $votes[$username] = new Vote($options[$option], $time);
-                            break;
+                                break;
+                            default:
+                                $username = trim($xpath->evaluate('string(td[1])', $row));
+
+                                if ($username === 'This poll has been closed.') {
+                                    $voteWasClosed = true;
+                                    continue;
+                                }
+
+                                if (!preg_match('(\(([^\)]+)\))', $username, $matches)) {
+                                    continue;
+                                }
+                                $username = $matches[1];
+                                $time = new \DateTime;
+
+                                $option = -1;
+                                foreach ($xpath->evaluate('td', $row) as $optionNode) {
+                                    if ($optionNode->getAttribute('style') == 'background-color:#AFA') {
+                                        $imgTitle = $xpath->evaluate('img[@title]', $optionNode);
+                                        if ($imgTitle && $imgTitle->length > 0) {
+                                            $time = \DateTime::createFromFormat('Y/m/d H:i', $imgTitle->item(0)->getAttribute('title'), new \DateTimeZone('UTC'));
+                                            $time->modify('-60 minute'); // hardcode how far both servers are away from each other timezone-wise
+                                        }
+                                        break;
+                                    }
+                                    $option++;
+                                }
+                                $votes[$username] = new Vote($options[$option], $time);
+                                break;
+                        }
                     }
+
+                    break; // only one form!
                 }
 
-                break; // only one form!
-            }
+                $votes = new Votes($votes);
 
-            $votes = new Votes($votes);
+                if (!isset($rfcs[$rfcUrl])) {
+                    $title = trim(str_replace('PHP RFC:', '', $xpath->evaluate('string(//h1)')));
+                    $author = "";
 
-            if (!isset($rfcs[$rfcUrl])) {
-                $title = trim(str_replace('PHP RFC:', '', $xpath->evaluate('string(//h1)')));
-                $author = "";
-
-                $listItems = $xpath->evaluate('//li/div[@class="li"]');
-                foreach ($listItems as $listItem) {
-                    $content = trim($listItem->nodeValue);
-                    if (strpos($content, "Author") === 0) {
-                        $parts = explode(":", $content);
-                        $author = $parts[1];
+                    $listItems = $xpath->evaluate('//li/div[@class="li"]');
+                    foreach ($listItems as $listItem) {
+                        $content = trim($listItem->nodeValue);
+                        if (strpos($content, "Author") === 0) {
+                            $parts = explode(":", $content);
+                            $author = $parts[1];
+                        }
                     }
+
+                    $rfc = new RequestForComment();
+                    $rfc->setTitle($title);
+                    $rfc->setUrl($rfcUrl);
+                    $rfc->setAuthor($author);
+                    $rfcs[$rfcUrl] = $rfc;
+
+                    // Guess at the approximate start time based on the first vote.
+                    $start = array_reduce(iterator_to_array($votes), function (\DateTime $start, Vote $vote) {
+                        if ($start > $vote->getTime()) {
+                            return clone $vote->getTime();
+                        }
+                        return $start;
+                    }, new \DateTime);
+
+                    // Subtract another minute so the vote opening always appears
+                    // before the first vote.
+                    $start->sub(new \DateInterval('PT1M'));
+
+                    $documentManager->persist(new Event($rfc, 'VoteOpened', $author, null, $start));
+                    $documentManager->persist($rfc);
+                } else {
+                    $rfc = $rfcs[$rfcUrl];
                 }
 
-                $rfc = new RequestForComment();
-                $rfc->setTitle($title);
-                $rfc->setUrl($rfcUrl);
-                $rfc->setAuthor($author);
-                $rfcs[$rfcUrl] = $rfc;
+                $changedVotes = $votes->diff($rfc->getVotes());
 
-                // Guess at the approximate start time based on the first vote.
-                $start = array_reduce(iterator_to_array($votes), function (\DateTime $start, Vote $vote) {
-                    if ($start > $vote->getTime()) {
-                        return clone $vote->getTime();
-                    }
-                    return $start;
-                }, new \DateTime);
+                foreach ($changedVotes->getNewVotes() as $username => $vote) {
+                    $documentManager->persist(new Event($rfc, 'UserVoted', $username, $vote->getOption(), $vote->getTime()));
+                }
 
-                // Subtract another minute so the vote opening always appears
-                // before the first vote.
-                $start->sub(new \DateInterval('PT1M'));
+                foreach ($changedVotes->getRemovedVotes() as $username => $option) {
+                    $documentManager->persist(new Event($rfc, 'UserVoteRemoved', $username, $vote->getOption(), $vote->getTime()));
+                }
 
-                $documentManager->persist(new Event($rfc, 'VoteOpened', $author, null, $start));
-                $documentManager->persist($rfc);
-            } else {
-                $rfc = $rfcs[$rfcUrl];
+                $rfc->setVotes($votes);
+
+                if ($voteWasClosed && $rfc->isOpen()) {
+                    $rfc->closeVote();
+                    $documentManager->persist(new Event($rfc, 'VoteClosed', $rfc->getAuthor(), null, new \DateTime('now')));
+                }
+
+
+                $output->writeln(sprintf('..Found <info>%d</info> changes in votes.', count($changedVotes)));
             }
 
-            $changedVotes = $votes->diff($rfc->getVotes());
+            $documentManager->flush();
+            $documentManager->clear();
 
-            foreach ($changedVotes->getNewVotes() as $username => $vote) {
-                $documentManager->persist(new Event($rfc, 'UserVoted', $username, $vote->getOption(), $vote->getTime()));
+            if ($daemon) {
+                sleep(60*5);
             }
 
-            foreach ($changedVotes->getRemovedVotes() as $username => $option) {
-                $documentManager->persist(new Event($rfc, 'UserVoteRemoved', $username, $vote->getOption(), $vote->getTime()));
-            }
-
-            $rfc->setVotes($votes);
-
-            if ($voteWasClosed && $rfc->isOpen()) {
-                $rfc->closeVote();
-                $documentManager->persist(new Event($rfc, 'VoteClosed', $rfc->getAuthor(), null, new \DateTime('now')));
-            }
-
-
-            $output->writeln(sprintf('..Found <info>%d</info> changes in votes.', count($changedVotes)));
-        }
-
-        $documentManager->flush();
+        } while ($daemon);
     }
 
     private function getRfcsInVoting(Browser $browser)
