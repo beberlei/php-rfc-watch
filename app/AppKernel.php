@@ -39,7 +39,7 @@ class AppKernel extends Kernel
         $parameters['secret'] = sha1(microtime(true));
 
         if ($this->getEnvironment() === 'prod') {
-            $parameters['assets_base_url'] = '';
+            $parameters['assets_base_url'] = null;
         } else {
             $parameters['assets_base_url'] = 'http://localhost:8090';
         }
