@@ -37,12 +37,6 @@ class AppKernel extends Kernel
     {
         $parameters = parent::getEnvParameters();
         $parameters['secret'] = sha1(microtime(true));
-
-        if ($this->getEnvironment() === 'prod') {
-            $parameters['assets_base_url'] = null;
-        } else {
-            $parameters['assets_base_url'] = 'http://localhost:8090';
-        }
         $parameters['locale'] = 'en';
 
         if (isset($_SERVER['COUCHDB_URL'])) {

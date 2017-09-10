@@ -9,7 +9,6 @@ framework:
         strict_requirements: ~
     templating:
         engines: ['twig']
-        assets_base_url: "%assets_base_url%"
 
 twig:
     debug:            "%kernel.debug%"
