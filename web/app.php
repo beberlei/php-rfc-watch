@@ -3,8 +3,6 @@
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
 
-date_default_timezone_set(new \DateTimeZone('UTC'));
-
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 
 // Enable APC for autoloading to improve performance.
