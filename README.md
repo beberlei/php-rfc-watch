@@ -27,3 +27,32 @@ Open up `http://localhost:8000`.
 Import the current state by calling:
 
     $ php app/console rfc-watch:synchronize
+
+## Run with Caddy
+
+To run PHP RFC Watch using Caddy HTTP Server see the configuration I use to run it myself:
+
+```
+php-rfc-watch.beberlei.de {
+    root /var/www/phprfcwatch/web
+    log /var/log/caddy/phprfcwatch.log
+    errors /var/log/caddy/errors-phprfcwatch.log
+
+    gzip 
+    tls off
+
+    git {
+        repo github.com/beberlei/php-rfc-watch
+        path ../../phprfcwatch
+        then composer install
+    }
+
+    fastcgi / /var/run/php/php7.0-fpm.sock php {
+        index app.php
+    }
+
+    rewrite  {
+        to {path} {path}/  /app.php
+    }
+}
+```
