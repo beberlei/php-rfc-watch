@@ -12,7 +12,9 @@
         "symfony/translation": "^4.1",
         "symfony/validator": "^4.1",
         "symfony/yaml": "^4.1",
-        "phpunit/phpunit": "^7.2"
+        "phpunit/phpunit": "^7.2",
+        "qafoolabs/no-framework-bundle": "dev-master",
+        "symfony/templating": "^4.1"
     },
     "scripts": {
         "auto-scripts": {
@@ -24,7 +26,8 @@
         "symfony/dotenv": "^4.1",
         "symfony/maker-bundle": "^1.5",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0",
+        "symfony/web-server-bundle": "^4.1"
     },
     "autoload": {
         "psr-4": {
