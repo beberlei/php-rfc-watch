@@ -1,1 +1,29 @@
 @import '~bootstrap/scss/bootstrap.scss';
+
+nav {
+    .sponsored-by {
+        a {
+            font-size: 10pt;
+            color: #fff;
+        }
+    }
+}
+
+main {
+    margin-top: 20px;
+    flex: 1;
+    min-height: 85vh;
+
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+footer {
+    text-align: center;
+    color: #999;
+}

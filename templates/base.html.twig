@@ -8,18 +8,39 @@
         <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
     </head>
     <body>
-        <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="sponsored-by">
+                <a target="_blank" href="https://tideways.com">PHP RFC Watch is sponsored by <img width="16" height="16" src="/tideways.png" /> Tideways <span class="d-none d-lg-inline">- Profiling, Monitoring and Exception Tracking for PHP</span></a>
+            </div>
+        </nav>
+
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <h1><img height="40" src="/php.svg"> RFC Watch</h1>
+                    </div>
+                    <div class="col-sm">
+                        <a href="#">Notify me when Voting on RFCs is completed</a>
+                    </div>
+                </div>
+
+                {% block content %}{% endblock %}
+
+            </div>
+        </main>
+        
+        <footer class="container-fluid bg-faded">
             <div class="row">
                 <div class="col-sm">
-                    <h1>PHP RFC Watch</h1>
-                </div>
-                <div class="col-sm">
-                    <a href="#">Notify me when Voting on RFCs is completed</a>
+                    Built by Tideways.com | 
+                    <a href="https://tideways.com/imprint">Imprint</a> |
+                    <a href="https://tideways.com/tos">Terms Of Service</a> |
+                    <a href="https://tideways.com/privacy">Privacy Policy</a>
                 </div>
             </div>
+        </footer>
 
-            {% block content %}{% endblock %}
-        </div>
         <script src="{{ asset('build/js/app.js') }}"></script>
     </body>
 </html>
