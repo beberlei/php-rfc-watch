@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>PHP RFC Watch</title>
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <h1>PHP RFC Watch</h1>
+                </div>
+                <div class="col-sm">
+                    <a href="#">Notify me when Voting on RFCs is completed</a>
+                </div>
+            </div>
+
+            {% block content %}{% endblock %}
+        </div>
+        <script src="{{ asset('build/js/app.js') }}"></script>
     </body>
 </html>
