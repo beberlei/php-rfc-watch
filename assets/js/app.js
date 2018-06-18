@@ -7,7 +7,7 @@ import _ from 'underscore'
 class VoteResults extends React.Component {
     renderVote (vote, idx) {
         var share = Math.round(vote.share * 100, 2);
-        return <li>{vote.option}: {vote.votes} ({share}%)</li>;
+        return <div className="col-lg" key={vote.option}>{vote.option}: {vote.votes} ({share}%)</div>;
     }
 
     renderVoteProgress () {
@@ -30,14 +30,14 @@ class VoteResults extends React.Component {
     render () {
         return (
             <div>
-                <div className="vote-results">
+                <div className="vote-results mb-2">
                     {this.renderVoteProgress()}
                 </div>
 
-                <ul>
-                    <li>Votes cast: {this.computeTotalVotesCasted()}</li>
+                <div className="row">
+                    <div className="col-lg">Votes cast: {this.computeTotalVotesCasted()}</div>
                     {this.props.results.map(this.renderVote)}
-                </ul>
+                </div>
             </div>
         );
     }
@@ -45,12 +45,17 @@ class VoteResults extends React.Component {
 
 class RfcVoteItem extends React.Component {
     render() {
-        return <div className="card">
-            <div className="card-header">
-                <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
-            </div>
-            <div className="card-body">
-                <VoteResults results={this.props.rfc.results} share={this.props.rfc.share} />
+        return <div className="col-lg-6 mb-4">
+            <div className="card">
+                <div className="card-header">
+                    {this.props.rfc.status == 'open' ?
+                        <span className="badge badge-primary mr-1">Active</span>
+                        : null }
+                    <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
+                </div>
+                <div className="card-body">
+                    <VoteResults results={this.props.rfc.results} share={this.props.rfc.share} />
+                </div>
             </div>
         </div>
     }
@@ -58,7 +63,9 @@ class RfcVoteItem extends React.Component {
 
 class RfcList extends React.Component {
     render () {
-        return this.props.rfcs.map(item => { return <RfcVoteItem key={item.id} rfc={item} /> })
+        return <div className="row">
+            {this.props.rfcs.map(item => { return <RfcVoteItem key={item.id} rfc={item} /> })}
+        </div>
     }
 }
 
@@ -72,10 +79,15 @@ class RfcWatch extends React.Component {
         };
     }
 
-    componentDidMount() {
+    fetchData () {
         fetch('/data.json')
             .then(response => response.json())
             .then(data => this.setState({ data: data, loading: false }));
+    }
+
+    componentDidMount() {
+        this.fetchData()
+        setInterval(() => { this.fetchData() }, 60000);
     }
 
     render () {

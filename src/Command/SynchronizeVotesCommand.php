@@ -90,7 +90,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                             if (!preg_match('(\(([^\)]+)\))', $username, $matches)) {
                                 continue;
                             }
-                            $username = $matches[1];
+                            $username = md5($matches[1]);
                             $time = new \DateTime;
 
                             $option = -1;
