@@ -76,4 +76,36 @@ class DefaultController extends Controller
 
         return new JsonResponse($result);
     }
+
+    /**
+     * @Route("/notify", name="notify")
+     */
+    public function newsletterAction()
+    {
+        return [];
+    }
+
+    /**
+     * @Route("/optin", name="optin")
+     */
+    public function optinAction()
+    {
+        return [];
+    }
+
+    /**
+     * @Route("/confirm", name="confirm")
+     */
+    public function confirmAction()
+    {
+        return [];
+    }
+
+    /**
+     * @Route("/unsubscribe", name="unsubscribe")
+     */
+    public function unsubscribeAction()
+    {
+        return [];
+    }
 }

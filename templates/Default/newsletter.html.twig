@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+<form method="POST" action="https://campaigns.tideways.io/signup">
+    <input type="hidden" name="list" value="06b270ac-7323-11e8-9a3c-dab956361052">
+    <input type="hidden" name="url"/>
+    <div class="row">
+        <div class="col-md">
+            <p>
+                We sent semi-automated updates whenever an RFC is accepted
+                or rejected by voting. Stop with the constant refresh of
+                the PHP RFC Watch website and just get notified whenever a
+                vote closes. In addition we also sent updates about PHP
+                major releases and all the new features included.
+            </p>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+
+                    <p>
+                        <input type="email" class="form-control" name="email" placeholder="E-Mail address"/>
+                    </p>
+
+                    <p>
+                    By clicking on the Subscribe button I am giving my consent for Tideways to hold my email address for the purposes of contacting me with occasional information about PHP RFCs and Releases.</p>
+
+                    <p>You can unsubscribe with one click at any time and withdraw your consent. No spam. We will never share your e-mail address. <a href="https://tideways.com/privacy">Our Privacy Policy</a>
+                    </p>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-primary">Signup for Notifications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
