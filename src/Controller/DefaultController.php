@@ -7,8 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use App\CouchDocument\RequestForComment;
-use App\CouchDocument\Event;
+use App\Entity\RequestForComment;
+use App\Entity\Event;
 
 class DefaultController extends Controller
 {
@@ -25,9 +25,9 @@ class DefaultController extends Controller
      */
     public function dataAction()
     {
-        $documentManager = $this->get('doctrine_couchdb.odm.default_document_manager');
-        $rfcRepository = $documentManager->getRepository(RequestForComment::CLASS);
-        $eventRepository = $documentManager->getRepository(Event::CLASS);
+        $entityManager = $this->get('doctrine.orm.default_entity_manager');
+        $rfcRepository = $entityManager->getRepository(RequestForComment::CLASS);
+        $eventRepository = $entityManager->getRepository(Event::CLASS);
 
         $rfcs = array_reverse($rfcRepository->findAll());
         $events = $eventRepository = $eventRepository->findAll();
@@ -68,7 +68,6 @@ class DefaultController extends Controller
             $result['events'][] = [
                 'type' => $event->getType(),
                 'option' => $event->getOption(),
-                'user' => $event->getUser(),
                 'vote' => $vote,
                 'date' => $event->getDate()->format(DateTime::ISO8601),
             ];

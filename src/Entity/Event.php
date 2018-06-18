@@ -1,51 +1,46 @@
 <?php
 
-namespace App\CouchDocument;
+namespace App\Entity;
 
-use Doctrine\ODM\CouchDB\Mapping\Annotations as CouchDB;
+use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
- * @CouchDB\Document
- * @CouchDB\Index
+ * @ORM\Entity
  */
 class Event
 {
     /**
-     * @CouchDB\Id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
      */
     private $id;
 
     /**
-     * @CouchDB\Field(type="string")
+     * @ORM\Column(type="string")
      */
     private $eventType;
 
     /**
-     * @CouchDB\Field(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $option;
 
     /**
-     * @CouchDB\Field(type="string")
-     */
-    private $user;
-
-    /**
-     * @CouchDB\ReferenceOne(targetDocument="App\CouchDocument\RequestForComment")
+     * @ORM\ManyToOne(targetEntity="App\Entity\RequestForComment")
      */
     private $rfc;
 
     /**
-     * @CouchDB\Field(type="datetime")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
-    public function __construct(RequestForComment $rfc, $type, $user, $option, DateTime $date)
+    public function __construct(RequestForComment $rfc, $type, $option, DateTime $date)
     {
         $this->rfc = $rfc;
         $this->eventType = $type;
-        $this->user = $user;
         $this->option = $option;
         $this->date = $date;
     }
@@ -58,11 +53,6 @@ class Event
     public function getType()
     {
         return $this->eventType;
-    }
-
-    public function getUser()
-    {
-        return $this->user;
     }
 
     public function getOption()

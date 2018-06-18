@@ -1,13 +1,12 @@
 <?php
 
-namespace App\CouchDocument;
+namespace App\Entity;
 
-use Doctrine\ODM\CouchDB\Mapping\Annotations as CouchDB;
+use Doctrine\ORM\Mapping as ORM;
 use App\Model\Votes;
 
 /**
- * @CouchDB\Document
- * @CouchDB\Index
+ * @ORM\Entity
  */
 class RequestForComment
 {
@@ -15,35 +14,37 @@ class RequestForComment
     const CLOSE = 'close';
 
     /**
-     * @CouchDB\Id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
      */
     private $id;
 
     /**
-     * @CouchDB\Field(type="string")
+     * @ORM\Column(type="string")
      */
     private $url;
 
     /**
-     * @CouchDB\Field(type="string")
+     * @ORM\Column(type="string")
      * @var string
      */
     private $title;
 
     /**
-     * @CouchDB\Field(type="string")
+     * @ORM\Column(type="string")
      * @var string
      */
     private $author;
 
     /**
-     * @CouchDB\Field(type="string")
+     * @ORM\Column(type="string")
      * @var string
      */
     private $status = self::OPEN;
 
     /**
-     * @CouchDB\Field(type="mixed")
+     * @ORM\Column(type="json_array")
      * @var array<string,string>
      */
     private $currentVotes = array();

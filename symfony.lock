@@ -71,8 +71,20 @@
     "egulias/email-validator": {
         "version": "2.1.4"
     },
+    "http-interop/http-factory": {
+        "version": "0.3.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "kriswallsmith/buzz": {
+        "version": "0.17",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.17",
+            "ref": "89a8c10882c422723d1c7f80a41f7008b17f608c"
+        }
     },
     "monolog/monolog": {
         "version": "1.23.0"
@@ -82,6 +94,9 @@
     },
     "nikic/php-parser": {
         "version": "v4.0.2"
+    },
+    "nyholm/psr7": {
+        "version": "0.3.0"
     },
     "ocramius/package-versions": {
         "version": "1.3.0"
@@ -94,6 +109,15 @@
     },
     "phar-io/version": {
         "version": "1.0.1"
+    },
+    "php-http/httplug": {
+        "version": "v1.1.0"
+    },
+    "php-http/message-factory": {
+        "version": "v1.0.2"
+    },
+    "php-http/promise": {
+        "version": "v1.0.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -136,6 +160,12 @@
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-client": {
+        "version": "0.1.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/log": {
         "version": "1.0.2"
@@ -208,6 +238,9 @@
             "version": "3.3",
             "ref": "e3868d2f4a5104f19f844fe551099a00c6562527"
         }
+    },
+    "symfony/css-selector": {
+        "version": "v4.1.0"
     },
     "symfony/debug": {
         "version": "v4.1.0"

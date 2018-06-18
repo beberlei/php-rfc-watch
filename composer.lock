@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d47045b00e5180b8d7f44a5c89e51386",
+    "content-hash": "79776ce9b7d247fcd3d23570e5cd8e08",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1034,6 +1034,54 @@
                 "sql"
             ],
             "time": "2014-01-12T16:20:24+00:00"
+        },
+        {
+            "name": "kriswallsmith/buzz",
+            "version": "v0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kriswallsmith/Buzz.git",
+                "reference": "487760b05d6269a4c2c374364325326cfa65b12c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/487760b05d6269a4c2c374364325326cfa65b12c",
+                "reference": "487760b05d6269a4c2c374364325326cfa65b12c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Buzz": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Lightweight HTTP client",
+            "homepage": "https://github.com/kriswallsmith/Buzz",
+            "keywords": [
+                "curl",
+                "http client"
+            ],
+            "time": "2014-09-15T12:42:36+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3114,6 +3162,59 @@
                 }
             ],
             "description": "Symfony Console Component",
+            "homepage": "https://symfony.com",
+            "time": "2018-05-30T07:26:09+00:00"
+        },
+        {
+            "name": "symfony/css-selector",
+            "version": "v4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "03ac71606ecb0b0ce792faa17d74cc32c2949ef4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/03ac71606ecb0b0ce792faa17d74cc32c2949ef4",
+                "reference": "03ac71606ecb0b0ce792faa17d74cc32c2949ef4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\CssSelector\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jean-François Simon",
+                    "email": "jeanfrancois.simon@sensiolabs.com"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
             "time": "2018-05-30T07:26:09+00:00"
         },
@@ -5599,6 +5700,58 @@
             "time": "2017-12-04T20:26:38+00:00"
         },
         {
+            "name": "http-interop/http-factory",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/http-interop/http-factory.git",
+                "reference": "c2587cc0a6f74987fefb5b8074acfd32c69a4b0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/http-interop/http-factory/zipball/c2587cc0a6f74987fefb5b8074acfd32c69a4b0f",
+                "reference": "c2587cc0a6f74987fefb5b8074acfd32c69a4b0f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Interop\\Http\\Factory\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP message factories",
+            "keywords": [
+                "factory",
+                "http",
+                "message",
+                "psr",
+                "psr-17",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2017-03-24T14:48:51+00:00"
+        },
+        {
             "name": "nikic/php-parser",
             "version": "v4.0.2",
             "source": {
@@ -5648,6 +5801,314 @@
                 "php"
             ],
             "time": "2018-06-03T11:33:10+00:00"
+        },
+        {
+            "name": "nyholm/psr7",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nyholm/psr7.git",
+                "reference": "ec2c453decfc5f8ee5a8cf43694b8ca392503d32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nyholm/psr7/zipball/ec2c453decfc5f8ee5a8cf43694b8ca392503d32",
+                "reference": "ec2c453decfc5f8ee5a8cf43694b8ca392503d32",
+                "shasum": ""
+            },
+            "require": {
+                "http-interop/http-factory": "^0.3",
+                "php": "^7.1",
+                "php-http/message-factory": "^1.0",
+                "psr/http-message": "^1.0"
+            },
+            "provide": {
+                "psr/http-factory-implementation": "1.0",
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "http-interop/http-factory-tests": "dev-master",
+                "php-http/psr7-integration-tests": "dev-master",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nyholm\\Psr7\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com"
+                }
+            ],
+            "description": "A fast PHP7 implementation of PSR-7",
+            "homepage": "http://tnyholm.se",
+            "keywords": [
+                "psr-17",
+                "psr-7"
+            ],
+            "time": "2018-02-06T12:01:53+00:00"
+        },
+        {
+            "name": "php-http/httplug",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/httplug.git",
+                "reference": "1c6381726c18579c4ca2ef1ec1498fdae8bdf018"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/httplug/zipball/1c6381726c18579c4ca2ef1ec1498fdae8bdf018",
+                "reference": "1c6381726c18579c4ca2ef1ec1498fdae8bdf018",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "php-http/promise": "^1.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "henrikbjorn/phpspec-code-coverage": "^1.0",
+                "phpspec/phpspec": "^2.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Http\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric GELOEN",
+                    "email": "geloen.eric@gmail.com"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                }
+            ],
+            "description": "HTTPlug, the HTTP client abstraction for PHP",
+            "homepage": "http://httplug.io",
+            "keywords": [
+                "client",
+                "http"
+            ],
+            "time": "2016-08-31T08:30:17+00:00"
+        },
+        {
+            "name": "php-http/message-factory",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/message-factory.git",
+                "reference": "a478cb11f66a6ac48d8954216cfed9aa06a501a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/message-factory/zipball/a478cb11f66a6ac48d8954216cfed9aa06a501a1",
+                "reference": "a478cb11f66a6ac48d8954216cfed9aa06a501a1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                }
+            ],
+            "description": "Factory interfaces for PSR-7 HTTP Message",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "factory",
+                "http",
+                "message",
+                "stream",
+                "uri"
+            ],
+            "time": "2015-12-19T14:08:53+00:00"
+        },
+        {
+            "name": "php-http/promise",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/promise.git",
+                "reference": "dc494cdc9d7160b9a09bd5573272195242ce7980"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/promise/zipball/dc494cdc9d7160b9a09bd5573272195242ce7980",
+                "reference": "dc494cdc9d7160b9a09bd5573272195242ce7980",
+                "shasum": ""
+            },
+            "require-dev": {
+                "henrikbjorn/phpspec-code-coverage": "^1.0",
+                "phpspec/phpspec": "^2.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Http\\Promise\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                },
+                {
+                    "name": "Joel Wurtz",
+                    "email": "joel.wurtz@gmail.com"
+                }
+            ],
+            "description": "Promise used for asynchronous HTTP requests",
+            "homepage": "http://httplug.io",
+            "keywords": [
+                "promise"
+            ],
+            "time": "2016-01-26T13:27:02+00:00"
+        },
+        {
+            "name": "psr/http-client",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-client.git",
+                "reference": "d4d3ec04b034120b0591ad9722a4c2be33a7dfec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-client/zipball/d4d3ec04b034120b0591ad9722a4c2be33a7dfec",
+                "reference": "d4d3ec04b034120b0591ad9722a4c2be33a7dfec",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP clients",
+            "homepage": "https://github.com/php-fig/http-client",
+            "keywords": [
+                "http",
+                "http-client",
+                "psr",
+                "psr-18"
+            ],
+            "time": "2018-02-03T12:55:20+00:00"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "symfony/dotenv",
