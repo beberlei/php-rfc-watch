@@ -117,6 +117,20 @@ class RequestForComment
         return new Votes($this->currentVotes);
     }
 
+    public function getYesShare(): int
+    {
+        $total = $yes = 0;
+
+        foreach ($this->currentVotes as $_ => $vote) {
+            if ($vote === 'Yes') {
+                $yes++;
+            }
+            $total++;
+        }
+
+        return round($yes / $total * 100, 0);
+    }
+
     public function getCurrentResults()
     {
         $results = array();

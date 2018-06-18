@@ -41,6 +41,7 @@ class DefaultController extends Controller
                 'url' => $rfc->getUrl(),
                 'results' => $rfc->getCurrentResults(),
                 'status' => $rfc->getStatus(),
+                'share' => $rfc->getYesShare(),
             ];
         }
 
