@@ -449,7 +449,16 @@
     "zendframework/zend-code": {
         "version": "3.3.0"
     },
+    "zendframework/zend-escaper": {
+        "version": "2.6.0"
+    },
     "zendframework/zend-eventmanager": {
         "version": "3.2.1"
+    },
+    "zendframework/zend-feed": {
+        "version": "2.10.2"
+    },
+    "zendframework/zend-stdlib": {
+        "version": "3.2.0"
     }
 }

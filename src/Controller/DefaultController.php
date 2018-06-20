@@ -6,9 +6,11 @@ use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 use App\Entity\RequestForComment;
 use App\Entity\Event;
+use Zend\Feed\Writer\Feed;
 
 class DefaultController extends Controller
 {
@@ -107,5 +109,62 @@ class DefaultController extends Controller
     public function unsubscribeAction()
     {
         return [];
+    }
+
+    /**
+     * @Route("/atom.xml", name="atom")
+     */
+    public function atomAction()
+    {
+        $entityManager = $this->get('doctrine.orm.default_entity_manager');
+        $rfcRepository = $entityManager->getRepository(RequestForComment::CLASS);
+
+        $rfcs = $rfcRepository->findBy(['status' => 'close'], ['closeDate' => 'DESC'], 10);
+
+        $feed = new Feed;
+        $feed->setTitle("PHP RFC Watch");
+        $feed->setLink('https://php-rfc-watch.beberlei.de');
+        $feed->setFeedLink('https://php-rfc-watch.beberlei.de/atom.xml', 'atom');
+        $feed->addAuthor([
+            'name'  => 'Benjamin',
+            'email' => 'benjamin@tideways.io',
+            'uri'   => 'https://tideways.com',
+        ]);
+
+        $modifiedDateSet = false;
+
+        foreach ($rfcs as $rfc) {
+            if (!$rfc->getCloseDate()) {
+                continue;
+            }
+
+            $results = $rfc->getCurrentResults();
+            $content = sprintf("%d %%\n", $rfc->getYesShare());
+
+            foreach ($results as $result) {
+                $content .= sprintf("%s: %d votes\n", $result['option'], $result['votes']);
+            }
+
+            if (!$modifiedDateSet) {
+                $feed->setDateModified((int)$rfc->getCloseDate()->format('U'));
+                $modifiedDateSet = true;
+            }
+
+            $entry = $feed->createEntry();
+            $entry->setTitle($rfc->getTitle());
+            $entry->setLink($rfc->getUrl());
+            $entry->setDateModified((int)$rfc->getCloseDate()->format('U'));
+            $entry->setDateCreated((int)$rfc->getCloseDate()->format('U'));
+            $entry->setDescription($content);
+            $entry->setContent($content);
+
+            $feed->addEntry($entry);
+        }
+
+        if (!$modifiedDateSet) {
+            $feed->setDateModified(time());
+        }
+
+        return new Response($feed->export('atom'), 200, ['Content-Type' => 'application/atom+xml']);
     }
 }

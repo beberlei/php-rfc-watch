@@ -17,7 +17,8 @@
         "symfony/templating": "^4.1",
         "symfony/webpack-encore-pack": "^1.0",
         "kriswallsmith/buzz": "0.13.*",
-        "symfony/css-selector": "^4.1"
+        "symfony/css-selector": "^4.1",
+        "zendframework/zend-feed": "^2.10"
     },
     "scripts": {
         "auto-scripts": {

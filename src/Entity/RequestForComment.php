@@ -49,6 +49,23 @@ class RequestForComment
      */
     private $currentVotes = array();
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime
+     */
+    private $closeDate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime
+     */
+    private $created;
+
+    public function __construct()
+    {
+        $this->created = new \DateTime('now');
+    }
+
     public function getId()
     {
         return $this->id;
@@ -92,6 +109,12 @@ class RequestForComment
     public function closeVote()
     {
         $this->status = self::CLOSE;
+        $this->closeDate = new \DateTime('now');
+    }
+
+    public function getCloseDate()
+    {
+        return $this->closeDate;
     }
 
     public function setAuthor($author)

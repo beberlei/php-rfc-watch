@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "79776ce9b7d247fcd3d23570e5cd8e08",
+    "content-hash": "9426921271e4ac6f5d41a59c0fcfef1a",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -5523,6 +5523,51 @@
             "time": "2017-10-20T15:21:32+00:00"
         },
         {
+            "name": "zendframework/zend-escaper",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-escaper.git",
+                "reference": "31d8aafae982f9568287cb4dce987e6aff8fd074"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/31d8aafae982f9568287cb4dce987e6aff8fd074",
+                "reference": "31d8aafae982f9568287cb4dce987e6aff8fd074",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
+                "zendframework/zend-coding-standard": "~1.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6.x-dev",
+                    "dev-develop": "2.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Escaper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Securely and safely escape HTML, HTML attributes, JavaScript, CSS, and URLs",
+            "keywords": [
+                "ZendFramework",
+                "escaper",
+                "zf"
+            ],
+            "time": "2018-04-25T15:48:53+00:00"
+        },
+        {
             "name": "zendframework/zend-eventmanager",
             "version": "3.2.1",
             "source": {
@@ -5575,6 +5620,113 @@
                 "zf2"
             ],
             "time": "2018-04-25T15:33:34+00:00"
+        },
+        {
+            "name": "zendframework/zend-feed",
+            "version": "2.10.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-feed.git",
+                "reference": "5253f949f4ad999086ab9b408908b6c6776f24db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-feed/zipball/5253f949f4ad999086ab9b408908b6c6776f24db",
+                "reference": "5253f949f4ad999086ab9b408908b6c6776f24db",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "zendframework/zend-escaper": "^2.5.2",
+                "zendframework/zend-stdlib": "^2.7.7 || ^3.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7.23 || ^6.4.3",
+                "psr/http-message": "^1.0.1",
+                "zendframework/zend-cache": "^2.7.2",
+                "zendframework/zend-coding-standard": "~1.0.0",
+                "zendframework/zend-db": "^2.8.2",
+                "zendframework/zend-http": "^2.7",
+                "zendframework/zend-servicemanager": "^2.7.8 || ^3.3",
+                "zendframework/zend-validator": "^2.10.1"
+            },
+            "suggest": {
+                "psr/http-message": "PSR-7 ^1.0.1, if you wish to use Zend\\Feed\\Reader\\Http\\Psr7ResponseDecorator",
+                "zendframework/zend-cache": "Zend\\Cache component, for optionally caching feeds between requests",
+                "zendframework/zend-db": "Zend\\Db component, for use with PubSubHubbub",
+                "zendframework/zend-http": "Zend\\Http for PubSubHubbub, and optionally for use with Zend\\Feed\\Reader",
+                "zendframework/zend-servicemanager": "Zend\\ServiceManager component, for easily extending ExtensionManager implementations",
+                "zendframework/zend-validator": "Zend\\Validator component, for validating email addresses used in Atom feeds and entries when using the Writer subcomponent"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.10.x-dev",
+                    "dev-develop": "2.11.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Feed\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides functionality for consuming RSS and Atom feeds",
+            "keywords": [
+                "ZendFramework",
+                "feed",
+                "zf"
+            ],
+            "time": "2018-06-18T20:14:01+00:00"
+        },
+        {
+            "name": "zendframework/zend-stdlib",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-stdlib.git",
+                "reference": "cd164b4a18b5d1aeb69be2c26db035b5ed6925ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/cd164b4a18b5d1aeb69be2c26db035b5ed6925ae",
+                "reference": "cd164b4a18b5d1aeb69be2c26db035b5ed6925ae",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpbench/phpbench": "^0.13",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
+                "zendframework/zend-coding-standard": "~1.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev",
+                    "dev-develop": "3.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Stdlib\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "SPL extensions, array utilities, error handlers, and more",
+            "keywords": [
+                "ZendFramework",
+                "stdlib",
+                "zf"
+            ],
+            "time": "2018-04-30T13:50:40+00:00"
         }
     ],
     "packages-dev": [
