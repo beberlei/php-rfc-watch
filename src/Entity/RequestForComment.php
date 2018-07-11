@@ -27,6 +27,11 @@ class RequestForComment
 
     /**
      * @ORM\Column(type="string")
+     */
+    private $voteId;
+
+    /**
+     * @ORM\Column(type="string")
      * @var string
      */
     private $title;
@@ -79,6 +84,16 @@ class RequestForComment
     public function getUrl()
     {
         return $this->url;
+    }
+
+    public function setVoteId($voteId)
+    {
+        $this->voteId = $voteId;
+    }
+
+    public function getVodeId()
+    {
+        return $this->voteId;
     }
 
     public function setTitle($title)

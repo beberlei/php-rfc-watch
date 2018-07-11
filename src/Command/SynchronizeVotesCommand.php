@@ -24,6 +24,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         $this
             ->setName('php-rfc-watch:synchronize')
             ->setDescription('Synchronize the Current votes from wiki.php.net to RFC Watch')
+            ->addArgument('urls', InputArgument::IS_ARRAY)
         ;
     }
 
@@ -41,14 +42,18 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         $curl->setOption(CURLOPT_TIMEOUT, 15);
         $browser = new Browser($curl);
 
-        $rfcUrls = $this->getRfcsInVoting($browser);
+        if ($input->getArgument('urls')) {
+            $rfcUrls = $input->getArgument('urls');
+        } else {
+            $rfcUrls = $this->getRfcsInVoting($browser);
 
-        $rfcUrls = array_unique(
-            array_merge(
-                $rfcUrls,
-                array_keys(array_filter($rfcs, function ($rfc) { return $rfc->isOpen(); }))
-            )
-        );
+            $rfcUrls = array_unique(
+                array_merge(
+                    $rfcUrls,
+                    array_keys(array_filter($rfcs, function ($rfc) { return $rfc->isOpen(); }))
+                )
+            );
+        }
 
         foreach ($rfcUrls as $rfcUrl) {
             $response = $browser->get($rfcUrl);
@@ -60,10 +65,12 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
 
             $votes = array();
             $voteWasClosed = false;
+            $voteId = null;
 
             foreach ($nodes as $form) {
                 $output->writeln(sprintf('Found Form for <info>%s</info>', $rfcUrl));
                 $rows = $xpath->evaluate('table[@class="inline"]/tbody/tr', $form);
+                $voteId = $form->getAttribute('id');
 
                 foreach ($rows as $row) {
                     switch ((string)$row->getAttribute('class')) {
@@ -132,6 +139,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                 $rfc->setTitle($title);
                 $rfc->setUrl($rfcUrl);
                 $rfc->setAuthor($author);
+                $rfc->setVoteId($voteId);
                 $rfcs[$rfcUrl] = $rfc;
 
                 // Guess at the approximate start time based on the first vote.
@@ -163,6 +171,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
             }
 
             $rfc->setVotes($votes);
+            $rfc->setVoteId($voteId);
 
             if ($voteWasClosed && $rfc->isOpen()) {
                 $rfc->closeVote();
