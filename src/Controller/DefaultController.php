@@ -40,6 +40,7 @@ class DefaultController extends Controller
             $result['rfcs'][] = [
                 'id' => $rfc->getId(),
                 'title' => $rfc->getTitle(),
+                'question' => $rfc->getQuestion(),
                 'url' => $rfc->getUrl(),
                 'results' => $rfc->getCurrentResults(),
                 'status' => $rfc->getStatus(),

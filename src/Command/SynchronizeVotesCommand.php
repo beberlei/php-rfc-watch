@@ -35,7 +35,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
 
         $rfcs = [];
         foreach ($rfcRepository->findAll() as $rfc) {
-            $rfcs[$rfc->getUrl()] = $rfc;
+            $rfcs[$rfc->getVoteId()] = $rfc;
         }
 
         $curl = new Curl();
@@ -47,12 +47,15 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         } else {
             $rfcUrls = $this->getRfcsInVoting($browser);
 
-            $rfcUrls = array_unique(
+            $rfcUrls = array_filter(array_unique(
                 array_merge(
                     $rfcUrls,
-                    array_keys(array_filter($rfcs, function ($rfc) { return $rfc->isOpen(); }))
+                    array_map(
+                        function ($rfc) { return $rfc->getUrl(); },
+                        array_filter($rfcs, function ($rfc) { return $rfc->isOpen(); })
+                    )
                 )
-            );
+            ));
         }
 
         foreach ($rfcUrls as $rfcUrl) {
@@ -63,18 +66,19 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
 
             $nodes = $xpath->evaluate('//form[@name="doodle__form"]');
 
-            $votes = array();
-            $voteWasClosed = false;
-            $voteId = null;
-
             foreach ($nodes as $form) {
                 $output->writeln(sprintf('Found Form for <info>%s</info>', $rfcUrl));
                 $rows = $xpath->evaluate('table[@class="inline"]/tbody/tr', $form);
                 $voteId = $form->getAttribute('id');
+                $question = "";
+
+                $votes = array();
+                $voteWasClosed = false;
 
                 foreach ($rows as $row) {
                     switch ((string)$row->getAttribute('class')) {
                         case 'row0':
+                            $question = trim($xpath->evaluate('string(th/text())', $row));
                             // do nothing;
                             break;
                         case 'row1':
@@ -117,69 +121,68 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                     }
                 }
 
-                break; // only one form!
-            }
+                $votes = new Votes($votes);
 
-            $votes = new Votes($votes);
+                if (!isset($rfcs[$voteId])) {
+                    $title = trim(str_replace('PHP RFC:', '', $xpath->evaluate('string(//h1)')));
+                    $author = "";
 
-            if (!isset($rfcs[$rfcUrl])) {
-                $title = trim(str_replace('PHP RFC:', '', $xpath->evaluate('string(//h1)')));
-                $author = "";
-
-                $listItems = $xpath->evaluate('//li/div[@class="li"]');
-                foreach ($listItems as $listItem) {
-                    $content = trim($listItem->nodeValue);
-                    if (strpos($content, "Author") === 0) {
-                        $parts = explode(":", $content);
-                        $author = $parts[1];
+                    $listItems = $xpath->evaluate('//li/div[@class="li"]');
+                    foreach ($listItems as $listItem) {
+                        $content = trim($listItem->nodeValue);
+                        if (strpos($content, "Author") === 0) {
+                            $parts = explode(":", $content);
+                            $author = $parts[1];
+                        }
                     }
+
+                    $rfc = new RequestForComment();
+                    $rfc->setTitle($title);
+                    $rfc->setUrl($rfcUrl);
+                    $rfc->setQuestion($question);
+                    $rfc->setAuthor($author);
+                    $rfc->setVoteId($voteId);
+                    $rfcs[$voteId] = $rfc;
+
+                    // Guess at the approximate start time based on the first vote.
+                    $start = array_reduce(iterator_to_array($votes), function (\DateTime $start, Vote $vote) {
+                        if ($start > $vote->getTime()) {
+                            return clone $vote->getTime();
+                        }
+                        return $start;
+                    }, new \DateTime);
+
+                    // Subtract another minute so the vote opening always appears
+                    // before the first vote.
+                    $start->sub(new \DateInterval('PT1M'));
+
+                    $entityManager->persist(new Event($rfc, 'VoteOpened', null, $start));
+                    $entityManager->persist($rfc);
+                } else {
+                    $rfc = $rfcs[$voteId];
                 }
 
-                $rfc = new RequestForComment();
-                $rfc->setTitle($title);
-                $rfc->setUrl($rfcUrl);
-                $rfc->setAuthor($author);
+                $changedVotes = $votes->diff($rfc->getVotes());
+
+                foreach ($changedVotes->getNewVotes() as $username => $vote) {
+                    $entityManager->persist(new Event($rfc, 'UserVoted', $vote->getOption(), $vote->getTime()));
+                }
+
+                foreach ($changedVotes->getRemovedVotes() as $username => $option) {
+                    $entityManager->persist(new Event($rfc, 'UserVoteRemoved', $vote->getOption(), $vote->getTime()));
+                }
+
+                $rfc->setVotes($votes);
                 $rfc->setVoteId($voteId);
-                $rfcs[$rfcUrl] = $rfc;
+                $rfc->setQuestion($question);
 
-                // Guess at the approximate start time based on the first vote.
-                $start = array_reduce(iterator_to_array($votes), function (\DateTime $start, Vote $vote) {
-                    if ($start > $vote->getTime()) {
-                        return clone $vote->getTime();
-                    }
-                    return $start;
-                }, new \DateTime);
+                if ($voteWasClosed && $rfc->isOpen()) {
+                    $rfc->closeVote();
+                    $entityManager->persist(new Event($rfc, 'VoteClosed', null, new \DateTime('now')));
+                }
 
-                // Subtract another minute so the vote opening always appears
-                // before the first vote.
-                $start->sub(new \DateInterval('PT1M'));
-
-                $entityManager->persist(new Event($rfc, 'VoteOpened', null, $start));
-                $entityManager->persist($rfc);
-            } else {
-                $rfc = $rfcs[$rfcUrl];
+                $output->writeln(sprintf('..Found <info>%d</info> changes in votes.', count($changedVotes)));
             }
-
-            $changedVotes = $votes->diff($rfc->getVotes());
-
-            foreach ($changedVotes->getNewVotes() as $username => $vote) {
-                $entityManager->persist(new Event($rfc, 'UserVoted', $vote->getOption(), $vote->getTime()));
-            }
-
-            foreach ($changedVotes->getRemovedVotes() as $username => $option) {
-                $entityManager->persist(new Event($rfc, 'UserVoteRemoved', $vote->getOption(), $vote->getTime()));
-            }
-
-            $rfc->setVotes($votes);
-            $rfc->setVoteId($voteId);
-
-            if ($voteWasClosed && $rfc->isOpen()) {
-                $rfc->closeVote();
-                $entityManager->persist(new Event($rfc, 'VoteClosed', null, new \DateTime('now')));
-            }
-
-
-            $output->writeln(sprintf('..Found <info>%d</info> changes in votes.', count($changedVotes)));
         }
 
         $entityManager->flush();

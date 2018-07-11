@@ -31,6 +31,12 @@ class RequestForComment
     private $voteId;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    private $question;
+
+    /**
      * @ORM\Column(type="string")
      * @var string
      */
@@ -91,9 +97,19 @@ class RequestForComment
         $this->voteId = $voteId;
     }
 
-    public function getVodeId()
+    public function getVoteId()
     {
         return $this->voteId;
+    }
+
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+    }
+
+    public function getQuestion()
+    {
+        return $this->question;
     }
 
     public function setTitle($title)

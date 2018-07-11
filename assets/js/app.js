@@ -54,6 +54,7 @@ class RfcVoteItem extends React.Component {
                     <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
                 </div>
                 <div className="card-body">
+                    <strong>{this.props.rfc.question}</strong>
                     <VoteResults results={this.props.rfc.results} share={this.props.rfc.share} />
                 </div>
             </div>
