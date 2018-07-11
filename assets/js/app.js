@@ -30,6 +30,10 @@ class VoteResults extends React.Component {
     render () {
         return (
             <div>
+                <div className="mb-2">
+                    <strong>{this.props.question}</strong>
+                </div>
+
                 <div className="vote-results mb-2">
                     {this.renderVoteProgress()}
                 </div>
@@ -53,8 +57,9 @@ class RfcVoteItem extends React.Component {
                 <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
             </div>
             <div className="card-body">
-                <strong>{this.props.rfc.question}</strong>
-                <VoteResults results={this.props.rfc.results} share={this.props.rfc.share} />
+                {this.props.rfc.questions.map(item => {
+                    return <VoteResults question={item.question} results={item.results} share={item.share} />
+                })}
             </div>
         </div>
     }
@@ -94,7 +99,10 @@ class RfcWatch extends React.Component {
             return <div>Loading...</div>
         }
 
-        return <RfcList rfcs={this.state.data.rfcs} />
+        return <div>
+            <RfcList rfcs={this.state.data.active} />
+            <RfcList rfcs={this.state.data.other} />
+        </div>
     }
 }
 

@@ -32,50 +32,31 @@ class DefaultController extends Controller
         $eventRepository = $entityManager->getRepository(Event::CLASS);
 
         $rfcs = array_reverse($rfcRepository->findAll());
-        $events = $eventRepository = $eventRepository->findAll();
 
-        $result = [];
+        $aggregated = [];
 
         foreach ($rfcs as $rfc) {
-            $result['rfcs'][] = [
-                'id' => $rfc->getId(),
-                'title' => $rfc->getTitle(),
+            if (!isset($aggregated[$rfc->getUrl()])) {
+                $aggregated[$rfc->getUrl()] = [
+                    'id' => $rfc->getId(),
+                    'title' => $rfc->getTitle(),
+                    'url' => $rfc->getUrl(),
+                    'status' => $rfc->getStatus(),
+                    'questions' => [],
+                ];
+            }
+
+            $aggregated[$rfc->getUrl()]['questions'][] = [
                 'question' => $rfc->getQuestion(),
-                'url' => $rfc->getUrl(),
                 'results' => $rfc->getCurrentResults(),
-                'status' => $rfc->getStatus(),
                 'share' => $rfc->getYesShare(),
             ];
         }
 
-        usort($events, function ($a, $b) {
-            $a = $a->getDate()->format('U');
-            $b = $b->getDate()->format('U');
+        $aggregated = array_values($aggregated);
 
-            if ($a == $b) {
-                return 0;
-            }
-
-            return $a > $b ? -1 : 1;
-        });
-
-        foreach ($events as $event) {
-            $vote = [
-                'id' => $event->getRfc()->getId(),
-                'title' => $event->getRfc()->getTitle(),
-                'url' => $event->getRfc()->getUrl()
-            ];
-            // TODO: Cleanup somehow
-            if ($event->getType() == 'VoteClosed') {
-                $vote['results'] = $event->getRfc()->getCurrentResults();
-            }
-            $result['events'][] = [
-                'type' => $event->getType(),
-                'option' => $event->getOption(),
-                'vote' => $vote,
-                'date' => $event->getDate()->format(DateTime::ISO8601),
-            ];
-        }
+        $result['active'] = array_values(array_filter($aggregated, function ($item) { return $item['status'] === 'open'; }));
+        $result['other'] = array_values(array_filter($aggregated, function ($item) { return $item['status'] !== 'open'; }));
 
         return new JsonResponse($result);
     }
