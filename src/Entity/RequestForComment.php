@@ -26,7 +26,7 @@ class RequestForComment
     private $url;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $voteId;
 
