@@ -53,19 +53,17 @@ class RfcVoteItem extends React.Component {
     render() {
         const voteCount = this.props.rfc.questions.length;
 
-        return <div className="col-md-6">
-            <div className="card">
-                <div className="card-header">
-                    {this.props.rfc.status == 'open' ?
-                        <span className="badge badge-primary mr-1">Active</span>
-                        : null }
-                    <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
-                </div>
-                <div className="card-body">
-                    {this.props.rfc.questions.map((item, idx) => {
-                        return <VoteResults question={item.question} results={item.results} share={item.share} last={voteCount == idx+1} />
-                    })}
-                </div>
+        return <div className="card">
+            <div className="card-header">
+                {this.props.rfc.status == 'open' ?
+                    <span className="badge badge-primary mr-1">Active</span>
+                    : null }
+                <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
+            </div>
+            <div className="card-body">
+                {this.props.rfc.questions.map((item, idx) => {
+                    return <VoteResults question={item.question} results={item.results} share={item.share} last={voteCount == idx+1} />
+                })}
             </div>
         </div>
     }
@@ -73,7 +71,7 @@ class RfcVoteItem extends React.Component {
 
 class RfcList extends React.Component {
     render () {
-        return <div className="card-columns row">
+        return <div className="card-columns">
             {this.props.rfcs.map(item => { return <RfcVoteItem key={item.id} rfc={item} /> })}
         </div>
     }

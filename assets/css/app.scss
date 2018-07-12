@@ -32,6 +32,12 @@ main {
             }
         }
     }
+
+    #app {
+        .card-columns {
+            column-count: 2;
+        }
+    }
 }
 
 footer {
