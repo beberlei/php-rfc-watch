@@ -182,7 +182,7 @@ class RequestForComment
             $total++;
         }
 
-        return round($yes / $total * 100, 0);
+        return (int) round($yes / $total * 100, 0);
     }
 
     public function getCurrentResults()
