@@ -53,6 +53,9 @@
             "ref": "c1431086fec31f17fbcfe6d6d7e92059458facc1"
         }
     },
+    "doctrine/event-manager": {
+        "version": "v1.0.0"
+    },
     "doctrine/inflector": {
         "version": "v1.3.0"
     },
@@ -67,6 +70,12 @@
     },
     "doctrine/orm": {
         "version": "v2.6.1"
+    },
+    "doctrine/persistence": {
+        "version": "v1.1.0"
+    },
+    "doctrine/reflection": {
+        "version": "v1.0.0"
     },
     "egulias/email-validator": {
         "version": "2.1.4"
@@ -239,6 +248,9 @@
             "ref": "e3868d2f4a5104f19f844fe551099a00c6562527"
         }
     },
+    "symfony/contracts": {
+        "version": "v1.0.2"
+    },
     "symfony/css-selector": {
         "version": "v4.1.0"
     },
@@ -365,6 +377,18 @@
             "ref": "f8a63faa0d9521526499c0a8f403c9964ecb0527"
         }
     },
+    "symfony/security-core": {
+        "version": "v4.2.2"
+    },
+    "symfony/security-csrf": {
+        "version": "v4.2.2"
+    },
+    "symfony/security-guard": {
+        "version": "v4.2.2"
+    },
+    "symfony/security-http": {
+        "version": "v4.2.2"
+    },
     "symfony/stopwatch": {
         "version": "v4.1.0"
     },
@@ -406,6 +430,9 @@
     },
     "symfony/var-dumper": {
         "version": "v4.1.0"
+    },
+    "symfony/var-exporter": {
+        "version": "v4.2.2"
     },
     "symfony/web-profiler-bundle": {
         "version": "3.3",
