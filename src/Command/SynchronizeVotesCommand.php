@@ -75,14 +75,15 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                 $votes = array();
                 $voteWasClosed = false;
 
+                $options = array();
                 foreach ($rows as $row) {
                     switch ((string)$row->getAttribute('class')) {
                         case 'row0':
                             $question = trim($xpath->evaluate('string(th/text())', $row));
                             // do nothing;
                             break;
+
                         case 'row1':
-                            $options = array();
                             foreach ($xpath->evaluate('td', $row) as $optionNode) {
                                 $option = trim($optionNode->nodeValue);
                                 if ($option !== "Real name") {
@@ -90,17 +91,19 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                                 }
                             }
                             break;
+
                         default:
                             $username = trim($xpath->evaluate('string(td[1])', $row));
 
                             if ($username === 'This poll has been closed.') {
                                 $voteWasClosed = true;
-                                continue;
+                                break;
                             }
 
                             if (!preg_match('(\(([^\)]+)\))', $username, $matches)) {
-                                continue;
+                                break;
                             }
+
                             $username = md5($matches[1]);
                             $time = new \DateTime;
 

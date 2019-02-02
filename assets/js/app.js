@@ -61,8 +61,9 @@ class RfcVoteItem extends React.Component {
                 <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
             </div>
             <div className="card-body">
+                {this.props.rfc.targetPhpVersion.length > 0 && <span><strong>Target PHP Version:</strong> {this.props.rfc.targetPhpVersion}</span>}
                 {this.props.rfc.questions.map((item, idx) => {
-                    return <VoteResults question={item.question} results={item.results} share={item.share} last={voteCount == idx+1} />
+                    return <VoteResults key={idx} question={item.question} results={item.results} share={item.share} last={voteCount == idx+1} />
                 })}
             </div>
         </div>
@@ -71,8 +72,15 @@ class RfcVoteItem extends React.Component {
 
 class RfcList extends React.Component {
     render () {
-        return <div className="card-columns">
-            {this.props.rfcs.map(item => { return <RfcVoteItem key={item.id} rfc={item} /> })}
+        if (this.props.rfcs.length == 0) {
+            return null;
+        }
+
+        return <div>
+            <h2>{this.props.title}</h2>
+            <div className="card-columns">
+                {this.props.rfcs.map(item => { return <RfcVoteItem key={item.id} rfc={item} /> })}
+            </div>
         </div>
     }
 }
@@ -104,8 +112,10 @@ class RfcWatch extends React.Component {
         }
 
         return <div>
-            <RfcList rfcs={this.state.data.active} />
-            <RfcList rfcs={this.state.data.other} />
+            <RfcList rfcs={this.state.data.active} title="Currently Active RFCs"/>
+            {Object.keys(this.state.data.others).map( (version) => {
+                return <RfcList key={version} rfcs={this.state.data.others[version]} title={"Completed RFCs for " + version} />
+            })}
         </div>
     }
 }

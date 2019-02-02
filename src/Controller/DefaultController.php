@@ -2,18 +2,24 @@
 
 namespace App\Controller;
 
-use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 use App\Entity\RequestForComment;
-use App\Entity\Event;
 use Zend\Feed\Writer\Feed;
+use Doctrine\ORM\EntityManagerInterface;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/", name="homepage")
      */
@@ -27,21 +33,22 @@ class DefaultController extends Controller
      */
     public function dataAction()
     {
-        $entityManager = $this->get('doctrine.orm.default_entity_manager');
-        $rfcRepository = $entityManager->getRepository(RequestForComment::CLASS);
-        $eventRepository = $entityManager->getRepository(Event::CLASS);
+        $rfcRepository = $this->entityManager->getRepository(RequestForComment::CLASS);
 
         $rfcs = array_reverse($rfcRepository->findAll());
 
         $aggregated = [];
 
         foreach ($rfcs as $rfc) {
+            assert($rfc instanceof RequestForComment);
+
             if (!isset($aggregated[$rfc->getUrl()])) {
                 $aggregated[$rfc->getUrl()] = [
                     'id' => $rfc->getId(),
                     'title' => $rfc->getTitle(),
                     'url' => $rfc->getUrl(),
                     'status' => $rfc->getStatus(),
+                    'targetPhpVersion' => $rfc->getTargetPhpVersion() ?: 'unknown',
                     'questions' => [],
                 ];
             }
@@ -56,7 +63,16 @@ class DefaultController extends Controller
         $aggregated = array_values($aggregated);
 
         $result['active'] = array_values(array_filter($aggregated, function ($item) { return $item['status'] === 'open'; }));
-        $result['other'] = array_values(array_filter($aggregated, function ($item) { return $item['status'] !== 'open'; }));
+        $others = array_values(array_filter($aggregated, function ($item) { return $item['status'] !== 'open'; }));
+
+        $result['others'] = ['unknown' => []];
+
+        foreach ($others as $other) {
+            if (!isset($result['others'][$other['targetPhpVersion']])) {
+                $result['others'][$other['targetPhpVersion']] = [];
+            }
+            $result['others'][$other['targetPhpVersion']][] = $other;
+        }
 
         return new JsonResponse($result);
     }

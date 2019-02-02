@@ -67,6 +67,12 @@ class RequestForComment
     private $closeDate;
 
     /**
+     * @ORM\Column(type="string", options={"default":""})
+     * @var string
+     */
+    private $targetPhpVersion = '';
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
      */
@@ -218,5 +224,21 @@ class RequestForComment
         });
 
         return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTargetPhpVersion() : string
+    {
+        return $this->targetPhpVersion;
+    }
+
+    /**
+     * @param string $targetPhpVersion
+     */
+    public function setTargetPhpVersion(string $targetPhpVersion)
+    {
+        $this->targetPhpVersion = $targetPhpVersion;
     }
 }
