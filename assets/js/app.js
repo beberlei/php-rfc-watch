@@ -156,7 +156,7 @@ class RfcWatch extends React.Component {
         return <div>
             <RfcList rfcs={this.state.data.active} title="Currently Active RFCs"/>
             {Object.keys(this.state.data.others).map( (version) => {
-                return <RfcList key={version} rfcs={this.state.data.others[version]} title={"Completed RFCs for " + version} />
+                return <RfcList key={version} rfcs={this.state.data.others[version]} title={"Accepted RFCs for PHP " + version} />
             })}
             <RfcList rfcs={this.state.data.rejected} title="Rejected RFCs"/>
         </div>
