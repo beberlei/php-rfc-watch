@@ -49,6 +49,30 @@ class VoteResults extends React.Component {
     }
 }
 
+class RfcDiscussions extends React.Component {
+    render() {
+        if (this.props.discussions.length == 0) {
+            return null;
+        }
+
+        var idx = 0;
+
+        return <p>
+                <strong>Discussions:</strong>
+                {this.props.discussions.map(x => {
+                    var label;
+                    if (x.indexOf('externals.io')) {
+                        label = 'Mailinglist';
+                    } else if (x.indexOf('reddit')) {
+                        label = 'Reddit';
+                    }
+                    idx++;
+                    return <a href={x} target="_blank">#{idx} {label}</a>
+                })}
+            </p>
+    }
+}
+
 class RfcVoteItem extends React.Component {
     render() {
         const voteCount = this.props.rfc.questions.length;
@@ -62,6 +86,9 @@ class RfcVoteItem extends React.Component {
             </div>
             <div className="card-body">
                 {this.props.rfc.targetPhpVersion.length > 0 && <span><strong>Target PHP Version:</strong> {this.props.rfc.targetPhpVersion}</span>}
+
+                <RfcDiscussions discussions={this.props.rfc.discussions} />
+
                 {this.props.rfc.questions.map((item, idx) => {
                     return <VoteResults key={idx} question={item.question} results={item.results} share={item.share} last={voteCount == idx+1} />
                 })}

@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Form\RfcType;
+use QafooLabs\MVC\FormRequest;
+use QafooLabs\MVC\RedirectRoute;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,6 +32,31 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/admin", name="admin")
+     */
+    public function adminAction()
+    {
+        $rfcRepository = $this->entityManager->getRepository(RequestForComment::CLASS);
+        $rfcs = array_reverse($rfcRepository->findAll());
+
+        return ['rfcs' => $rfcs];
+    }
+
+    /**
+     * @Route("/admin/rfc/{id}", name="admin_edit_rfc", methods={"POST", "GET"})
+     */
+    public function adminEditRfcAction(RequestForComment $rfc, FormRequest $request)
+    {
+        if (!$request->handle(RfcType::class, $rfc)) {
+            return ['rfc' => $rfc, 'form' => $request->createFormView()];
+        }
+
+        $this->entityManager->flush();
+
+        return new RedirectRoute('admin');
+    }
+
+    /**
      * @Route("/data.json", name="data")
      */
     public function dataAction()
@@ -48,9 +76,18 @@ class DefaultController extends AbstractController
                     'title' => $rfc->getTitle(),
                     'url' => $rfc->getUrl(),
                     'status' => $rfc->getStatus(),
-                    'targetPhpVersion' => $rfc->getTargetPhpVersion() ?: 'unknown',
+                    'targetPhpVersion' => 'unknown',
+                    'discussions' => [],
                     'questions' => [],
                 ];
+            }
+
+            if ($rfc->getDiscussions()) {
+                $aggregated[$rfc->getUrl()]['discussions'] = $rfc->getDiscussions();
+            }
+
+            if ($rfc->getTargetPhpVersion()) {
+                $aggregated[$rfc->getUrl()]['targetPhpVersion'] = $rfc->getTargetPhpVersion();
             }
 
             $aggregated[$rfc->getUrl()]['questions'][] = [

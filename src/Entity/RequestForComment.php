@@ -73,6 +73,12 @@ class RequestForComment
     private $targetPhpVersion = '';
 
     /**
+     * @ORM\Column(type="json_array", options={"default":""})
+     * @var array
+     */
+    private $discussions = [];
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
      */
@@ -240,5 +246,17 @@ class RequestForComment
     public function setTargetPhpVersion(string $targetPhpVersion)
     {
         $this->targetPhpVersion = $targetPhpVersion;
+    }
+
+    public function getDiscussions(): array
+    {
+        return array_filter($this->discussions);
+    }
+
+    public function setDiscussions(array $discussions): void
+    {
+        $this->discussions = array_filter($discussions, function ($discussion) {
+            return strpos($discussion, 'http') === 0;
+        });
     }
 }

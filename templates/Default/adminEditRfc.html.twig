@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <h1>Admin: {{ rfc.title }}</h1>
+
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+    {{ form(form) }}
+{% endblock %}

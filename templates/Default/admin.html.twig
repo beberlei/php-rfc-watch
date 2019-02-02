@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <h1>Admin</h1>
+
+    <div class="card-columns">
+        {% for rfc in rfcs %}
+        <div class="card">
+            <div class="card-header">{{ rfc.title }}</div>
+            <div class="card-body">
+                <p>
+                    <strong>Target Version:</strong>
+                    {{ rfc.targetPhpVersion|default('unknown') }}
+                </p>
+
+                <p>
+                    <strong>Discussions:</strong>
+                    {% for discussion in rfc.discussions %}
+                        <a href="{{ discussion }}">#{{ loop.index }}</a>
+                        {% else %}
+                        None
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ path('admin_edit_rfc', {'id': rfc.id}) }}">Edit</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
