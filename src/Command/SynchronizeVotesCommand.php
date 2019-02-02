@@ -186,6 +186,10 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                 $rfc->setQuestion($question);
 
                 if ($voteWasClosed && $rfc->isOpen()) {
+                    if ($rfc->getYesShare() > $rfc->getPassThreshold()) {
+                        $rfc->setRejected(true);
+                    }
+
                     $rfc->closeVote();
                     $entityManager->persist(new Event($rfc, 'VoteClosed', null, new \DateTime('now')));
                 }
