@@ -49,6 +49,16 @@ class VoteResults extends React.Component {
     }
 }
 
+function intersperse(arr, sep) {
+    if (arr.length === 0) {
+        return [];
+    }
+
+    return arr.slice(1).reduce(function(xs, x, i) {
+        return xs.concat([sep, x]);
+    }, [arr[0]]);
+}
+
 class RfcDiscussions extends React.Component {
     render() {
         if (this.props.discussions.length == 0) {
@@ -59,7 +69,7 @@ class RfcDiscussions extends React.Component {
 
         return <p>
                 <strong>Discussions:</strong>
-                {this.props.discussions.map(x => {
+                {intersperse(this.props.discussions.map(x => {
                     var label;
                     if (x.indexOf('externals.io')) {
                         label = 'Mailinglist';
@@ -68,7 +78,7 @@ class RfcDiscussions extends React.Component {
                     }
                     idx++;
                     return <a href={x} target="_blank">#{idx} {label}</a>
-                })}
+                }), ", ")}
             </p>
     }
 }
@@ -143,6 +153,7 @@ class RfcWatch extends React.Component {
             {Object.keys(this.state.data.others).map( (version) => {
                 return <RfcList key={version} rfcs={this.state.data.others[version]} title={"Completed RFCs for " + version} />
             })}
+            <RfcList rfcs={this.state.data.rejected} title="Rejected RFCs"/>
         </div>
     }
 }

@@ -79,6 +79,7 @@ class DefaultController extends AbstractController
                     'targetPhpVersion' => 'unknown',
                     'discussions' => [],
                     'questions' => [],
+                    'rejected' => false,
                 ];
             }
 
@@ -90,6 +91,10 @@ class DefaultController extends AbstractController
                 $aggregated[$rfc->getUrl()]['targetPhpVersion'] = $rfc->getTargetPhpVersion();
             }
 
+            if ($rfc->isRejected()) {
+                $aggregated[$rfc->getUrl()]['rejected'] = true;
+            }
+
             $aggregated[$rfc->getUrl()]['questions'][] = [
                 'question' => $rfc->getQuestion(),
                 'results' => $rfc->getCurrentResults(),
@@ -99,8 +104,9 @@ class DefaultController extends AbstractController
 
         $aggregated = array_values($aggregated);
 
-        $result['active'] = array_values(array_filter($aggregated, function ($item) { return $item['status'] === 'open'; }));
-        $others = array_values(array_filter($aggregated, function ($item) { return $item['status'] !== 'open'; }));
+        $result['rejected'] = array_values(array_filter($aggregated, function ($item) { return $item['rejected']; }));
+        $result['active'] = array_values(array_filter($aggregated, function ($item) { return $item['status'] === 'open' && !$item['rejected']; }));
+        $others = array_values(array_filter($aggregated, function ($item) { return $item['status'] !== 'open' && !$item['rejected']; }));
 
         $result['others'] = ['unknown' => []];
 

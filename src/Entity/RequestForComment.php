@@ -79,6 +79,12 @@ class RequestForComment
     private $discussions = [];
 
     /**
+     * @ORM\Column(type="boolean", options={"default":0})
+     * @var bool
+     */
+    private $rejected = false;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
      */
@@ -258,5 +264,21 @@ class RequestForComment
         $this->discussions = array_filter($discussions, function ($discussion) {
             return strpos($discussion, 'http') === 0;
         });
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRejected(): bool
+    {
+        return $this->rejected;
+    }
+
+    /**
+     * @param bool $rejected
+     */
+    public function setRejected(bool $rejected): void
+    {
+        $this->rejected = $rejected;
     }
 }
