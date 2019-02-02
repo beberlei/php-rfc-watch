@@ -55,6 +55,12 @@ class RequestForComment
     private $status = self::OPEN;
 
     /**
+     * @ORM\Column(type="integer", options={"default":50})
+     * @var int
+     */
+    private $passThreshold = 50;
+
+    /**
      * @ORM\Column(type="json_array")
      * @var array<string,string>
      */
@@ -280,5 +286,21 @@ class RequestForComment
     public function setRejected(bool $rejected): void
     {
         $this->rejected = $rejected;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPassThreshold(): int
+    {
+        return $this->passThreshold;
+    }
+
+    /**
+     * @param int $passThreshold
+     */
+    public function setPassThreshold(int $passThreshold): void
+    {
+        $this->passThreshold = $passThreshold;
     }
 }

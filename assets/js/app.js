@@ -11,8 +11,8 @@ class VoteResults extends React.Component {
     }
 
     renderVoteProgress () {
-        var positive = this.props.share + "%";
-        var negative = (100 - this.props.share) + "%";
+        var positive = this.props.vote.share + "%";
+        var negative = (100 - this.props.vote.share) + "%";
         return <div className="progress">
             <div className="progress-bar bg-success" style={{width: positive}}>{positive}</div>
             <div className="progress-bar bg-danger" style={{width: negative}}>{negative}</div>
@@ -21,17 +21,20 @@ class VoteResults extends React.Component {
 
     computeTotalVotesCasted () {
         var total = 0;
-        for (var i = 0; i < this.props.results.length; i++) {
-            total += this.props.results[i].votes;
+        for (var i = 0; i < this.props.vote.results.length; i++) {
+            total += this.props.vote.results[i].votes;
         }
         return total;
     }
 
     render () {
+        const passClass = this.props.vote.passing ? 'badge-success' : 'badge-danger';
+        const passLabel = this.props.vote.passing ? 'Passing' : 'Failing';
+
         return (
             <div>
                 <div className="mb-2">
-                    {this.props.question}
+                    {this.props.vote.question} <span className={"badge " + passClass}>{passLabel}</span>
                 </div>
 
                 <div className="vote-results mb-2">
@@ -40,7 +43,7 @@ class VoteResults extends React.Component {
 
                 <div className="row">
                     <div className="col-lg">Votes cast: {this.computeTotalVotesCasted()}</div>
-                    {this.props.results.map(this.renderVote)}
+                    {this.props.vote.results.map(this.renderVote)}
                 </div>
 
                 {this.props.last ? null : <hr />}
@@ -67,7 +70,7 @@ class RfcDiscussions extends React.Component {
 
         var idx = 0;
 
-        return <p>
+        return <div>
                 <strong>Discussions:</strong>
                 {intersperse(this.props.discussions.map(x => {
                     var label;
@@ -79,7 +82,7 @@ class RfcDiscussions extends React.Component {
                     idx++;
                     return <a href={x} target="_blank">#{idx} {label}</a>
                 }), ", ")}
-            </p>
+            </div>
     }
 }
 
@@ -99,8 +102,10 @@ class RfcVoteItem extends React.Component {
 
                 <RfcDiscussions discussions={this.props.rfc.discussions} />
 
+                <hr />
+
                 {this.props.rfc.questions.map((item, idx) => {
-                    return <VoteResults key={idx} question={item.question} results={item.results} share={item.share} last={voteCount == idx+1} />
+                    return <VoteResults key={idx} vote={item} last={voteCount == idx+1} />
                 })}
             </div>
         </div>

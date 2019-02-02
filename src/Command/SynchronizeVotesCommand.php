@@ -61,6 +61,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         foreach ($rfcUrls as $rfcUrl) {
             $response = $browser->get($rfcUrl);
 
+            $html = $response->getContent();
             $dom = $response->toDomDocument();
             $xpath = new \DOMXpath($dom);
 
@@ -145,6 +146,11 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                     $rfc->setQuestion($question);
                     $rfc->setAuthor($author);
                     $rfc->setVoteId($voteId);
+
+                    if (strpos($html, "2/3 majority")) {
+                        $rfc->setPassThreshold(66);
+                    }
+
                     $rfcs[$voteId] = $rfc;
 
                     // Guess at the approximate start time based on the first vote.

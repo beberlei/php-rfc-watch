@@ -21,9 +21,11 @@ class RfcType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $versions = ['8.0', '7.4', '7.3', '7.2', '7.1', '7.0'];
+        $passes = ['50%+1' => 50, '2/3' => 66];
 
         $builder
             ->add('targetPhpVersion', ChoiceType::class, ['choices' => array_combine($versions, $versions)])
+            ->add('passThreshold', ChoiceType::class, ['choices' => $passes])
             ->add('discussions', TextType::class, ['required' => false])
             ->add('rejected', CheckboxType::class, ['required' => false])
             ->add('submit', SubmitType::class)

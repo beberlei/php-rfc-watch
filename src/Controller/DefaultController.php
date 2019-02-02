@@ -99,6 +99,7 @@ class DefaultController extends AbstractController
                 'question' => $rfc->getQuestion(),
                 'results' => $rfc->getCurrentResults(),
                 'share' => $rfc->getYesShare(),
+                'passing' => $rfc->getYesShare() > $rfc->getPassThreshold()
             ];
         }
 
