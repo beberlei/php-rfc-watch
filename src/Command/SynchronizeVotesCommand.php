@@ -186,7 +186,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                 $rfc->setQuestion($question);
 
                 if ($voteWasClosed && $rfc->isOpen()) {
-                    if ($rfc->getYesShare() > $rfc->getPassThreshold()) {
+                    if ($rfc->getYesShare() < $rfc->getPassThreshold()) {
                         $rfc->setRejected(true);
                     }
 

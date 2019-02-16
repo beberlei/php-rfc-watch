@@ -57,6 +57,14 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/admin/rfc/{id}/export", name="admin_export_rfc", methods={"GET"})
+     */
+    public function adminExportRfcAction(RequestForComment $rfc)
+    {
+        return ['rfc' => $rfc];
+    }
+
+    /**
      * @Route("/data.json", name="data")
      */
     public function dataAction()
