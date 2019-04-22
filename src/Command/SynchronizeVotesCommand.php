@@ -146,10 +146,7 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
                     $rfc->setQuestion($question);
                     $rfc->setAuthor($author);
                     $rfc->setVoteId($voteId);
-
-                    if (strpos($html, "2/3 majority")) {
-                        $rfc->setPassThreshold(66);
-                    }
+                    $rfc->setPassThreshold(66);
 
                     $rfcs[$voteId] = $rfc;
 
