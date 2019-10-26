@@ -206,10 +206,8 @@ class SynchronizeVotesCommand extends ContainerAwareCommand
         $xPath      = new \DOMXPath($document);
         $rfcs       = [];
 
-        foreach ($xPath->query($converter->toXPath('#in_voting_phase + .level2 .li')) as $listing) {
-            /** @var \DOMNode $listing */
+        foreach ($xPath->query($converter->toXPath('#in_voting_phase + .level2 .li a.wikilink1')) as $link) {
             /** @var \DOMElement $link */
-            $link   = $xPath->query($converter->toXPath('a'), $listing)->item(0);
             $rfcs[] = $link->getAttribute('href');
         }
 
