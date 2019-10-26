@@ -41,6 +41,8 @@ class Synchronization
 
     public function synchronizeRfcs(array $rfcUrls)
     {
+        $rfcs = [];
+
         foreach ($rfcUrls as $rfcUrl) {
             $dom = $this->rfcFetcher->getRfcDom($rfcUrl);
             $xpath = new \DOMXpath($dom);
@@ -173,5 +175,7 @@ class Synchronization
         }
 
         $this->entityManager->flush();
+
+        return $rfcs;
     }
 }
