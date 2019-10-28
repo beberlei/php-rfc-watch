@@ -3,7 +3,7 @@
     "@babel/preset-react": "^7.0.0",
     "@symfony/webpack-encore": "0.28",
     "bootstrap": "^4.1.1",
-    "node-sass": "4.9.0",
+    "node-sass": "4.9.4",
     "sass-loader": "7.0.3"
   },
   "dependencies": {
