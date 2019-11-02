@@ -100,7 +100,7 @@ class RfcDiscussions extends React.Component {
                         label = url.host;
                     }
                     idx++;
-                    return <a href={x} target="_blank">#{idx} {label}</a>
+                    return <a href={x} target="_blank" style={{whiteSpace: 'nowrap'}}>#{idx} {label}</a>
                 }), ", ")}
             </div>
     }
