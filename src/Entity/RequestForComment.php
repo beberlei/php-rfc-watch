@@ -303,4 +303,9 @@ class RequestForComment
     {
         $this->passThreshold = $passThreshold;
     }
+
+    public function getCreated()
+    {
+        return $this->created;
+    }
 }

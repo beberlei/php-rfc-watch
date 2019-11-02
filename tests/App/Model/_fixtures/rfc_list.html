@@ -1,0 +1,1798 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PHP: rfc</title>
+
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="keywords" content="rfc"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/lib/exe/opensearch.php" title="PHP Wiki"/>
+<link rel="start" href="/"/>
+<link rel="contents" href="/rfc?do=index" title="Sitemap"/>
+<link rel="manifest" href="/lib/exe/manifest.php"/>
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="Current namespace" href="/feed.php?mode=list&amp;ns="/>
+<link rel="edit" title="Edit this page" href="/rfc?do=edit"/>
+<link rel="alternate" type="text/html" title="Plain HTML" href="/_export/xhtml/rfc"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/_export/raw/rfc"/>
+<link rel="canonical" href="https://wiki.php.net/rfc"/>
+<link rel="stylesheet" type="text/css" href="/lib/exe/css.php?t=phpnet&amp;tseed=bb98a79a04ccfbc5597904792b880cf8"/>
+<!--[if gte IE 9]><!-->
+<script type="text/javascript">/*<![CDATA[*/var NS='';var SIG=' --- //[[beberlei@php.net|beberlei]] 2019/04/22 22:09//';var JSINFO = {"id":"rfc","namespace":"","ACT":"show","useHeadingNavigation":0,"useHeadingContent":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="/lib/exe/jquery.php?tseed=23f888679b4f1dc26eef34902aca964f"></script>
+<script type="text/javascript" charset="utf-8" src="/lib/exe/js.php?t=phpnet&amp;tseed=bb98a79a04ccfbc5597904792b880cf8"></script>
+<!--<![endif]-->
+  <link media='all' rel='stylesheet' href='//shared.php.net/styles/defaults.css?filemtime=1506087205'/>
+  <link media='all' rel='stylesheet' href='//shared.php.net/styles/wiki.css?filemtime=1550435250'/>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,400italic,600italic|Source+Code+Pro&amp;subset=latin,latin-ext" rel="stylesheet">
+  <link rel="shortcut icon" href="//php.net/favicon.ico">
+<!--[if lt IE 9]>
+  <script src="//shared.php.net/js/html5shiv.js"></script>
+<![endif]-->
+  </head>
+<body id="">
+
+<div class="wrap">
+<header class='clearfix'>
+  <div id="mainmenu-toggle-overlay"></div>
+  <input type="checkbox" id="mainmenu-toggle">
+  <nav class="fullscreen">
+    <div class="mainscreen">
+      <a href="/" class="home"><img src="//php.net/images/logo.php?" width="48" height="24" alt="php"><span class="subdomain"></span></a>
+      <ul>
+        <li><a href="?do=edit">Edit this page</a></li>
+        <li><a href="?do=admin">Admin</a></li>
+        <li><a href="?do=logout">Logout</a></li>
+        <li><a href="?do=profile">beberlei (beberlei)</a></li>
+      </ul>
+    </div>
+    <div class="secondscreen">
+      <form method="get" action="/start">
+        <input type="search" placeholder="Search" name="id" class="search">
+        <input type="hidden" name="do" value="search">
+      </form>
+    </div>
+  </nav>
+</header>
+<div id="flash-message"></div>
+<nav id="megadropdown"></nav>
+
+<section class="fullscreen clearfix">
+
+
+
+<section id="breadcrumbs">
+<nav>
+<span class="bchead">You are here: </span><span class="home"><bdi><a href="/start" class="wikilink1" title="start">start</a></bdi></span> › <bdi><span class="curid"><a href="/rfc" class="wikilink1" title="rfc">rfc</a></span></bdi></nav>
+</section>
+<section class="mainscreen">
+    <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+    <div id="dokuwiki__site"><div id="dokuwiki__top" class="site dokuwiki mode_show tpl_phpnet loggedIn    ">
+
+
+        <div class="wrapper group">
+
+            
+            <!-- ********** CONTENT ********** -->
+            <div id="dokuwiki__content"><div class="pad group">
+
+                <div class="pageId"><span>rfc</span></div>
+
+                <div class="page group">
+                                                            <!-- wikipage start -->
+                                        
+<h1 class="sectionedit1" id="request_for_comments">Request for Comments</h1>
+<div class="level1">
+
+<p>
+This page gives an overview of the current RFCs for PHP.
+</p>
+
+<p>
+To create a new <abbr title="Request for Comments">RFC</abbr>, see <a href="/rfc/howto" class="wikilink1" title="rfc:howto">How To Create an RFC</a>.
+</p>
+
+<p>
+Note: An <abbr title="Request for Comments">RFC</abbr> is effectively “owned” by the person that created it. If you want to make changes, get permission from the creator. If no agreement can be found, the only course of action is to create a competing <abbr title="Request for Comments">RFC</abbr>. In this case, the old <abbr title="Request for Comments">RFC</abbr> page should be modified to become an intermediate page that points to all the competing <abbr title="Request for Comments">RFC</abbr>&#039;s.
+</p>
+
+<p>
+A new page in this <abbr title="Request for Comments">RFC</abbr> namespace will automatically be loaded with an <abbr title="Request for Comments">RFC</abbr> <a href="/rfc/template" class="wikilink1" title="rfc:template">template</a>. Customize as needed.
+</p>
+
+</div>
+<div class='secedit editbutton_section editbutton_1'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Request for Comments] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="request_for_comments" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="1-616" /><button type="submit" title="Request for Comments">Edit</button></div></form></div>
+<h2 class="sectionedit2" id="in_voting_phase">In voting phase</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/arrow_functions_v2" class="wikilink1" title="rfc:arrow_functions_v2">Arrow functions 2.0</a> <br/>
+Adds short closures / arrow functions.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate_php_short_tags" class="wikilink1" title="rfc:deprecate_php_short_tags">Deprecate PHP&#039;s Short Open Tags</a> <br/>
+Deprecate PHP&#039;s short open tags (Created: 2019-03-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate-and-remove-ext-interbase" class="wikilink1" title="rfc:deprecate-and-remove-ext-interbase">Deprecate and remove ext/interbase</a> <br/>
+Deprecate and eventually remove the InterBase extension in the Core (Created 2019-03-22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/spread_operator_for_array" class="wikilink1" title="rfc:spread_operator_for_array">Spread Operator in Array Expression</a> <br/>
+(Created: 2018-10-13)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_2'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[In voting phase] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="in_voting_phase" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="617-1138" /><button type="submit" title="In voting phase">Edit</button></div></form></div>
+<h2 class="sectionedit3" id="under_discussion">Under Discussion</h2>
+<div class="level2">
+
+<p>
+This section is for RFCs that have been announced on the PHP “internals” mail list.
+</p>
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/ternary_associativity" class="wikilink1" title="rfc:ternary_associativity">Deprecate left-associative ternary operator</a> <br/>
+Deprecate nesting of ternaries without explicit use of parentheses. (Created: 2019-04-09)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/lsp_errors" class="wikilink1" title="rfc:lsp_errors">Always generate fatal error for incompatible method signatures</a> <br/>
+Resolve inconsistent handling of abstract and non-abstract methods during inheritance. (Created: 2019-04-08)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/nullable-casting" class="wikilink1" title="rfc:nullable-casting">Nullable Casting</a> <br/>
+Support nullable types in casting (Discussion started: 2019-04-06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/sodium.argon.hash" class="wikilink1" title="rfc:sodium.argon.hash">Argon2 support from sodium</a> <br/>
+Provide password_hash() support for argon2i/argon2id from ext/sodium if standard does not. (Created: 2019-04-05)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/concatenation_precedence" class="wikilink1" title="rfc:concatenation_precedence">Change the precedence of the concatenation operator</a> <br/>
+Update the precedence of concatenation to be inferior to addition and subtraction (Created: 2019-03-28)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/dom_living_standard_api" class="wikilink1" title="rfc:dom_living_standard_api">DOM Living Standard API</a> <br/>
+Upgrade DOM <abbr title="Application Programming Interface">API</abbr> to latest standard version (Created: 2019-03-13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate_curly_braces_array_access" class="wikilink1" title="rfc:deprecate_curly_braces_array_access">Deprecate alternate access to array elements and chars in string</a> <br/>
+Deprecate curly braces syntax access for the benefit of square braces: $string{1}, $array{“key”} ⇒ $string[1], $array[“key”]. (Created: 2019-03-12)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/locked-classes" class="wikilink1" title="rfc:locked-classes">Locked Classes</a> <br/>
+Allows classes to block dynamically adding and removing properties from their instances (Announced: 2019-03-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/trailing_whitespace_numerics" class="wikilink1" title="rfc:trailing_whitespace_numerics">Trailing whitespace in numeric strings</a> <br/>
+Proposes to permit trailing whitespace in numeric strings. (Put under discussion: 2019-03-06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/string_to_number_comparison" class="wikilink1" title="rfc:string_to_number_comparison">Saner string to number comparison</a> <br/>
+Proposes to change non-strict comparisons between strings and numbers to behave more reasonably. (Created: 2019-02-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/allow-void-variance" class="wikilink1" title="rfc:allow-void-variance">Allow void variance</a> <br/>
+Allow void variance. (Created: 2019-02-04)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/namespace-visibility" class="wikilink1" title="rfc:namespace-visibility">Namespace Visiblity for Class, Interface and Trait</a> <br/>
+Add support for public, protected and private classes, interfaces and traits. (Created: 2018-07-18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/fiber" class="wikilink1" title="rfc:fiber">Fiber</a> <br/>
+Primitives for implementing light weight cooperative concurrency (Created: 2017-09-13 2018-06-11 to 2018-06-22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/namespace_scoped_declares" class="wikilink1" title="rfc:namespace_scoped_declares">Namespace-scoped declares</a> <br/>
+Add ability to specify declare directives at the namespace level. (Created: 2016-09-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate-pear-include-composer" class="wikilink1" title="rfc:deprecate-pear-include-composer">Deprecate PEAR/PECL &amp; Replace with composer/pickle</a> <br/>
+Proposes replacing pear/pecl with composer/pickle (Created: 2016-09-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/mixed-typehint" class="wikilink1" title="rfc:mixed-typehint">Mixed typehint</a> <br/>
+Proposal to add mixed typehint for parameter and return types (Revived: 2019-02-07)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_3'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Under Discussion] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="under_discussion" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="1139-3910" /><button type="submit" title="Under Discussion">Edit</button></div></form></div>
+<h2 class="sectionedit4" id="in_draft">In Draft</h2>
+<div class="level2">
+
+<p>
+This section is for early drafts of RFCs that have NOT been announced on the PHP “internals” mail list.
+</p>
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/comprehensions" class="wikilink1" title="rfc:comprehensions">Comprehensions (short generators)</a> <br/>
+Generator Comprehensions for PHP (Created: 2019-03-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/annotations_v2" class="wikilink1" title="rfc:annotations_v2">Annotations 2.0</a> <br/>
+Annotations (Class Metadata) support in PHP (Created: 2019-02-05)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecations_php_7_4" class="wikilink1" title="rfc:deprecations_php_7_4">Deprecations for PHP 7.4</a> <br/>
+Functionality to be deprecated in PHP 7.4.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/default-session-strict-mode" class="wikilink1" title="rfc:default-session-strict-mode">Session strict mode default ini settings</a> <br/>
+More secure ini defaults for sessions (Created: 2018-02-13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/arrow_functions" class="wikilink1" title="rfc:arrow_functions">Arrow Functions</a> <br/>
+A short form of closures similar to ES6&#039;s arrow functions (Created: 2016-08-14; Discussion began 2017-01-30)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/short-closures" class="wikilink1" title="rfc:short-closures">Short Closures</a> <br/>
+Provide consistent syntax for creating closures from callable (Created: 2017-06-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/disallow-multiple-constructor-calls" class="wikilink1" title="rfc:disallow-multiple-constructor-calls">Disallow multiple constructor calls</a> <br/>
+Raise an error on calling $obj-&gt;__construct (Created: 2017-01-17)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/inheritance_private_methods" class="wikilink1" title="rfc:inheritance_private_methods">Ignore inheritance rules on private methods</a> <br/>
+Proposes that inheritance checks are ignored for private methods (Created: 2017-02-07)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/ommit-double-slash-in-user-stream-wrapper-uri" class="wikilink1" title="rfc:ommit-double-slash-in-user-stream-wrapper-uri">Remove requirement for authority portion of user stream wrapper URIs</a> <br/>
+Proposes additional flag allowing to use valid <abbr title="Uniform Resource Identifier">URI</abbr> with StreamWrapper&#039;s (Created: 2017-01-23)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/chaining_comparison" class="wikilink1" title="rfc:chaining_comparison">Comparison Chains</a> <br/>
+Implement arbitrary chaining of comparator operations</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/replace_parse_url" class="wikilink1" title="rfc:replace_parse_url">Create URLParser and URLBuilder Classes</a> <br/>
+Proposed improvement beyond what parse_url() allows Created: 2016-10-04)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/comparator_interface" class="wikilink1" title="rfc:comparator_interface">Comparator interface</a> <br/>
+Proposes introduction of Comparator interface (Created: 2016-09-27)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/automatic_csrf_protection" class="wikilink1" title="rfc:automatic_csrf_protection">Automatic CSRF protection</a> <br/>
+Extend session module to provide automatic CSRF protection (Created 2016-05-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/exception_bt_provide_object" class="wikilink1" title="rfc:exception_bt_provide_object">Extending Exception backtraces to provide &#039;object&#039;</a> <br/>
+Extending Exception backtraces to provide &#039;object&#039; (Created 11/04-2016)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/foreach_void" class="wikilink1" title="rfc:foreach_void">Add foreach iteration of keys without values</a> <br/>
+Add new syntax to enable foreach iteration without retrieving values (Created 2016-01-09)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/consistent_callables" class="wikilink1" title="rfc:consistent_callables">Consistent callables</a><br/>
+Consistent Callables (Created 2015-09-28)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/enum" class="wikilink1" title="rfc:enum">Enumerated Types</a><br/>
+A proposal to add enumerated types (Created 2015-04-08)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/introduce-type-affinity" class="wikilink1" title="rfc:introduce-type-affinity">Type Affinity</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes type affinity for inputs</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/parser-extension-api" class="wikilink1" title="rfc:parser-extension-api">Parser Extension API</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a userland <abbr title="Application Programming Interface">API</abbr> to fetch an AST for code and to provide parser extensions (Created 2015/02/17)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/nullsafe_calls" class="wikilink1" title="rfc:nullsafe_calls">Nullsafe operator</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a new operator for propagating forward failures in a computation composed of method calls without the need for lots of boilerplate. (Created 2014-12-09)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/linking_in_stream_wrappers" class="wikilink1" title="rfc:linking_in_stream_wrappers">Support linking in stream wrappers</a><br/>
+Add support for links in stream wrappers by adding appropriate hooks</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/string-bitwise-shifts" class="wikilink1" title="rfc:string-bitwise-shifts">Normalize string bitwise shifts</a><br/>
+Bitwise shifts to operate on string bytes instead of casting to integer.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/consistent-names" class="wikilink1" title="rfc:consistent-names">Consistent names for legacy functions/classes</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to use alias to provide both legacy and consistent names.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/inconsistent-behaviors" class="wikilink1" title="rfc:inconsistent-behaviors">Inconsistent behaviors</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> is to discuss/document inconsistent behaviors. </div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/csrandombytes" class="wikilink1" title="rfc:csrandombytes">Platform and extension-independent API to the system CSPRNG</a><br/>
+Request for Comments: Platform and extension-independent <abbr title="Application Programming Interface">API</abbr> to the system CSPRNG. </div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/loop_else" class="wikilink1" title="rfc:loop_else">Loop+Else control structure</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes an optional “else” clause that can be used after while, for, and foreach loops.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/case-sensitivity" class="wikilink1" title="rfc:case-sensitivity">Make the PHP core case-sensitive</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/zpp-conversion-rules" class="wikilink1" title="rfc:zpp-conversion-rules">Restrict parameter parsing rules</a> <br/>
+Restrict rules to accept and implicitely convert internal function input arguments.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/sourcemaps" class="wikilink1" title="rfc:sourcemaps">Sourcemaps</a> <br/>
+Add support for Source Maps Revision 3</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/static_class_constructor" class="wikilink1" title="rfc:static_class_constructor">Static class constructor</a> <br/>
+Introduce a class constructor to initialize class state</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/property_type_hints" class="wikilink1" title="rfc:property_type_hints">Property Type-hints</a> <br/>
+Introduce optional static type-hints and type-checking for properties.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/simplified_named_params" class="wikilink1" title="rfc:simplified_named_params">Simplified Named Arguments</a> <br/>
+Introduce syntax for named arguments</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/typesafe-callable" class="wikilink1" title="rfc:typesafe-callable">Typesafe Callable</a> <br/>
+Allow typesafe callables (Created 2016-04-04)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/cyclic-replace" class="wikilink1" title="rfc:cyclic-replace">Add cyclic string replace to str_[i]replace() functions</a> (Created 2015/01/05)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/improved_error_callback_mechanism" class="wikilink1" title="rfc:improved_error_callback_mechanism">Improved Error Callback Mechanism</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> aims to give extensions that intercept errors a better way to register their callbacks. (Created 2015-03-13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/url-opcode-cache" class="wikilink1" title="rfc:url-opcode-cache">Add support for stream-wrapped URLs in opcode cache</a> <br/>
+Adds a generic way to opcode-cache code generated through a stream wrapper. (Created 2017/05/25)</div>
+</li>
+<li class="level1"><div class="li">  <a href="/rfc/deprecate-inconsistent-cast-keywords" class="wikilink1" title="rfc:deprecate-inconsistent-cast-keywords">Deprecate Inconsistent Cast Names</a> <br/>
+Deprecate cast names that are not valid as type declarations</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_4'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[In Draft] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="in_draft" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="3911-9152" /><button type="submit" title="In Draft">Edit</button></div></form></div>
+<h2 class="sectionedit5" id="accepted">Accepted</h2>
+<div class="level2">
+
+</div>
+<div class='secedit editbutton_section editbutton_5'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Accepted] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="accepted" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="9153-9174" /><button type="submit" title="Accepted">Edit</button></div></form></div>
+<h3 class="sectionedit6" id="process_and_policy">Process and Policy</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/abolish-short-votes" class="wikilink1" title="rfc:abolish-short-votes">Abolish Short Votes</a> <br/>
+Proposal to abolish voting periods of less than two weeks (Created 2019-03-21, Voting ended: 2019-04-22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/abolish-narrow-margins" class="wikilink1" title="rfc:abolish-narrow-margins">Abolish Narrow Margins</a> <br/>
+Proposal to abolish 50%+1 votes (Created 2016-11-17, Voting ended: 2019-02-22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/security-classification" class="wikilink1" title="rfc:security-classification">Security Issue Classification</a> <br/>
+Ratify reformed security issue classification. (Accepted 2016-11-18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/php56timeline" class="wikilink1" title="rfc:php56timeline">PHP 5 Support Timeline</a><br/>
+Determine the Active &amp; Support timelines for PHP 5.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/reserve_even_more_types_in_php_7" class="wikilink1" title="rfc:reserve_even_more_types_in_php_7">Reserve Even More Types in PHP 7</a> <br/>
+A proposal to reserve even more type names in PHP 7 (Created 2015-02-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/php7timeline" class="wikilink1" title="rfc:php7timeline">PHP 7.0 Timeline</a><br/>
+Define an agreed-upon timeline and milestones for PHP 7.0.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/travis_ci" class="wikilink1" title="rfc:travis_ci">Keeping the tests green</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a policy for keeping PHP CI tests green. </div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/php53eol" class="wikilink1" title="rfc:php53eol">Define PHP 5.3 end of life</a><br/>
+The purpose of this <abbr title="Request for Comments">RFC</abbr> is to define when the PHP 5.3 series will no longer be supported.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/releaseprocess" class="wikilink1" title="rfc:releaseprocess">Release Process</a><br/>
+PHP release process.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/voting" class="wikilink1" title="rfc:voting">Voting Process</a><br/>
+PHP voting process.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/magicquotes" class="wikilink1" title="rfc:magicquotes">Magic Quotes</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes how we deal with magic quotes from PHP 5.3.0 to 6.0.0.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/dvcs" class="wikilink1" title="rfc:dvcs">Choosing a distributed version control system for PHP</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to migrate the PHP SVN repo to a DVCS.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/phpvcs" class="wikilink1" title="rfc:phpvcs">PHP Version Control System</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> discusses the switch from CVS to some other version tracking system</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/php6" class="wikilink1" title="rfc:php6">Name of Next Release of PHP</a><br/>
+To settle what the name of the next major release of PHP shall be. (Created 2014-07-05)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/release-md5-deprecation" class="wikilink1" title="rfc:release-md5-deprecation">MD5 Release Checksum</a> <br/>
+Deprecate MD5 checksums from Release process (Created: 2017-05-30)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/class-naming" class="wikilink1" title="rfc:class-naming">Class Naming</a> <br/>
+Specify how to deal with abbreviations and acronyms in the coding standard (Created: 2017-06-03)</div>
+</li>
+<li class="level1"><div class="li">  <a href="/rfc/umaintained_extensions" class="wikilink1" title="rfc:umaintained_extensions">Cleaning up unmaintained extensions</a> <br/>
+(Created: 2016-08-07; Accepted: 2018-06-26)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_6'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Process and Policy] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="process_and_policy" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="9175-11260" /><button type="submit" title="Process and Policy">Edit</button></div></form></div>
+<h3 class="sectionedit7" id="pending_implementation">Pending Implementation</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/apxs-loadmodule" class="wikilink1" title="rfc:apxs-loadmodule">APXS LoadModule</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes the addition of an option to the configure script that allows the user to specify whether the main Apache .conf file should be appended with the LoadModule entry.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/datetime_and_daylight_saving_time" class="wikilink1" title="rfc:datetime_and_daylight_saving_time">DateTime and Daylight Saving Time Transitions</a><br/>
+Defines expected behaviors and new features to improve how DateTime handles Daylight Saving Time transitions.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/notice-for-non-valid-array-container" class="wikilink1" title="rfc:notice-for-non-valid-array-container"> E_WARNING for invalid containers</a> <br/>
+Raise E_WARNING for array access on invalid containers (Created 2016-07-27)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/covariant-returns-and-contravariant-parameters" class="wikilink1" title="rfc:covariant-returns-and-contravariant-parameters">Covariant Returns and Contravariant Parameters</a> <br/>
+(Announced: 2018-11-26; Voting began: 2018-12-19)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_7'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Pending Implementation] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="pending_implementation" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="11261-12047" /><button type="submit" title="Pending Implementation">Edit</button></div></form></div>
+<h2 class="sectionedit8" id="implemented">Implemented</h2>
+<div class="level2">
+
+<p>
+<strong>Order in these sections:</strong> Language changes first, library changes later.
+</p>
+
+</div>
+<div class='secedit editbutton_section editbutton_8'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Implemented] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="implemented" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="12048-12149" /><button type="submit" title="Implemented">Edit</button></div></form></div>
+<h3 class="sectionedit9" id="php_80">PHP 8.0</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/negative_array_index" class="wikilink1" title="rfc:negative_array_index">Arrays starting with a negative index</a> <br/>
+Proposes to make implicit array keys consistent. (Created: 2017-04-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/consistent_type_errors" class="wikilink1" title="rfc:consistent_type_errors">Consistent type errors for internal functions</a> <br/>
+Consistently throw <code>TypeError</code> for parameter parsing failures of internal functions. (Created: 2019-02-05, Voting started: 2019-02-19)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/jit" class="wikilink1" title="rfc:jit">JIT</a> <br/>
+Just in Time Compiler. (Created: 2019-01-28)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_9'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 8.0] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_80" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="12150-12603" /><button type="submit" title="PHP 8.0">Edit</button></div></form></div>
+<h3 class="sectionedit10" id="php_74">PHP 7.4</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/weakrefs" class="wikilink1" title="rfc:weakrefs">weakrefs</a> <br/>
+(Created: 2018-05-17, Voting started: 2019-02-22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/ffi" class="wikilink1" title="rfc:ffi">FFI - Foreign Function Interface</a> <br/>
+(Announced: 2018-12-06; Voting began: 2018-12-20; Accepted: 2019-01-09)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/typed_properties_v2" class="wikilink1" title="rfc:typed_properties_v2">Typed Properties 2.0</a> <br/>
+Add support for typed properties, including static properties and references to typed properties. (Created: 2018-06-15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/null_coalesce_equal_operator" class="wikilink1" title="rfc:null_coalesce_equal_operator">Null Coalesce Equal Operator</a> <br/>
+Allow shorthand for self assigning null coalesce operator (Created 2016-03-09)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/preload" class="wikilink1" title="rfc:preload">Preloading</a> <br/>
+Preload PHP functions and classes once and use them in the context of any future request without overhead. (Created: 2018-10-18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/permanent_hash_ext" class="wikilink1" title="rfc:permanent_hash_ext">Always available hash extension</a> <br/>
+Proposes to make the hash extension available to every build of PHP. (Created: 04/09-2018)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/password_registry" class="wikilink1" title="rfc:password_registry">Password Hash Registry</a> <br/>
+Make the mechanisms used by password_hash/verify/etc… extensible by other modules. (Created: 2018-10-15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/improve-openssl-random-pseudo-bytes" class="wikilink1" title="rfc:improve-openssl-random-pseudo-bytes">Improve openssl_random_pseudo_bytes()</a> <br/>
+Proposes making <code>openssl_random_pseudo_bytes()</code> fail closed and deprecate the second parameter (Created: 2019-10-19)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/mb_str_split" class="wikilink1" title="rfc:mb_str_split">mb_str_split() Split multibyte string</a> <br/>
+(Announced: 2019-01-02; Voting began: 2019-01-10; Accepted: 2019-01-20; Implemented: 2019-02-12)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/reference_reflection" class="wikilink1" title="rfc:reference_reflection">Reflection for references</a> <br/>
+Introduces the <code>ReflectionReference</code> class to allow detecting references and determining reference equality. (Created: 2019-01-15; Voting began: 2019-01-30)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate-and-remove-ext-wddx" class="wikilink1" title="rfc:deprecate-and-remove-ext-wddx">Unbundle ext/wddx</a> <br/>
+(Announced: 2018-09-16; Voting began: 2019-01-17 Voting finished: 2019-01-31)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/custom_object_serialization" class="wikilink1" title="rfc:custom_object_serialization">New custom object serialization mechanism</a> <br/>
+Introduces new custom object serialization mechanism to replace <code>Serializable</code>. (Created: 2019-01-24, Voting start: 2019-03-01)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_10'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 7.4] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_74" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="12604-14589" /><button type="submit" title="PHP 7.4">Edit</button></div></form></div>
+<h3 class="sectionedit11" id="php_73">PHP 7.3</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/flexible_heredoc_nowdoc_syntaxes" class="wikilink1" title="rfc:flexible_heredoc_nowdoc_syntaxes">Flexible Heredoc and Nowdoc Syntaxes</a><br/>
+Allow indentation of, and remove newline requirement after, Nowdoc/Heredoc closing markers  (Published: 2017-09-16, Accepted 2017-11-16)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/trailing-comma-function-calls" class="wikilink1" title="rfc:trailing-comma-function-calls">Allow a trailing comma in function calls</a> (Published 2017-10-07)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/json_throw_on_error" class="wikilink1" title="rfc:json_throw_on_error">JSON_THROW_ON_ERROR</a> <br/>
+Adds a flag to change the JSON extension&#039;s error-handling behaviour (Created: 2017-09-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/pcre2-migration" class="wikilink1" title="rfc:pcre2-migration">PCRE2 Migration</a> (Published 2017-10-16)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/list_reference_assignment" class="wikilink1" title="rfc:list_reference_assignment">list() Reference Assignment</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a new syntax to enable reference assignment with list(). (Created 2013/10/25, withdrawn 2014-05-15, Commandeered and Reopened: 2016-12-30, Accepted 2017-02-22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/is-countable" class="wikilink1" title="rfc:is-countable">is_countable function</a> (Created: 2018-01-21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/array_key_first_last" class="wikilink1" title="rfc:array_key_first_last">array_key_first(), array_key_last()</a> <br/>
+Add functions for handling the outer keys of an array (Created: 2018-06-11; Voting from 2018-07-09 to 2018-07-16)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/compact" class="wikilink1" title="rfc:compact">Make compact function reports undefined passed variables</a> <br/>
+(Created: 2018-05-24; Voting from 2018-06-06 to 2018-06-18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/argon2_password_hash_enhancements" class="wikilink1" title="rfc:argon2_password_hash_enhancements">Argon2 Password Hash Enhancements</a> <br/>
+(Created: 2018-01-11; Voting from 2018-06-06 to 2018-06-18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/image2wbmp" class="wikilink1" title="rfc:image2wbmp">Deprecate and Remove image2wbmp()</a> <br/>
+(Created: 2018-05-11; Voting from 2018-05-26 to 2018-06-09)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/case_insensitive_constant_deprecation" class="wikilink1" title="rfc:case_insensitive_constant_deprecation">Deprecate and Remove Case-Insensitive Constants</a> <br/>
+Support for case-insensitive constants is deprecated and scheduled for removal in the next major version.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecations_php_7_3" class="wikilink1" title="rfc:deprecations_php_7_3">Deprecations for PHP 7.3</a> <br/>
+Miscellaneous minor deprecations for PHP 7.3.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/same-site-cookie" class="wikilink1" title="rfc:same-site-cookie">Same Site Cookie</a> <br/>
+Add same site flag to cookies created by core cookie functions (Created: 2017-07-16)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_11'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 7.3] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_73" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="14590-16501" /><button type="submit" title="PHP 7.3">Edit</button></div></form></div>
+<h3 class="sectionedit12" id="php_72">PHP 7.2</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/load-ext-by-name" class="wikilink1" title="rfc:load-ext-by-name">Allow loading extensions by name</a> (Created: 2016-05-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/allow-abstract-function-override" class="wikilink1" title="rfc:allow-abstract-function-override">Allow abstract function override</a> <br/>
+Allow redefinition of “abstract functions” (Created: 2017-03-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/number_format_negative_zero" class="wikilink1" title="rfc:number_format_negative_zero">Prevent number_format() from returning negative zero</a> <br/>
+Bring consistency to number_format() for negative zero. (Created: 2017-04-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/convert_numeric_keys_in_object_array_casts" class="wikilink1" title="rfc:convert_numeric_keys_in_object_array_casts">Convert numeric keys in object/array casts</a> <br/>
+Fix an edge case in casting objects to arrays and vice-versa. (Created: 2016-10-21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate-bareword-strings" class="wikilink1" title="rfc:deprecate-bareword-strings">Deprecate and Remove Bareword (Unquoted) Strings</a> <br/>
+Raises the severity of “undefined constant” to E_WARNING and deprecates the fallback to interpreting as a string. (Created: 2017-01-29)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/get_class_disallow_null_parameter" class="wikilink1" title="rfc:get_class_disallow_null_parameter">get_class() disallow null parameter</a> <br/>
+Prevent get_class() having astonishing behaviour</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/counting_non_countables" class="wikilink1" title="rfc:counting_non_countables">Counting of non-countable objects</a> <br/>
+Raise a warning when counting invalid objects. (Created: 2016-10-04)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/parameter-no-type-variance" class="wikilink1" title="rfc:parameter-no-type-variance">Parameter Type Widening</a> <br/>
+Allow subclasses to omit a type entirely (Created: 2016-11-21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/list-syntax-trailing-commas" class="wikilink1" title="rfc:list-syntax-trailing-commas">Trailing commas in list syntax</a><br/>
+Allow for trailing commas in all list syntax (Created 2015-11-03)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate-png-jpeg-2wbmp" class="wikilink1" title="rfc:deprecate-png-jpeg-2wbmp">Deprecate png2wbmp() and jpeg2wbmp()</a> <br/>
+Deprecate and later remove the png2wbmp() and jpeg2wbmp() functions. (Created: 2016-10-15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/socket_getaddrinfo" class="wikilink1" title="rfc:socket_getaddrinfo">Implement socket_getaddrinfo()</a> <br/>
+Implement getaddrinfo() to socket extension. (Created: 2016-08-08)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/argon2_password_hash" class="wikilink1" title="rfc:argon2_password_hash">Argon2 in password hash</a> <br/>
+Introduce Argon2 hashing algorithm to password functions (Created: 2016-07-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/debugging_pdo_prepared_statement_emulation" class="wikilink1" title="rfc:debugging_pdo_prepared_statement_emulation">Debugging PDO Prepared Statement Emulation</a> <br/>
+Allow the output of this feature to be examined in userland. (Created: 2016-10-17)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/debugging_pdo_prepared_statement_emulation_v2" class="wikilink1" title="rfc:debugging_pdo_prepared_statement_emulation_v2">Debugging PDO Prepared Statement Emulation v2</a> <br/>
+Another approach to allowing the output of this feature to be examined in userland. (Created: 2016-11-17)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/hash-context.as-resource" class="wikilink1" title="rfc:hash-context.as-resource">HashContext as Object</a> <br/>
+Change Hash Contexts to use Objects instead of Resources</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate-and-remove-intl_idna_variant_2003" class="wikilink1" title="rfc:deprecate-and-remove-intl_idna_variant_2003">Deprecate and remove INTL_IDNA_VARIANT_2003</a> (Created: 2017-01-07)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/extended-string-types-for-pdo" class="wikilink1" title="rfc:extended-string-types-for-pdo">Extended String Types For PDO</a> <br/>
+Types to handle “national character,” i.e. Unicode, string parameters. (Created: 2017-02-16)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/improved-tls-constants" class="wikilink1" title="rfc:improved-tls-constants">Improve TLS constants to sane values</a> (Created 2017-05-15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/object-typehint" class="wikilink1" title="rfc:object-typehint">Object typehint</a> <br/>
+Proposes adding <code>object</code> type-hint and return-type (Created: 2016-08-12)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/ldap_exop" class="wikilink1" title="rfc:ldap_exop">LDAP EXOP</a> <br/>
+Provide functions to use LDAP extended operations in php-ldap (Created: 2017-06-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/libsodium" class="wikilink1" title="rfc:libsodium">Libsodium</a> <br/>
+Make Libsodium a Core Extension (Created 2016-01-07)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecations_php_7_2" class="wikilink1" title="rfc:deprecations_php_7_2">Deprecations for PHP 7.2</a> <br/>
+Functions and features to be deprecated in PHP 7.2 (Created 2015-12-28)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_12'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 7.2] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_72" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="16502-19683" /><button type="submit" title="PHP 7.2">Edit</button></div></form></div>
+<h3 class="sectionedit13" id="php_71">PHP 7.1</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/session-id-without-hashing" class="wikilink1" title="rfc:session-id-without-hashing">Session ID without hashing</a> <br/>
+Remove hash usage from session ID generation. (Created 2016-04-06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/async_signals" class="wikilink1" title="rfc:async_signals">Asynchronous Signal Handling</a> <br/>
+Asynchronous Signal Handling without TICKs and any additional overhead. (Created 2016-06-24)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/this_var" class="wikilink1" title="rfc:this_var">Fix inconsistent behavior of $this variable</a> <br/>
+Fix all known inconsistencies related to special variable $this (Discussion began 2016-05-23)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/too_few_args" class="wikilink1" title="rfc:too_few_args">Replace &quot;Missing argument&quot; warning with &quot;Too few arguments&quot; exception</a> <br/>
+(Created 2016-06-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/nullable_types" class="wikilink1" title="rfc:nullable_types">Nullable Types</a> <br/>
+Allow a type check to be of some type or null (Discussion began 2016-04-13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/short_list_syntax" class="wikilink1" title="rfc:short_list_syntax">Square bracket syntax for array destructuring assignment</a> <br/>
+An alternative syntax to <code class="code php"><a href="http://www.php.net/list"><span class="kw3">list</span></a><span class="br0">&#40;</span><span class="br0">&#41;</span></code> (Created 2016-04-07)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/invalid_strings_in_arithmetic" class="wikilink1" title="rfc:invalid_strings_in_arithmetic">Warn about invalid strings in arithmetic</a> <br/>
+Produce E_NOTICE or E_WARNING when using invalid numeric strings with arithmetic operators (Created 2016-01-08)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/list_keys" class="wikilink1" title="rfc:list_keys">Allow specifying keys in list()</a> <br/>
+Adds syntax to help unpacking associative arrays into variables (Created 2016-01-17)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/iterable" class="wikilink1" title="rfc:iterable">Iterable</a> <br/>
+Iterable pseudo-type accepting arrays or objects implementing Traversable (Created 2016-06-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/negative-string-offsets" class="wikilink1" title="rfc:negative-string-offsets">Generalize support of negative string offsets</a> <br/>
+Add support for negative string offsets everywhere it makes sense (Created 2016-01-23)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/closurefromcallable" class="wikilink1" title="rfc:closurefromcallable">Closure from callable function</a> <br/>
+Add a function to create closures from callables without reflection</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate_mb_ereg_replace_eval_option" class="wikilink1" title="rfc:deprecate_mb_ereg_replace_eval_option">Deprecate mb_ereg_replace eval option</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> aims at deprecating the e option that mb_ereg_replace and mb_eregi_replace provide.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/mcrypt-viking-funeral" class="wikilink1" title="rfc:mcrypt-viking-funeral">Deprecate (and remove) Mcrypt</a> <br/>
+Let&#039;s get rid of ext/mcrypt, which is abandonware and inhibits the growth of the language, as soon as humanly possible. (Created 2016-01-09)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/openssl_aead" class="wikilink1" title="rfc:openssl_aead">OpenSSL AEAD support</a> <br/>
+Adds support for AEAD cipher modes (GCM and CCM) to openssl_decrypt and openssl_encrypt.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/void_return_type" class="wikilink1" title="rfc:void_return_type">Void Return Type</a> <br/>
+Adds a void return type to require that a function does not return a value. (Revived 2015-10-04, originally created 2015-02-14)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/class_const_visibility" class="wikilink1" title="rfc:class_const_visibility">Class constant visibility modifiers</a> <br/>
+Introduce class constants visibility modifiers that mirror properties and methods. (Created 2015/09/13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/octal.overload-checking" class="wikilink1" title="rfc:octal.overload-checking">Octal Overflow Protection</a> <br/>
+Stop quietly ignoring overflows in octal number parsing (Created: 2016-04-12)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/rng_fixes" class="wikilink1" title="rfc:rng_fixes">RNG fixes and changes</a> <br/>
+Fixes and improvements to the random number generation subsystems (Created 2016-06-14)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/curl_http2_push" class="wikilink1" title="rfc:curl_http2_push">Add HTTP/2 Server Push support to ext/curl</a> (Created 2015/10/01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/intl.timezone.get-windows-id" class="wikilink1" title="rfc:intl.timezone.get-windows-id">TimeZone::getWindowsID</a> (Created (2016/03/15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/multiple-catch" class="wikilink1" title="rfc:multiple-catch">Multi catch</a> <br/>
+Catching multiple exception types in a single catch statement (Created 2016/03/06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/forbid_dynamic_scope_introspection" class="wikilink1" title="rfc:forbid_dynamic_scope_introspection">Forbid dynamic calls to scope introspection functions</a> (Created 2016-05-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/new-curl-error-functions" class="wikilink1" title="rfc:new-curl-error-functions">Add curl_multi_errno(), curl_share_errno() and curl_share_strerror()</a> (Created: 2016-04-29)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/throw_error_in_extensions" class="wikilink1" title="rfc:throw_error_in_extensions">Throw Error in Extensions</a> <br/>
+Convert E_ERROR and E_RECOVERABLE_ERROR to throw Error in extensions (Created 2016-06-14)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/precise_float_value" class="wikilink1" title="rfc:precise_float_value">More precise float value handling</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes more precise float value handling.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/additional-context-in-pcntl-signal-handler" class="wikilink1" title="rfc:additional-context-in-pcntl-signal-handler">Additional Context in pcntl_signal Handler</a> <br/>
+Adds a second array argument to <code>pcntl_signal</code> handler (Created 2016-06-14)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/session-create-id" class="wikilink1" title="rfc:session-create-id">Add session_create_id()</a> <br/>
+Add session_create_id() function (Created 2016-04-07)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/session-gc" class="wikilink1" title="rfc:session-gc">Add session_gc()</a> <br/>
+Add session_gc() function (Created 2016-04-06)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_13'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 7.1] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_71" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="19684-23700" /><button type="submit" title="PHP 7.1">Edit</button></div></form></div>
+<h3 class="sectionedit14" id="php_70">PHP 7.0</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/random-function-exceptions" class="wikilink1" title="rfc:random-function-exceptions">Random Functions throwing Exceptions</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes that the random_* functions should throw exceptions on failure.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/throwable-interface" class="wikilink1" title="rfc:throwable-interface">Throwable Interface</a> <br/>
+Proposes a modification to the exception hierarchy for PHP 7, introducing a Throwable interface and Error class.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/context_sensitive_lexer" class="wikilink1" title="rfc:context_sensitive_lexer">Context Sensitive Lexer</a><br/>
+Proposal to have a context sensitive lexer for PHP with support for semi-reserved words (Created 2015-02-15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/preg_replace_callback_array" class="wikilink1" title="rfc:preg_replace_callback_array">Add preg_replace_callback_array function</a><br/>
+A <abbr title="Request for Comments">RFC</abbr> proposing each pattern can easily have a specific callback.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/easy_userland_csprng" class="wikilink1" title="rfc:easy_userland_csprng">Reliable User-land CSPRNG</a><br/>
+A proposal to add a reliable CSPRNG (Created 2015-02-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/anonymous_classes" class="wikilink1" title="rfc:anonymous_classes">Anonymous Class Support</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes support for anonymous classes.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/generator-delegation" class="wikilink1" title="rfc:generator-delegation">Generator Delegation</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes new syntax to delegate generator function operations to sub-iterators/generators (Created 2015-03-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/reserve_more_types_in_php_7" class="wikilink1" title="rfc:reserve_more_types_in_php_7">Reserve More Type Names in PHP 7</a> <br/>
+Reserves <code>int</code>, <code>float</code>, <code>string</code>, <code>bool</code>, <code>true</code>, <code>false</code> and <code>null</code> in class names or namespaces. (Created 2015-02-18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/internal_constructor_behaviour" class="wikilink1" title="rfc:internal_constructor_behaviour">Constructor behaviour of internal classes</a><br/>
+Cleanup undesirable behaviour of constructors internal classes. (Created 2015-03-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/reclassify_e_strict" class="wikilink1" title="rfc:reclassify_e_strict">Reclassify E_STRICT notices</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to reclassify our few existing E_STRICT notices to different categories. (Created 2015-02-22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/remove_php4_constructors" class="wikilink1" title="rfc:remove_php4_constructors">Remove PHP 4 Constructors</a><br/>
+Stop recognizing methods with the same name as the defining class as constructors. (Created 2014-11-17; Voting closed 2015-03-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/date.timezone_warning_removal" class="wikilink1" title="rfc:date.timezone_warning_removal">Remove the date.timezone warning</a> <br/>
+(Created 2015-01-27)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/combined-comparison-operator" class="wikilink1" title="rfc:combined-comparison-operator">Combined Comparison (Spaceship) Operator</a> <br/>
+Proposes a new comparison operator, <code>&lt;=&gt;</code> (Created 2014-02-12, revived 2015-01-19)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/php7_foreach" class="wikilink1" title="rfc:php7_foreach">Fix &quot;foreach&quot; behavior</a> <br/>
+The <abbr title="Request for Comments">RFC</abbr> defines foreach statement behavior for the cases where is wasn&#039;t defined before and implementation provided inconsistent results. (Created 2015-01-29)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/removal_of_dead_sapis_and_exts" class="wikilink1" title="rfc:removal_of_dead_sapis_and_exts"> Removal of dead SAPIs and extensions</a><br/>
+Consideration about removing the unsupported SAPIs and extensions with unsupported dependencies.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/remove_deprecated_functionality_in_php7" class="wikilink1" title="rfc:remove_deprecated_functionality_in_php7">Remove deprecated functionality in PHP 7</a><br/>
+Proposes to remove functionality that has been deprecated in the PHP 5.x cycle in PHP 7. (Created 2014-09-11)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/jsond" class="wikilink1" title="rfc:jsond">Jsond</a> <br/>
+Whether jsond should replace the current json extension. (Created 2015-01-11)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/json_preserve_fractional_part" class="wikilink1" title="rfc:json_preserve_fractional_part">Preserve Fractional Part in JSON encode</a> <br/>
+Adds a new option for JSON encode to preserve fractional part on float numbers.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/return_types" class="wikilink1" title="rfc:return_types">Return Type Declarations</a><br/>
+Adds return types to functions, methods and closures. (Created 2014-03-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/fast_zpp" class="wikilink1" title="rfc:fast_zpp">Fast Parameter Parsing API</a><br/>
+Fast <abbr title="Application Programming Interface">API</abbr> in addition to zend_parse_parameters(). (Created 2014-05-23)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/unicode_escape" class="wikilink1" title="rfc:unicode_escape">Unicode Codepoint Escape Syntax</a><br/>
+Adds an escape sequence syntax for Unicode codepoints to string literals. (Created 2014-11-24)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/native-tls" class="wikilink1" title="rfc:native-tls">Native TLS</a><br/>
+Native TLS for internal globals in TS mode</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/isset_ternary" class="wikilink1" title="rfc:isset_ternary">Null Coalesce Operator</a><br/>
+Adds the coalesce operator, <code>??</code></div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/integer_semantics" class="wikilink1" title="rfc:integer_semantics">Integer Semantics</a><br/>
+Improves cross-platform consistency in PHP for some operations dealing with integers</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/zpp_fail_on_overflow" class="wikilink1" title="rfc:zpp_fail_on_overflow">ZPP Failure on Overflow</a><br/>
+Make <code>zend_parse_parameters</code> fail if a float value out of bounds, or NaN, is passed where an integer is expected. (Created 2014-09-22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/phpng" class="wikilink1" title="rfc:phpng">Move the phpng branch into master</a><br/>
+Embrace the phpng codebase as the basis for the future major version of PHP. (Created 2014-07-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/abstract_syntax_tree" class="wikilink1" title="rfc:abstract_syntax_tree">Abstract Syntax Tree</a><br/>
+Proposes the introduction of an Abstract Syntax Tree (AST) as an intermediary structure in our compilation process.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/uniform_variable_syntax" class="wikilink1" title="rfc:uniform_variable_syntax">Uniform Variable Syntax</a><br/>
+Introduces an internally consistent and complete variable syntax.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/size_t_and_int64_next" class="wikilink1" title="rfc:size_t_and_int64_next">64 bit platform improvements for string length and integer</a><br/>
+Integer and String modifications for full 64 bit support</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/closure_apply" class="wikilink1" title="rfc:closure_apply">Closure::call</a><br/>
+Proposes a new method on the <code>Closure</code> class to allow calling bound to an object without pre-binding</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/fix_list_behavior_inconsistency" class="wikilink1" title="rfc:fix_list_behavior_inconsistency">Fix list() behavior inconsistency</a><br/>
+Enable or disable string handling in list() operator</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/remove_alternative_php_tags" class="wikilink1" title="rfc:remove_alternative_php_tags">Remove alternative PHP tags</a><br/>
+Removes ASP and script tags</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/switch.default.multiple" class="wikilink1" title="rfc:switch.default.multiple">switch.default.multiple</a><br/>
+Disallow multiple defaults in switch statements</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/catchable-call-to-member-of-non-object" class="wikilink1" title="rfc:catchable-call-to-member-of-non-object">Catchable &quot;call to a member function of a non-object&quot;</a><br/>
+Turns this fatal error into E_RECOVERABLE (Created 2014-04-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/secure_unserialize" class="wikilink1" title="rfc:secure_unserialize">Filtered unserialize()</a><br/>
+Add option to ignore all or some objects to unserialize() (Created 2013/03/30)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/intl.char" class="wikilink1" title="rfc:intl.char">ICU IntlChar class</a><br/>
+Adds an IntlChar class an intl_char_*() functions to the Intl extension.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/session-lock-ini" class="wikilink1" title="rfc:session-lock-ini">Introduce session_start() INI options as array</a><br/>
+Introduce session_start() options</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/remove_hex_support_in_numeric_strings" class="wikilink1" title="rfc:remove_hex_support_in_numeric_strings">Remove hex support in numeric strings</a> <br/>
+Removes support for hexadecimal numbers in numeric string conversions. (Created 2014-08-19)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/expectations" class="wikilink1" title="rfc:expectations">Expectations</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding BC zero-cost assertions. (Created 2013-11-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/group_use_declarations" class="wikilink1" title="rfc:group_use_declarations">Group Use Declarations</a> <br/>
+The <abbr title="Request for Comments">RFC</abbr> adds improvements to current PHP namespace implementation by introducing group use declarations. (Created 2015-01-28)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/engine_exceptions_for_php7" class="wikilink1" title="rfc:engine_exceptions_for_php7">Exceptions in the engine</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to allow the use of exceptions in the engine. (Created 2014-09-30)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/generator-return-expressions" class="wikilink1" title="rfc:generator-return-expressions">Generator Return Expressions</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes the ability to specify and access return values from Generator functions</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/scalar_type_hints_v5" class="wikilink1" title="rfc:scalar_type_hints_v5">Scalar Type Hints v0.5</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a mixed-mode scalar type system</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/continue_ob" class="wikilink1" title="rfc:continue_ob">Continue output buffering</a> <br/>
+Let the output buffer stack be usable despite an aborted connection</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/intdiv" class="wikilink1" title="rfc:intdiv">intdiv()</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding an intdiv() function for integer division. (Created 2014-07-15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/session.user.return-value" class="wikilink1" title="rfc:session.user.return-value">Fix handling of custom session handler return values</a><br/>
+Make false actually mean failure, not success.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/gc_fn_pointer" class="wikilink1" title="rfc:gc_fn_pointer">Turn gc_collect_cycles into function pointer</a> <br/>
+Proposes to turn gc_collect_cycles into function pointer for extensions to hook into. (Created 2012-12-11)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_14'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 7.0] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_70" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="23701-30623" /><button type="submit" title="PHP 7.0">Edit</button></div></form></div>
+<h3 class="sectionedit15" id="php_56">PHP 5.6</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/debug-info" class="wikilink1" title="rfc:debug-info">__debugInfo() magic method</a><br/>
+Support get_debug_info hook for userspace classes</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/pow-operator" class="wikilink1" title="rfc:pow-operator">Exponential operator</a><br/>
+Exponential operator</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/use_function" class="wikilink1" title="rfc:use_function">Importing namespaced functions</a><br/>
+Proposes to allow importing namespaced functions through a new `use function` sequence.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/const_scalar_exprs" class="wikilink1" title="rfc:const_scalar_exprs">Constant Scalar Expressions (with constants)</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding support for Constant Scalar Expressions with support for constants being operands.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/incompat_ctx" class="wikilink1" title="rfc:incompat_ctx">Remove calls from incompatible context</a><br/>
+Calls from incompatible context deprecated in 5.6 (will be removed in next version).</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/variadics" class="wikilink1" title="rfc:variadics">Dedicated syntax for variadic functions</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> introduces a dedicated syntax for variadic functions.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/argument_unpacking" class="wikilink1" title="rfc:argument_unpacking">Argument unpacking</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a syntax for argument unpacking.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/operator_overloading_gmp" class="wikilink1" title="rfc:operator_overloading_gmp">Internal operator overloading and GMP improvements</a><br/>
+Add support for operator overloading in internal classes and improve GMP using it</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/phpdbg" class="wikilink1" title="rfc:phpdbg">phpdbg</a><br/>
+Distribute phpdbg with PHP, a PHP debugger</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/slim_post_data" class="wikilink1" title="rfc:slim_post_data">Slim POST data</a><br/>
+Use a temp PHP stream for HTTP payload.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/crypt_function_salt" class="wikilink1" title="rfc:crypt_function_salt">Crypt() function salt</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes changing crypt() function&#039;s salt parameter treatment.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/fpm_change_hat" class="wikilink1" title="rfc:fpm_change_hat">Apparmor change_hat functionality for php-fpm</a><br/>
+Proposes to add the possibility to change to a different hat under the apparmor LSM</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/tls-peer-verification" class="wikilink1" title="rfc:tls-peer-verification">TLS Peer Verification</a><br/>
+Enable peer verification by default for encrypted client streams.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/improved-tls-defaults" class="wikilink1" title="rfc:improved-tls-defaults">Improved TLS Defaults</a><br/>
+Implement more secure defaults for encrypted stream transfers</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/default_encoding" class="wikilink1" title="rfc:default_encoding">Default character encoding</a><br/>
+Default character encoding handling in PHP.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/pack_unpack_64bit_formats" class="wikilink1" title="rfc:pack_unpack_64bit_formats">64 bit format codes for pack() and unpack()</a><br/>
+Adds format codes for converting 64 bit integers to and from binary strings.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/timing_attack" class="wikilink1" title="rfc:timing_attack">Timing attack safe string comparison function</a><br/>
+New function to perform time-constant string comparison (Created 2013/12/22)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_15'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 5.6] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_56" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="30624-32800" /><button type="submit" title="PHP 5.6">Edit</button></div></form></div>
+<h3 class="sectionedit16" id="php_55">PHP 5.5</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/generators" class="wikilink1" title="rfc:generators">Generators</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding generators as a simple and boilerplate-free way of defining iterators.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/finally" class="wikilink1" title="rfc:finally">support finally keyword</a><br/>
+Add try catch finally supporting</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/class_name_scalars" class="wikilink1" title="rfc:class_name_scalars">Resolve class names to scalars via class keyword</a><br/>
+A proposal to use ::class after type names to resolve FQ class names as scalar</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/foreachlist" class="wikilink1" title="rfc:foreachlist">foreach_variable supporting T_LIST</a><br/>
+This extends PHP&#039;s language parser to support T_LIST in foreach_variable</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/constdereference" class="wikilink1" title="rfc:constdereference">Const array/string dereference</a> <br/>
+A little improvement to make things consistent</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/empty_isset_exprs" class="wikilink1" title="rfc:empty_isset_exprs">Allow arbitrary expression arguments to empty() and isset()</a><br/>
+Proposes to allow <code>empty(getArray())</code> etc.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/optimizerplus" class="wikilink1" title="rfc:optimizerplus">Integrating Optimizer+ into the PHP distribution</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to integrate the Zend Optimizer+ opcode cache into the PHP distribution</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/hash_pbkdf2" class="wikilink1" title="rfc:hash_pbkdf2">Adding hash_pbkdf2 function</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding a hash_pbkdf2 function to the hash package</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/password_hash" class="wikilink1" title="rfc:password_hash">Add Simplified Password Hashing</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding 3 new functions to the core to expose a much simplified password hashing <abbr title="Application Programming Interface">API</abbr>.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/remove_preg_replace_eval_modifier" class="wikilink1" title="rfc:remove_preg_replace_eval_modifier">Remove preg_replace /e modifier</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> aims at deprecating and subsequently removing the /e modifier (PREG_REPLACE_EVAL) that preg_replace provides.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/uconverter" class="wikilink1" title="rfc:uconverter">Add UConverter</a><br/>
+A proposal to add ICU::UConverter functionality to ext/intl</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/mysql_deprecation" class="wikilink1" title="rfc:mysql_deprecation">ext/mysql deprecation</a><br/>
+Formally deprecating ext/mysql in PHP.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/cookie_max-age" class="wikilink1" title="rfc:cookie_max-age">Cookie Max-Age attribute</a><br/>
+Cookie Max-Age attribute</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/curl-file-upload" class="wikilink1" title="rfc:curl-file-upload">Fix cURL file uploading API</a><br/>
+Fix insecure cURL file uploading <abbr title="Application Programming Interface">API</abbr></div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/sendrecvmsg" class="wikilink1" title="rfc:sendrecvmsg">Add recvmsg() and sendmsg() to ext/sockets</a><br/>
+Wrap sendmsg() and recvmsg(), with support for a limited number of message types</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/cli_process_title" class="wikilink1" title="rfc:cli_process_title">PHP CLI changing process title support</a><br/>
+Setting PHP CLI process titles for visibility in &#039;top&#039; or &#039;ps&#039;</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/foreach-non-scalar-keys" class="wikilink1" title="rfc:foreach-non-scalar-keys">Allow non-scalar keys in foreach</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to remove the type restrictions on foreach iteration</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/array_column" class="wikilink1" title="rfc:array_column">Add array_column() function</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a new array function that returns the values of the specified column from a multi-dimensional array.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/curl-wrappers-removal-rfc" class="wikilink1" title="rfc:curl-wrappers-removal-rfc">Removal of curl-wrappers</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> is about removing the curl stream wrappers of the PHP as of 5.5 and to move it on PECL for any eventual improvements.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/strict_sessions" class="wikilink1" title="rfc:strict_sessions">Strict Sessions</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes an additional security measure for preventing session fixation.</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_16'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 5.5] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_55" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="32801-35512" /><button type="submit" title="PHP 5.5">Edit</button></div></form></div>
+<h3 class="sectionedit17" id="php_54">PHP 5.4</h3>
+<div class="level3">
+
+<p>
+Note: Many RFCs in this list have been <a href="/todo/php54/vote" class="wikilink1" title="todo:php54:vote">mass voted</a>.
+</p>
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/instance-method-call" class="wikilink1" title="rfc:instance-method-call">Instantiating a class and calling methods/accessing properties on same command</a><br/>
+A proposal to add support to instantiating a class and calling its methods or accessing its properties on same command.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/horizontalreuse" class="wikilink1" title="rfc:horizontalreuse">Traits</a><br/>
+Traits is a mechanism for code reuse in single inheritance languages such as PHP. A Trait is intended to reduce some limitations of single inheritance by enabling a developer to reuse sets of methods freely in several independent classes living in different class hierarchies. This <abbr title="Request for Comments">RFC</abbr> proposes a basic version of Traits.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/closures/object-extension" class="wikilink1" title="rfc:closures:object-extension">Closures: Object Extension</a><br/>
+How to extend closures to work with $this and objects.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/shortsyntaxforarrays" class="wikilink1" title="rfc:shortsyntaxforarrays">Short syntax for arrays</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> will discuss an language enhancement for simple and easy array definition.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/functionarraydereferencing" class="wikilink1" title="rfc:functionarraydereferencing">Function array dereferencing</a><br/>
+You know, like foo()[&#039;bar&#039;]</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/shortags" class="wikilink1" title="rfc:shortags">Short tags in templates</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> discusses ways to enable short tags template syntax in a way that would be easy for users and compatible with XML users&#039; requirements.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/indirect-method-call-by-array-var" class="wikilink1" title="rfc:indirect-method-call-by-array-var">Indirect method call by array variable</a><br/>
+$arr = array(&#039;Class&#039;, &#039;method&#039;); $arr();</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/binnotation4ints" class="wikilink1" title="rfc:binnotation4ints">Supporting Binary Notation for Integers</a><br/>
+This extends PHP&#039;s syntax to support binary notation for integers just as it already does for decimal, octal, and hexadecimal representations.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/builtinwebserver" class="wikilink1" title="rfc:builtinwebserver">Built-in web server</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> discusses the web server that is built into PHP itself, for development purpose.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/removal-of-deprecated-features" class="wikilink1" title="rfc:removal-of-deprecated-features">Removal of deprecated features</a><br/>
+<abbr title="Request for Comments">RFC</abbr> about removing legacy features in the next version of PHP</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/improved-parser-error-message" class="wikilink1" title="rfc:improved-parser-error-message">Improve parser error messages</a><br/>
+Improve parser error message readability.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/session_upload_progress" class="wikilink1" title="rfc:session_upload_progress">Session upload progress</a><br/>
+Using sessions to provide upload progress feedback to users.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/session-oo" class="wikilink1" title="rfc:session-oo">Object oriented session handlers</a><br/>
+A proposal to allow session_set_save_handler() to accept an object, and expose the original session handler.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/allow_multiple_simultaneous_syslog_connections" class="wikilink1" title="rfc:allow_multiple_simultaneous_syslog_connections">Allow Multiple Simultaneous Syslog Connections</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> propose enhancement to syslog function in order to allow multiple simultaneous connections by using resources.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/streammetadata" class="wikilink1" title="rfc:streammetadata">Stream meta-data</a><br/>
+<abbr title="Request for Comments">RFC</abbr> defines handler for setting metadata on stream <abbr title="Uniform Resource Locator">URL</abbr>. </div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/error-formatting-for-developers" class="wikilink1" title="rfc:error-formatting-for-developers">Error message formatting for development</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> discusses error message formatting to aid developers.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/performanceimprovements" class="wikilink1" title="rfc:performanceimprovements">Zend Engine Performance Improvements</a><br/>
+Proposes Zend Engine changes which together make up to 20% performance improvement on synthetic benchmarks and some real-life applications</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/runtimecache" class="wikilink1" title="rfc:runtimecache">Run Time Cache</a><br/>
+offers an implementation of run-time caching technique which may improve performance of repeatable code</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/zendsignals" class="wikilink1" title="rfc:zendsignals">Zend Signal Handling</a><br/>
+Improve stability and speed when running under any forking SAPI by adding deferred signal handling to the Zend Engine.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/dtrace" class="wikilink1" title="rfc:dtrace">DTrace Probes for PHP</a><br/>
+Provide DTrace probes for PHP.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/new-output-api" class="wikilink1" title="rfc:new-output-api">New Output API</a><br/>
+An <abbr title="Request for Comments">RFC</abbr> about the New Output <abbr title="Application Programming Interface">API</abbr></div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/callable" class="wikilink1" title="rfc:callable">Callable type hint</a><br/>
+Callable type hint</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/ldap_modify_batch" class="wikilink1" title="rfc:ldap_modify_batch">LDAP: Add ldap_modify_batch</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding a lower-level modification function to the LDAP extension.</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_17'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 5.4] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_54" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="35513-39141" /><button type="submit" title="PHP 5.4">Edit</button></div></form></div>
+<h3 class="sectionedit18" id="php_53">PHP 5.3</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/closures" class="wikilink1" title="rfc:closures">Closures</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes Closures and lambda functions for PHP.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/namespaceresolution" class="wikilink1" title="rfc:namespaceresolution">Namespace resolution order</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/namespaceseparator" class="wikilink1" title="rfc:namespaceseparator">RFC on what namespace separator to choose</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/heredoc-with-double-quotes" class="wikilink1" title="rfc:heredoc-with-double-quotes">HEREDOC with double quotes</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> is about allowing double quote syntax similar to single-quotes in NOWDOC as a HEREDOC syntax variant (in PHP 5.3)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/lsb_parentself_forwarding" class="wikilink1" title="rfc:lsb_parentself_forwarding">LSB parent::/self:: forwarding</a><br/>
+Changes how parent:: and self:: work with LSB by making them forwarding.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/calltimebyref" class="wikilink1" title="rfc:calltimebyref">call_time_pass_by_reference</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes that call_time_pass_by_reference be switched off by default in PHP 5.3.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/e-user-deprecated-warning" class="wikilink1" title="rfc:e-user-deprecated-warning">New error level E_USER_DEPRECATED</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to introduce a new userspace error level similar to E_DEPRECATED for user level deprecation warnings</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/rounding" class="wikilink1" title="rfc:rounding">Rounding in PHP</a><br/>
+Make round() produce predictable results on all platforms and fix some problems in the process.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/autoload_include" class="wikilink1" title="rfc:autoload_include">Alternative to include/require for autoloaders</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> aims to offer an alternative solution to the well known fopen() “hack” used in autoloaders in order to verify the existence of files inside the include path</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/fpm" class="wikilink1" title="rfc:fpm">FPM SAPI</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> discusses FPM SAPI and its inclusion to the core PHP distribution.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/fpm/ini_syntax" class="wikilink1" title="rfc:fpm:ini_syntax">FPM INI syntax</a><br/>
+This RDV discusses the replacement of FPM configuration file from XML to INI.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/newinis" class="wikilink1" title="rfc:newinis">New INI Files</a><br/>
+A proposal for two new INI files which will replace the current INI&#039;s packaged with PHP. One focused on production deployments and the other focused on development deployments.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/array_count_handlers" class="wikilink1" title="rfc:array_count_handlers">count_elements handler vs count()</a><br/>
+Internal change to allow some optimization and add consistency.</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_18'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[PHP 5.3] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="php_53" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="39142-41011" /><button type="submit" title="PHP 5.3">Edit</button></div></form></div>
+<h2 class="sectionedit19" id="declined">Declined</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/iterable-stdclass" class="wikilink1" title="rfc:iterable-stdclass">Making stdClass iterable</a> <br/>
+(Created: 2019-01-12; Voting began: 2019-02-04)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/iterable_to_array-and-iterable_count" class="wikilink1" title="rfc:iterable_to_array-and-iterable_count">iterable_to_array() and iterable_count()</a> <br/>
+Add iterable_to_array() and iterable_count() functions (iterator_to_array() and iterator_count() siblings) that work with iterables (Created: 2018-06-20, Vote started: 2018-07-03)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/object-comparison" class="wikilink1" title="rfc:object-comparison">User-defined object comparison</a> <br/>
+Object comparison using <em>__compareTo</em> and <em>__equals</em> (Created: 2018-06-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/friend-classes" class="wikilink1" title="rfc:friend-classes">Class Friendship</a> <br/>
+A proposal to add class friendship (Created 2018-06-27)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/implement_sqlite_openblob_in_pdo" class="wikilink1" title="rfc:implement_sqlite_openblob_in_pdo">Implement SQLite &quot;openBlob&quot; in PDO</a> (Created: 2017-09-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/uuid" class="wikilink1" title="rfc:uuid">UUID</a> <br/>
+Proposes to include a native immutable UUID value object (Created: 2017-05-25)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/unary_null_coalescing_operator" class="wikilink1" title="rfc:unary_null_coalescing_operator">Unary null coalescing operator</a> <br/>
+Proposes a unary form of the null coalescing operator. (Created: 2017-06-21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/doxygen" class="wikilink1" title="rfc:doxygen">Doxygen</a> <br/>
+Start documenting the PHP C sources with Doxygen comments (Created: 2017-05-30)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/binary_string_deprecation" class="wikilink1" title="rfc:binary_string_deprecation">Binary String Deprecation</a> <br/>
+Proposes the deprecation of the b prefix and binary cast (Created: 2016-12-11)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/throwable-code-generalization" class="wikilink1" title="rfc:throwable-code-generalization">Throwable code&#039;s type generalization</a> <br/>
+Change Throwable::getCode() &amp; co. so that they can be of any type (Created: 2016-12-18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/user_defined_session_serializer" class="wikilink1" title="rfc:user_defined_session_serializer">User defined session serializer</a> <br/>
+Implement user defined session serializer interface (Created: 2016-11-17)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/php_engine_constant" class="wikilink1" title="rfc:php_engine_constant">Add PHP Engine Identifier Constant</a> (Created 2016/02/03)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/add_validate_functions_to_filter" class="wikilink1" title="rfc:add_validate_functions_to_filter">Add validation functions to filter module</a> <br/>
+Add functions suitable for input validations. (Created 2016-08-03)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/escaping_operator" class="wikilink1" title="rfc:escaping_operator">New operator for context-dependent escaping</a> <br/>
+New operator &lt;?* ?&gt; for <abbr title="HyperText Markup Language">HTML</abbr> escaping and other contexts. (Created 2016-07-14)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/session-use-strict-mode" class="wikilink1" title="rfc:session-use-strict-mode">Enable session.use_strict_mode by default</a> <br/>
+Enable session.use_strict_mode by default. (Created 2016-07-05)</div>
+</li>
+<li class="level1"><div class="li"> <code><a href="/rfc/var_type" class="wikilink1" title="rfc:var_type">var_type()</a></code> <br/>
+Successor for <code>gettype()</code> function (Created: 2016-06-25)</div>
+</li>
+<li class="level1"><div class="li"> <code><a href="/rfc/var_info" class="wikilink1" title="rfc:var_info">var_info()</a></code> <br/>
+Extended version of <code>var_type()</code> function (Created: 2016-06-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/reflectiontypeimprovements" class="wikilink1" title="rfc:reflectiontypeimprovements">ReflectionTypeImprovements</a> <br/>
+Improve ReflectionType&#039;s support for nullable and named types.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/typed-properties" class="wikilink1" title="rfc:typed-properties">Typed Properties</a> <br/>
+Allow class properties to be typed (Created 2016-03-16)  </div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/union_types" class="wikilink1" title="rfc:union_types">Union Types</a><br/>
+A proposal to add union types (Discussion began 2016-04-13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/callable-types" class="wikilink1" title="rfc:callable-types">Callable prototypes</a> <br/>
+Callable prototypes (Created 2015-08-27)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/functional-interfaces" class="wikilink1" title="rfc:functional-interfaces">Functional Interfaces</a> <br/>
+Functional Interfaces (Created 2016-04-17)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/attributes" class="wikilink1" title="rfc:attributes">PHP Attributes</a> <br/>
+Native support for annotation (Discussion began 2016-04-22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/var_deprecation" class="wikilink1" title="rfc:var_deprecation">&#039;&#039;var&#039;&#039; Deprecation</a> <br/>
+Deprecating <code>var</code> in favor of <code>public</code> (Created 2016-03-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/script_only_include" class="wikilink1" title="rfc:script_only_include">Introduce script only require/include </a> <br/>
+Introduce script only include/require to prevent script inclusion. (Created 2015-02-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/precise_session_management" class="wikilink1" title="rfc:precise_session_management">Precise Session Management</a><br/>
+Make session management precise. (Created 2015/03/21 )</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/number_format_separator" class="wikilink1" title="rfc:number_format_separator">Number Format Separator</a> <br/>
+Enable for numerical literals to be formatted for better readability (Created 2015-12-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/json_numeric_as_string" class="wikilink1" title="rfc:json_numeric_as_string">JSON numeric as string</a><br/>
+Proposes new options for dealing with the JSON number conversion problem by converting data to string.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/in_operator" class="wikilink1" title="rfc:in_operator">In Operator</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a new operator for contains checks.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/coercive_sth" class="wikilink1" title="rfc:coercive_sth">Coercive Scalar Type Hints</a><br/>
+A proposal to add user-land coercive scalar type hints, and change internal function behavior to align with them (Created 2015-02-21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/variadic_empty" class="wikilink1" title="rfc:variadic_empty">Make empty() a Variadic</a><br/>
+A proposal to make empty() accept any number of arguments (Created 2015-02-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/error_handler_callback_parameters_passed_by_reference" class="wikilink1" title="rfc:error_handler_callback_parameters_passed_by_reference">Allow error_handler callback parameters to be passed by reference</a> <br/>
+(Created 2015-01-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/pecl_http" class="wikilink1" title="rfc:pecl_http">pecl_http</a><br/>
+Whether to add pecl_http v2 to the core</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/skipparams" class="wikilink1" title="rfc:skipparams">Skipping optional parameters</a> <br/>
+Skipping optional parameters in function calls (Created 2012-04-13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/php57" class="wikilink1" title="rfc:php57">PHP 5.7</a> <br/>
+Proposes a final minor version of PHP 5, PHP 5.7, with no new features but added deprecation notices. (Created 2014-12-15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/objkey" class="wikilink1" title="rfc:objkey">Using objects as keys</a><br/>
+Allows to use objects as keys for arrays. (Created 2014-10-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/abstract_final_class" class="wikilink1" title="rfc:abstract_final_class">Abstract final classes / Static classes</a><br/>
+Language enhancement to support “abstract final classes” or “static classes”. (Created 2014-11-26)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/aliases_by_reflection" class="wikilink1" title="rfc:aliases_by_reflection">Access to aliases definition by reflection</a> <br/>
+Extends reflection for a getDefinedAliases() methods. (Created 2014/10/09)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/safe_cast" class="wikilink1" title="rfc:safe_cast">Safe Casting Functions</a><br/>
+Adds a set of safe casting functions for scalar types (Created 2014-10-21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/loop_or" class="wikilink1" title="rfc:loop_or">Loop + or control structure</a><br/>
+Adds a default block to loops to be executed in the event that the loop is never entered.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/bare_name_array_literal" class="wikilink1" title="rfc:bare_name_array_literal">Bare Name Array Literal</a><br/>
+A shorter new syntax for array key-value pairs (Created 2014-06-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/bare_name_array_dereference" class="wikilink1" title="rfc:bare_name_array_dereference">Bare Name Array Dereference</a><br/>
+A shorter new syntax for dereferencing arrays with string keys (Created 2014-06-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/arrayof" class="wikilink1" title="rfc:arrayof">Array Of</a><br/>
+Proposed syntax for Type-Hinting against the contents or an array (Created 2014/01/15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/secure-html-escape" class="wikilink1" title="rfc:secure-html-escape">Improve HTML escape</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes more secure <abbr title="HyperText Markup Language">HTML</abbr> escape by escaping “/” (Vote period: 2014/02/16 - 2014/02/22) (Created 2014/02/02)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/multibyte_char_handling" class="wikilink1" title="rfc:multibyte_char_handling">Multibyte Char Handling</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes the way to handle multibyte chars. (Created 2014/01/16)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/altmbstring" class="wikilink1" title="rfc:altmbstring">Alternative mbstring implementation using ICU</a><br/>
+A proposal to completely rewrite mbstring extension with ICU. (Created 2011/04/06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/size_t_and_int64" class="wikilink1" title="rfc:size_t_and_int64">64 bit platform improvements for string length and integer</a><br/>
+Integer and String modifications for full 64 bit support</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/alpanumeric_decrement" class="wikilink1" title="rfc:alpanumeric_decrement">Alphanumeric Decrement</a><br/>
+This will add support for decrementing alphanumeric strings (“ab”, for example) to complement the existing incrementing behaviour. (Created 2013/12/16)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/engine_exceptions" class="wikilink1" title="rfc:engine_exceptions">Exceptions in the engine</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to allow the use of exceptions in the engine. (Postponed to PHP 6.)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/keywords_as_identifiers" class="wikilink1" title="rfc:keywords_as_identifiers">Extended keyword support</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to widen keyword support.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/instance_counter" class="wikilink1" title="rfc:instance_counter">Class instances counter</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a new function returning a list with class names and their instance counter.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/trailing-comma-function-args" class="wikilink1" title="rfc:trailing-comma-function-args">trailing-comma-function-args</a><br/>
+Allow a trailing comma in function calls, similar to array declarations</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/array_part" class="wikilink1" title="rfc:array_part">Add an array_part() function</a><br/>
+Adds a function to extract multi-dimensional slices</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/splclassloader" class="wikilink1" title="rfc:splclassloader">SplClassLoader</a><br/>
+Merge implementation of first proposal of PHP Standards Recommendation (PSR) into SPL core</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/annotations" class="wikilink1" title="rfc:annotations">Annotations</a><br/>
+Class Metadata feature (aka Annotations) support in PHP</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/ifsetor" class="wikilink1" title="rfc:ifsetor">ifsetor() Operator</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes an operator that efficiently implements (isset($foo) ? $foo : $bar) as ifsetor($foo, $bar)</div>
+</li>
+<li class="level1"><div class="li"> <a href="http://marc.info/?l=php-internals&amp;m=121397217528280&amp;w=2" class="urlextern" title="http://marc.info/?l=php-internals&amp;m=121397217528280&amp;w=2" rel="nofollow">Method overloading</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/nonbreakabletraits" class="wikilink1" title="rfc:nonbreakabletraits">Non-breakable Traits</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> is a extension to the basic proposal. It includes the notion of trait-local methods and properties.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/functiongetentropy" class="wikilink1" title="rfc:functiongetentropy">Function getEntropy</a><br/>
+Feature request for a new userspace function providing a truly random value.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/propertygetsetsyntax-v1.2" class="wikilink1" title="rfc:propertygetsetsyntax-v1.2">Property Accessors Syntax</a><br/>
+<abbr title="Request for Comments">RFC</abbr> for the addition of C#-style get/set accessors to PHP</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/propertygetsetsyntax-alternative-typehinting-syntax" class="wikilink1" title="rfc:propertygetsetsyntax-alternative-typehinting-syntax">Alternative typehinting syntax for accessors</a><br/>
+Proposes an improved typehinting syntax for the accessors proposal.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/automatic_property_initialization" class="wikilink1" title="rfc:automatic_property_initialization">Automatic Property Initialization</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes automatic assignments of constructor arguments to properties. (Created 2013/09/27)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/default_ctor" class="wikilink1" title="rfc:default_ctor">Default parent constructors</a> <br/>
+The <abbr title="Request for Comments">RFC</abbr> proposes that the parent constructors, destructors and clone operations were always callable even if not defined in parent class. (Created 2014-11-05)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_19'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Declined] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="declined" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="41012-49594" /><button type="submit" title="Declined">Edit</button></div></form></div>
+<h2 class="sectionedit20" id="withdrawn">Withdrawn</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/array_change_keys" class="wikilink1" title="rfc:array_change_keys">array_change_keys()</a> <br/>
+Add method to simplify re-keying an array (Created 2016-05-29)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/continue_on_switch_deprecation" class="wikilink1" title="rfc:continue_on_switch_deprecation">Deprecate and remove continue targeting switch</a> <br/>
+Support for continue acting on switch is deprecated and scheduled for removal in the next major version.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/json_encode_decode_errors" class="wikilink1" title="rfc:json_encode_decode_errors">JSON failure warnings</a> <br/>
+Raise warnings for json_encode() and json_decode() issues (Created: 2017-07-28)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/namespaces-in-core" class="wikilink1" title="rfc:namespaces-in-core">Namespaces in Core</a> <br/>
+Proposal to allow namespaces in PHP core (Created: 2017-06-03)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/wddx-deprecate-class-instance-deserialization" class="wikilink1" title="rfc:wddx-deprecate-class-instance-deserialization">Deprecate class instance deserialization in WDDX</a> <br/>
+Proposal to deprecate the ability to deserialize class instances via <code>wddx_deserialize()</code>.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/arrayiterator-improvements" class="wikilink1" title="rfc:arrayiterator-improvements">ArrayIterator improvements</a> <br/>
+Proposes adding <code>ArrayIterator::seekKey()</code> and <code>ArrayIterator::prev()</code>  (Created: 2016-11-21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/use-php_mt_rand" class="wikilink1" title="rfc:use-php_mt_rand">Use php_mt_rand() where php_rand() is used</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes replacing php_rand() function to php_mt_rand(). (Created 2014-07-17)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/revisit-trailing-comma-function-args" class="wikilink1" title="rfc:revisit-trailing-comma-function-args">Revisit trailing commas in function arguments</a><br/>
+Revisit trailing commas in function arguments (Created 2015-10-07)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/short_closures" class="wikilink1" title="rfc:short_closures">Short Closures (&#039;&#039;~&gt;&#039;&#039; operator)</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes an operator for shorter Closures.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/reflectionparameter-getclassname" class="wikilink1" title="rfc:reflectionparameter-getclassname"> ReflectionParameter::getClassName()</a> <br/>
+Add reflection method to access to a class name in a type hint (Created 2015-01-30)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/bigint" class="wikilink1" title="rfc:bigint">Big Integer Support</a><br/>
+Adds Big Integer support to PHP (Created 2014-06-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/scalar_type_hints" class="wikilink1" title="rfc:scalar_type_hints">Scalar Type Hints</a> <br/>
+Adds four type hints for scalar types. (Created 2014-12-14)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate-ini-functions" class="wikilink1" title="rfc:deprecate-ini-functions">Deprecate function that modify INI</a><br/>
+There are number of functions that modify INI value. Let them deprecate and use ini_get()/ini_set(). (Other <abbr title="Request for Comments">RFC</abbr> is proposed)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/sync" class="wikilink1" title="rfc:sync">pecl_sync</a><br/>
+Whether PHP should support locking mechanism on its core</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/function_referencing" class="wikilink1" title="rfc:function_referencing">Function Referencing as Closures</a><br/>
+Proposes a new syntax to allow referencing functions and methods as closures</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/readonly_properties" class="wikilink1" title="rfc:readonly_properties">Readonly Properties</a><br/>
+Adds a <code>readonly</code> specifier to make properties writeable within a class, but only readable from outside (Created 2014-10-24)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/strict_argcount" class="wikilink1" title="rfc:strict_argcount">Strict Argument Count On Function Calls</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to sensibly add a strict argument count check for function calls on PHP7 (Created 2015-02-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/scalar_type_hinting_with_cast" class="wikilink1" title="rfc:scalar_type_hinting_with_cast">Add scalar type hinting with casts</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding scalar type hinting with casting to provide more robust parameter hinting. (Re-opened 2014-07-13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/session-read_only-lazy_write" class="wikilink1" title="rfc:session-read_only-lazy_write">Sessions: Improve original RFC about lazy_write</a><br/>
+An attempt at redesigning the accepted solution from <a href="/rfc/session-lock-ini" class="wikilink1" title="rfc:session-lock-ini">session-lock-ini</a>.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/gmp_number" class="wikilink1" title="rfc:gmp_number">Make GMP number work like PHP number</a><br/>
+Make compatible PHP number </div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/const_scalar_expressions2" class="wikilink1" title="rfc:const_scalar_expressions2">Constant Scalar Expressions (re-opening)</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding support for Constant Scalar Expressions.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/function_autoloading" class="wikilink1" title="rfc:function_autoloading">Function Autoloading</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to refactor the existing autoloading mechanism to support function and constant autoloading.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/protocol_type_hinting" class="wikilink1" title="rfc:protocol_type_hinting">Structural Type Hinting</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a new type-hint format to allow run-time checking of Structural Types.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/const_scalar_expressions" class="wikilink1" title="rfc:const_scalar_expressions">Constant Scalar Expressions</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding support for Constant Scalar Expressions.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/request-tempnam" class="wikilink1" title="rfc:request-tempnam">Modify tempnam() to handle directories and auto-cleanup</a><br/>
+Add TEMPNAM_DIR and TEMPNAM_REQUEST options to tempnam()</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/parameter_type_casting_hints" class="wikilink1" title="rfc:parameter_type_casting_hints">Parameter Type Casting Hints</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding type casting hints to function declarations.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/voting_who" class="wikilink1" title="rfc:voting_who">Who can vote?</a><br/>
+Define the participants of the voting process.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/magicquotes_finale" class="wikilink1" title="rfc:magicquotes_finale">Magic Quotes in PHP, the Finalé</a><br/>
+A safe, orderly manner for getting rid of Magic Quotes.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/returntypehint2" class="wikilink1" title="rfc:returntypehint2">Return value type hint</a><br/>
+Return type hinting</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/object_cast_magic" class="wikilink1" title="rfc:object_cast_magic">Cast and Assign Magic Methods</a><br/>
+Feature request to expose object_cast, get and set to PHP land code via two new magic methods</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/mysqlnd_localhost_override" class="wikilink1" title="rfc:mysqlnd_localhost_override">Add mysqlnd.localhost_override option</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to add mysqlnd.localhost_override to more easily override localhost when connecting to a MySQL database.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/useas" class="wikilink1" title="rfc:useas">Allow use T_AS in closure use statement</a><br/>
+Allow user use a alias name for lexical variable of closure</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/strncmpnegativelen" class="wikilink1" title="rfc:strncmpnegativelen">strn(case)cmp supporting a negative length as its third paramter</a><br/>
+This extends PHP&#039;s string function strn(case)cmp to support a negative length as parameter</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/nested_classes" class="wikilink1" title="rfc:nested_classes">Nested Class Support</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes support for nested classes, following on from Anonymous Classes.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/jsonserializable" class="wikilink1" title="rfc:jsonserializable"> Extending the JsonSerializable interface</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> aims to allow creation of an object through JSON (Created 2015-07-13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/array-to-string" class="wikilink1" title="rfc:array-to-string">Improve array to string conversion</a> <br/>
+Proposes alternative behaviors for array to string zval conversion. (Created 2015/01/10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/intl.charset-detector" class="wikilink1" title="rfc:intl.charset-detector">IntlCharsetDetector</a> <br/>
+Wrap ICU&#039;s UCharsetDetector (Created: 2016-04-11)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/kill-csv-escaping" class="wikilink1" title="rfc:kill-csv-escaping">Kill proprietary CSV escaping mechanism</a> <br/>
+(Created: 2018-09-27; Withdrawn: 2018-12-02)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_20'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Withdrawn] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="withdrawn" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="49595-55125" /><button type="submit" title="Withdrawn">Edit</button></div></form></div>
+<h2 class="sectionedit21" id="inactive">Inactive</h2>
+<div class="level2">
+
+<p>
+This section is for RFCs that had been in discussion, but did not have any activity or discussion about them recently. It can be because they have been deferred, obsoleted, or appear to have been abandoned, or because the authors need more work on them. Sorry if your <abbr title="Request for Comments">RFC</abbr> is added here and you feel it is still active; please move it back to the appropriate section.
+</p>
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/callableconstructors" class="wikilink1" title="rfc:callableconstructors">Callable constructors</a> <br/>
+Allow constructors to be called as a callable (Created 2015-02-25)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/lexical-anon" class="wikilink1" title="rfc:lexical-anon">Anonymous Class Lexical Scope</a> <br/>
+Anonymous Class Lexical Scope (Created 2016-04-19)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/intersection_types" class="wikilink1" title="rfc:intersection_types">Intersection Types</a> (Discussion began 2016-04-28)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/constant_redefinition" class="wikilink1" title="rfc:constant_redefinition">Exception on constant redefintion</a> <br/>
+Throw Exception on Attempt of Constant Redefinition (Created 2016-06-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/add_str_begin_and_end_functions" class="wikilink1" title="rfc:add_str_begin_and_end_functions">Add str_begins() and str_ends() functions</a> <br/>
+Add functions to check if a string begins with, or ends with, a given substring (Created 2016-08-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/remove_utf_8_decode_encode" class="wikilink1" title="rfc:remove_utf_8_decode_encode">remove_utf_8_decode_encode</a> <br/>
+Remove utf8_decode() and utf8_encode()</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/pdo_float_type" class="wikilink1" title="rfc:pdo_float_type">PDO Float Type</a> <br/>
+New parameter type to represent floating point values. (Created: 2017-04-05)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/uniqid" class="wikilink1" title="rfc:uniqid">Improve uniqid() uniqueness.</a> <br/>
+Improve uniqid() uniqueness (Created: 2016-09-12)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/retry-keyword" class="wikilink1" title="rfc:retry-keyword">Retry keyword</a> <br/>
+Proposes the implementation of the Retry keyword in Exceptions context. (Created: 2017-06-19)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/curl_setopt_strict_types" class="wikilink1" title="rfc:curl_setopt_strict_types">Enable strict_types checking for curl_setopt()</a> <br/>
+Introduce strict type enforcement inside curl_setopt() when declare(strict_types=1) is being used. (Created: 2017-04-21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate_pdo_null" class="wikilink1" title="rfc:deprecate_pdo_null">Deprecate PDO::PARAM_NULL</a> (Created 2017-05-15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate-uniqid" class="wikilink1" title="rfc:deprecate-uniqid">Deprecate uniqid()</a> <br/>
+Proposes the deprecation of <code>uniqid()</code> (Created: 2017-05-24)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/immutability" class="wikilink1" title="rfc:immutability">Immutable classes and properties</a> <br/>
+Proposes introduction of immutable classes and properties (Created: 2016-08-12, Reopened 2018-02-20)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate-backtick-operator" class="wikilink1" title="rfc:deprecate-backtick-operator">Deprecate backtick operator</a> (Created: 2018-02-11)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/fallback-to-root-scope-deprecation" class="wikilink1" title="rfc:fallback-to-root-scope-deprecation">Deprecation of fallback to root scope</a> <br/>
+Deprecation of fallback to root scope (Created: 2018-02-03)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/scalar-pseudo-type" class="wikilink1" title="rfc:scalar-pseudo-type">Scalar Pseudo-type</a> <br/>
+Proposal to add <code>scalar</code> pseudo-type for parameter and return types (Created: 2017-12-24)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/explicit_send_by_ref" class="wikilink1" title="rfc:explicit_send_by_ref">Explicit call-site pass-by-reference</a><br/>
+Allow explicitly annotating by-reference argument passing at the call-site. (Created: 2017-12-02)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/operator_functions" class="wikilink1" title="rfc:operator_functions">Operator functions</a> <br/>
+Add counterpart functions for PHP&#039;s basic operators (Published: 2017-09-08)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/traits-with-interfaces" class="wikilink1" title="rfc:traits-with-interfaces">Traits with interfaces</a> <br/>
+Allow traits to explicitly implement interfaces (Created 2016-02-17)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/adopt-code-of-conduct" class="wikilink1" title="rfc:adopt-code-of-conduct">Adopt Code of Conduct</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes that the PHP project should adopt a formal code of conduct for its members. (Re-created 2016-01-21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/token-get-always-tokens" class="wikilink1" title="rfc:token-get-always-tokens">Normalize token_get_all() output</a> <br/>
+Allows specifying flag to normalize output of token_get_all()</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/on_demand_name_mangling" class="wikilink1" title="rfc:on_demand_name_mangling">On-demand Name Mangling</a> <br/>
+Replaces automatic super-global name mangling with an on-demand approach for those apps requiring it. (Updated 2016-01-08)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/array_key_first_last_index" class="wikilink1" title="rfc:array_key_first_last_index">Add array_key_(first|last|index) functions</a> <br/>
+Add functions to get the first/last/indexed array key and value. (Created 2016-01-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/improve_predictable_prng_random" class="wikilink1" title="rfc:improve_predictable_prng_random">Improve predictable PRNG random</a> <br/>
+Fix predictable PRNG problems. (Created: 2017-02-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/request_response" class="wikilink1" title="rfc:request_response">Server-Side Request and Response Objects</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes request and response objects that are wrappers for existing global PHP variables and functions, with some limited additional convenience functionality. (Created: 2016/12/21)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/soap_get_location" class="wikilink1" title="rfc:soap_get_location">SoapClient getLocation</a> <br/>
+Add getLocation method to SoapClient (Created: 2016-12-06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/distrust-sha1-certificates" class="wikilink1" title="rfc:distrust-sha1-certificates">Distrust SHA-1 Certificates</a> <br/>
+Distrust SHA-1 starting in PHP 7.2 (Created: 2016-11-25)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/secure_serialization" class="wikilink1" title="rfc:secure_serialization">Secure serialization by authentication code</a> <br/>
+Add authentication code protection to serialization.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/list_default_value" class="wikilink1" title="rfc:list_default_value">Default Value in List Assignment Syntax</a> <br/>
+Allow set default values when using list assignment</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/sql_injection_protection" class="wikilink1" title="rfc:sql_injection_protection">Automatic SQL injection protection</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> enables automatic detection of SQL queries that are issued with a non-constant query parameter-string, with configurable evasive action on detection (i.e. ignore/log/throw).</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/consistent_function_names" class="wikilink1" title="rfc:consistent_function_names">Introduce consistent function names</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to have consistent function names that accord CORDING_STANDARDS.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/introduce_design_by_contract" class="wikilink1" title="rfc:introduce_design_by_contract">Introduce Design by Contract</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> is vote only <abbr title="Request for Comments">RFC</abbr> for 2 Design by Contract introduction proposals.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/dbc" class="wikilink1" title="rfc:dbc">Native Design by Contract support as annotation</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes native Design by Contract support to PHP (Created 2015/02/04) </div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/dbc2" class="wikilink1" title="rfc:dbc2">Native Design by Contract support as definition</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes native Design by Contract support to PHP (Created 2015/02/10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/allow_url_include" class="wikilink1" title="rfc:allow_url_include">Precise URL include control</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes precise <abbr title="Uniform Resource Locator">URL</abbr> include control.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/comparable" class="wikilink1" title="rfc:comparable">Comparable</a><br/>
+A proposal to add a Comparable interface for userspace object comparisons.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate_ini_set_get_aliases" class="wikilink1" title="rfc:deprecate_ini_set_get_aliases"> Deprecate INI set/get aliases</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes INI set/get alias function deprecation. (Created 2015-01-28)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/additional-splat-usage" class="wikilink1" title="rfc:additional-splat-usage">Additional splat operator usage</a><br/>
+Allow splat operator to be used in array literals. (Created 2014-11-03)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/github-pr" class="wikilink1" title="rfc:github-pr">GitHub Pull Requests Triage Team</a><br/>
+Define a process for triaging GitHub pull requests. (Created 2014-10-30)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/checkdnsrr-default-type" class="wikilink1" title="rfc:checkdnsrr-default-type">Change checkdnsrr() $type argument behavior</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes that the default behavior of the checkdnsrr() function be changed such that it no longer checks only for MX records by default. (Created 2014-09-19)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/binary_string_comparison" class="wikilink1" title="rfc:binary_string_comparison">Binary String Comparison</a><br/>
+Non-strict binary string comparison</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/password_hash_spec" class="wikilink1" title="rfc:password_hash_spec">password_hash function behavior</a><br/>
+Current password_hash()&#039;s hash function has password length limitation. (Created 2014-07-23)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/reflectionparameter.typehint" class="wikilink1" title="rfc:reflectionparameter.typehint">ReflectionParameter Typehint accessors</a><br/>
+New <abbr title="Application Programming Interface">API</abbr> for accessing typehints on a reflection parameter.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/secure-session-options-by-default" class="wikilink1" title="rfc:secure-session-options-by-default">Secure Session Options</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes secure options for session module as default (Vote period:  2014/02/14 - 2014/02/21) (Created: 2014/02/01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/unified-crypto-source" class="wikilink1" title="rfc:unified-crypto-source">Unify crypto source INI setting</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes unified crypto source settings. (Created 2014/02/13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/build-openssl-by-default" class="wikilink1" title="rfc:build-openssl-by-default">Build OpenSSL module by default</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes building openssl module by default.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/gmp-floating-point" class="wikilink1" title="rfc:gmp-floating-point">Add support for GMP floating point numbers</a><br/>
+Separate out floating point change from <a href="/rfc/gmp_number" class="wikilink1" title="rfc:gmp_number">gmp_number</a> (Created 2014/01/04)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/generics" class="wikilink1" title="rfc:generics">Add generic class and method support</a> (Created 2015/04/28)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/resource_typehint" class="wikilink1" title="rfc:resource_typehint">Add resource typehint</a> (Created 2015/11/11)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/short_ternary_equal_operator" class="wikilink1" title="rfc:short_ternary_equal_operator">Short Ternary Assignment Operator</a> <br/>
+Allow shorthand for self assigning short ternary expressions (Created: 2016-03-10)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/pipe-operator" class="wikilink1" title="rfc:pipe-operator">Pipe Operator</a> <br/>
+Syntactic sugar for chaining expressions (Created: 2016-04-29)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/simple-annotations" class="wikilink1" title="rfc:simple-annotations">Simple Annotations</a> (Created: 2016-05-13)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/improve_hash_hkdf_parameter" class="wikilink1" title="rfc:improve_hash_hkdf_parameter">Improve hash_hkdf() parameter order and handling</a> <br/>
+hash_hkdf() added to master(7.2) has non optimal parameter order and handling. (Created: 2017-02-05)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/basic_scalar_types" class="wikilink1" title="rfc:basic_scalar_types">Basic Scalar Types</a><br/>
+A <abbr title="Request for Comments">RFC</abbr> proposing pure scalar types (Created 2015-03-11)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/peclversioning" class="wikilink1" title="rfc:peclversioning">PECL versioning</a><br/>
+This <abbr title="Request for Comments">RFC</abbr>, about tackling the versioning issues in PECL extensions, has been implemented across PECL for several months. But what should be done about extension versioning in the PHP core?</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/protectedlookup" class="wikilink1" title="rfc:protectedlookup">Improve consistency of protected member lookups</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to eliminate an inconsistency in the way protected class members are resolved.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/drop_sql.safe_mode" class="wikilink1" title="rfc:drop_sql.safe_mode">Drop sql.safe_mode</a><br/>
+Dropping a php.ini setting affecting two extensions</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/get-random" class="wikilink1" title="rfc:get-random">Get Random</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> talks about how to get a (better) random string in PHP</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/error-optimizations" class="wikilink1" title="rfc:error-optimizations">Error optimizations</a><br/>
+A way to optimize the formatting of our errors</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/autofunc" class="wikilink1" title="rfc:autofunc">Function autoloading through spl_autoload*</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> introduces a potential implementation for function autoloading which would be consistent with what we have for autoloading classes. (Created 2011/08/05)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/cli-strict" class="wikilink1" title="rfc:cli-strict">CLI options for strict and quiet modes</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a <code>-W</code> option to turn on maximum error reporting, and a <code>-Q</code> option for no error reporting. (Created 2011/07/05)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/logicalshiftoperator" class="wikilink1" title="rfc:logicalshiftoperator">Add Logical Shift Operators</a><br/>
+Add logical shift operators for bitwise shifting of strings (Created 2011/07/18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/grisu3-strtod" class="wikilink1" title="rfc:grisu3-strtod">Faster strtod algorithm</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to add the Grisu3 strtod algorithm as an optional feature to PHP. (Created 2011/07/15)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/isset-set-operator" class="wikilink1" title="rfc:isset-set-operator">Isset Set Operator</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes new operators for handling unset/falsey variables.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/object_cast_to_types" class="wikilink1" title="rfc:object_cast_to_types">Scalar Type Casting Magic Methods</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a set of new scalar type casting magic methods for classes.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/docblockparser" class="wikilink1" title="rfc:docblockparser">docBlock Parser</a><br/>
+Proposal to add docBlock parsing to the Reflection extension</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/annotations-in-docblock" class="wikilink1" title="rfc:annotations-in-docblock">Annotations in doc block</a><br/>
+Class Metadata feature (aka Annotations) support in PHP through DocBlock</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/objectarrayliterals" class="wikilink1" title="rfc:objectarrayliterals">Object and Array Literals</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes first-class, inline object and array literals similar to JSON.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/weakreferences" class="wikilink1" title="rfc:weakreferences">Weak References</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes the introduction of Weak References in PHP via a new SPL class.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/pdov1" class="wikilink1" title="rfc:pdov1">PDO Version 1 Improvements</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a set of improvements to be made to PDO.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/taint" class="wikilink1" title="rfc:taint">Tainted variables</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes an implementation of variable tainting in PHP.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/static-classes" class="wikilink1" title="rfc:static-classes">Static classes</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes the introduction of static classes for PHP</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/class_casting_to_scalar" class="wikilink1" title="rfc:class_casting_to_scalar">class casting to scalar</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a way to do like __toString(), for other scalar types</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/autodefine" class="wikilink1" title="rfc:autodefine">Autodefinition</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes the ability to define missing definitions (generalization of autoload).</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/linecontrol" class="wikilink1" title="rfc:linecontrol">Line Markers in PHP</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes the introduction of line markers in PHP.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/autoboxing" class="wikilink1" title="rfc:autoboxing">Autoboxing</a><br/>
+Autoboxing feature in PHP</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/socketactivation" class="wikilink1" title="rfc:socketactivation">Systemd socket activation</a><br/>
+Systemd socket activation support for PHP-FPM (Created 2012/10/18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/deprecated-modifier" class="wikilink1" title="rfc:deprecated-modifier">Add a deprecated modifier for functions</a><br/>
+Add a deprecated modifier for functions (Created 2012/12/25)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/prototype_checks" class="wikilink1" title="rfc:prototype_checks">Clarifying/Improving the prototype checks</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> discusses the current state of prototype checks, and gives some directions for discussion and improvement. (Created 2011/09/19)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/jenkins" class="wikilink1" title="rfc:jenkins">Introducing Jenkins</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes using Jenkins as a Continuous Ingtegration environment for the php project. (Created 2011/11/01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/anonymous_catch" class="wikilink1" title="rfc:anonymous_catch">Support for anonymous catch-statements</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding catch-statements without variables, and fully anonymous catches. (Created 2013/06/25)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/errors_as_exceptions" class="wikilink1" title="rfc:errors_as_exceptions">Errors as Exceptions</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> discusses the conversion of errors to exceptions (Created 2011/04/06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/traitsmodifications" class="wikilink1" title="rfc:traitsmodifications">Proposed modifications to traits</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes three modifications to traits: increasing separation and consistency of inheritance vs. trait composition, adding trait-local scope, and extending <code>use</code> syntax. (Created 2011/04/06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/datetime_tostring" class="wikilink1" title="rfc:datetime_tostring">Add toString to DateTime</a><br/>
+A proposal to add toString to DateTime (Created 2012/09/01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/propertygetsetsyntax-as-implemented" class="wikilink1" title="rfc:propertygetsetsyntax-as-implemented">Property get/set syntax</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to add a C# style property get/set syntax to PHP classes. (Created 2011-12-21 - document index)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/optional-t-function" class="wikilink1" title="rfc:optional-t-function">Make T_FUNCTION in method declarations optional.</a><br/>
+A proposal for removing the requirement to use T_FUNCTION in method declarations. (Created 2011/04/06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/jsonable" class="wikilink1" title="rfc:jsonable">Jsonable interface</a><br/>
+Feature request to allow support json_(encode|decode) to handle Object instance conversions.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/extensionsiberia" class="wikilink1" title="rfc:extensionsiberia">Siberia</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to create a cemetery for dead extensions (PECL or core).</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/array_delete" class="wikilink1" title="rfc:array_delete">array_delete</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes adding array_delete() as an intuitive <abbr title="Application Programming Interface">API</abbr> for array element deletion. (Created 2012/08/22)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/enhanced_error_handling" class="wikilink1" title="rfc:enhanced_error_handling">Enhanced Error Handling</a><br/>
+This offers a concept and implementation to let the user (php coder) choose between php_error, exception et al while retaining backwards compatibility (Created 2009/12/27)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/typechecking" class="wikilink1" title="rfc:typechecking">Parameter (and Return) value type hints/checks</a><br/>
+Several <abbr title="Request for Comments">RFC</abbr> that propose to complete the actual parameter type hints/checks (and an implementation for return value type hints). (Created 2009/07/03)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/tls" class="wikilink1" title="rfc:tls">Native TLS in ZTS</a><br/>
+Improving performance of ZTS builds by using native thread local storage. (Created 2008/08/24)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/better_benchmarks" class="wikilink1" title="rfc:better_benchmarks">Better benchmarks for PHP</a><br/>
+A proposal for replacing current bench.php benchmarking script. (Created 2009/04/03)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/remove_zend_api" class="wikilink1" title="rfc:remove_zend_api">Remove reliance of Zend API</a><br/>
+A proposal to remove the use of the Zend <abbr title="Application Programming Interface">API</abbr> in PHP libraries. (Created 2009/03/29)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/php_native_interface" class="wikilink1" title="rfc:php_native_interface">PHP Native Interface</a><br/>
+Provide complete alternative to writing libraries interfaces using the Zend <abbr title="Application Programming Interface">API</abbr> libraries. (Created 2009/04/05)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/fcallfcall" class="wikilink1" title="rfc:fcallfcall">Function call chaining</a><br/>
+Function call chaining implementation. (Created 2010/01/30)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/source_files_without_opening_tag" class="wikilink1" title="rfc:source_files_without_opening_tag">Source files without opening tag</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes a way to support source code files without &lt;?php at the top.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/phpp" class="wikilink1" title="rfc:phpp">New File Type for Pure-Code PHP Scripts</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes the creation of a new .phpp file type for scripts that contain only PHP code without a &lt;?php or ?&gt; tag.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/namedparameters" class="wikilink1" title="rfc:namedparameters">Named Parameters (obsolete)</a><br/>
+Dummy <abbr title="Request for Comments">RFC</abbr> for named parameters, superseded by <a href="/rfc/named_params" class="wikilink1" title="rfc:named_params">Named Parameters</a>.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/lemon" class="wikilink1" title="rfc:lemon">Lemon as a language parser</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> discusses the switch from YACC/Bison to lemon for the main language parser</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/ast_based_parsing_compilation_process" class="wikilink1" title="rfc:ast_based_parsing_compilation_process">Moving to an AST-based parsing/compilation process (obsolete)</a><br/>
+Proposal for AST-based compilation process. Superseded by the <a href="/rfc/abstract_syntax_tree" class="wikilink1" title="rfc:abstract_syntax_tree">Astract Syntax Tree RFC</a>. (Created 2012/09/04)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/escaper" class="wikilink1" title="rfc:escaper">Escaping RFC for PHP Core</a><br/>
+Implementing a core anti-XSS escaping class and possibly functions for the more procedurally inclined programmers. (Created 2012/09/18)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/site_voting_poll" class="wikilink1" title="rfc:site_voting_poll">Integrate voting polls in PHP.net</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> talks about integration of voting polls into PHP.net (Created 2013/02/23)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/unset_bool" class="wikilink1" title="rfc:unset_bool">unset(): return bool if the variable has existed</a><br/>
+Add to unset a return value if the deletion was successful (Created 2013/03/06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/internal_serialize_api" class="wikilink1" title="rfc:internal_serialize_api">Internal Serialize API</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes <abbr title="Application Programming Interface">API</abbr> for internal generating of serialization. (Created 2013/07/27)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/named_params" class="wikilink1" title="rfc:named_params">Named Parameters</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes introducing named parameters. (Created 2013/09/06)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/normalize_inc_dec" class="wikilink1" title="rfc:normalize_inc_dec">Normalizing increment and decrement operators</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes to make ++ and – operators to work more intuitively. (Created 2013-12-19)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/nophptags" class="wikilink1" title="rfc:nophptags">Make PHP open tag optional for better security</a><br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes option (php.ini and CLI opts) for removing PHP tags  (&lt;?php and so forth) from PHP scripts.(Vote period: 2014/02/16 - 2014/02/22) (Created 2012/04/12)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/moduleapi-inspection" class="wikilink1" title="rfc:moduleapi-inspection">Module API introspection</a><br/>
+Developer/Operations command-line <abbr title="Application Programming Interface">API</abbr> for checking module versions (Created  2014/01/24)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_21'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Inactive] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="inactive" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="55126-71520" /><button type="submit" title="Inactive">Edit</button></div></form></div>
+<h2 class="sectionedit22" id="obsolete">Obsolete</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> <a href="/rfc/deprecate_mcrypt_rand" class="wikilink1" title="rfc:deprecate_mcrypt_rand">Deprecate MCRYPT_RAND</a> <br/>
+This <abbr title="Request for Comments">RFC</abbr> proposes the deprecation of MCRYPT_RAND in favor of selecting cryptographically secure pseudo-random number generators.</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/zend-vm-pause-api" class="wikilink1" title="rfc:zend-vm-pause-api">Zend Pause API</a> <br/>
+<abbr title="Application Programming Interface">API</abbr> to pause zend vm in extension (Created: 2017-11-01)</div>
+</li>
+<li class="level1"><div class="li"> <a href="/rfc/heredoc-scanner-loosening" class="wikilink1" title="rfc:heredoc-scanner-loosening">Loosening heredoc/nowdoc scanner</a><br/>
+More permissive scanner rules for heredoc/nowdoc (Created 2014-08-29)</div>
+</li>
+</ul>
+
+</div>
+<div class='secedit editbutton_section editbutton_22'><form class="button btn_secedit" method="post" action="/rfc"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="1555916065" /><input type="hidden" name="summary" value="[Obsolete] " /><input type="hidden" name="target" value="section" /><input type="hidden" name="hid" value="obsolete" /><input type="hidden" name="codeblockOffset" value="0" /><input type="hidden" name="range" value="71521-" /><button type="submit" title="Obsolete">Edit</button></div></form></div>
+                    <!-- wikipage stop -->
+                                    </div>
+
+                <div class="docInfo"><bdi>rfc.txt</bdi> · Last modified: 2019/04/22 06:54 by <bdi>krakjoe</bdi></div>
+
+                            </div></div><!-- /content -->
+
+            <hr class="a11y" />
+
+            <!-- PAGE ACTIONS -->
+            <div id="dokuwiki__pagetools">
+                <h3 class="a11y">Page Tools</h3>
+                <div class="tools">
+                    <ul>
+                        <li><a href="/rfc?do=edit"  class="action edit" accesskey="e" rel="nofollow" title="Edit this page [E]"><span>Edit this page</span></a></li><li><a href="/rfc?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]"><span>Old revisions</span></a></li><li><a href="/rfc?do=backlink"  class="action backlink" rel="nofollow" title="Backlinks"><span>Backlinks</span></a></li><li><a href="/rfc?do=subscribe"  class="action subscribe" rel="nofollow" title="Manage Subscriptions"><span>Manage Subscriptions</span></a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="Back to top [T]"><span>Back to top</span></a></li>                    </ul>
+                </div>
+            </div>
+        </div><!-- /wrapper -->
+
+    </div></div><!-- /site -->
+
+    <div class="no"><img src="/lib/exe/indexer.php?id=rfc&amp;1555970971" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no"></div>    <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</section>
+
+﻿<section class="secondscreen">
+  <!-- TOC START -->
+<div id="dw__toc" class="dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#request_for_comments">Request for Comments</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#in_voting_phase">In voting phase</a></div></li>
+<li class="level2"><div class="li"><a href="#under_discussion">Under Discussion</a></div></li>
+<li class="level2"><div class="li"><a href="#in_draft">In Draft</a></div></li>
+<li class="level2"><div class="li"><a href="#accepted">Accepted</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#process_and_policy">Process and Policy</a></div></li>
+<li class="level3"><div class="li"><a href="#pending_implementation">Pending Implementation</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#implemented">Implemented</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#php_80">PHP 8.0</a></div></li>
+<li class="level3"><div class="li"><a href="#php_74">PHP 7.4</a></div></li>
+<li class="level3"><div class="li"><a href="#php_73">PHP 7.3</a></div></li>
+<li class="level3"><div class="li"><a href="#php_72">PHP 7.2</a></div></li>
+<li class="level3"><div class="li"><a href="#php_71">PHP 7.1</a></div></li>
+<li class="level3"><div class="li"><a href="#php_70">PHP 7.0</a></div></li>
+<li class="level3"><div class="li"><a href="#php_56">PHP 5.6</a></div></li>
+<li class="level3"><div class="li"><a href="#php_55">PHP 5.5</a></div></li>
+<li class="level3"><div class="li"><a href="#php_54">PHP 5.4</a></div></li>
+<li class="level3"><div class="li"><a href="#php_53">PHP 5.3</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#declined">Declined</a></div></li>
+<li class="level2"><div class="li"><a href="#withdrawn">Withdrawn</a></div></li>
+<li class="level2"><div class="li"><a href="#inactive">Inactive</a></div></li>
+<li class="level2"><div class="li"><a href="#obsolete">Obsolete</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</section>
+</section><!-- .fullscreen -->
+<footer>
+  <nav class="fullscreen">
+    <ul>
+      <li><a href="//php.net/copyright">Copyright © 2001-2019 The PHP Group</a></li>
+      <li><a href="//php.net/sites">Other PHP.net sites</a></li>
+      <li><a href="//php.net/privacy">Privacy policy</a></li>
+    </ul>
+  </nav>
+</footer>
+
+</div><!-- .wrap -->
+</body>
+</html>

@@ -113,6 +113,9 @@
     "ocramius/proxy-manager": {
         "version": "2.2.0"
     },
+    "phake/phake": {
+        "version": "v3.1.3"
+    },
     "phar-io/manifest": {
         "version": "1.0.1"
     },
