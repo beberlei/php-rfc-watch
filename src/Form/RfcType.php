@@ -36,6 +36,10 @@ class RfcType extends AbstractType
                     return implode(', ', $discussionsAsArray);
                 },
                 function ($discussions) {
+                    if (strlen($discussions) === 0) {
+                        return [];
+                    }
+
                     // transform the string back to an array
                     return preg_split('(,[\s]?)', $discussions);
                 }
