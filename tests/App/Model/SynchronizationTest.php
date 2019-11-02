@@ -2,20 +2,20 @@
 
 namespace App\Model;
 
+use App\Entity\Rfc;
+use App\Repository\RfcRepository;
 use PHPUnit\Framework\TestCase;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\RequestForComment;
 
 class SynchronizationTest extends TestCase
 {
-    private $entityManager;
+    private $rfcRepository;
     private $rfcFetcher;
     private $service;
 
     public function setUp()
     {
         $this->service = new Synchronization(
-            $this->entityManager = \Phake::mock(EntityManagerInterface::class),
+            $this->rfcRepository = \Phake::mock(RfcRepository::class),
             $this->rfcFetcher = \Phake::mock(RfcDomFetcher::class)
         );
     }
@@ -37,21 +37,27 @@ class SynchronizationTest extends TestCase
     {
         $this->whenRfcFetcherUrlThenReturnHtmlDom('https://wiki.php.net/rfc/arrow_functions_v2', 'arrow_functions.html');
 
+        \Phake::when($this->rfcRepository)->findOneByUrl('https://wiki.php.net/rfc/arrow_functions_v2')->thenReturn(null);
+
         $rfcs = $this->service->synchronizeRfcs(['https://wiki.php.net/rfc/arrow_functions_v2']);
 
-        \Phake::verify($this->entityManager)->persist($this->isInstanceOf(RequestForComment::class));
+        \Phake::verify($this->rfcRepository)->persist($this->isInstanceOf(Rfc::class));
 
         $rfc = current($rfcs);
 
-        $this->assertEquals('https://wiki.php.net/rfc/arrow_functions_v2', $rfc->getUrl());
-        $this->assertEquals('Arrow Functions 2.0', $rfc->getTitle());
-        $this->assertEquals('open', $rfc->getStatus());
-        $this->assertEquals('doodle__form__add_arrow_functions_as_described_in_php_7.4', $rfc->getVoteId());
-        $this->assertEquals('Add arrow functions as described in PHP 7.4?', $rfc->getQuestion());
-        $this->assertEquals([
-            ['votes' => 37, 'share' => 37/44, 'option' => 'Yes'],
-            ['votes' => 7, 'share' => 7/44, 'option' => 'No']
-        ], $rfc->getCurrentResults());
+        assert($rfc instanceof Rfc);
+
+        $this->assertEquals('https://wiki.php.net/rfc/arrow_functions_v2', $rfc->url);
+        $this->assertEquals('Arrow Functions 2.0', $rfc->title);
+        $this->assertEquals('open', $rfc->status);
+        $this->assertEquals('7.4', $rfc->targetPhpVersion);
+
+        $this->assertTrue(isset($rfc->votes['doodle__form__add_arrow_functions_as_described_in_php_7.4']), 'Collection has key "doodle__form__add_arrow_functions_as_described_in_php_7.4"');
+
+        $vote = $rfc->votes['doodle__form__add_arrow_functions_as_described_in_php_7.4'];
+
+        $this->assertEquals('Add arrow functions as described in PHP 7.4?', $vote->question);
+        $this->assertEquals(['Yes' => 37, 'No' => 7], $vote->currentVotes);
     }
 
     public function whenRfcFetcherUrlThenReturnHtmlDom($url, $htmlFile)

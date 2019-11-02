@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use DOMDocument;
+use Buzz\Browser;
 
 class RfcDomFetcher
 {

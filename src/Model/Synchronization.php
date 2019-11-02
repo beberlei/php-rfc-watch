@@ -2,21 +2,18 @@
 
 namespace App\Model;
 
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\RequestForComment;
-use App\Entity\Event;
-use App\Model\Vote;
-use App\Model\Votes;
+use App\Entity\Rfc;
+use App\Repository\RfcRepository;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 
 class Synchronization
 {
-    private $entityManager;
+    private $rfcRepository;
     private $rfcFetcher;
 
-    public function __construct(EntityManagerInterface $entityManager, RfcDomFetcher $rfcFetcher)
+    public function __construct(RfcRepository $rfcRepository, RfcDomFetcher $rfcFetcher)
     {
-        $this->entityManager = $entityManager;
+        $this->rfcRepository = $rfcRepository;
         $this->rfcFetcher = $rfcFetcher;
     }
 
@@ -44,138 +41,120 @@ class Synchronization
         $rfcs = [];
 
         foreach ($rfcUrls as $rfcUrl) {
-            $dom = $this->rfcFetcher->getRfcDom($rfcUrl);
-            $xpath = new \DOMXpath($dom);
+            $rfcs[] = $this->synchronizeRfc($rfcUrl);
+        }
 
-            $nodes = $xpath->evaluate('//form[@name="doodle__form"]');
+        $this->rfcRepository->flush();
 
-            foreach ($nodes as $form) {
-                $rows = $xpath->evaluate('table[@class="inline"]/tbody/tr', $form);
-                $voteId = $form->getAttribute('id');
-                $question = "";
+        return $rfcs;
+    }
 
-                $votes = array();
-                $voteWasClosed = false;
+    private function synchronizeRfc(string $rfcUrl) : Rfc
+    {
+        $matches = [];
+        $rfc = $this->rfcRepository->findOneByUrl($rfcUrl);
 
-                $options = array();
-                foreach ($rows as $row) {
-                    switch ((string)$row->getAttribute('class')) {
-                        case 'row0':
-                            $question = trim($xpath->evaluate('string(th/text())', $row));
-                            // do nothing;
-                            break;
+        if (!$rfc) {
+            $rfc = new Rfc();
+            $rfc->url = $rfcUrl;
+        }
 
-                        case 'row1':
-                            foreach ($xpath->evaluate('td', $row) as $optionNode) {
-                                $option = trim($optionNode->nodeValue);
-                                if ($option !== "Real name") {
-                                    $options[] = $option;
-                                }
-                            }
-                            break;
+        $dom = $this->rfcFetcher->getRfcDom($rfcUrl);
+        $content = $dom->saveHTML();
+        $xpath = new \DOMXpath($dom);
 
-                        default:
-                            $username = trim($xpath->evaluate('string(td[1])', $row));
+        $rfc->title = trim(str_replace('PHP RFC:', '', $xpath->evaluate('string(//h1)')));
 
-                            if ($username === 'This poll has been closed.') {
-                                $voteWasClosed = true;
-                                break;
-                            }
-
-                            if (!preg_match('(\(([^\)]+)\))', $username, $matches)) {
-                                break;
-                            }
-
-                            $username = md5($matches[1]);
-                            $time = new \DateTime;
-
-                            $option = -1;
-                            foreach ($xpath->evaluate('td', $row) as $optionNode) {
-                                if ($optionNode->getAttribute('style') == 'background-color:#AFA') {
-                                    $imgTitle = $xpath->evaluate('img[@title]', $optionNode);
-                                    if ($imgTitle && $imgTitle->length > 0) {
-                                        $time = \DateTime::createFromFormat('Y/m/d H:i', $imgTitle->item(0)->getAttribute('title'), new \DateTimeZone('UTC'));
-                                        $time->modify('-60 minute'); // hardcode how far both servers are away from each other timezone-wise
-                                    }
-                                    break;
-                                }
-                                $option++;
-                            }
-                            $votes[$username] = new Vote($options[$option], $time);
-                            break;
-                    }
-                }
-
-                $votes = new Votes($votes);
-
-                if (!isset($rfcs[$voteId])) {
-                    $title = trim(str_replace('PHP RFC:', '', $xpath->evaluate('string(//h1)')));
-                    $author = "";
-
-                    $listItems = $xpath->evaluate('//li/div[@class="li"]');
-                    foreach ($listItems as $listItem) {
-                        $content = trim($listItem->nodeValue);
-                        if (strpos($content, "Author") === 0) {
-                            $parts = explode(":", $content);
-                            $author = $parts[1];
-                        }
-                    }
-
-                    $rfc = new RequestForComment();
-                    $rfc->setTitle($title);
-                    $rfc->setUrl($rfcUrl);
-                    $rfc->setQuestion($question);
-                    $rfc->setAuthor($author);
-                    $rfc->setVoteId($voteId);
-                    $rfc->setPassThreshold(66);
-
-                    $rfcs[$voteId] = $rfc;
-
-                    // Guess at the approximate start time based on the first vote.
-                    $start = array_reduce(iterator_to_array($votes), function (\DateTime $start, Vote $vote) {
-                        if ($start > $vote->getTime()) {
-                            return clone $vote->getTime();
-                        }
-                        return $start;
-                    }, new \DateTime);
-
-                    // Subtract another minute so the vote opening always appears
-                    // before the first vote.
-                    $start->sub(new \DateInterval('PT1M'));
-
-                    $this->entityManager->persist(new Event($rfc, 'VoteOpened', null, $start));
-                    $this->entityManager->persist($rfc);
-                } else {
-                    $rfc = $rfcs[$voteId];
-                }
-
-                $changedVotes = $votes->diff($rfc->getVotes());
-
-                foreach ($changedVotes->getNewVotes() as $username => $vote) {
-                    $this->entityManager->persist(new Event($rfc, 'UserVoted', $vote->getOption(), $vote->getTime()));
-                }
-
-                foreach ($changedVotes->getRemovedVotes() as $username => $option) {
-                    $this->entityManager->persist(new Event($rfc, 'UserVoteRemoved', $vote->getOption(), $vote->getTime()));
-                }
-
-                $rfc->setVotes($votes);
-                $rfc->setVoteId($voteId);
-                $rfc->setQuestion($question);
-
-                if ($voteWasClosed && $rfc->isOpen()) {
-                    if ($rfc->getYesShare() < $rfc->getPassThreshold()) {
-                        $rfc->setRejected(true);
-                    }
-
-                    $rfc->closeVote();
-                    $this->entityManager->persist(new Event($rfc, 'VoteClosed', null, new \DateTime('now')));
+        if (strlen($rfc->targetPhpVersion) === 0) {
+            $targetVersionRegexps = [
+                '(Targets: ([^<]+))',
+                '(Proposed version: ([^<]+))',
+                '(Proposed Version: ([^<]+))',
+                '(Target version: ([^<]+))',
+                '(Target Version: ([^<]+))',
+            ];
+            foreach ($targetVersionRegexps as $targetVersionRegexp) {
+                if (preg_match($targetVersionRegexp, $content, $matches)) {
+                    $rfc->targetPhpVersion = trim(str_replace('PHP', '', $matches[1]));
                 }
             }
         }
 
-        $this->entityManager->flush();
+        $nodes = $xpath->evaluate('//form[@name="doodle__form"]');
 
-        return $rfcs;
+        $first = true;
+        foreach ($nodes as $form) {
+            $rows = $xpath->evaluate('table[@class="inline"]/tbody/tr', $form);
+            $voteId = $form->getAttribute('id');
+
+            $vote = $rfc->getVoteById($voteId);
+
+            $vote->primaryVote = $first;
+            $first = false;
+
+            $options = array();
+            foreach ($rows as $row) {
+                switch ((string)$row->getAttribute('class')) {
+                    case 'row0':
+                        $vote->question = trim($xpath->evaluate('string(th/text())', $row));
+                        // do nothing;
+                        break;
+
+                    case 'row1':
+                        foreach ($xpath->evaluate('td', $row) as $optionNode) {
+                            $option = trim($optionNode->nodeValue);
+                            if ($option !== "Real name") {
+                                $options[] = $option;
+                                $vote->currentVotes[$option] = 0;
+                            }
+                        }
+                        break;
+
+                    default:
+                        $firstColumn = trim($xpath->evaluate('string(td[1])', $row));
+
+                        if ($firstColumn === 'This poll has been closed.') {
+                            $rfc->status = Rfc::CLOSE;
+                            break;
+                        }
+
+                        if (!preg_match('(\(([^\)]+)\))', $firstColumn, $matches)) {
+                            break;
+                        }
+
+                        $option = -1;
+                        foreach ($xpath->evaluate('td', $row) as $optionNode) {
+                            if ($optionNode->getAttribute('style') == 'background-color:#AFA') {
+                                $imgTitle = $xpath->evaluate('img[@title]', $optionNode);
+                                if ($imgTitle && $imgTitle->length > 0) {
+                                    $time = \DateTime::createFromFormat('Y/m/d H:i', $imgTitle->item(0)->getAttribute('title'), new \DateTimeZone('UTC'));
+                                    $time->modify('-60 minute'); // hardcode how far both servers are away from each other timezone-wise
+
+                                    if ($rfc->firstVote > $time) {
+                                        $rfc->firstVote = $time;
+                                    }
+                                }
+                                break;
+                            }
+                            $option++;
+                        }
+                        $vote->currentVotes[$options[$option]]++;
+                        break;
+                }
+            }
+
+            $rfc->rejected = false;
+
+            if ($rfc->status == Rfc::CLOSE && $vote->primaryVote && isset($vote->currentVotes['Yes'])) {
+                $yesShare = $vote->currentVotes['Yes'] / array_sum($vote->currentVotes);
+                if ($yesShare < ($vote->passThreshold / 100)) {
+                    $rfc->rejected = true;
+                }
+            }
+        }
+
+        $this->rfcRepository->persist($rfc);
+
+        return $rfc;
     }
 }

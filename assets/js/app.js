@@ -6,16 +6,21 @@ import _ from 'underscore'
 
 class VoteResults extends React.Component {
     renderVote (vote, idx) {
-        var share = Math.round(vote.share * 100, 2);
-        return <div className="col-lg" key={vote.option}>{vote.option}: {vote.votes} ({share}%)</div>;
+        var bgs = ['bg-success', 'bg-danger', 'bg-info', 'bg-primary', 'bg-secondary'];
+        return <div className="col-lg" key={vote.option}>
+            <div className={bgs[idx]} style={{width:"14px", height: "14px", marginRight: "4px", display:"inline-block", border: "1px solid #000"}}></div>
+            <small>{vote.option}: {vote.votes}</small>
+        </div>;
     }
 
     renderVoteProgress () {
-        var positive = this.props.vote.share + "%";
-        var negative = (100 - this.props.vote.share) + "%";
+        var bgs = ['bg-success', 'bg-danger', 'bg-info', 'bg-primary', 'bg-secondary'];
+
         return <div className="progress">
-            <div className="progress-bar bg-success" style={{width: positive}}>{positive}</div>
-            <div className="progress-bar bg-danger" style={{width: negative}}>{negative}</div>
+            {this.props.vote.results.map(function (result, idx) {
+                var share = Math.round(result.share * 100, 2);
+                return <div key={result.option} className={"progress-bar " + bgs[idx]} style={{width: share + "%"}}>{share} %</div>
+            })}
         </div>
     }
 
@@ -34,16 +39,28 @@ class VoteResults extends React.Component {
         return (
             <div>
                 <div className="mb-2">
-                    {this.props.vote.question} <span className={"badge " + passClass}>{passLabel}</span>
+                    {this.props.vote.question}
                 </div>
 
-                <div className="vote-results mb-2">
-                    {this.renderVoteProgress()}
-                </div>
+                {this.props.vote.hasYes ?
+                    <div className="row">
+                        <div className="col-10">
+                            <div className="mb-2 mt-2">
+                                {this.renderVoteProgress()}
+                            </div>
+                        </div>
+                        <div className="col-2">
+                            {this.props.vote.hasYes ? <span className={"badge " + passClass}>{passLabel}</span> : null}
+                        </div>
+                    </div> : <div className="mb-2">
+                        {this.renderVoteProgress()}
+                    </div>}
 
                 <div className="row">
-                    <div className="col-lg">Votes cast: {this.computeTotalVotesCasted()}</div>
                     {this.props.vote.results.map(this.renderVote)}
+                </div>
+                <div className="row">
+                    <div className="col-lg"><small style={{color:"#999999"}}>Total number of votes cast: {this.computeTotalVotesCasted()}</small></div>
                 </div>
 
                 {this.props.last ? null : <hr />}

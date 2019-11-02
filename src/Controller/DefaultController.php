@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Rfc;
+use App\Entity\Vote;
 use App\Form\RfcType;
 use QafooLabs\MVC\FormRequest;
 use QafooLabs\MVC\RedirectRoute;
@@ -69,53 +71,54 @@ class DefaultController extends AbstractController
      */
     public function dataAction()
     {
-        $rfcRepository = $this->entityManager->getRepository(RequestForComment::CLASS);
+        $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
 
         $rfcs = array_reverse($rfcRepository->findAll());
 
-        $aggregated = [];
-
+        $data = [];
         foreach ($rfcs as $rfc) {
-            assert($rfc instanceof RequestForComment);
+            assert($rfc instanceof Rfc);
 
-            if (!isset($aggregated[$rfc->getUrl()])) {
-                $aggregated[$rfc->getUrl()] = [
-                    'id' => $rfc->getId(),
-                    'title' => $rfc->getTitle(),
-                    'url' => $rfc->getUrl(),
-                    'status' => $rfc->getStatus(),
-                    'targetPhpVersion' => 'unknown',
-                    'discussions' => [],
-                    'questions' => [],
-                    'rejected' => false,
-                ];
-            }
+            $questions = array_map(function (Vote $vote) {
+                $data = ['question' => $vote->question, 'results' => [], 'hasYes' => false, 'passing' => false];
 
-            if ($rfc->getDiscussions()) {
-                $aggregated[$rfc->getUrl()]['discussions'] = $rfc->getDiscussions();
-            }
+                $total = array_sum($vote->currentVotes);
 
-            if ($rfc->getTargetPhpVersion()) {
-                $aggregated[$rfc->getUrl()]['targetPhpVersion'] = $rfc->getTargetPhpVersion();
-            }
+                foreach ($vote->currentVotes as $option => $count) {
+                    $data['results'][] = [
+                        'votes' => $count,
+                        'share' => $count / $total,
+                        'option' => $option,
+                    ];
 
-            if ($rfc->isRejected()) {
-                $aggregated[$rfc->getUrl()]['rejected'] = true;
-            }
+                    if ($option === "Yes") {
+                        $data['hasYes'] = true;
 
-            $aggregated[$rfc->getUrl()]['questions'][] = [
-                'question' => $rfc->getQuestion(),
-                'results' => $rfc->getCurrentResults(),
-                'share' => $rfc->getYesShare(),
-                'passing' => $rfc->getYesShare() > $rfc->getPassThreshold()
+                        if ($count / $total >= $vote->passThreshold/100) {
+                            $data['passing'] = true;
+                        }
+                    }
+                }
+
+                return $data;
+            }, $rfc->votes->toArray());
+
+            $data[] = [
+                'id' => $rfc->id,
+                'title' => $rfc->title,
+                'url' => $rfc->url,
+                'status' => $rfc->status,
+                'targetPhpVersion' => $rfc->targetPhpVersion,
+                'discussions' => $rfc->discussions,
+                'questions' => array_values($questions),
+                'rejected' => $rfc->rejected,
             ];
         }
 
-        $aggregated = array_values($aggregated);
-
-        $result['rejected'] = array_values(array_filter($aggregated, function ($item) { return $item['rejected']; }));
-        $result['active'] = array_values(array_filter($aggregated, function ($item) { return $item['status'] === 'open' && !$item['rejected']; }));
-        $others = array_values(array_filter($aggregated, function ($item) { return $item['status'] !== 'open' && !$item['rejected']; }));
+        $result = [];
+        $result['rejected'] = array_values(array_filter($data, function ($item) { return $item['rejected']; }));
+        $result['active'] = array_values(array_filter($data, function ($item) { return $item['status'] === 'open' && !$item['rejected']; }));
+        $others = array_values(array_filter($data, function ($item) { return $item['status'] !== 'open' && !$item['rejected']; }));
 
         $result['others'] = ['unknown' => []];
 

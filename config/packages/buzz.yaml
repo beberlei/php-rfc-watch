@@ -5,7 +5,7 @@ services:
 
     # Tell the auto wire system to use "FileGetContents" client as default client.
     # Set this to any of the other clients below (e.g. Curl or MultiCurl) to use a different default client.
-    Buzz\Client\BuzzClientInterface: '@buzz.file_get_contents_client'
+    Buzz\Client\BuzzClientInterface: '@buzz.curl_client'
 
     # Clients
     buzz.file_get_contents_client:
@@ -26,16 +26,3 @@ services:
     # Browser
     Buzz\Browser:
         arguments: ['@Buzz\Client\BuzzClientInterface']
-        calls:
-            - ['addMiddleware', ['@buzz.middleware.content_length']]
-            - ['addMiddleware', ['@buzz.middleware.logger']]
-
-    # Middlewares
-    buzz.middleware.content_length:
-        class: Buzz\Middleware\ContentLengthMiddleware
-
-    buzz.middleware.logger:
-        class: Buzz\Middleware\LoggerMiddleware
-        arguments: ['@?logger']
-        tags:
-            - { name: monolog.logger, channel: buzz }
