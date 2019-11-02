@@ -91,10 +91,13 @@ class RfcDiscussions extends React.Component {
                 <strong>Discussions:</strong>
                 {intersperse(this.props.discussions.map(x => {
                     var label;
-                    if (x.indexOf('externals.io')) {
+                    var url = new URL(x);
+                    if (url.host === "externals.io") {
                         label = 'Mailinglist';
-                    } else if (x.indexOf('reddit')) {
-                        label = 'Reddit';
+                    } else if (x.indexOf("derickrethans.nl/phpinternalsnews") > 0) {
+                        label = "PHP Internals News";
+                    } else {
+                        label = url.host;
                     }
                     idx++;
                     return <a href={x} target="_blank">#{idx} {label}</a>
