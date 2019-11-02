@@ -38,7 +38,7 @@ class DefaultController extends AbstractController
      */
     public function adminAction()
     {
-        $rfcRepository = $this->entityManager->getRepository(RequestForComment::CLASS);
+        $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
         $rfcs = array_reverse($rfcRepository->findAll());
 
         return ['rfcs' => $rfcs];
@@ -47,7 +47,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/admin/rfc/{id}", name="admin_edit_rfc", methods={"POST", "GET"})
      */
-    public function adminEditRfcAction(RequestForComment $rfc, FormRequest $request)
+    public function adminEditRfcAction(Rfc $rfc, FormRequest $request)
     {
         if (!$request->handle(RfcType::class, $rfc)) {
             return ['rfc' => $rfc, 'form' => $request->createFormView()];
@@ -61,7 +61,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/admin/rfc/{id}/export", name="admin_export_rfc", methods={"GET"})
      */
-    public function adminExportRfcAction(RequestForComment $rfc)
+    public function adminExportRfcAction(Rfc $rfc)
     {
         return ['rfc' => $rfc];
     }
