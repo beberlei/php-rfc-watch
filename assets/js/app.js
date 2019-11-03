@@ -79,6 +79,7 @@ class RfcDiscussions extends React.Component {
 
         return <div>
                 <strong>Discussions:</strong>
+                <span>&nbsp;</span>
                 {intersperse(this.props.discussions.map(x => {
                     var label;
                     var url = new URL(x);
