@@ -50,7 +50,7 @@ class VoteResults extends React.Component {
                     {this.props.vote.results.map(this.renderVote)}
                 </div>
                 <div className="row">
-                    <div className="col-lg"><small style={{color:"#666666"}}>Total number of votes cast: {this.computeTotalVotesCasted()}</small></div>
+                    <div className="col-lg meta">Total number of votes cast: {this.computeTotalVotesCasted()}</div>
                 </div>
 
                 {this.props.last ? null : <hr />}
@@ -92,6 +92,7 @@ class RfcDiscussions extends React.Component {
                     idx++;
                     return <a href={x} target="_blank" style={{whiteSpace: 'nowrap'}}>#{idx} {label}</a>
                 }), ", ")}
+                <hr />
             </div>
     }
 }
@@ -106,15 +107,12 @@ class RfcVoteItem extends React.Component {
                     <span className="badge badge-primary mr-1">Active</span>
                     : null }
                 <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
+                {this.props.rfc.targetPhpVersion.length > 0 && <div className={"float-right"}><span className="badge badge-secondary">PHP {this.props.rfc.targetPhpVersion}</span></div>}
             </div>
             <div className="card-body">
-                <div style={{color: "#666666"}}>
-                    {this.props.rfc.targetPhpVersion.length > 0 && <span><strong>Target PHP Version:</strong> {this.props.rfc.targetPhpVersion}</span>}
-    
+                <div className="meta">
                     <RfcDiscussions discussions={this.props.rfc.discussions} />
                 </div>
-
-                <hr />
 
                 {this.props.rfc.questions.map((item, idx) => {
                     return <VoteResults key={idx} vote={item} last={voteCount == idx+1} />
