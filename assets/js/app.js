@@ -65,7 +65,7 @@ function intersperse(arr, sep) {
     }
 
     return arr.slice(1).reduce(function(xs, x, i) {
-        return ' ' + xs.concat([sep, x]);
+        return xs.concat([sep, x]);
     }, [arr[0]]);
 }
 
