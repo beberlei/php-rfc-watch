@@ -42,25 +42,15 @@ class VoteResults extends React.Component {
                     {this.props.vote.question}
                 </div>
 
-                {this.props.vote.hasYes ?
-                    <div className="row">
-                        <div className="col-10">
-                            <div className="mb-2 mt-2">
-                                {this.renderVoteProgress()}
-                            </div>
-                        </div>
-                        <div className="col-2">
-                            {this.props.vote.hasYes ? <span className={"badge " + passClass}>{passLabel}</span> : null}
-                        </div>
-                    </div> : <div className="mb-2">
-                        {this.renderVoteProgress()}
-                    </div>}
+                <div className="mb-2">
+                    {this.renderVoteProgress()}
+                </div>
 
                 <div className="row">
                     {this.props.vote.results.map(this.renderVote)}
                 </div>
                 <div className="row">
-                    <div className="col-lg"><small style={{color:"#999999"}}>Total number of votes cast: {this.computeTotalVotesCasted()}</small></div>
+                    <div className="col-lg"><small style={{color:"#666666"}}>Total number of votes cast: {this.computeTotalVotesCasted()}</small></div>
                 </div>
 
                 {this.props.last ? null : <hr />}
@@ -118,9 +108,11 @@ class RfcVoteItem extends React.Component {
                 <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
             </div>
             <div className="card-body">
-                {this.props.rfc.targetPhpVersion.length > 0 && <span><strong>Target PHP Version:</strong> {this.props.rfc.targetPhpVersion}</span>}
-
-                <RfcDiscussions discussions={this.props.rfc.discussions} />
+                <div style={{color: "#666666"}}>
+                    {this.props.rfc.targetPhpVersion.length > 0 && <span><strong>Target PHP Version:</strong> {this.props.rfc.targetPhpVersion}</span>}
+    
+                    <RfcDiscussions discussions={this.props.rfc.discussions} />
+                </div>
 
                 <hr />
 
