@@ -8,7 +8,7 @@ class VoteResults extends React.Component {
     renderVote (vote, idx) {
         var bgs = ['bg-success', 'bg-danger', 'bg-info', 'bg-primary', 'bg-secondary'];
         return <div className="col-lg" key={vote.option}>
-            <div className={bgs[idx]} style={{width:"14px", height: "14px", marginRight: "4px", display:"inline-block", border: "1px solid #000"}}></div>
+            <div className={bgs[idx]} style={{width:"14px", height: "14px", marginRight: "4px", display:"inline-block", borderRadius: "4px"}}></div>
             <small>{vote.option}: {vote.votes}</small>
         </div>;
     }
