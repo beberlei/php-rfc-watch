@@ -50,7 +50,7 @@ class VoteResults extends React.Component {
                     {this.props.vote.results.map(this.renderVote)}
                 </div>
                 <div className="row">
-                    <div className="col-lg meta">Total number of votes cast: {this.computeTotalVotesCasted()}</div>
+                    <div className="col-lg meta ml-3">Total number of votes cast: {this.computeTotalVotesCasted()}</div>
                 </div>
 
                 {this.props.last ? null : <hr />}
@@ -111,7 +111,7 @@ class RfcVoteItem extends React.Component {
                 {this.props.rfc.targetPhpVersion.length > 0 && <div className={"float-right"}><span className="badge badge-secondary">PHP {this.props.rfc.targetPhpVersion}</span></div>}
             </div>
             <div className="card-body">
-                <div className="meta ml-3">
+                <div className="meta">
                     <RfcDiscussions discussions={this.props.rfc.discussions} />
                 </div>
 
