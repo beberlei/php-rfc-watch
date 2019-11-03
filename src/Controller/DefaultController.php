@@ -169,10 +169,9 @@ class DefaultController extends AbstractController
      */
     public function atomAction()
     {
-        $entityManager = $this->get('doctrine.orm.default_entity_manager');
-        $rfcRepository = $entityManager->getRepository(RequestForComment::CLASS);
+        $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
 
-        $rfcs = $rfcRepository->findBy(['status' => 'close'], ['closeDate' => 'DESC'], 10);
+        $rfcs = $rfcRepository->findBy(['status' => 'close'], ['id' => 'DESC'], 10);
 
         $feed = new Feed;
         $feed->setTitle("PHP RFC Watch");
@@ -187,29 +186,47 @@ class DefaultController extends AbstractController
         $modifiedDateSet = false;
 
         foreach ($rfcs as $rfc) {
-            if (!$rfc->getCloseDate()) {
-                continue;
+            assert($rfc instanceof Rfc);
+
+            $content = "URL: " . $rfc->url . "\n\n";
+
+            if (count($rfc->discussions) > 0) {
+
+                $content .= "## Discussions\n\n";
+
+                foreach ($rfc->discussions as $discussion) {
+                    $content .= "- " . $discussion . "\n";
+                }
+
+                $content .= "\n";
             }
 
-            $results = $rfc->getCurrentResults();
-            $content = sprintf("%d %%\n", $rfc->getYesShare());
+            $content .= "## Votes\n\n";
 
-            foreach ($results as $result) {
-                $content .= sprintf("%s: %d votes\n", $result['option'], $result['votes']);
+            foreach ($rfc->votes as $vote) {
+                assert($vote instanceof Vote);
+
+                $content .= "### {$vote->question}\n\n";
+
+                foreach ($vote->currentVotes as $option => $count) {
+                    $content .= "- {$option} with {$count} votes\n";
+                }
+
+                $content .= "\n";
             }
 
             if (!$modifiedDateSet) {
-                $feed->setDateModified((int)$rfc->getCloseDate()->format('U'));
+                $feed->setDateModified((int)$rfc->created->format('U'));
                 $modifiedDateSet = true;
             }
 
             $entry = $feed->createEntry();
-            $entry->setTitle($rfc->getTitle());
-            $entry->setLink($rfc->getUrl());
-            $entry->setDateModified((int)$rfc->getCloseDate()->format('U'));
-            $entry->setDateCreated((int)$rfc->getCloseDate()->format('U'));
-            $entry->setDescription($content);
-            $entry->setContent($content);
+            $entry->setTitle($rfc->title);
+            $entry->setLink($rfc->url);
+            $entry->setDateModified((int)$rfc->created->format('U'));
+            $entry->setDateCreated((int)$rfc->created->format('U'));
+            $entry->setDescription(strip_tags($content));
+            $entry->setContent(strip_tags($content));
 
             $feed->addEntry($entry);
         }
