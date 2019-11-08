@@ -19,6 +19,11 @@ class RfcOrmRepository implements RfcRepository
         return $this->entityManager->getRepository(Rfc::class)->findOneBy(['url' => $url]);
     }
 
+    public function findActiveRfcs() : array
+    {
+        return $this->entityManager->getRepository(Rfc::class)->findBy(['status' => Rfc::OPEN]);
+    }
+
     public function persist(Rfc $rfc)
     {
         $this->entityManager->persist($rfc);

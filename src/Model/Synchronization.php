@@ -31,9 +31,17 @@ class Synchronization
             $rfcs[] = $link->getAttribute('href');
         }
 
-        return array_map(function ($link) {
+        $currentInVotingUrls = array_map(function ($link) {
             return 'https://wiki.php.net' . $link;
         }, $rfcs);
+
+        $ourActiveRfcs = $this->rfcRepository->findActiveRfcs();
+
+        $activeRfcUrls = array_map(function (Rfc $rfc) {
+            return $rfc->url;
+        }, $ourActiveRfcs);
+
+        return array_unique(array_merge($currentInVotingUrls, $activeRfcUrls));
     }
 
     public function synchronizeRfcs(array $rfcUrls)
