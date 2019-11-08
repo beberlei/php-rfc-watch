@@ -8,6 +8,7 @@
 
 namespace App\Form;
 
+use App\Entity\Rfc;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -26,6 +27,7 @@ class RfcType extends AbstractType
             ->add('targetPhpVersion', ChoiceType::class, ['choices' => array_combine($versions, $versions)])
             ->add('discussions', TextType::class, ['required' => false])
             ->add('rejected', CheckboxType::class, ['required' => false])
+            ->add('status', ChoiceType::class, ['choices' => [Rfc::OPEN => Rfc::OPEN, Rfc::CLOSE => Rfc::CLOSE]])
             ->add('submit', SubmitType::class)
         ;
 
