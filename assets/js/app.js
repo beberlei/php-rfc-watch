@@ -8,9 +8,9 @@ class VoteResults extends React.Component {
     renderVote (vote, idx) {
         var bgs = ['bg-green-400', 'bg-red-400', 'bg-blue-400', 'bg-teal-400'];
 
-        return <div className="col-lg" key={vote.option}>
+        return <div className="mb-1" key={vote.option}>
             <div className={bgs[idx] + " rounded-sm mr-2 h-2 w-2 inline-block"}></div>
-            <small>{vote.option}: {vote.votes}</small>
+            <span className="text-xs">{vote.option}: <span className="font-normal">{vote.votes}</span></span>
         </div>;
     }
 
@@ -51,11 +51,10 @@ class VoteResults extends React.Component {
                     {this.renderVoteProgress()}
                 </div>
 
-                <div className="row">
-                    {this.props.vote.results.map(this.renderVote)}
-                </div>
-                <div className="row">
-                    <div className="col-lg meta ml-3">Total number of votes cast: {this.computeTotalVotesCasted()}</div>
+                {this.props.vote.results.map(this.renderVote)}
+
+                <div className="text-gray text-xs mt-2 ml-4">
+                    Total number of votes cast: <span className="font-normal">{this.computeTotalVotesCasted()}</span>
                 </div>
             </div>
         );
@@ -80,7 +79,7 @@ class RfcDiscussions extends React.Component {
 
         var idx = 0;
 
-        return <div className="meta py-4">
+        return <div className="text-xs text-gray-800 py-4">
                 <strong>Discussions:</strong>
                 <span>&nbsp;</span>
                 {intersperse(this.props.discussions.map(x => {
