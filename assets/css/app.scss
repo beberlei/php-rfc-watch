@@ -11,42 +11,6 @@ nav {
     }
 }
 
-main {
-    margin-top: 20px;
-    flex: 1;
-    min-height: 85vh;
-
-    a {
-        text-decoration: underline;
-
-        &:hover {
-            text-decoration: none;
-        }
-    }
-
-    h1 {
-        a {
-            color: #000;
-            text-decoration: none;
-
-            &:hover {
-                color: #000;
-            }
-        }
-    }
-
-    #app {
-        .card-columns {
-            column-count: 2;
-        }
-        @media (max-width: 576px) {
-            .card-columns {
-                column-count: 1;
-            }
-        }
-    }
-}
-
 footer {
     text-align: center;
     color: #999;
@@ -55,4 +19,12 @@ footer {
 .card-header a {
     text-decoration: none;
     font-weight: bold;
+}
+
+.rfc-list > :nth-child(2n + 1) { order: 1; } /* 1st column */
+.rfc-list > :nth-child(2n + 2) { order: 2; } /* 2nd column */
+
+.rfc-list > :nth-child(-n + 2) {
+  page-break-before: always; /* CSS 2.1 syntax */
+  break-before: always;  /* New syntax */
 }
