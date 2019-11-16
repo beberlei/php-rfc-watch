@@ -44,12 +44,12 @@ class Synchronization
         return array_unique(array_merge($currentInVotingUrls, $activeRfcUrls));
     }
 
-    public function synchronizeRfcs(array $rfcUrls)
+    public function synchronizeRfcs(array $rfcUrls, ?string $targetPhpVersion = null)
     {
         $rfcs = [];
 
         foreach ($rfcUrls as $rfcUrl) {
-            $rfcs[] = $this->synchronizeRfc($rfcUrl);
+            $rfcs[] = $this->synchronizeRfc($rfcUrl, $targetPhpVersion);
         }
 
         $this->rfcRepository->flush();
@@ -57,7 +57,7 @@ class Synchronization
         return $rfcs;
     }
 
-    private function synchronizeRfc(string $rfcUrl) : Rfc
+    private function synchronizeRfc(string $rfcUrl, ?string $targetPhpVersion = null) : Rfc
     {
         $matches = [];
         $rfc = $this->rfcRepository->findOneByUrl($rfcUrl);
@@ -73,7 +73,7 @@ class Synchronization
 
         $rfc->title = trim(str_replace('PHP RFC:', '', $xpath->evaluate('string(//h1)')));
 
-        if (strlen($rfc->targetPhpVersion) === 0) {
+        if (empty($rfc->targetPhpVersion)) {
             $targetVersionRegexps = [
                 '(Targets: ([^<]+))',
                 '(Proposed version: ([^<]+))',
@@ -81,6 +81,10 @@ class Synchronization
                 '(Target version: ([^<]+))',
                 '(Target Version: ([^<]+))',
             ];
+
+            // set default to the one passed potentially via commandline flag
+            $rfc->targetPhpVersion = (string)$targetPhpVersion;
+
             foreach ($targetVersionRegexps as $targetVersionRegexp) {
                 if (preg_match($targetVersionRegexp, $content, $matches)) {
                     $rfc->targetPhpVersion = trim(str_replace('PHP', '', $matches[1]));
