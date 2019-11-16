@@ -73,7 +73,7 @@ class DefaultController extends AbstractController
     {
         $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
 
-        $rfcs = array_reverse($rfcRepository->findAll());
+        $rfcs = array_reverse($rfcRepository->findBy([], ['targetPhpVersion' => 'ASC']));
 
         $data = [];
         foreach ($rfcs as $rfc) {
