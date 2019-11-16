@@ -1,9 +1,15 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <h1>Admin: {{ rfc.title }}</h1>
+    <h1 class="uppercase text-xl font-bold">Admin: {{ rfc.title }}</h1>
 
-    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <div class="flex flex-wrap items-stretch">
+        <div class="w-full p-2">
+            <div class="rounded shadow bg-white p-4">
+                {% form_theme form 'tailwind_form_theme.html.twig' %}
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
 
-    {{ form(form) }}
 {% endblock %}

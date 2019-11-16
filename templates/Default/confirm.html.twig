@@ -1,24 +1,17 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md">
-        <p>
+<div class="flex">
+    <div class="w-1/2 mx-auto">
+        <p class="mb-8">
             We sent semi-automated updates whenever an RFC is accepted
             or rejected by voting. Stop with the constant refresh of
             the PHP RFC Watch website and just get notified whenever a
             vote closes. In addition we also sent updates about PHP
             major releases and all the new features included.
         </p>
-    </div>
-</div>
-<div class="row justify-content-md-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <p>You have successfully subscribed to the PHP RFC Watch Notifications.</p>
-            </div>
-        </div>
+
+        <p>You have successfully subscribed to the PHP RFC Watch Notifications.</p>
     </div>
 </div>
 {% endblock %}

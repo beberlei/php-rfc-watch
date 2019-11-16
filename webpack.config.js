@@ -10,6 +10,7 @@ Encore
     .addStyleEntry('css/app', './assets/css/app.scss')
     .enableReactPreset()
     .enableSassLoader()
+    .enablePostCssLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();

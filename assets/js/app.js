@@ -6,21 +6,29 @@ import _ from 'underscore'
 
 class VoteResults extends React.Component {
     renderVote (vote, idx) {
-        var bgs = ['bg-success', 'bg-danger', 'bg-info', 'bg-primary', 'bg-secondary'];
+        var bgs = ['bg-green-400', 'bg-red-400', 'bg-blue-400', 'bg-teal-400'];
+
         return <div className="col-lg" key={vote.option}>
-            <div className={bgs[idx]} style={{width:"14px", height: "14px", marginRight: "4px", display:"inline-block", borderRadius: "4px"}}></div>
+            <div className={bgs[idx] + " rounded-sm mr-2 h-2 w-2 inline-block"}></div>
             <small>{vote.option}: {vote.votes}</small>
         </div>;
     }
 
     renderVoteProgress () {
-        var bgs = ['bg-success', 'bg-danger', 'bg-info', 'bg-primary', 'bg-secondary'];
+        var bgs = ['bg-green-400', 'bg-red-400', 'bg-blue-400', 'bg-teal-400'];
 
-        return <div className="progress">
-            {this.props.vote.results.map(function (result, idx) {
-                var share = Math.round(result.share * 100, 2);
-                return <div key={result.option} className={"progress-bar " + bgs[idx]} style={{width: share + "%"}}>{share} %</div>
-            })}
+        return <div className="w-full">
+            <div className="shadow w-full bg-grey-light rounded-sm flex items-stretch">
+                {this.props.vote.results.map(function (result, idx) {
+                    var share = Math.round(result.share * 100, 2);
+
+                    if (share === 0) {
+                        return null;
+                    }
+
+                    return <div key={result.option} className={bgs[idx] + " text-xs inline-block leading-none py-1 text-center text-white flex-none"} style={{width: share + "%"}}>{share} %</div> 
+                })}
+            </div>
         </div>
     }
 
@@ -33,9 +41,6 @@ class VoteResults extends React.Component {
     }
 
     render () {
-        const passClass = this.props.vote.passing ? 'badge-success' : 'badge-danger';
-        const passLabel = this.props.vote.passing ? 'Passing' : 'Failing';
-
         return (
             <div>
                 <div className="mb-2">
@@ -53,7 +58,7 @@ class VoteResults extends React.Component {
                     <div className="col-lg meta ml-3">Total number of votes cast: {this.computeTotalVotesCasted()}</div>
                 </div>
 
-                {this.props.last ? null : <hr />}
+                {this.props.last ? null : <hr className="mb-4" />}
             </div>
         );
     }
@@ -102,22 +107,24 @@ class RfcVoteItem extends React.Component {
     render() {
         const voteCount = this.props.rfc.questions.length;
 
-        return <div className="card">
-            <div className="card-header">
-                {this.props.rfc.status == 'open' ?
-                    <span className="badge badge-primary mr-1">Active</span>
-                    : null }
-                <a href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
-                {this.props.rfc.targetPhpVersion.length > 0 && <div className={"float-right"}><span className="badge badge-secondary">PHP {this.props.rfc.targetPhpVersion}</span></div>}
-            </div>
-            <div className="card-body">
-                <div className="meta">
-                    <RfcDiscussions discussions={this.props.rfc.discussions} />
+        return <div className="w-full md:w-1/2 p-2">
+            <div className="bg-white rounded shadow-lg md:flex-auto flex-none">
+                <div className="px-6 py-4">
+                    {this.props.rfc.status == 'open' ?
+                        <span className="inline-block bg-blue-500 text-white rounded-full px-3 mr-2 text-sm font-semibold">Active</span>
+                        : null }
+                    <a className="font-bold" href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
+                    {this.props.rfc.targetPhpVersion.length > 0 && <div className={"float-right"}><span className="badge badge-secondary">PHP {this.props.rfc.targetPhpVersion}</span></div>}
                 </div>
+                <div className="px-6 py-4">
+                    <div className="meta">
+                        <RfcDiscussions discussions={this.props.rfc.discussions} />
+                    </div>
 
-                {this.props.rfc.questions.map((item, idx) => {
-                    return <VoteResults key={idx} vote={item} last={voteCount == idx+1} />
-                })}
+                    {this.props.rfc.questions.map((item, idx) => {
+                        return <VoteResults key={idx} vote={item} last={voteCount == idx+1} />
+                    })}
+                </div>
             </div>
         </div>
     }
@@ -130,8 +137,8 @@ class RfcList extends React.Component {
         }
 
         return <div>
-            <h2>{this.props.title}</h2>
-            <div className="card-columns">
+            <h2 className="text-lg font-semibold mb-2 p-2 uppercase">{this.props.title}</h2>
+            <div className="flex flex-wrap items-start mb-10">
                 {this.props.rfcs.map(item => { return <RfcVoteItem key={item.id} rfc={item} /> })}
             </div>
         </div>
