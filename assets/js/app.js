@@ -42,7 +42,7 @@ class VoteResults extends React.Component {
 
     render () {
         return (
-            <div>
+            <div className={!this.props.last ? "mb-8" : null}>
                 <div className="mb-2">
                     {this.props.vote.question}
                 </div>
@@ -57,8 +57,6 @@ class VoteResults extends React.Component {
                 <div className="row">
                     <div className="col-lg meta ml-3">Total number of votes cast: {this.computeTotalVotesCasted()}</div>
                 </div>
-
-                {this.props.last ? null : <hr className="mb-4" />}
             </div>
         );
     }
@@ -82,7 +80,7 @@ class RfcDiscussions extends React.Component {
 
         var idx = 0;
 
-        return <div>
+        return <div className="meta py-4">
                 <strong>Discussions:</strong>
                 <span>&nbsp;</span>
                 {intersperse(this.props.discussions.map(x => {
@@ -98,7 +96,6 @@ class RfcDiscussions extends React.Component {
                     idx++;
                     return <a href={x} target="_blank" style={{whiteSpace: 'nowrap'}}>#{idx} {label}</a>
                 }), ", ")}
-                <hr />
             </div>
     }
 }
@@ -112,14 +109,13 @@ class RfcVoteItem extends React.Component {
                 <div className="px-6 py-4">
                     {this.props.rfc.status == 'open' ?
                         <span className="inline-block bg-blue-500 text-white rounded-full px-3 mr-2 text-sm font-semibold">Active</span>
-                        : null }
-                    <a className="font-bold" href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
+                        : null}
+
+                    <a className="font-bold hover:underline no-underline" href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
+
                     {this.props.rfc.targetPhpVersion.length > 0 && <div className={"float-right"}><span className="badge badge-secondary">PHP {this.props.rfc.targetPhpVersion}</span></div>}
-                </div>
-                <div className="px-6 py-4">
-                    <div className="meta">
-                        <RfcDiscussions discussions={this.props.rfc.discussions} />
-                    </div>
+
+                    <RfcDiscussions discussions={this.props.rfc.discussions} />
 
                     {this.props.rfc.questions.map((item, idx) => {
                         return <VoteResults key={idx} vote={item} last={voteCount == idx+1} />
