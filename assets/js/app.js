@@ -43,7 +43,7 @@ class VoteResults extends React.Component {
     render () {
         return (
             <div className={!this.props.last ? "mb-8" : null}>
-                <div className="mb-2">
+                <div className="mb-2 break-words">
                     {this.props.vote.question}
                 </div>
 
@@ -110,7 +110,7 @@ class RfcVoteItem extends React.Component {
                         <span className="inline-block bg-blue-500 text-white rounded-full px-3 mr-2 text-sm font-semibold">Active</span>
                         : null}
 
-                    <a className="font-bold hover:underline no-underline" href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
+                    <a className="font-bold hover:underline no-underline break-words" href={this.props.rfc.url} target="_blank">{this.props.rfc.title}</a>
 
                     {this.props.rfc.targetPhpVersion.length > 0 && <div className={"float-right"}><span className="badge badge-secondary">PHP {this.props.rfc.targetPhpVersion}</span></div>}
 
