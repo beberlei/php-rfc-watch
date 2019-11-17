@@ -2,25 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-nav {
-    .sponsored-by {
-        a {
-            font-size: 10pt;
-            color: #fff;
-        }
-    }
-}
-
-footer {
-    text-align: center;
-    color: #999;
-}
-
-.card-header a {
-    text-decoration: none;
-    font-weight: bold;
-}
-
 .rfc-list > :nth-child(2n + 1) { order: 1; } /* 1st column */
 .rfc-list > :nth-child(2n + 2) { order: 2; } /* 2nd column */
 

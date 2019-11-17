@@ -10,6 +10,11 @@
                 <div class="card-header">{{ rfc.title }}</div>
                 <div class="text-sm text-gray-600">
                     <p>
+                        <strong>Status:</strong>
+                        {{ rfc.status }}
+                    </p>
+
+                    <p>
                         <strong>Target Version:</strong>
                         {{ rfc.targetPhpVersion|default('unknown') }}
                     </p>
