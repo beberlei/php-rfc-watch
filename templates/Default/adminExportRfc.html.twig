@@ -15,8 +15,9 @@
 
 
 **Votes**:
-{% for vote in rfc.votes if vote.primaryVote %}
-- **{{ vote.question }}** {% for answer,count in vote.currentVotes %}{{ count }} {{ answer }}{% if not loop.last %}, {% endif %}{% endfor %}
+{% for vote in rfc.votes %}
+- {{ vote.question }} {% for answer,count in vote.currentVotes %}{{ count }} {{ answer }}{% if not loop.last %}, {% endif %}{% endfor %}
+
 {% endfor %}
 
     </textarea>
