@@ -5,19 +5,22 @@
 
     <input class="p-2 mb-8 shadow rounded" style="width: 100%;" value="PHP RFC {% if rfc.status == "rejected" %}Rejected{% else %}Accepted{% endif %}: {{ rfc.title }}" />
 
-    <textarea class="p-2 shadow rounded" style="width: 100%; height: 300px;">Hey there fellow PHP RFC Watcher,
+    <textarea class="p-2 shadow rounded" style="width: 100%; height: 300px;">
+&lt;p&gt;Hey there fellow PHP RFC Watcher,&lt;/p&gt;
 
-- **RFC:** [{{ rfc.title }}]({{ rfc.url }})
-- **Discussions:** {% for discussion in rfc.discussions %}[#{{ loop.index }}]({{ discussion }}){% if not loop.last %}, {% endif %}{% endfor %}
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RFC:&lt;/strong&gt; [{{ rfc.title }}]({{ rfc.url }}&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Discussions:&lt;/strong&gt; {% for discussion in rfc.discussions %}[#{{ loop.index }}]({{ discussion }}){% if not loop.last %}, {% endif %}{% endfor %
+&gt;
 
-- **Target:** {{ rfc.targetPhpVersion }}
-- **Status:** {% if rfc.status == "rejected" %}Rejected{% else %}Accepted{% endif %}
+&lt;li&gt;&lt;strong&gt;Target:&lt;/strong&gt; {{ rfc.targetPhpVersion }}&gt;
+&lt;li&gt;&lt;strong&gt;Status:&lt;/strong&gt; {% if rfc.status == "rejected" %}Rejected{% else %}Accepted{% endif %}&gt;
 
-
-**Votes**:
+&lt;h4&gt;;Votes&lt;/h4&gt;
+&lt;ul&gt;
 {% for vote in rfc.votes %}
-- {{ vote.question }} {% for answer,count in vote.currentVotes %}{{ count }} {{ answer }}{% if not loop.last %}, {% endif %}{% endfor %}
-
+&lt;li&gt; {{ vote.question }} {% for answer,count in vote.currentVotes %}{{ count }} {{ answer }}{% if not loop.last %}, {% endif %}{% endfor %}
+&lt;/li&gt;
 {% endfor %}
 
     </textarea>
