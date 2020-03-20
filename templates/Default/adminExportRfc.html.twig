@@ -9,8 +9,8 @@
 &lt;p&gt;Hey there fellow PHP RFC Watcher,&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;RFC:&lt;/strong&gt; [{{ rfc.title }}]({{ rfc.url }}&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Discussions:&lt;/strong&gt; {% for discussion in rfc.discussions %}[#{{ loop.index }}]({{ discussion }}){% if not loop.last %}, {% endif %}{% endfor %
+&lt;li&gt;&lt;strong&gt;RFC:&lt;/strong&gt; &lt;a href="{{ rfc.url }}"&gt;{{ rfc.title }}&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Discussions:&lt;/strong&gt; {% for discussion in rfc.discussions %}&lt;a href="{{ discussion }}"&gt;{{ loop.index }}&lt;/a&gt;{% if not loop.last %}, {% endif %}{% endfor %
 &gt;
 
 &lt;li&gt;&lt;strong&gt;Target:&lt;/strong&gt; {{ rfc.targetPhpVersion }}&gt;
