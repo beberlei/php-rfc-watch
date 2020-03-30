@@ -6,7 +6,7 @@ import _ from 'underscore'
 
 class VoteResults extends React.Component {
     renderVote (vote, idx) {
-        var bgs = ['bg-green-400', 'bg-red-400', 'bg-blue-400', 'bg-teal-400'];
+        var bgs = ['bg-green-400', 'bg-red-400', 'bg-blue-400', 'bg-teal-400', 'bg-orange-400', 'bg-purple-400', 'bg-pink-400', 'bg-yellow-400'];
 
         return <div className="mb-1" key={vote.option}>
             <div className={bgs[idx] + " rounded-sm mr-2 h-2 w-2 inline-block"}></div>
@@ -15,7 +15,7 @@ class VoteResults extends React.Component {
     }
 
     renderVoteProgress () {
-        var bgs = ['bg-green-400', 'bg-red-400', 'bg-blue-400', 'bg-teal-400'];
+        var bgs = ['bg-green-400', 'bg-red-400', 'bg-blue-400', 'bg-teal-400', 'bg-orange-400', 'bg-purple-400', 'bg-pink-400', 'bg-yellow-400'];
 
         return <div className="w-full">
             <div className="shadow w-full bg-grey-light rounded-sm flex items-stretch">
