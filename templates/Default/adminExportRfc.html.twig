@@ -3,25 +3,32 @@
 {% block content %}
     <h1 class="text-xl font-bold">Admin: {{ rfc.title }}</h1>
 
-    <input class="p-2 mb-8 shadow rounded" style="width: 100%;" value="PHP RFC {% if rfc.status == "rejected" %}Rejected{% else %}Accepted{% endif %}: {{ rfc.title }}" />
+    <input class="p-2 mb-8 shadow rounded" style="width: 100%;" value="PHP RFC {% if rfc.rejected %}Rejected{% else %}Accepted{% endif %}: {{ rfc.title }}" />
 
     <textarea class="p-2 shadow rounded" style="width: 100%; height: 300px;">
-&lt;p&gt;Hey there fellow PHP RFC Watcher,&lt;/p&gt;
+{% autoescape 'html' %}
+<p>Hey there fellow PHP RFC Watcher,</p>
 
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;RFC:&lt;/strong&gt; &lt;a href="{{ rfc.url }}"&gt;{{ rfc.title }}&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Discussions:&lt;/strong&gt; {% for discussion in rfc.discussions %}&lt;a href="{{ discussion }}"&gt;{{ loop.index }}&lt;/a&gt;{% if not loop.last %}, {% endif %}{% endfor %}
-&gt;
+<ul>
+<li><strong>RFC:</strong> <a href="{{ rfc.url }}">{{ rfc.title }}</a></li>
+{% if rfc.discussions|length > 0 %}
+<li><strong>Discussions:</strong> {% for discussion in rfc.discussions %}<a href="{{ discussion }}">{{ loop.index }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
+{% endif %}
 
-&lt;li&gt;&lt;strong&gt;Target:&lt;/strong&gt; {{ rfc.targetPhpVersion }}&gt;
-&lt;li&gt;&lt;strong&gt;Status:&lt;/strong&gt; {% if rfc.status == "rejected" %}Rejected{% else %}Accepted{% endif %}&gt;
+>
 
-&lt;h4&gt;;Votes&lt;/h4&gt;
-&lt;ul&gt;
+<li><strong>Target:</strong> {{ rfc.targetPhpVersion }}<li>
+<li><strong>Status:</strong> {% if rfc.rejected %}Rejected{% else %}Accepted{% endif %}<li>
+
+<h4>Votes</h4>
+<ul>
 {% for vote in rfc.votes %}
-&lt;li&gt; {{ vote.question }} {% for answer,count in vote.currentVotes %}{{ count }} {{ answer }}{% if not loop.last %}, {% endif %}{% endfor %}
-&lt;/li&gt;
+<li> {{ vote.question }} {% for answer,count in vote.currentVotes %}{{ count }} {{ answer }}{% if not loop.last %}, {% endif %}{% endfor %}
+</li>
 {% endfor %}
+
+<p>greetings,<br />Benjamin</p>
+{% endautoescape %}
 
     </textarea>
 
