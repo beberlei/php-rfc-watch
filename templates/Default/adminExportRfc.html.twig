@@ -11,14 +11,13 @@
 
 <ul>
 <li><strong>RFC:</strong> <a href="{{ rfc.url }}">{{ rfc.title }}</a></li>
+<li><strong>Target:</strong> {{ rfc.targetPhpVersion }}<li>
+<li><strong>Status:</strong> {% if rfc.rejected %}Rejected{% else %}Accepted{% endif %}<li>
 {% if rfc.discussions|length > 0 %}
 <li><strong>Discussions:</strong> {% for discussion in rfc.discussions %}<a href="{{ discussion }}">{{ loop.index }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
 {% endif %}
 
->
-
-<li><strong>Target:</strong> {{ rfc.targetPhpVersion }}<li>
-<li><strong>Status:</strong> {% if rfc.rejected %}Rejected{% else %}Accepted{% endif %}<li>
+</ul>
 
 <h4>Votes</h4>
 <ul>
