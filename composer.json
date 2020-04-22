@@ -1,4 +1,5 @@
 {
+    "name": "beberlei/phprfcwatch",
     "require": {
         "symfony/flex": "^1.0",
         "sensio/framework-extra-bundle": "^5.1",
