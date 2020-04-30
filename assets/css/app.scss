@@ -9,3 +9,11 @@
   page-break-before: always; /* CSS 2.1 syntax */
   break-before: always;  /* New syntax */
 }
+
+.rfc-list-header > .rfc-anchor {
+  display: none;
+}
+
+.rfc-list-header:hover > .rfc-anchor {
+  display: inline;
+}
