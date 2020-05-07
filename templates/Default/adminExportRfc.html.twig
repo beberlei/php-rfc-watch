@@ -11,8 +11,8 @@
 
 <ul>
 <li><strong>RFC:</strong> <a href="{{ rfc.url }}">{{ rfc.title }}</a></li>
-<li><strong>Target:</strong> {{ rfc.targetPhpVersion }}<li>
-<li><strong>Status:</strong> {% if rfc.rejected %}Rejected{% else %}Accepted{% endif %}<li>
+<li><strong>Target:</strong> {{ rfc.targetPhpVersion }}</li>
+<li><strong>Status:</strong> {% if rfc.rejected %}Rejected{% else %}Accepted{% endif %}</li>
 {% if rfc.discussions|length > 0 %}
 <li><strong>Discussions:</strong> {% for discussion in rfc.discussions %}<a href="{{ discussion }}">{{ loop.index }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
 {% endif %}
@@ -25,6 +25,8 @@
 <li> {{ vote.question }} {% for answer,count in vote.currentVotes %}{{ count }} {{ answer }}{% if not loop.last %}, {% endif %}{% endfor %}
 </li>
 {% endfor %}
+
+<p>Let me know what you think about this vote or the newsletter in general by just replying to this e-mail.</p>
 
 <p>greetings,<br />Benjamin</p>
 {% endautoescape %}
