@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,6 +29,9 @@ class RfcType extends AbstractType
             ->add('discussions', TextType::class, ['required' => false])
             ->add('rejected', CheckboxType::class, ['required' => false])
             ->add('status', ChoiceType::class, ['choices' => [Rfc::OPEN => Rfc::OPEN, Rfc::CLOSE => Rfc::CLOSE]])
+            ->add('votes', CollectionType::class, [
+                'entry_type' => VoteType::class,
+            ])
             ->add('submit', SubmitType::class)
         ;
 

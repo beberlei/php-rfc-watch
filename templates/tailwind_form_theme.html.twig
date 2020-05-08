@@ -17,8 +17,9 @@
            id="{{ id}}"
            name={{ full_name }}
            class="{{ block('input_class') }}"
-           {% if value is not empty %}value="{{ value }}" {% endif %}
-           {% if required is defined %}required {% endif %}/>
+            {{ block('widget_attributes') }}
+            {% if value is not empty %}value="{{ value }}" {% endif %}
+    />
 {%- endblock form_widget_simple -%}
 
 {% block form_label -%}

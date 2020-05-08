@@ -8,6 +8,12 @@
             <div class="rounded shadow bg-white p-4">
                 {% form_theme form 'tailwind_form_theme.html.twig' %}
                 {{ form(form) }}
+
+                <ul>
+                {% for vote in rfc.votes %}
+                    <li>{{ vote.question }} {% if not vote.hide %}[Hide]{% endif %}</li>
+                {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

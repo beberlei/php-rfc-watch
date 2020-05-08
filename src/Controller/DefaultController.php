@@ -101,7 +101,7 @@ class DefaultController extends AbstractController
                 }
 
                 return $data;
-            }, $rfc->votes->toArray());
+            }, $rfc->votes->filter(function (Vote $vote) { return !$vote->hide; })->toArray());
 
             $data[] = [
                 'id' => $rfc->id,

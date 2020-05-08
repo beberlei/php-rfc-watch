@@ -48,4 +48,10 @@ class Vote
      * @var int
      */
     public $passThreshold = 66;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @var bool
+     */
+    public $hide = false;
 }
