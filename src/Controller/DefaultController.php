@@ -108,8 +108,7 @@ class DefaultController extends AbstractController
                 return $data;
             }, $rfc->votes->filter(function (Vote $vote) { return !$vote->hide; })->toArray());
 
-            $yourVote = $githubUserId ? $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : null;
-            $yourVote = ($yourVote !== null) ? (int) $yourVote : null;
+            $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
 
             $data[] = [
                 'id' => $rfc->id,
@@ -122,7 +121,7 @@ class DefaultController extends AbstractController
                 'rejected' => $rfc->rejected,
                 'communityVote' => [
                     'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
-                    'down' => $this->redis->zcount('rfc/' . $rfc->id, 0, 0),
+                    'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
                     'you' => $yourVote,
                 ]
             ];
@@ -157,16 +156,15 @@ class DefaultController extends AbstractController
         $githubUserId = $session->get('github_user_id');
 
         if ($rfc && $githubUserId) {
-            $this->redis->zadd('rfc/' . $rfc->id, [$githubUserId => $payload['choice'] ? 1 : 0]);
+            $this->redis->zadd('rfc/' . $rfc->id, [$githubUserId => $payload['choice']]);
         }
 
-        $yourVote = $githubUserId ? $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : null;
-        $yourVote = ($yourVote !== null) ? (int) $yourVote : null;
+        $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
 
         return new JsonResponse([
             'communityVote' => [
                 'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
-                'down' => $this->redis->zcount('rfc/' . $rfc->id, 0, 0),
+                'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
                 'you' => $yourVote,
             ]
         ]);
