@@ -107,9 +107,13 @@ class RfcDiscussions extends React.Component {
 class RfcCommunityVote extends React.Component {
     constructor() {
         super();
-        this.state = {up: 0, down: 0}
+        this.state = {voted: false, communityVote: {}}
     }
-    vote(choice) {
+    vote(choice, loggedIn) {
+        if (!loggedIn) {
+            return;
+        }
+
         fetch('/vote', {
             method: 'POST',
             body: JSON.stringify({
@@ -120,37 +124,42 @@ class RfcCommunityVote extends React.Component {
             .then(response => response.json())
             .then(data => this.setState({
                 voted: true,
-                up: data.communityVote.up,
-                down: data.communityVote.down
+                communityVote: data.communityVote,
             }));
     }
     componentDidUpdate(prevProps) {
         if (this.props.rfc.communityVote.up !== prevProps.rfc.communityVote.up ||
             this.props.rfc.communityVote.down !== prevProps.rfc.communityVote.down) {
-            this.setState({voted: false, up: 0, down: 0});
+            this.setState({voted: false, communityVote: {}});
         }
     }
     render() {
-        return <div className="text-right">
+        const communityVote = this.state.voted ? this.state.communityVote : this.props.rfc.communityVote
+
+        return <AppContext.Consumer>
+            {ctx => <div className="text-right">
+                {!ctx.logged_in ? <a className="underline mr-4 text-sm" href="/login">Login with Github for Community Voting</a> : null}
+
             <span className="relative z-0 inline-flex shadow-sm">
-                <button type="button" onClick={() => this.vote(true)}
+                <button type="button" onClick={() => this.vote(true, ctx.logged_in)} title={!ctx.logged_in ? "Login required" : ""}
                         className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150">
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className={"h-5 w-5"} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                       d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
                     </svg>
-                    {this.state.voted ? this.state.up : this.props.rfc.communityVote.up}
+                    <span className={communityVote.you === 1 ? 'font-bold' : null}>{communityVote.up}</span>
                 </button>
-                <button type="button" onClick={() => this.vote(false)}
+                <button type="button" onClick={() => this.vote(false, ctx.logged_in)} title={!ctx.logged_in ? "Login required" : ""}
                         className="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150">
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className={"h-5 w-5"} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                       d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"/>
                     </svg>
-                    {this.state.voted ? this.state.down : this.props.rfc.communityVote.down}
+                    <span className={communityVote.you === 0 ? 'font-bold' : null}>{communityVote.down}</span>
                 </button>
             </span>
-        </div>
+        </div>}
+        </AppContext.Consumer>
     }
 }
 

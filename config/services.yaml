@@ -31,3 +31,5 @@ services:
         arguments:
             - '%env(GITHUB_CLIENT_ID)%'
             - '%env(GITHUB_CLIENT_SECRET)%'
+
+    Predis\Client: ~

@@ -20,10 +20,12 @@ use Doctrine\ORM\EntityManagerInterface;
 class DefaultController extends AbstractController
 {
     private $entityManager;
+    private $redis;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, Client $redis)
     {
         $this->entityManager = $entityManager;
+        $this->redis = $redis;
     }
 
     /**
@@ -72,8 +74,9 @@ class DefaultController extends AbstractController
      */
     public function dataAction(Request $request)
     {
+        $githubUserId = $request->getSession()->get('github_user_id');
+
         $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
-        $redis = new Client();
 
         $rfcs = array_reverse($rfcRepository->findBy([], ['targetPhpVersion' => 'ASC']));
 
@@ -105,6 +108,9 @@ class DefaultController extends AbstractController
                 return $data;
             }, $rfc->votes->filter(function (Vote $vote) { return !$vote->hide; })->toArray());
 
+            $yourVote = $githubUserId ? $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : null;
+            $yourVote = ($yourVote !== null) ? (int) $yourVote : null;
+
             $data[] = [
                 'id' => $rfc->id,
                 'title' => $rfc->title,
@@ -115,8 +121,9 @@ class DefaultController extends AbstractController
                 'questions' => array_values($questions),
                 'rejected' => $rfc->rejected,
                 'communityVote' => [
-                    'up' => $redis->zcount('rfc/' . $rfc->id, 1, 1),
-                    'down' => $redis->zcount('rfc/' . $rfc->id, 0, 0)
+                    'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
+                    'down' => $this->redis->zcount('rfc/' . $rfc->id, 0, 0),
+                    'you' => $yourVote,
                 ]
             ];
         }
@@ -150,14 +157,17 @@ class DefaultController extends AbstractController
         $githubUserId = $session->get('github_user_id');
 
         if ($rfc && $githubUserId) {
-            $redis = new Client();
-            $redis->zadd('rfc/' . $rfc->id, [$githubUserId => $payload['choice'] ? 1 : 0]);
+            $this->redis->zadd('rfc/' . $rfc->id, [$githubUserId => $payload['choice'] ? 1 : 0]);
         }
+
+        $yourVote = $githubUserId ? $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : null;
+        $yourVote = ($yourVote !== null) ? (int) $yourVote : null;
 
         return new JsonResponse([
             'communityVote' => [
-                'up' => $redis->zcount('rfc/' . $rfc->id, 1, 1),
-                'down' => $redis->zcount('rfc/' . $rfc->id, 0, 0)
+                'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
+                'down' => $this->redis->zcount('rfc/' . $rfc->id, 0, 0),
+                'you' => $yourVote,
             ]
         ]);
     }
