@@ -5,24 +5,27 @@ namespace App\Controller;
 use App\Entity\Rfc;
 use App\Entity\Vote;
 use App\Form\RfcType;
+use Predis\Client;
 use QafooLabs\MVC\FormRequest;
 use QafooLabs\MVC\RedirectRoute;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use App\Entity\RequestForComment;
 use Zend\Feed\Writer\Feed;
 use Doctrine\ORM\EntityManagerInterface;
 
 class DefaultController extends AbstractController
 {
     private $entityManager;
+    private $redis;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, Client $redis)
     {
         $this->entityManager = $entityManager;
+        $this->redis = $redis;
     }
 
     /**
@@ -69,8 +72,10 @@ class DefaultController extends AbstractController
     /**
      * @Route("/data.json", name="data")
      */
-    public function dataAction()
+    public function dataAction(Request $request)
     {
+        $githubUserId = $request->getSession()->get('github_user_id');
+
         $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
 
         $rfcs = array_reverse($rfcRepository->findBy([], ['targetPhpVersion' => 'ASC']));
@@ -103,6 +108,9 @@ class DefaultController extends AbstractController
                 return $data;
             }, $rfc->votes->filter(function (Vote $vote) { return !$vote->hide; })->toArray());
 
+            $yourVote = $githubUserId ? $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : null;
+            $yourVote = ($yourVote !== null) ? (int) $yourVote : null;
+
             $data[] = [
                 'id' => $rfc->id,
                 'title' => $rfc->title,
@@ -112,10 +120,15 @@ class DefaultController extends AbstractController
                 'discussions' => $rfc->discussions,
                 'questions' => array_values($questions),
                 'rejected' => $rfc->rejected,
+                'communityVote' => [
+                    'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
+                    'down' => $this->redis->zcount('rfc/' . $rfc->id, 0, 0),
+                    'you' => $yourVote,
+                ]
             ];
         }
 
-        $result = [];
+        $result = ['logged_in' => $request->getSession()->has('github_user_id')];
         $result['rejected'] = array_values(array_filter($data, function ($item) { return $item['rejected']; }));
         $result['active'] = array_values(array_filter($data, function ($item) { return $item['status'] === 'open' && !$item['rejected']; }));
         $others = array_values(array_filter($data, function ($item) { return $item['status'] !== 'open' && !$item['rejected']; }));
@@ -130,6 +143,33 @@ class DefaultController extends AbstractController
         }
 
         return new JsonResponse($result);
+    }
+
+    /**
+     * @Route("/vote")
+     */
+    public function voteAction(Request $request)
+    {
+        $session = $request->getSession();
+        $payload = json_decode($request->getContent(), true);
+
+        $rfc = $this->entityManager->find(Rfc::class, $payload['id']);
+        $githubUserId = $session->get('github_user_id');
+
+        if ($rfc && $githubUserId) {
+            $this->redis->zadd('rfc/' . $rfc->id, [$githubUserId => $payload['choice'] ? 1 : 0]);
+        }
+
+        $yourVote = $githubUserId ? $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : null;
+        $yourVote = ($yourVote !== null) ? (int) $yourVote : null;
+
+        return new JsonResponse([
+            'communityVote' => [
+                'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
+                'down' => $this->redis->zcount('rfc/' . $rfc->id, 0, 0),
+                'you' => $yourVote,
+            ]
+        ]);
     }
 
     /**

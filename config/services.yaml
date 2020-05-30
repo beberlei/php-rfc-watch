@@ -26,3 +26,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Controller\GithubController:
+        tags: ['controller.service_arguments']
+        arguments:
+            - '%env(GITHUB_CLIENT_ID)%'
+            - '%env(GITHUB_CLIENT_SECRET)%'
+
+    Predis\Client: ~
