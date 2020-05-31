@@ -92,7 +92,7 @@ class DefaultController extends AbstractController
                 foreach ($vote->currentVotes as $option => $count) {
                     $data['results'][] = [
                         'votes' => $count,
-                        'share' => $count / $total,
+                        'share' => $total > 0 ? $count / $total : 0,
                         'option' => $option,
                     ];
 
