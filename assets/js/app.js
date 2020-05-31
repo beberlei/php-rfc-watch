@@ -166,9 +166,9 @@ class TailwindButton extends React.Component {
     render() {
         let classes = "relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium"
         if (!this.props.disabled) {
-            classes = classes + "text-gray-300 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
+            classes = classes + " text-gray-300 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
         } else {
-            classes = classes + "text-gray-500"
+            classes = classes + " text-gray-500"
         }
 
         return <button type="button" onClick={(ev) => this.props.onClick(ev)} title={this.props.title}
