@@ -5,21 +5,16 @@ namespace App\Model;
 use App\Entity\Rfc;
 use App\Repository\RfcRepository;
 use Symfony\Component\CssSelector\CssSelectorConverter;
-use Symfony\Component\HttpClient\Exception\TransportException;
-use Symfony\Component\Mercure\PublisherInterface;
-use Symfony\Component\Mercure\Update;
 
 class Synchronization
 {
     private $rfcRepository;
     private $rfcFetcher;
-    private $publisher;
 
-    public function __construct(RfcRepository $rfcRepository, RfcDomFetcher $rfcFetcher, MercurePublisher $publisher)
+    public function __construct(RfcRepository $rfcRepository, RfcDomFetcher $rfcFetcher)
     {
         $this->rfcRepository = $rfcRepository;
         $this->rfcFetcher = $rfcFetcher;
-        $this->publisher = $publisher;
     }
 
     public function getRfcUrlsInVoting()
@@ -64,14 +59,12 @@ class Synchronization
 
     private function synchronizeRfc(string $rfcUrl, ?string $targetPhpVersion = null) : Rfc
     {
-        $updated = false;
         $matches = [];
         $rfc = $this->rfcRepository->findOneByUrl($rfcUrl);
 
         if (!$rfc) {
             $rfc = new Rfc();
             $rfc->url = $rfcUrl;
-            $updated = true;
         }
 
         $dom = $this->rfcFetcher->getRfcDom($rfcUrl);
@@ -173,10 +166,6 @@ class Synchronization
         }
 
         $this->rfcRepository->persist($rfc);
-
-        if ($updated) {
-            $this->publisher->publish('rfcs', ['rfc' => $rfc->id]);
-        }
 
         return $rfc;
     }

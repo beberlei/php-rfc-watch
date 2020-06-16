@@ -33,3 +33,9 @@ services:
             - '%env(GITHUB_CLIENT_SECRET)%'
 
     Predis\Client: ~
+
+    App\Model\UpdatedRfcListener:
+        tags:
+            - name: 'doctrine.orm.entity_listener'
+              event: 'postUpdate'
+              entity: 'App\Entity\Rfc'
