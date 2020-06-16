@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Rfc;
 use App\Entity\Vote;
 use App\Form\RfcType;
+use App\Model\MercurePublisher;
 use Predis\Client;
 use QafooLabs\MVC\FormRequest;
 use QafooLabs\MVC\RedirectRoute;
@@ -21,11 +22,13 @@ class DefaultController extends AbstractController
 {
     private $entityManager;
     private $redis;
+    private $mercurePublisher;
 
-    public function __construct(EntityManagerInterface $entityManager, Client $redis)
+    public function __construct(EntityManagerInterface $entityManager, Client $redis, MercurePublisher $mercurePublisher)
     {
         $this->entityManager = $entityManager;
         $this->redis = $redis;
+        $this->mercurePublisher = $mercurePublisher;
     }
 
     /**
@@ -160,6 +163,8 @@ class DefaultController extends AbstractController
         }
 
         $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
+
+        $this->mercurePublisher->publish('vote', ['rfc' => $rfc->id]);
 
         return new JsonResponse([
             'communityVote' => [

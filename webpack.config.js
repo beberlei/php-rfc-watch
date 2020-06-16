@@ -11,6 +11,11 @@ Encore
     .enableReactPreset()
     .enableSassLoader()
     .enablePostCssLoader()
+    .addExternals({
+        Config: JSON.stringify({
+            mercureUrl: Encore.isProduction() ? 'https://php-rfc-watch.beberlei.de/mercure' : 'http://127.0.0.1:3000'
+        }),
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

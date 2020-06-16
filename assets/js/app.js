@@ -2,6 +2,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Config from 'Config'
 import _ from 'underscore'
 
 const AppContext = React.createContext({logged_in: false});
@@ -230,6 +231,7 @@ class RfcWatch extends React.Component {
     constructor(props) {
         super(props);
 
+        this.eventSource = null
         this.state = {
             loading: true,
             data: [],
@@ -244,7 +246,15 @@ class RfcWatch extends React.Component {
 
     componentDidMount() {
         this.fetchData()
-        setInterval(() => { this.fetchData() }, 60000);
+
+        this.eventSource = new EventSource(
+            Config.mercureUrl + '/.well-known/mercure?topic='  + encodeURIComponent('*'),
+            {withCredentials: true}
+        );
+
+        this.eventSource.onmessage = event => {
+            this.fetchData()
+        }
     }
 
     render () {
