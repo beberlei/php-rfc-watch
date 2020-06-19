@@ -12,6 +12,7 @@
 /bin/
 /composer.phar
 /node_modules
+updates.db
 
 ###> symfony/framework-bundle ###
 /.env

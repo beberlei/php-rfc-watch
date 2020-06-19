@@ -5882,6 +5882,11 @@ readdirp@^2.2.1:
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
 
+reconnecting-eventsource@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/reconnecting-eventsource/-/reconnecting-eventsource-1.0.4.tgz#3261cc1e800fcb500607514d641bdb7c1d01b36b"
+  integrity sha512-rW6Q85xy8QjgVtX0MwiwKCZMPLNq1oK4xjthYg2d5FlXLHcFBOU3eFiLW/OxzSmBkff2oaV0BegpAjRs5zTlOQ==
+
 redent@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"

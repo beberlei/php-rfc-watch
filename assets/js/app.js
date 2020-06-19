@@ -4,6 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Config from 'Config'
 import _ from 'underscore'
+import ReconnectingEventSource from "reconnecting-eventsource";
 
 const AppContext = React.createContext({logged_in: false});
 
@@ -247,7 +248,7 @@ class RfcWatch extends React.Component {
     componentDidMount() {
         this.fetchData()
 
-        this.eventSource = new EventSource(
+        this.eventSource = new ReconnectingEventSource(
             Config.mercureUrl + '/.well-known/mercure?topic='  + encodeURIComponent('*'),
             {withCredentials: true}
         );
