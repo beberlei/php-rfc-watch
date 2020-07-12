@@ -274,11 +274,11 @@ class RfcWatch extends React.Component {
             <AppContext.Provider value={{logged_in: this.state.data.logged_in}}>
                 <PageVisibility onChange={this.handlePageVisibility}>
                     <RfcList rfcs={this.state.data.active} title="Currently Active RFCs"/>
-                    {Object.keys(this.state.data.others).map( (version) => {
-                        return <RfcList key={version} rfcs={this.state.data.others[version]} title={"Accepted RFCs for PHP " + version} />
-                    })}
-                    <RfcList rfcs={this.state.data.rejected} title="Rejected RFCs"/>
                 </PageVisibility>
+                {Object.keys(this.state.data.others).map( (version) => {
+                    return <RfcList key={version} rfcs={this.state.data.others[version]} title={"Accepted RFCs for PHP " + version} />
+                })}
+                <RfcList rfcs={this.state.data.rejected} title="Rejected RFCs"/>
             </AppContext.Provider>
         </div>
     }
