@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 import Config from 'Config'
 import _ from 'underscore'
 import ReconnectingEventSource from "reconnecting-eventsource";
+import PageVisibility from 'react-page-visibility';
 
 const AppContext = React.createContext({logged_in: false});
 
@@ -239,14 +240,20 @@ class RfcWatch extends React.Component {
         };
     }
 
-    fetchData () {
-        fetch('/data.json')
+    fetchData (viaEventStream) {
+        fetch('/data.json?es=' + viaEventStream)
             .then(response => response.json())
             .then(data => this.setState({ data: data, loading: false }));
     }
 
+    handleVisibilityChange(isVisible) {
+        if (isVisible) {
+            this.fetchData(0);
+        }
+    }
+
     componentDidMount() {
-        this.fetchData()
+        this.fetchData(0)
 
         this.eventSource = new ReconnectingEventSource(
             Config.mercureUrl + '/.well-known/mercure?topic='  + encodeURIComponent('*'),
@@ -254,7 +261,7 @@ class RfcWatch extends React.Component {
         );
 
         this.eventSource.onmessage = event => {
-            this.fetchData()
+            this.fetchData(1)
         }
     }
 
@@ -265,11 +272,13 @@ class RfcWatch extends React.Component {
 
         return <div>
             <AppContext.Provider value={{logged_in: this.state.data.logged_in}}>
-                <RfcList rfcs={this.state.data.active} title="Currently Active RFCs"/>
-                {Object.keys(this.state.data.others).map( (version) => {
-                    return <RfcList key={version} rfcs={this.state.data.others[version]} title={"Accepted RFCs for PHP " + version} />
-                })}
-                <RfcList rfcs={this.state.data.rejected} title="Rejected RFCs"/>
+                <PageVisibility onChange={this.handlePageVisibility}>
+                    <RfcList rfcs={this.state.data.active} title="Currently Active RFCs"/>
+                    {Object.keys(this.state.data.others).map( (version) => {
+                        return <RfcList key={version} rfcs={this.state.data.others[version]} title={"Accepted RFCs for PHP " + version} />
+                    })}
+                    <RfcList rfcs={this.state.data.rejected} title="Rejected RFCs"/>
+                </PageVisibility>
             </AppContext.Provider>
         </div>
     }
