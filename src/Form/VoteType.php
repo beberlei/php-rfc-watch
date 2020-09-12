@@ -14,7 +14,8 @@ class VoteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('question', TextType::class, ['disabled' => true])
+        $builder
+            ->add('question', TextType::class, ['disabled' => true])
             ->add('hide', CheckboxType::class, ['required' => false])
         ;
     }

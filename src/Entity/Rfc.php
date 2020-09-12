@@ -96,4 +96,9 @@ class Rfc
 
         return $this->votes[$voteId];
     }
+
+    public function getVoteList() : array
+    {
+        return array_values($this->votes->toArray());
+    }
 }
