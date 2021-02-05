@@ -22,7 +22,7 @@ class RfcType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $versions = ['8.0', '7.4', '7.3', '7.2', '7.1', '7.0', '5.6', '5.5', '5.4'];
+        $versions = ['8.2', '8.1', '8.0', '7.4', '7.3', '7.2', '7.1', '7.0', '5.6', '5.5', '5.4'];
 
         $builder
             ->add('targetPhpVersion', ChoiceType::class, ['choices' => array_combine($versions, $versions)])
