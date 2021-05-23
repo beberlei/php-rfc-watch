@@ -22,7 +22,7 @@
         "symfony/css-selector": "^4.2",
         "zendframework/zend-feed": "^2.10",
         "phake/phake": "^3.1",
-        "ocramius/package-versions": "1.7",
+        "composer/package-versions-deprecated": "^1.11",
         "predis/predis": "^1.1",
         "symfony/mercure-bundle": "^0.2.4"
     },
