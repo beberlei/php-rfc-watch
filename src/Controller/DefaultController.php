@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Rfc;
 use App\Entity\Vote;
 use App\Form\RfcType;
 use App\Model\MercurePublisher;
+use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use QafooLabs\MVC\FormRequest;
 use QafooLabs\MVC\RedirectRoute;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Zend\Feed\Writer\Feed;
-use Doctrine\ORM\EntityManagerInterface;
 
 class DefaultController extends AbstractController
 {
@@ -54,7 +56,7 @@ class DefaultController extends AbstractController
      */
     public function adminEditRfcAction(Rfc $rfc, FormRequest $request)
     {
-        if (!$request->handle(RfcType::class, $rfc)) {
+        if (! $request->handle(RfcType::class, $rfc)) {
             return ['rfc' => $rfc, 'form' => $request->createFormView()];
         }
 
@@ -86,7 +88,7 @@ class DefaultController extends AbstractController
         foreach ($rfcs as $rfc) {
             assert($rfc instanceof Rfc);
 
-            $questions = array_map(function (Vote $vote) {
+            $questions = array_map(static function (Vote $vote) {
                 $data = ['question' => $vote->question, 'results' => [], 'hasYes' => false, 'passing' => false];
 
                 $total = array_sum($vote->currentVotes);
@@ -98,18 +100,22 @@ class DefaultController extends AbstractController
                         'option' => $option,
                     ];
 
-                    if ($option === "Yes") {
-                        $data['hasYes'] = true;
-
-                        if ($count / $total >= $vote->passThreshold / 100) {
-                            $data['passing'] = true;
-                        }
+                    if ($option !== 'Yes') {
+                        continue;
                     }
+
+                    $data['hasYes'] = true;
+
+                    if ($count / $total < $vote->passThreshold / 100) {
+                        continue;
+                    }
+
+                    $data['passing'] = true;
                 }
 
                 return $data;
-            }, $rfc->votes->filter(function (Vote $vote) {
-                return !$vote->hide;
+            }, $rfc->votes->filter(static function (Vote $vote) {
+                return ! $vote->hide;
             })->toArray());
 
             $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
@@ -127,27 +133,28 @@ class DefaultController extends AbstractController
                     'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
                     'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
                     'you' => $yourVote,
-                ]
+                ],
             ];
         }
 
         $result = ['logged_in' => $request->getSession()->has('github_user_id')];
-        $result['rejected'] = array_values(array_filter($data, function ($item) {
+        $result['rejected'] = array_values(array_filter($data, static function ($item) {
             return $item['rejected'];
         }));
-        $result['active'] = array_values(array_filter($data, function ($item) {
-            return $item['status'] === 'open' && !$item['rejected'];
+        $result['active'] = array_values(array_filter($data, static function ($item) {
+            return $item['status'] === 'open' && ! $item['rejected'];
         }));
-        $others = array_values(array_filter($data, function ($item) {
-            return $item['status'] !== 'open' && !$item['rejected'];
+        $others = array_values(array_filter($data, static function ($item) {
+            return $item['status'] !== 'open' && ! $item['rejected'];
         }));
 
         $result['others'] = ['unknown' => []];
 
         foreach ($others as $other) {
-            if (!isset($result['others'][$other['targetPhpVersion']])) {
+            if (! isset($result['others'][$other['targetPhpVersion']])) {
                 $result['others'][$other['targetPhpVersion']] = [];
             }
+
             $result['others'][$other['targetPhpVersion']][] = $other;
         }
 
@@ -178,7 +185,7 @@ class DefaultController extends AbstractController
                 'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
                 'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
                 'you' => $yourVote,
-            ]
+            ],
         ]);
     }
 
@@ -224,7 +231,7 @@ class DefaultController extends AbstractController
         $rfcs = $rfcRepository->findBy(['status' => 'close'], ['id' => 'DESC'], 10);
 
         $feed = new Feed();
-        $feed->setTitle("PHP RFC Watch");
+        $feed->setTitle('PHP RFC Watch');
         $feed->setLink('https://php-rfc-watch.beberlei.de');
         $feed->setFeedLink('https://php-rfc-watch.beberlei.de/atom.xml', 'atom');
         $feed->addAuthor([
@@ -238,13 +245,13 @@ class DefaultController extends AbstractController
         foreach ($rfcs as $rfc) {
             assert($rfc instanceof Rfc);
 
-            $content = "URL: " . $rfc->url . "\n\n";
+            $content = 'URL: ' . $rfc->url . "\n\n";
 
             if (count($rfc->discussions) > 0) {
                 $content .= "## Discussions\n\n";
 
                 foreach ($rfc->discussions as $discussion) {
-                    $content .= "- " . $discussion . "\n";
+                    $content .= '- ' . $discussion . "\n";
                 }
 
                 $content .= "\n";
@@ -264,23 +271,23 @@ class DefaultController extends AbstractController
                 $content .= "\n";
             }
 
-            if (!$modifiedDateSet) {
-                $feed->setDateModified((int)$rfc->created->format('U'));
+            if (! $modifiedDateSet) {
+                $feed->setDateModified((int) $rfc->created->format('U'));
                 $modifiedDateSet = true;
             }
 
             $entry = $feed->createEntry();
             $entry->setTitle($rfc->title);
             $entry->setLink($rfc->url);
-            $entry->setDateModified((int)$rfc->created->format('U'));
-            $entry->setDateCreated((int)$rfc->created->format('U'));
+            $entry->setDateModified((int) $rfc->created->format('U'));
+            $entry->setDateCreated((int) $rfc->created->format('U'));
             $entry->setDescription(strip_tags($content));
             $entry->setContent(strip_tags($content));
 
             $feed->addEntry($entry);
         }
 
-        if (!$modifiedDateSet) {
+        if (! $modifiedDateSet) {
             $feed->setDateModified(time());
         }
 

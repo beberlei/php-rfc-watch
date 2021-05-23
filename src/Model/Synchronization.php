@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use App\Entity\Rfc;
@@ -25,19 +27,19 @@ class Synchronization
         $rfcs       = [];
 
         foreach ($xPath->query($converter->toXPath('#in_voting_phase + .level2 .li')) as $listing) {
-            /** @var \DOMNode $listing */
-            /** @var \DOMElement $link */
-            $link   = $xPath->query($converter->toXPath('a'), $listing)->item(0);
+            \assert($listing instanceof \DOMNode);
+            $link = $xPath->query($converter->toXPath('a'), $listing)->item(0);
+            \assert($link instanceof \DOMElement);
             $rfcs[] = $link->getAttribute('href');
         }
 
-        $currentInVotingUrls = array_map(function ($link) {
+        $currentInVotingUrls = array_map(static function ($link) {
             return 'https://wiki.php.net' . $link;
         }, $rfcs);
 
         $ourActiveRfcs = $this->rfcRepository->findActiveRfcs();
 
-        $activeRfcUrls = array_map(function (Rfc $rfc) {
+        $activeRfcUrls = array_map(static function (Rfc $rfc) {
             return $rfc->url;
         }, $ourActiveRfcs);
 
@@ -62,7 +64,7 @@ class Synchronization
         $matches = [];
         $rfc = $this->rfcRepository->findOneByUrl($rfcUrl);
 
-        if (!$rfc) {
+        if (! $rfc) {
             $rfc = new Rfc();
             $rfc->url = $rfcUrl;
         }
@@ -83,12 +85,14 @@ class Synchronization
             ];
 
             // set default to the one passed potentially via commandline flag
-            $rfc->targetPhpVersion = (string)$targetPhpVersion;
+            $rfc->targetPhpVersion = (string) $targetPhpVersion;
 
             foreach ($targetVersionRegexps as $targetVersionRegexp) {
-                if (preg_match($targetVersionRegexp, $content, $matches)) {
-                    $rfc->targetPhpVersion = trim(str_replace('PHP', '', $matches[1]));
+                if (! preg_match($targetVersionRegexp, $content, $matches)) {
+                    continue;
                 }
+
+                $rfc->targetPhpVersion = trim(str_replace('PHP', '', $matches[1]));
             }
         }
 
@@ -104,9 +108,9 @@ class Synchronization
             $vote->primaryVote = $first;
             $first = false;
 
-            $options = array();
+            $options = [];
             foreach ($rows as $row) {
-                switch ((string)$row->getAttribute('class')) {
+                switch ((string) $row->getAttribute('class')) {
                     case 'row0':
                         $vote->question = trim($xpath->evaluate('string(th/text())', $row));
                         // do nothing;
@@ -115,11 +119,14 @@ class Synchronization
                     case 'row1':
                         foreach ($xpath->evaluate('td', $row) as $optionNode) {
                             $option = trim($optionNode->nodeValue);
-                            if ($option !== "Real name") {
-                                $options[] = $option;
-                                $vote->currentVotes[$option] = 0;
+                            if ($option === 'Real name') {
+                                continue;
                             }
+
+                            $options[] = $option;
+                            $vote->currentVotes[$option] = 0;
                         }
+
                         break;
 
                     default:
@@ -130,13 +137,13 @@ class Synchronization
                             break;
                         }
 
-                        if (!preg_match('(\(([^\)]+)\))', $firstColumn, $matches)) {
+                        if (! preg_match('(\(([^\)]+)\))', $firstColumn, $matches)) {
                             break;
                         }
 
                         $option = -1;
                         foreach ($xpath->evaluate('td', $row) as $optionNode) {
-                            if ($optionNode->getAttribute('style') == 'background-color:#AFA') {
+                            if ($optionNode->getAttribute('style') === 'background-color:#AFA') {
                                 $imgTitle = $xpath->evaluate('img[@title]', $optionNode);
                                 if ($imgTitle && $imgTitle->length > 0) {
                                     $time = \DateTime::createFromFormat('Y/m/d H:i', $imgTitle->item(0)->getAttribute('title'), new \DateTimeZone('UTC'));
@@ -146,10 +153,13 @@ class Synchronization
                                         $rfc->firstVote = $time;
                                     }
                                 }
+
                                 break;
                             }
+
                             $option++;
                         }
+
                         $vote->currentVotes[$options[$option]]++;
                         break;
                 }
@@ -157,12 +167,16 @@ class Synchronization
 
             $rfc->rejected = false;
 
-            if ($rfc->status == Rfc::CLOSE && $vote->primaryVote && isset($vote->currentVotes['Yes'])) {
-                $yesShare = $vote->currentVotes['Yes'] / array_sum($vote->currentVotes);
-                if ($yesShare < ($vote->passThreshold / 100)) {
-                    $rfc->rejected = true;
-                }
+            if ($rfc->status !== Rfc::CLOSE || ! $vote->primaryVote || ! isset($vote->currentVotes['Yes'])) {
+                continue;
             }
+
+            $yesShare = $vote->currentVotes['Yes'] / array_sum($vote->currentVotes);
+            if ($yesShare >= $vote->passThreshold / 100) {
+                continue;
+            }
+
+            $rfc->rejected = true;
         }
 
         $this->rfcRepository->persist($rfc);

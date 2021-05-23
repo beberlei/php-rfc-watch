@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Rfc;
@@ -24,12 +26,12 @@ class RfcOrmRepository implements RfcRepository
         return $this->entityManager->getRepository(Rfc::class)->findBy(['status' => Rfc::OPEN]);
     }
 
-    public function persist(Rfc $rfc)
+    public function persist(Rfc $rfc): void
     {
         $this->entityManager->persist($rfc);
     }
 
-    public function flush()
+    public function flush(): void
     {
         $this->entityManager->flush();
     }

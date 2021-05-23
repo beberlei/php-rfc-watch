@@ -8,7 +8,13 @@
     <arg name="colors"/>
     <arg name="extensions" value="php"/>
 
-    <rule ref="PSR12"/>
+    <rule ref="Doctrine">
+        <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName" />
+                <exclude name="SlevomatCodingStandard.Variables.UselessVariable.UselessVariable" /> <!-- this cannot be safely detected sadly -->
+                <exclude name="SlevomatCodingStandard.ControlStructures.UselessTernaryOperator.UselessTernaryOperator" /> <!-- i find this useful at time to increase clarity! -->
+                <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName" />
+                <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame" />
+    </rule>
 
     <file>bin/</file>
     <file>config/</file>

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -10,12 +12,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class GithubController
 {
-    /** @var string */
-    private $clientId;
-    /** @var string */
-    private $clientSecret;
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    private string $clientId;
+    private string $clientSecret;
+    private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(string $clientId, string $clientSecret, UrlGeneratorInterface $urlGenerator)
     {
@@ -78,7 +77,7 @@ class GithubController
             throw new AccessDeniedHttpException();
         }
 
-        $user = json_decode(($response->getContent()), true);
+        $user = json_decode($response->getContent(), true);
 
         $session->set('github_user_id', $user['id']);
         $session->remove('_github_state');

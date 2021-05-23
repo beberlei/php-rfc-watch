@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Command;
 
 use App\Model\MercurePublisher;
@@ -18,16 +20,15 @@ class PingMercureCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('php-rfc-watch:ping-mercure')
-            ->setDescription('Ping mercure to force update of all clients')
-        ;
+            ->setDescription('Ping mercure to force update of all clients');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        ($this->publisher)->publish('ping', []);
+        $this->publisher->publish('ping', []);
     }
 }

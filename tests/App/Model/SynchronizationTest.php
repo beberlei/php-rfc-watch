@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use App\Entity\Rfc;
@@ -12,7 +14,7 @@ class SynchronizationTest extends TestCase
     private $rfcFetcher;
     private $service;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->service = new Synchronization(
             $this->rfcRepository = \Phake::mock(RfcRepository::class),
@@ -20,20 +22,20 @@ class SynchronizationTest extends TestCase
         );
     }
 
-    public function testGetRfcUrlsInVoting()
+    public function testGetRfcUrlsInVoting(): void
     {
         $this->whenRfcFetcherUrlThenReturnHtmlDom('https://wiki.php.net/rfc', 'rfc_list.html');
         $rfcs = $this->service->getRfcUrlsInVoting();
 
         $this->assertEquals([
-            "https://wiki.php.net/rfc/arrow_functions_v2",
-            "https://wiki.php.net/rfc/deprecate_php_short_tags",
-            "https://wiki.php.net/rfc/deprecate-and-remove-ext-interbase",
-            "https://wiki.php.net/rfc/spread_operator_for_array",
-            ], $rfcs);
+            'https://wiki.php.net/rfc/arrow_functions_v2',
+            'https://wiki.php.net/rfc/deprecate_php_short_tags',
+            'https://wiki.php.net/rfc/deprecate-and-remove-ext-interbase',
+            'https://wiki.php.net/rfc/spread_operator_for_array',
+        ], $rfcs);
     }
 
-    public function testSynchronizeRfc()
+    public function testSynchronizeRfc(): void
     {
         $this->whenRfcFetcherUrlThenReturnHtmlDom('https://wiki.php.net/rfc/arrow_functions_v2', 'arrow_functions.html');
 
@@ -60,7 +62,7 @@ class SynchronizationTest extends TestCase
         $this->assertEquals(['Yes' => 37, 'No' => 7], $vote->currentVotes);
     }
 
-    public function whenRfcFetcherUrlThenReturnHtmlDom($url, $htmlFile)
+    public function whenRfcFetcherUrlThenReturnHtmlDom($url, $htmlFile): void
     {
         $dom = new \DOMDocument();
         @$dom->loadHTML(file_get_contents(__DIR__ . '/_fixtures/' . $htmlFile));

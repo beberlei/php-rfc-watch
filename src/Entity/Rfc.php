@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -21,63 +23,39 @@ class Rfc
      */
     public $id;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    /** @ORM\Column(type="string") */
     public $url;
 
-    /**
-     * @ORM\Column(type="string")
-     * @var string
-     */
-    public $title;
+    /** @ORM\Column(type="string") */
+    public string $title;
 
-    /**
-     * @ORM\Column(type="string")
-     * @var string
-     */
-    public $status = self::OPEN;
+    /** @ORM\Column(type="string") */
+    public string $status = self::OPEN;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
-     */
-    public $closeDate;
+    /** @ORM\Column(type="datetime", nullable=true) */
+    public ?\DateTime $closeDate;
 
-    /**
-     * @ORM\Column(type="string")
-     * @var string
-     */
-    public $targetPhpVersion = '';
+    /** @ORM\Column(type="string") */
+    public string $targetPhpVersion = '';
 
     /**
      * @ORM\Column(type="json_array")
+     *
      * @var array
      */
-    public $discussions = [];
+    public array $discussions = [];
 
-    /**
-     * @ORM\OneToMany(targetEntity="Vote", mappedBy="rfc", indexBy="voteId", cascade={"PERSIST"})
-     */
+    /** @ORM\OneToMany(targetEntity="Vote", mappedBy="rfc", indexBy="voteId", cascade={"PERSIST"}) */
     public $votes;
 
-    /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
-     */
-    public $firstVote;
+    /** @ORM\Column(type="datetime") */
+    public \DateTime $firstVote;
 
-    /**
-     * @ORM\Column(type="boolean")
-     * @var bool
-     */
-    public $rejected = false;
+    /** @ORM\Column(type="boolean") */
+    public bool $rejected = false;
 
-    /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
-     */
-    public $created;
+    /** @ORM\Column(type="datetime") */
+    public \DateTime $created;
 
     public function __construct()
     {
@@ -88,7 +66,7 @@ class Rfc
 
     public function getVoteById(string $voteId): Vote
     {
-        if (!isset($this->votes[$voteId])) {
+        if (! isset($this->votes[$voteId])) {
             $this->votes[$voteId] = new Vote();
             $this->votes[$voteId]->rfc = $this;
             $this->votes[$voteId]->voteId = $voteId;

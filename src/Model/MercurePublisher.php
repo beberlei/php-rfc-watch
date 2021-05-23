@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Symfony\Component\HttpClient\Exception\ClientException;
@@ -16,7 +18,7 @@ class MercurePublisher
         $this->publisher = $publisher;
     }
 
-    public function publish(string $topic, array $data)
+    public function publish(string $topic, array $data): void
     {
         try {
             ($this->publisher)(new Update($topic, json_encode($data)));
