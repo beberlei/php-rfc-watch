@@ -16,6 +16,8 @@
                 <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame" />
     </rule>
 
+    <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction" />
+
     <file>bin/</file>
     <file>config/</file>
     <file>public/</file>

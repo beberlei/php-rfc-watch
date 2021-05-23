@@ -33,10 +33,7 @@ class RfcType extends AbstractType
 
         $builder->get('discussions')
             ->addModelTransformer(new CallbackTransformer(
-                static function ($discussionsAsArray) {
-                    // transform the array to a string
-                    return implode(', ', $discussionsAsArray);
-                },
+                static fn ($discussionsAsArray) => implode(', ', $discussionsAsArray),
                 static function ($discussions) {
                     if ($discussions === null || strlen($discussions) === 0) {
                         return [];

@@ -33,15 +33,11 @@ class Synchronization
             $rfcs[] = $link->getAttribute('href');
         }
 
-        $currentInVotingUrls = array_map(static function ($link) {
-            return 'https://wiki.php.net' . $link;
-        }, $rfcs);
+        $currentInVotingUrls = array_map(static fn ($link) => 'https://wiki.php.net' . $link, $rfcs);
 
         $ourActiveRfcs = $this->rfcRepository->findActiveRfcs();
 
-        $activeRfcUrls = array_map(static function (Rfc $rfc) {
-            return $rfc->url;
-        }, $ourActiveRfcs);
+        $activeRfcUrls = array_map(static fn (Rfc $rfc) => $rfc->url, $ourActiveRfcs);
 
         return array_unique(array_merge($currentInVotingUrls, $activeRfcUrls));
     }

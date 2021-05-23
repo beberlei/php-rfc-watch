@@ -114,9 +114,7 @@ class DefaultController extends AbstractController
                 }
 
                 return $data;
-            }, $rfc->votes->filter(static function (Vote $vote) {
-                return ! $vote->hide;
-            })->toArray());
+            }, $rfc->votes->filter(static fn (Vote $vote) => ! $vote->hide)->toArray());
 
             $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
 
@@ -138,15 +136,9 @@ class DefaultController extends AbstractController
         }
 
         $result = ['logged_in' => $request->getSession()->has('github_user_id')];
-        $result['rejected'] = array_values(array_filter($data, static function ($item) {
-            return $item['rejected'];
-        }));
-        $result['active'] = array_values(array_filter($data, static function ($item) {
-            return $item['status'] === 'open' && ! $item['rejected'];
-        }));
-        $others = array_values(array_filter($data, static function ($item) {
-            return $item['status'] !== 'open' && ! $item['rejected'];
-        }));
+        $result['rejected'] = array_values(array_filter($data, static fn ($item) => $item['rejected']));
+        $result['active'] = array_values(array_filter($data, static fn ($item) => $item['status'] === 'open' && ! $item['rejected']));
+        $others = array_values(array_filter($data, static fn ($item) => $item['status'] !== 'open' && ! $item['rejected']));
 
         $result['others'] = ['unknown' => []];
 
