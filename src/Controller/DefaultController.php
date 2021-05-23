@@ -14,7 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 use Zend\Feed\Writer\Feed;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -102,14 +101,16 @@ class DefaultController extends AbstractController
                     if ($option === "Yes") {
                         $data['hasYes'] = true;
 
-                        if ($count / $total >= $vote->passThreshold/100) {
+                        if ($count / $total >= $vote->passThreshold / 100) {
                             $data['passing'] = true;
                         }
                     }
                 }
 
                 return $data;
-            }, $rfc->votes->filter(function (Vote $vote) { return !$vote->hide; })->toArray());
+            }, $rfc->votes->filter(function (Vote $vote) {
+                return !$vote->hide;
+            })->toArray());
 
             $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
 
@@ -131,9 +132,15 @@ class DefaultController extends AbstractController
         }
 
         $result = ['logged_in' => $request->getSession()->has('github_user_id')];
-        $result['rejected'] = array_values(array_filter($data, function ($item) { return $item['rejected']; }));
-        $result['active'] = array_values(array_filter($data, function ($item) { return $item['status'] === 'open' && !$item['rejected']; }));
-        $others = array_values(array_filter($data, function ($item) { return $item['status'] !== 'open' && !$item['rejected']; }));
+        $result['rejected'] = array_values(array_filter($data, function ($item) {
+            return $item['rejected'];
+        }));
+        $result['active'] = array_values(array_filter($data, function ($item) {
+            return $item['status'] === 'open' && !$item['rejected'];
+        }));
+        $others = array_values(array_filter($data, function ($item) {
+            return $item['status'] !== 'open' && !$item['rejected'];
+        }));
 
         $result['others'] = ['unknown' => []];
 
@@ -216,7 +223,7 @@ class DefaultController extends AbstractController
 
         $rfcs = $rfcRepository->findBy(['status' => 'close'], ['id' => 'DESC'], 10);
 
-        $feed = new Feed;
+        $feed = new Feed();
         $feed->setTitle("PHP RFC Watch");
         $feed->setLink('https://php-rfc-watch.beberlei.de');
         $feed->setFeedLink('https://php-rfc-watch.beberlei.de/atom.xml', 'atom');
@@ -234,7 +241,6 @@ class DefaultController extends AbstractController
             $content = "URL: " . $rfc->url . "\n\n";
 
             if (count($rfc->discussions) > 0) {
-
                 $content .= "## Discussions\n\n";
 
                 foreach ($rfc->discussions as $discussion) {

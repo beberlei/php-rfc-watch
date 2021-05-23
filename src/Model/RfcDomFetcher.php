@@ -14,7 +14,7 @@ class RfcDomFetcher
         $this->browser = $browser;
     }
 
-    public function getRfcDom($url) : DOMDocument
+    public function getRfcDom($url): DOMDocument
     {
         $response = $this->browser->get($url);
 

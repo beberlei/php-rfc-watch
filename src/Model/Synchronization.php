@@ -19,7 +19,7 @@ class Synchronization
 
     public function getRfcUrlsInVoting()
     {
-        $converter  = new CssSelectorConverter;
+        $converter  = new CssSelectorConverter();
         $document = $this->rfcFetcher->getRfcDom('https://wiki.php.net/rfc');
         $xPath      = new \DOMXPath($document);
         $rfcs       = [];
@@ -57,7 +57,7 @@ class Synchronization
         return $rfcs;
     }
 
-    private function synchronizeRfc(string $rfcUrl, ?string $targetPhpVersion = null) : Rfc
+    private function synchronizeRfc(string $rfcUrl, ?string $targetPhpVersion = null): Rfc
     {
         $matches = [];
         $rfc = $this->rfcRepository->findOneByUrl($rfcUrl);

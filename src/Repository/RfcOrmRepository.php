@@ -14,12 +14,12 @@ class RfcOrmRepository implements RfcRepository
         $this->entityManager = $entityManager;
     }
 
-    public function findOneByUrl(string $url) : ?Rfc
+    public function findOneByUrl(string $url): ?Rfc
     {
         return $this->entityManager->getRepository(Rfc::class)->findOneBy(['url' => $url]);
     }
 
-    public function findActiveRfcs() : array
+    public function findActiveRfcs(): array
     {
         return $this->entityManager->getRepository(Rfc::class)->findBy(['status' => Rfc::OPEN]);
     }

@@ -86,7 +86,7 @@ class Rfc
         $this->votes = new ArrayCollection();
     }
 
-    public function getVoteById(string $voteId) : Vote
+    public function getVoteById(string $voteId): Vote
     {
         if (!isset($this->votes[$voteId])) {
             $this->votes[$voteId] = new Vote();
@@ -97,7 +97,7 @@ class Rfc
         return $this->votes[$voteId];
     }
 
-    public function getVoteList() : array
+    public function getVoteList(): array
     {
         return array_values($this->votes->toArray());
     }

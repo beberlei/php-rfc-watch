@@ -31,7 +31,7 @@ class GithubController
     {
         $params = [
             'client_id' => $this->clientId,
-            'redirect_uri' => $this->urlGenerator->generate('login_check',  [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'redirect_uri' => $this->urlGenerator->generate('login_check', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'state' => base64_encode(random_bytes(64)),
         ];
 
