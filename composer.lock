@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ce4e0438e8c5e44e92945f440ddb55a",
+    "content-hash": "5b1660e85665ef89383f5c762ec2efd4",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1466,6 +1466,61 @@
             "time": "2020-02-13T22:36:52+00:00"
         },
         {
+            "name": "gyro/mvc-bundle",
+            "version": "v0.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gyro-project/mvc-bundle.git",
+                "reference": "e614f134bd8d019583fef91b888ef7e8cbf47ef0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gyro-project/mvc-bundle/zipball/e614f134bd8d019583fef91b888ef7e8cbf47ef0",
+                "reference": "e614f134bd8d019583fef91b888ef7e8cbf47ef0",
+                "shasum": ""
+            },
+            "require": {
+                "composer/package-versions-deprecated": "^1.8"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^8.2",
+                "nikic/php-parser": "^4.4",
+                "phake/phake": "^3.1.8",
+                "php": "~7.2|~8.0",
+                "phpunit/phpunit": "^8.5|^9.4",
+                "symfony/symfony": "^3.4|^4.4",
+                "twig/twig": "^1.44|^2.14|^3.1",
+                "vimeo/psalm": "4.1.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Gyro\\Bundle\\MVCBundle\\": "src/",
+                    "Gyro\\MVC\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                }
+            ],
+            "description": "Various improvements for Symfony applications",
+            "keywords": [
+                "bundle",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/gyro-project/mvc-bundle/issues",
+                "source": "https://github.com/gyro-project/mvc-bundle/tree/v0.10.1"
+            },
+            "time": "2020-12-31T16:08:23+00:00"
+        },
+        {
             "name": "jdorn/sql-formatter",
             "version": "v1.2.17",
             "source": {
@@ -2895,61 +2950,6 @@
                 "psr-3"
             ],
             "time": "2020-03-23T09:12:05+00:00"
-        },
-        {
-            "name": "qafoolabs/no-framework-bundle",
-            "version": "v3.0-alpha1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/QafooLabs/QafooLabsNoFrameworkBundle.git",
-                "reference": "08853e2751dad5b29ca8ffdc567f56784d66ab3f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/QafooLabs/QafooLabsNoFrameworkBundle/zipball/08853e2751dad5b29ca8ffdc567f56784d66ab3f",
-                "reference": "08853e2751dad5b29ca8ffdc567f56784d66ab3f",
-                "shasum": ""
-            },
-            "require-dev": {
-                "jms/serializer": "*",
-                "phake/phake": "*",
-                "php": "~7.1",
-                "phpunit/phpunit": "^6.0",
-                "sensio/framework-extra-bundle": "~3.0",
-                "symfony/form": "^3.0|^4.0",
-                "symfony/framework-bundle": "^3.0|^4.0",
-                "symfony/security": "^3.0|^4.0",
-                "symfony/templating": "^3.0|^4.0",
-                "symfony/translation": "^3.0|^4.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "QafooLabs\\Bundle\\NoFrameworkBundle\\": "src/",
-                    "QafooLabs\\MVC\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Manuel Pichler",
-                    "email": "manuel@qafoo.com"
-                },
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "benjamin@qafoo.com"
-                }
-            ],
-            "description": "Various improvements for Symfony applications",
-            "keywords": [
-                "bundle",
-                "symfony"
-            ],
-            "abandoned": true,
-            "time": "2019-02-02T13:46:11+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -9160,9 +9160,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "qafoolabs/no-framework-bundle": 15
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
