@@ -9,14 +9,14 @@ use DOMDocument;
 
 class RfcDomFetcher
 {
-    private $browser;
+    private Browser $browser;
 
     public function __construct(Browser $browser)
     {
         $this->browser = $browser;
     }
 
-    public function getRfcDom($url): DOMDocument
+    public function getRfcDom(string $url): DOMDocument
     {
         $response = $this->browser->get($url);
 

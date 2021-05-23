@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VoteType extends AbstractType
 {
+    /** @param array<string,mixed> $options */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

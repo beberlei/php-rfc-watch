@@ -26,7 +26,7 @@ class GithubController
     /**
      * @Route("/login", name="login")
      */
-    public function authorizeAction(Request $request)
+    public function authorizeAction(Request $request): RedirectResponse
     {
         $params = [
             'client_id' => $this->clientId,
@@ -42,7 +42,7 @@ class GithubController
     /**
      * @Route("/login_check", name="login_check")
      */
-    public function checkAction(Request $request)
+    public function checkAction(Request $request): RedirectResponse
     {
         $session = $request->getSession();
         $state = $session->get('_github_state');

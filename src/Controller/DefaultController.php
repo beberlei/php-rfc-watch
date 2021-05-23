@@ -21,29 +21,36 @@ use Zend\Feed\Writer\Feed;
 
 class DefaultController extends AbstractController
 {
-    private $entityManager;
-    private $redis;
-    private $mercurePublisher;
+    private EntityManagerInterface $entityManager;
+    private Client $redis;
+    private MercurePublisher $mercurePublisher;
 
-    public function __construct(EntityManagerInterface $entityManager, Client $redis, MercurePublisher $mercurePublisher)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        Client $redis,
+        MercurePublisher $mercurePublisher
+    ) {
         $this->entityManager = $entityManager;
         $this->redis = $redis;
         $this->mercurePublisher = $mercurePublisher;
     }
 
     /**
+     * @return array<string,mixed>
+     *
      * @Route("/", name="homepage")
      */
-    public function indexAction()
+    public function indexAction(): array
     {
         return [];
     }
 
     /**
+     * @return array<string,mixed>
+     *
      * @Route("/admin", name="admin")
      */
-    public function adminAction()
+    public function adminAction(): array
     {
         $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
         $rfcs = array_reverse($rfcRepository->findAll());
@@ -52,6 +59,8 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @return array<string,mixed>|RedirectRoute
+     *
      * @Route("/admin/rfc/{id}", name="admin_edit_rfc", methods={"POST", "GET"})
      */
     public function adminEditRfcAction(Rfc $rfc, FormRequest $request)
@@ -66,9 +75,11 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @return array<string,mixed>
+     *
      * @Route("/admin/rfc/{id}/export", name="admin_export_rfc", methods={"GET"})
      */
-    public function adminExportRfcAction(Rfc $rfc)
+    public function adminExportRfcAction(Rfc $rfc): array
     {
         return ['rfc' => $rfc];
     }
@@ -76,7 +87,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/data.json", name="data")
      */
-    public function dataAction(Request $request)
+    public function dataAction(Request $request): JsonResponse
     {
         $githubUserId = $request->getSession()->get('github_user_id');
 
@@ -135,10 +146,13 @@ class DefaultController extends AbstractController
             ];
         }
 
+        $activeFilter = static fn ($item) => $item['status'] === 'open' && ! $item['rejected'];
+        $othersFilter = static fn ($item) => $item['status'] !== 'open' && ! $item['rejected'];
+
         $result = ['logged_in' => $request->getSession()->has('github_user_id')];
         $result['rejected'] = array_values(array_filter($data, static fn ($item) => $item['rejected']));
-        $result['active'] = array_values(array_filter($data, static fn ($item) => $item['status'] === 'open' && ! $item['rejected']));
-        $others = array_values(array_filter($data, static fn ($item) => $item['status'] !== 'open' && ! $item['rejected']));
+        $result['active'] = array_values(array_filter($data, $activeFilter));
+        $others = array_values(array_filter($data, $othersFilter));
 
         $result['others'] = ['unknown' => []];
 
@@ -156,7 +170,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/vote")
      */
-    public function voteAction(Request $request)
+    public function voteAction(Request $request): JsonResponse
     {
         $session = $request->getSession();
         $payload = json_decode($request->getContent(), true);
@@ -182,33 +196,41 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @return array<string, mixed>
+     *
      * @Route("/notify", name="notify")
      */
-    public function newsletterAction()
+    public function newsletterAction(): array
     {
         return [];
     }
 
     /**
+     * @return array<string, mixed>
+     *
      * @Route("/optin", name="optin")
      */
-    public function optinAction()
+    public function optinAction(): array
     {
         return [];
     }
 
     /**
+     * @return array<string, mixed>
+     *
      * @Route("/confirm", name="confirm")
      */
-    public function confirmAction()
+    public function confirmAction(): array
     {
         return [];
     }
 
     /**
+     * @return array<string, mixed>
+     *
      * @Route("/unsubscribe", name="unsubscribe")
      */
-    public function unsubscribeAction()
+    public function unsubscribeAction(): array
     {
         return [];
     }
@@ -216,7 +238,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/atom.xml", name="atom")
      */
-    public function atomAction()
+    public function atomAction(): Response
     {
         $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
 
@@ -254,10 +276,10 @@ class DefaultController extends AbstractController
             foreach ($rfc->votes as $vote) {
                 assert($vote instanceof Vote);
 
-                $content .= "### {$vote->question}\n\n";
+                $content .= sprintf("### %s\n\n", $vote->question);
 
                 foreach ($vote->currentVotes as $option => $count) {
-                    $content .= "- {$option} with {$count} votes\n";
+                    $content .= sprintf("- %s with %d votes\n", $option, $count);
                 }
 
                 $content .= "\n";

@@ -11,13 +11,14 @@ use Symfony\Component\Mercure\Update;
 
 class MercurePublisher
 {
-    private $publisher;
+    private PublisherInterface $publisher;
 
     public function __construct(PublisherInterface $publisher)
     {
         $this->publisher = $publisher;
     }
 
+    /** @param array<mixed> $data */
     public function publish(string $topic, array $data): void
     {
         try {

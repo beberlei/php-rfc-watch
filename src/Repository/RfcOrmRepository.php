@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class RfcOrmRepository implements RfcRepository
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -21,6 +21,7 @@ class RfcOrmRepository implements RfcRepository
         return $this->entityManager->getRepository(Rfc::class)->findOneBy(['url' => $url]);
     }
 
+    /** @return list<Rfc> */
     public function findActiveRfcs(): array
     {
         return $this->entityManager->getRepository(Rfc::class)->findBy(['status' => Rfc::OPEN]);

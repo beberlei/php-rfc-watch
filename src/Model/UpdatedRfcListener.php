@@ -9,7 +9,7 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class UpdatedRfcListener
 {
-    private $publisher;
+    private MercurePublisher $publisher;
 
     public function __construct(MercurePublisher $publisher)
     {

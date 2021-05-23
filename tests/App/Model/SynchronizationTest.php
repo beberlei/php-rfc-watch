@@ -10,9 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 class SynchronizationTest extends TestCase
 {
-    private $rfcRepository;
-    private $rfcFetcher;
-    private $service;
+    private RfcRepository $rfcRepository;
+    private RfcDomFetcher $rfcFetcher;
+    private Synchronization $service;
 
     public function setUp(): void
     {
@@ -37,9 +37,13 @@ class SynchronizationTest extends TestCase
 
     public function testSynchronizeRfc(): void
     {
-        $this->whenRfcFetcherUrlThenReturnHtmlDom('https://wiki.php.net/rfc/arrow_functions_v2', 'arrow_functions.html');
+        $this->whenRfcFetcherUrlThenReturnHtmlDom(
+            'https://wiki.php.net/rfc/arrow_functions_v2',
+            'arrow_functions.html'
+        );
 
-        \Phake::when($this->rfcRepository)->findOneByUrl('https://wiki.php.net/rfc/arrow_functions_v2')->thenReturn(null);
+        \Phake::when($this->rfcRepository)->findOneByUrl('https://wiki.php.net/rfc/arrow_functions_v2')
+            ->thenReturn(null);
 
         $rfcs = $this->service->synchronizeRfcs(['https://wiki.php.net/rfc/arrow_functions_v2']);
 
@@ -54,7 +58,10 @@ class SynchronizationTest extends TestCase
         $this->assertEquals('open', $rfc->status);
         $this->assertEquals('7.4', $rfc->targetPhpVersion);
 
-        $this->assertTrue(isset($rfc->votes['doodle__form__add_arrow_functions_as_described_in_php_7.4']), 'Collection has key "doodle__form__add_arrow_functions_as_described_in_php_7.4"');
+        $this->assertTrue(
+            isset($rfc->votes['doodle__form__add_arrow_functions_as_described_in_php_7.4']),
+            'Collection has key "doodle__form__add_arrow_functions_as_described_in_php_7.4"'
+        );
 
         $vote = $rfc->votes['doodle__form__add_arrow_functions_as_described_in_php_7.4'];
 
@@ -62,7 +69,7 @@ class SynchronizationTest extends TestCase
         $this->assertEquals(['Yes' => 37, 'No' => 7], $vote->currentVotes);
     }
 
-    public function whenRfcFetcherUrlThenReturnHtmlDom($url, $htmlFile): void
+    public function whenRfcFetcherUrlThenReturnHtmlDom(string $url, string $htmlFile): void
     {
         $dom = new \DOMDocument();
         @$dom->loadHTML(file_get_contents(__DIR__ . '/_fixtures/' . $htmlFile));

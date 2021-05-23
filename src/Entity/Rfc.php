@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,10 +22,10 @@ class Rfc
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
      */
-    public $id;
+    public ?int $id;
 
     /** @ORM\Column(type="string") */
-    public $url;
+    public string $url;
 
     /** @ORM\Column(type="string") */
     public string $title;
@@ -41,12 +42,16 @@ class Rfc
     /**
      * @ORM\Column(type="json_array")
      *
-     * @var array
+     * @var array<string>
      */
     public array $discussions = [];
 
-    /** @ORM\OneToMany(targetEntity="Vote", mappedBy="rfc", indexBy="voteId", cascade={"PERSIST"}) */
-    public $votes;
+    /**
+     * @ORM\OneToMany(targetEntity="Vote", mappedBy="rfc", indexBy="voteId", cascade={"PERSIST"})
+     *
+     * @var Collection<string, Vote>
+     */
+    public Collection $votes;
 
     /** @ORM\Column(type="datetime") */
     public \DateTime $firstVote;
@@ -75,6 +80,9 @@ class Rfc
         return $this->votes[$voteId];
     }
 
+    /**
+     * @return array<Vote>
+     */
     public function getVoteList(): array
     {
         return array_values($this->votes->toArray());

@@ -10,6 +10,7 @@ interface RfcRepository
 {
     public function findOneByUrl(string $url): ?Rfc;
 
+    /** @return list<Rfc> */
     public function findActiveRfcs(): array;
 
     public function persist(Rfc $rfc): void;

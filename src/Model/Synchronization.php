@@ -10,8 +10,8 @@ use Symfony\Component\CssSelector\CssSelectorConverter;
 
 class Synchronization
 {
-    private $rfcRepository;
-    private $rfcFetcher;
+    private RfcRepository $rfcRepository;
+    private RfcDomFetcher $rfcFetcher;
 
     public function __construct(RfcRepository $rfcRepository, RfcDomFetcher $rfcFetcher)
     {
@@ -19,7 +19,8 @@ class Synchronization
         $this->rfcFetcher = $rfcFetcher;
     }
 
-    public function getRfcUrlsInVoting()
+    /** @return list<string> */
+    public function getRfcUrlsInVoting(): array
     {
         $converter  = new CssSelectorConverter();
         $document = $this->rfcFetcher->getRfcDom('https://wiki.php.net/rfc');
@@ -42,7 +43,12 @@ class Synchronization
         return array_unique(array_merge($currentInVotingUrls, $activeRfcUrls));
     }
 
-    public function synchronizeRfcs(array $rfcUrls, ?string $targetPhpVersion = null)
+    /**
+     * @param list<string> $rfcUrls
+     *
+     * @return list<Rfc>
+     */
+    public function synchronizeRfcs(array $rfcUrls, ?string $targetPhpVersion = null): array
     {
         $rfcs = [];
 
@@ -142,8 +148,13 @@ class Synchronization
                             if ($optionNode->getAttribute('style') === 'background-color:#AFA') {
                                 $imgTitle = $xpath->evaluate('img[@title]', $optionNode);
                                 if ($imgTitle && $imgTitle->length > 0) {
-                                    $time = \DateTime::createFromFormat('Y/m/d H:i', $imgTitle->item(0)->getAttribute('title'), new \DateTimeZone('UTC'));
-                                    $time->modify('-60 minute'); // hardcode how far both servers are away from each other timezone-wise
+                                    $time = \DateTime::createFromFormat(
+                                        'Y/m/d H:i',
+                                        $imgTitle->item(0)->getAttribute('title'),
+                                        new \DateTimeZone('UTC')
+                                    );
+                                    // hardcode how far both servers are away from each other timezone-wise
+                                    $time->modify('-60 minute');
 
                                     if ($rfc->firstVote > $time) {
                                         $rfc->firstVote = $time;

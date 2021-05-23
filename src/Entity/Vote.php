@@ -16,16 +16,16 @@ class Vote
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
      */
-    public $id;
+    public ?int $id = null;
 
     /** @ORM\ManyToOne(targetEntity="Rfc", inversedBy="votes") */
-    public $rfc;
+    public ?Rfc $rfc;
 
     /** @ORM\Column(type="boolean") */
-    public $primaryVote = true;
+    public bool $primaryVote = true;
 
     /** @ORM\Column(type="string", nullable=true) */
-    public $voteId;
+    public ?string $voteId = null;
 
     /** @ORM\Column(type="string", nullable=true) */
     public string $question;

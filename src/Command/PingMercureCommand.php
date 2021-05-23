@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PingMercureCommand extends Command
 {
-    private $publisher;
+    private MercurePublisher $publisher;
 
     public function __construct(MercurePublisher $publisher)
     {

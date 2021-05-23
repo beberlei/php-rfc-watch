@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SynchronizeVotesCommand extends Command
 {
-    private $synchronization;
+    private Synchronization $synchronization;
 
     public function __construct(Synchronization $synchronization)
     {
