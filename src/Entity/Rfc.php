@@ -10,9 +10,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Rfc
 {
-    const OPEN = 'open';
-    const CLOSE = 'close';
-    const ABORTED = 'aborted';
+    public const OPEN = 'open';
+    public const CLOSE = 'close';
+    public const ABORTED = 'aborted';
 
     /**
      * @ORM\Id
