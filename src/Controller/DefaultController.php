@@ -99,34 +99,6 @@ class DefaultController extends AbstractController
         foreach ($rfcs as $rfc) {
             assert($rfc instanceof Rfc);
 
-            $questions = array_map(static function (Vote $vote) {
-                $data = ['question' => $vote->question, 'results' => [], 'hasYes' => false, 'passing' => false];
-
-                $total = array_sum($vote->currentVotes);
-
-                foreach ($vote->currentVotes as $option => $count) {
-                    $data['results'][] = [
-                        'votes' => $count,
-                        'share' => $total > 0 ? $count / $total : 0,
-                        'option' => $option,
-                    ];
-
-                    if ($option !== 'Yes') {
-                        continue;
-                    }
-
-                    $data['hasYes'] = true;
-
-                    if ($count / $total < $vote->passThreshold / 100) {
-                        continue;
-                    }
-
-                    $data['passing'] = true;
-                }
-
-                return $data;
-            }, $rfc->votes->filter(static fn (Vote $vote) => ! $vote->hide)->toArray());
-
             $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
 
             $data[] = [
@@ -136,7 +108,7 @@ class DefaultController extends AbstractController
                 'status' => $rfc->status,
                 'targetPhpVersion' => $rfc->targetPhpVersion,
                 'discussions' => $rfc->discussions,
-                'questions' => array_values($questions),
+                'questions' => $rfc->tallyQuestionResults(),
                 'rejected' => $rfc->rejected,
                 'communityVote' => [
                     'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),

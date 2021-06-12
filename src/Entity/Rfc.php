@@ -80,11 +80,37 @@ class Rfc
         return $this->votes[$voteId];
     }
 
-    /**
-     * @return array<Vote>
-     */
-    public function getVoteList(): array
+    public function tallyQuestionResults(): array
     {
-        return array_values($this->votes->toArray());
+        return array_values(array_map(
+            static function (Vote $vote) {
+                $data = ['question' => $vote->question, 'results' => [], 'hasYes' => false, 'passing' => false];
+
+                $total = array_sum($vote->currentVotes);
+
+                foreach ($vote->currentVotes as $option => $count) {
+                    $data['results'][] = [
+                        'votes' => $count,
+                        'share' => $total > 0 ? $count / $total : 0,
+                        'option' => $option,
+                    ];
+
+                    if ($option !== 'Yes') {
+                        continue;
+                    }
+
+                    $data['hasYes'] = true;
+
+                    if ($count / $total < $vote->passThreshold / 100) {
+                        continue;
+                    }
+
+                    $data['passing'] = true;
+                }
+
+                return $data;
+            },
+            $this->votes->filter(static fn (Vote $vote) => ! $vote->hide)->toArray()
+        ));
     }
 }
