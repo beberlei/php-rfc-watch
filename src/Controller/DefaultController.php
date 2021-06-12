@@ -6,15 +6,16 @@ namespace App\Controller;
 
 use App\Entity\Rfc;
 use App\Form\RfcType;
-use App\Model\MercurePublisher;
 use Doctrine\ORM\EntityManagerInterface;
+use Gyro\MVC\Flash;
 use Gyro\MVC\FormRequest;
 use Gyro\MVC\RedirectRoute;
 use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Zend\Feed\Writer\Feed;
 
@@ -22,16 +23,13 @@ class DefaultController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private Client $redis;
-    private MercurePublisher $mercurePublisher;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        Client $redis,
-        MercurePublisher $mercurePublisher
+        Client $redis
     ) {
         $this->entityManager = $entityManager;
         $this->redis = $redis;
-        $this->mercurePublisher = $mercurePublisher;
     }
 
     /**
@@ -131,31 +129,32 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/vote")
+     * @Route("/vote", name="vote")
      */
-    public function voteAction(Request $request): JsonResponse
+    public function voteAction(Request $request): \Generator
     {
         $session = $request->getSession();
-        $payload = json_decode($request->getContent(), true);
 
-        $rfc = $this->entityManager->find(Rfc::class, $payload['id']);
-        $githubUserId = $session->get('github_user_id');
+        $rfc = $this->entityManager->find(Rfc::class, $request->request->getInt('id'));
 
-        if ($rfc && $githubUserId) {
-            $this->redis->zadd('rfc/' . $rfc->id, [$githubUserId => $payload['choice']]);
+        if (! $rfc || $rfc->status !== Rfc::OPEN) {
+            throw new NotFoundHttpException();
         }
 
-        $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
+        $githubUserId = $session->get('github_user_id');
+        $choice = $request->request->getInt('choice');
 
-        $this->mercurePublisher->publish('vote', ['rfc' => $rfc->id]);
+        if (! in_array($choice, [1, -1], true)) {
+            throw new HttpException(400);
+        }
 
-        return new JsonResponse([
-            'communityVote' => [
-                'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
-                'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
-                'you' => $yourVote,
-            ],
-        ]);
+        if ($githubUserId) {
+            $this->redis->zadd('rfc/' . $rfc->id, [$githubUserId => $choice]);
+        }
+
+        yield new Flash('info', 'Your community vote for the RFC "' . $rfc->title . '" has been registered.');
+
+        return new RedirectRoute('homepage');
     }
 
     /**

@@ -87,11 +87,18 @@ class Rfc
     {
         return array_values(array_map(
             static function (Vote $vote) {
-                $data = ['question' => $vote->question, 'results' => [], 'hasYes' => false, 'passing' => false];
+                $data = [
+                    'question' => $vote->question,
+                    'results' => [],
+                    'hasYes' => false,
+                    'passing' => false,
+                    'votes' => 0,
+                ];
 
                 $total = array_sum($vote->currentVotes);
 
                 foreach ($vote->currentVotes as $option => $count) {
+                    $data['votes'] += $count;
                     $data['results'][] = [
                         'votes' => $count,
                         'share' => $total > 0 ? $count / $total : 0,
