@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Rfc;
-use App\Entity\Vote;
 use App\Form\RfcType;
 use App\Model\MercurePublisher;
 use Doctrine\ORM\EntityManagerInterface;

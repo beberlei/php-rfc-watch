@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\App\Entity;
 
 use App\Entity\Rfc;
@@ -98,7 +100,8 @@ class RfcTest extends TestCase
     {
         $rfc = $this->createRfcWithTwoVotes();
 
-        $this->assertEquals(<<<TXT
+        $this->assertEquals(
+            <<<TXT
             URL: https://wiki.php.net/rfc/dom_living_standard_api
 
             ## Votes

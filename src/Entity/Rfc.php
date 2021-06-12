@@ -80,6 +80,9 @@ class Rfc
         return $this->votes[$voteId];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function tallyQuestionResults(): array
     {
         return array_values(array_map(
