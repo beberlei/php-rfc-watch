@@ -39,9 +39,56 @@ class DefaultController extends AbstractController
      *
      * @Route("/", name="homepage")
      */
-    public function indexAction(): array
+    public function indexAction(Request $request): array
     {
-        return [];
+        $githubUserId = $request->getSession()->get('github_user_id');
+
+        $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
+
+        $rfcs = array_reverse($rfcRepository->findBy([], ['targetPhpVersion' => 'ASC']));
+
+        $data = [];
+        foreach ($rfcs as $rfc) {
+            assert($rfc instanceof Rfc);
+
+            $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
+
+            $data[] = [
+                'id' => $rfc->id,
+                'title' => $rfc->title,
+                'url' => $rfc->url,
+                'status' => $rfc->status,
+                'targetPhpVersion' => $rfc->targetPhpVersion,
+                'discussions' => $rfc->discussions,
+                'questions' => $rfc->tallyQuestionResults(),
+                'rejected' => $rfc->rejected,
+                'communityVote' => [
+                    'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
+                    'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
+                    'you' => $yourVote,
+                ],
+            ];
+        }
+
+        $activeFilter = static fn ($item) => $item['status'] === 'open' && ! $item['rejected'];
+        $othersFilter = static fn ($item) => $item['status'] !== 'open' && ! $item['rejected'];
+
+        $result = ['logged_in' => $request->getSession()->has('github_user_id')];
+        $result['rejectedRfcs'] = array_values(array_filter($data, static fn ($item) => $item['rejected']));
+        $result['activeRfcs'] = array_values(array_filter($data, $activeFilter));
+        $others = array_values(array_filter($data, $othersFilter));
+
+        $result['otherRfcs'] = ['unknown' => []];
+
+        foreach ($others as $other) {
+            if (! isset($result['otherRfcs'][$other['targetPhpVersion']])) {
+                $result['otherRfcs'][$other['targetPhpVersion']] = [];
+            }
+
+            $result['otherRfcs'][$other['targetPhpVersion']][] = $other;
+        }
+
+        return $result;
     }
 
     /**
@@ -81,61 +128,6 @@ class DefaultController extends AbstractController
     public function adminExportRfcAction(Rfc $rfc): array
     {
         return ['rfc' => $rfc];
-    }
-
-    /**
-     * @Route("/data.json", name="data")
-     */
-    public function dataAction(Request $request): JsonResponse
-    {
-        $githubUserId = $request->getSession()->get('github_user_id');
-
-        $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
-
-        $rfcs = array_reverse($rfcRepository->findBy([], ['targetPhpVersion' => 'ASC']));
-
-        $data = [];
-        foreach ($rfcs as $rfc) {
-            assert($rfc instanceof Rfc);
-
-            $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
-
-            $data[] = [
-                'id' => $rfc->id,
-                'title' => $rfc->title,
-                'url' => $rfc->url,
-                'status' => $rfc->status,
-                'targetPhpVersion' => $rfc->targetPhpVersion,
-                'discussions' => $rfc->discussions,
-                'questions' => $rfc->tallyQuestionResults(),
-                'rejected' => $rfc->rejected,
-                'communityVote' => [
-                    'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
-                    'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
-                    'you' => $yourVote,
-                ],
-            ];
-        }
-
-        $activeFilter = static fn ($item) => $item['status'] === 'open' && ! $item['rejected'];
-        $othersFilter = static fn ($item) => $item['status'] !== 'open' && ! $item['rejected'];
-
-        $result = ['logged_in' => $request->getSession()->has('github_user_id')];
-        $result['rejected'] = array_values(array_filter($data, static fn ($item) => $item['rejected']));
-        $result['active'] = array_values(array_filter($data, $activeFilter));
-        $others = array_values(array_filter($data, $othersFilter));
-
-        $result['others'] = ['unknown' => []];
-
-        foreach ($others as $other) {
-            if (! isset($result['others'][$other['targetPhpVersion']])) {
-                $result['others'][$other['targetPhpVersion']] = [];
-            }
-
-            $result['others'][$other['targetPhpVersion']][] = $other;
-        }
-
-        return new JsonResponse($result);
     }
 
     /**
