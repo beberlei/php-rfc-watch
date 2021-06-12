@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class RfcTest extends TestCase
 {
-    public function testTallyQuestionResults(): void
+    private function createRfcWithTwoVotes(): Rfc
     {
         $vote1 = new Vote();
         $vote1->question = 'Foo?';
@@ -23,8 +23,17 @@ class RfcTest extends TestCase
         $vote2->currentVotes['Barrr?'] = 5;
 
         $rfc = new Rfc();
+        $rfc->url = 'https://wiki.php.net/rfc/dom_living_standard_api';
+        $rfc->title = 'DOM Living Standard API';
         $rfc->votes->add($vote1);
         $rfc->votes->add($vote2);
+
+        return $rfc;
+    }
+
+    public function testTallyQuestionResults(): void
+    {
+        $rfc = $this->createRfcWithTwoVotes();
 
         $talliedResults = $rfc->tallyQuestionResults();
 
@@ -83,5 +92,28 @@ class RfcTest extends TestCase
 
         $this->assertEquals('xyz', $vote->voteId);
         $this->assertSame($vote, $rfc->getVoteById($vote->voteId));
+    }
+
+    public function testAsFeedText(): void
+    {
+        $rfc = $this->createRfcWithTwoVotes();
+
+        $this->assertEquals(<<<TXT
+            URL: https://wiki.php.net/rfc/dom_living_standard_api
+
+            ## Votes
+
+            ### Foo?
+
+            - Yes with 10 votes
+            - No with 0 votes
+
+            ### Bar?
+
+            - Bar! with 5 votes
+            - Barrr? with 5 votes
+            TXT,
+            $rfc->asFeedText(),
+        );
     }
 }

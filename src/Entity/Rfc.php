@@ -25,10 +25,10 @@ class Rfc
     public ?int $id;
 
     /** @ORM\Column(type="string") */
-    public string $url;
+    public string $url = '';
 
     /** @ORM\Column(type="string") */
-    public string $title;
+    public string $title = '';
 
     /** @ORM\Column(type="string") */
     public string $status = self::OPEN;
@@ -112,5 +112,36 @@ class Rfc
             },
             $this->votes->filter(static fn (Vote $vote) => ! $vote->hide)->toArray()
         ));
+    }
+
+    public function asFeedText(): string
+    {
+        $content = 'URL: ' . $this->url . "\n\n";
+
+        if (count($this->discussions) > 0) {
+            $content .= "## Discussions\n\n";
+
+            foreach ($this->discussions as $discussion) {
+                $content .= '- ' . $discussion . "\n";
+            }
+
+            $content .= "\n";
+        }
+
+        $content .= "## Votes\n\n";
+
+        foreach ($this->votes as $vote) {
+            assert($vote instanceof Vote);
+
+            $content .= sprintf("### %s\n\n", $vote->question);
+
+            foreach ($vote->currentVotes as $option => $count) {
+                $content .= sprintf("- %s with %d votes\n", $option, $count);
+            }
+
+            $content .= "\n";
+        }
+
+        return strip_tags(trim($content));
     }
 }

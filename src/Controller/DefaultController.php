@@ -231,44 +231,20 @@ class DefaultController extends AbstractController
         foreach ($rfcs as $rfc) {
             assert($rfc instanceof Rfc);
 
-            $content = 'URL: ' . $rfc->url . "\n\n";
-
-            if (count($rfc->discussions) > 0) {
-                $content .= "## Discussions\n\n";
-
-                foreach ($rfc->discussions as $discussion) {
-                    $content .= '- ' . $discussion . "\n";
-                }
-
-                $content .= "\n";
-            }
-
-            $content .= "## Votes\n\n";
-
-            foreach ($rfc->votes as $vote) {
-                assert($vote instanceof Vote);
-
-                $content .= sprintf("### %s\n\n", $vote->question);
-
-                foreach ($vote->currentVotes as $option => $count) {
-                    $content .= sprintf("- %s with %d votes\n", $option, $count);
-                }
-
-                $content .= "\n";
-            }
-
             if (! $modifiedDateSet) {
                 $feed->setDateModified((int) $rfc->created->format('U'));
                 $modifiedDateSet = true;
             }
+
+            $content = $rfc->asFeedText();
 
             $entry = $feed->createEntry();
             $entry->setTitle($rfc->title);
             $entry->setLink($rfc->url);
             $entry->setDateModified((int) $rfc->created->format('U'));
             $entry->setDateCreated((int) $rfc->created->format('U'));
-            $entry->setDescription(strip_tags($content));
-            $entry->setContent(strip_tags($content));
+            $entry->setDescription($content);
+            $entry->setContent($content);
 
             $feed->addEntry($entry);
         }
