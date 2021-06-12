@@ -1,4 +1,5 @@
 {% macro rfc_list(title, rfcs, logged_in) %}
+    {% if rfcs|length > 0 %}
     <div>
         <h2 id="{{ title }}" class="text-lg font-semibold mb-2 p-2 uppercase rfc-list-header">
             {{ title }}
@@ -11,6 +12,7 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
 {% endmacro %}
 
 {% macro rfc(rfc, logged_in) %}
@@ -134,7 +136,7 @@
 {% endmacro %}
 
 {% macro tailwind_button_start(className, disabled, title, name, value) %}
-<button type="submit" title="{{ title }}" value="{{ value }}" name="{{ name }}"
+<button type="submit" title="{{ title }}" value="{{ value }}" name="{{ name }}" {% if disabled %}disabled{% endif %}
         class="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium
         {% if not disabled %}text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150
         {% else %} text-gray-400{% endif %}">
