@@ -1,0 +1,60 @@
+on: push
+name: CI
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['7.4', '8.0']
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+        tools: "cs2pr"
+
+    - name: "Cache dependencies installed with composer"
+      uses: "actions/cache@v1"
+      with:
+        path: "~/.composer/cache"
+        key: "php-${{ matrix.php-version }}-composer-locked-${{ hashFiles('composer.lock') }}"
+        restore-keys: "php-${{ matrix.php-version }}-composer-locked-"
+
+    - name: "Composer"
+      run: "composer update --prefer-stable"
+
+    - name: "PHPUnit"
+      run: "php vendor/bin/phpunit"
+
+  phpcs:
+    name: PHP Codesniffer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 7.4
+        tools: "cs2pr"
+
+    - name: "Cache dependencies installed with composer"
+      uses: "actions/cache@v1"
+      with:
+        path: "~/.composer/cache"
+        key: "php-${{ matrix.php-version }}-composer-locked-${{ hashFiles('composer.lock') }}"
+        restore-keys: "php-${{ matrix.php-version }}-composer-locked-"
+
+    - name: "Composer"
+      run: "composer update --prefer-stable"
+
+    - name: "phpcs"
+      run: "vendor/bin/phpcs -q --no-colors --report=checkstyle | cs2pr"
+
