@@ -87,7 +87,13 @@ class Rfc
     {
         return array_values(array_map(
             static function (Vote $vote) {
-                $data = ['question' => $vote->question, 'results' => [], 'hasYes' => false, 'passing' => false, 'votes' => 0];
+                $data = [
+                    'question' => $vote->question,
+                    'results' => [],
+                    'hasYes' => false,
+                    'passing' => false,
+                    'votes' => 0,
+                ];
 
                 $total = array_sum($vote->currentVotes);
 
