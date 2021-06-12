@@ -7,148 +7,15 @@
     </small>
 </p>
 
+{% import 'Default/rfc_macros.html.twig' as rfcs %}
 <div>
-    {{ _self.rfc_list("Currently Active RFCs", activeRfcs, logged_in) }}
+    {{ rfcs.rfc_list("Currently Active RFCs", activeRfcs, logged_in) }}
 
     {% for phpVersion, rfcs in otherRfcs %}
-        {{ _self.rfc_list("Accepted RFCs for PHP " ~ phpVersion, rfcs, logged_in) }}
+        {{ rfcs.rfc_list("Accepted RFCs for PHP " ~ phpVersion, rfcs, logged_in) }}
     {% endfor %}
 
-    {{ _self.rfc_list("Rejected RFCs", rejectedRfcs, logged_in) }}
+    {{ rfcs.rfc_list("Rejected RFCs", rejectedRfcs, logged_in) }}
 </div>
 
 {% endblock %}
-
-{% macro rfc_list(title, rfcs, logged_in) %}
-<div>
-    <h2 id="{{ title }}" class="text-lg font-semibold mb-2 p-2 uppercase rfc-list-header">
-        {{ title }}
-        <a href="#{{ title }}" class="rfc-anchor text-gray-600 ml-4">¶</a>
-    </h2>
-
-    <div class="rfc-list flex flex-col flex-wrap items-start mb-10">
-        {% for rfc in rfcs %}
-            <div class="w-full md:w-1/2 p-2">
-                <div class="bg-white rounded shadow-lg md:flex-auto flex-none">
-                    <div class="px-6 py-4">
-                        {% if rfc.status == 'open' %}
-                        <span class="inline-block bg-blue-500 text-white rounded-full px-3 mr-2 text-sm font-semibold">Active</span>
-                        {% endif %}
-
-                        <a class="font-bold hover:underline no-underline break-words" href="{{ rfc.url }}" target="_blank">{{ rfc.title }}</a>
-
-                        {% if rfc.targetPhpVersion %}
-                            <div class="float-right"><span class="badge badge-secondary">PHP {{ rfc.targetPhpVersion }}</span></div>
-                        {% endif %}
-
-                        {{ _self.rfc_discussion(rfc) }}
-
-                        {% for question in rfc.questions %}
-                            <div class="{% if not loop.last%}mb-8{% endif %}">
-                                <div class="mb-2 break-words">
-                                    {{ question.question }}
-                                </div>
-
-                                <div class="mb-2">
-                                    <div class="w-full">
-                                        <div class="shadow w-full bg-grey-light rounded-sm flex items-stretch">
-                                            {% for vote in question.results %}
-                                                {% set share = (vote.share * 100)|number_format(0) %}
-
-                                                {% if share > 0 %}
-                                                    <div class="{{ _self.rfc_color(loop.index0) }} text-xs inline-block leading-none py-1 text-center text-white flex-none"
-                                                         style="width: {{ share }}%">{{ share }} %
-                                                    </div>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {% for vote in question.results %}
-                                    <div class="mb-1">
-                                        <div class="{{ _self.rfc_color(loop.index0) }} rounded-sm mr-2 h-2 w-2 inline-block"></div>
-                                        <span class="text-xs">{{ vote.option }}: <span class="font-normal">{{ vote.votes }}</span></span>
-                                    </div>
-                                {% endfor %}
-
-                                <div class="text-gray text-xs mt-2 ml-4">
-                                    Total number of votes cast: <span class="font-normal">{{ question.votes }}</span>
-                                </div>
-                            </div>
-                        {% endfor %}
-
-                        {% if rfc.status == 'open' %}
-                        {{ _self.rfc_community_vote(rfc, logged_in) }}
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
-{% endmacro %}
-
-{% macro rfc_discussion(rfc) %}
-{% if rfc.discussions|length > 0 %}
-<div class="text-xs text-gray-800 py-4">
-    <strong>Discussions:</strong>
-    <span>&nbsp;</span>
-    {% for discussionUrl in rfc.discussions %}
-        <a href="{{ discussionUrl }}" target="_blank" style="white-space: nowrap">
-            #{{ loop.index }}
-            {% if "externals.io" in discussionUrl %}
-                Mailinglist
-            {% elseif "derickrethans.nl/phpinternalsnews" in discussionUrl %}
-                PHP Internals News
-            {% elseif "reddit" in discussionUrl %}
-                Reddit
-            {% else %}
-                {{ discussionUrl }}
-            {% endif %}
-        </a>
-        {% if not loop.last %}, {% endif %}
-    {% endfor %}
-</div>
-{% endif %}
-{% endmacro %}
-
-{% macro rfc_color(index) %}
-    {% set colors = ['bg-green-400', 'bg-red-400', 'bg-blue-400', 'bg-teal-400', 'bg-orange-400', 'bg-purple-400', 'bg-pink-400', 'bg-yellow-400'] %}
-    {{ colors[index] }}
-{% endmacro %}
-
-{% macro rfc_community_vote(rfc, logged_in) %}
-    <div class="text-right">
-        {% if not logged_in %}
-            <a class="underline mr-4 text-sm" href="/login">Login with Github</a>
-        {% endif %}
-
-        <span class="relative z-0 inline-flex shadow-sm">
-            <form method="POST" action="{{ path('vote') }}">
-                <input type="hidden" name="id" value="{{ rfc.id }}" />
-                {{ _self.tailwind_button_start("rounded-l-md", (not logged_in), logged_in ? "Login required", "choice", 1) }}
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
-                    </svg>
-                    <span class="{% if rfc.communityVote.you == 1 %}font-bold{% endif %}">{{ rfc.communityVote.up }}</span>
-                </button>
-                {{ _self.tailwind_button_start("rounded-r-md", (not logged_in), logged_in ? "Login required", "choice", -1) }}
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"/>
-                    </svg>
-                    <span class="{% if rfc.communityVote.you == -1 %}font-bold{% endif %}">{{ rfc.communityVote.down }}</span>
-                </button>
-            </form>
-        </span>
-    </div>
-{% endmacro %}
-
-{% macro tailwind_button_start(className, disabled, title, name, value) %}
-<button type="submit" title="{{ title }}" value="{{ value }}" name="{{ name }}"
-    class="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium
-        {% if not disabled %}text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150
-        {% else %} text-gray-400{% endif %}">
-{% endmacro %}

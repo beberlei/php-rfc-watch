@@ -51,21 +51,7 @@ class DefaultController extends AbstractController
 
             $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
 
-            $data[] = [
-                'id' => $rfc->id,
-                'title' => $rfc->title,
-                'url' => $rfc->url,
-                'status' => $rfc->status,
-                'targetPhpVersion' => $rfc->targetPhpVersion,
-                'discussions' => $rfc->discussions,
-                'questions' => $rfc->tallyQuestionResults(),
-                'rejected' => $rfc->rejected,
-                'communityVote' => [
-                    'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
-                    'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
-                    'you' => $yourVote,
-                ],
-            ];
+            $data[] = $this->convertRfcToViewModel($rfc, $yourVote);
         }
 
         $activeFilter = static fn ($item) => $item['status'] === 'open' && ! $item['rejected'];
@@ -87,6 +73,52 @@ class DefaultController extends AbstractController
         }
 
         return $result;
+    }
+
+    /**
+     * @return array<string,mixed>
+     *
+     * @Route("/rfc/{slug}", name="view")
+     */
+    public function viewAction(string $slug, Request $request): array
+    {
+        $githubUserId = $request->getSession()->get('github_user_id');
+
+        $rfcRepository = $this->entityManager->getRepository(Rfc::class);
+
+        $rfc = $rfcRepository->findOneBy(['url' => 'https://wiki.php.net/rfc/' . $slug]);
+
+        if (! $rfc) {
+            throw new NotFoundHttpException();
+        }
+
+        $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
+
+        return [
+            'rfc' => $this->convertRfcToViewModel($rfc, $yourVote),
+            'logged_in' => $githubUserId !== null,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function convertRfcToViewModel(Rfc $rfc, int $yourVote): array
+    {
+        return [
+            'id' => $rfc->id,
+            'title' => $rfc->title,
+            'url' => $rfc->url,
+            'slug' => $rfc->getSlug(),
+            'status' => $rfc->status,
+            'targetPhpVersion' => $rfc->targetPhpVersion,
+            'discussions' => $rfc->discussions,
+            'questions' => $rfc->tallyQuestionResults(),
+            'rejected' => $rfc->rejected,
+            'communityVote' => [
+                'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
+                'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
+                'you' => $yourVote,
+            ],
+        ];
     }
 
     /**
@@ -154,7 +186,7 @@ class DefaultController extends AbstractController
 
         yield new Flash('info', 'Your community vote for the RFC "' . $rfc->title . '" has been registered.');
 
-        return new RedirectRoute('homepage');
+        return new RedirectRoute('view', ['slug' => $rfc->getSlug()]);
     }
 
     /**
