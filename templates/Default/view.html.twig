@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <p class="mb-4 text-center">
+        <small>
+            <a class="underline" href="{{ path('notify') }}">Subscribe to RFC vote notifications</a>
+        </small>
+    </p>
+
+    {% import 'Default/rfc_macros.html.twig' as rfcs %}
+
+    <div>
+        {{ rfcs.rfc(rfc, logged_in) }}
+    </div>
+
+{% endblock %}

@@ -69,6 +69,11 @@ class Rfc
         $this->votes = new ArrayCollection();
     }
 
+    public function getSlug(): string
+    {
+        return str_replace('https://wiki.php.net/rfc/', '', $this->url);
+    }
+
     public function getVoteById(string $voteId): Vote
     {
         if (! isset($this->votes[$voteId])) {
