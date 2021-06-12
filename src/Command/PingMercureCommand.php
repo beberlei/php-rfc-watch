@@ -27,8 +27,10 @@ class PingMercureCommand extends Command
             ->setDescription('Ping mercure to force update of all clients');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->publisher->publish('ping', []);
+
+        return 0;
     }
 }

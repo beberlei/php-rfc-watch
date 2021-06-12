@@ -31,11 +31,13 @@ class SynchronizeVotesCommand extends Command
             ->addOption('target', 't', InputOption::VALUE_REQUIRED);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $urls = $input->getArgument('urls') ?: $this->synchronization->getRfcUrlsInVoting();
         $targetPhpVersion = $input->getOption('target');
 
         $this->synchronization->synchronizeRfcs($urls, $targetPhpVersion);
+
+        return 0;
     }
 }
