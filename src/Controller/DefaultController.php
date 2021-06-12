@@ -80,7 +80,7 @@ class DefaultController extends AbstractController
      *
      * @Route("/rfc/{slug}", name="view")
      */
-    public function viewAction(string $slug, Request $request)
+    public function viewAction(string $slug, Request $request): array
     {
         $githubUserId = $request->getSession()->get('github_user_id');
 
@@ -88,7 +88,7 @@ class DefaultController extends AbstractController
 
         $rfc = $rfcRepository->findOneBy(['url' => 'https://wiki.php.net/rfc/' . $slug]);
 
-        if (!$rfc) {
+        if (! $rfc) {
             throw new NotFoundHttpException();
         }
 
@@ -100,6 +100,7 @@ class DefaultController extends AbstractController
         ];
     }
 
+    /** @return array<string, mixed> */
     private function convertRfcToViewModel(Rfc $rfc, int $yourVote): array
     {
         return [
