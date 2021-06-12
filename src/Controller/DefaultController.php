@@ -186,7 +186,7 @@ class DefaultController extends AbstractController
 
         yield new Flash('info', 'Your community vote for the RFC "' . $rfc->title . '" has been registered.');
 
-        return new RedirectRoute('homepage');
+        return new RedirectRoute('view', ['slug' => $rfc->getSlug()]);
     }
 
     /**
