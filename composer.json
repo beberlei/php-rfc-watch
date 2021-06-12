@@ -1,7 +1,7 @@
 {
     "name": "beberlei/phprfcwatch",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4",
         "ext-json": "*",
         "symfony/flex": "^1.0",
         "sensio/framework-extra-bundle": "^5.1",
@@ -15,7 +15,7 @@
         "symfony/translation": "^4.2",
         "symfony/validator": "^4.2",
         "symfony/yaml": "^4.2",
-        "phpunit/phpunit": "^7.2",
+        "phpunit/phpunit": "^9.5",
         "gyro/mvc-bundle": "^0.10",
         "symfony/templating": "^4.2",
         "symfony/webpack-encore-pack": "^1.0",
