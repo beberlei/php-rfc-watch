@@ -23,5 +23,6 @@
     <file>public/</file>
     <file>src/</file>
     <file>tests/</file>
+    <exclude-pattern>config/bundles.php</exclude-pattern>
 
 </ruleset>
