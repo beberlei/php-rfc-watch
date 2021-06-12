@@ -44,6 +44,7 @@ class RfcTest extends TestCase
                 'question' => 'Foo?',
                 'hasYes' => true,
                 'passing' => true,
+                'votes' => 10,
                 'results' => [
                     ['votes' => 10, 'share' => 1, 'option' => 'Yes'],
                     ['votes' => 0, 'share' => 0, 'option' => 'No'],
@@ -53,6 +54,7 @@ class RfcTest extends TestCase
                 'question' => 'Bar?',
                 'hasYes' => false,
                 'passing' => false,
+                'votes' => 10,
                 'results' => [
                     ['votes' => 5, 'share' => 0.5, 'option' => 'Bar!'],
                     ['votes' => 5, 'share' => 0.5, 'option' => 'Barrr?'],
@@ -79,6 +81,7 @@ class RfcTest extends TestCase
                 'question' => 'Foo?',
                 'hasYes' => true,
                 'passing' => false,
+                'votes' => 10,
                 'results' => [
                     ['votes' => 0, 'share' => 0, 'option' => 'Yes'],
                     ['votes' => 10, 'share' => 1, 'option' => 'No'],
