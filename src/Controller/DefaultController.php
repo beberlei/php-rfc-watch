@@ -151,6 +151,17 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/admin/rfc/{id}/delete", name="admin_delete_rfc", methods={"POST"})
+     */
+    public function adminDeleteRfcAction(Rfc $rfc): RedirectRoute
+    {
+        $this->entityManager->remove($rfc);
+        $this->entityManager->flush();
+
+        return new RedirectRoute('admin');
+    }
+
+    /**
      * @return array<string,mixed>
      *
      * @Route("/admin/rfc/{id}/export", name="admin_export_rfc", methods={"GET"})

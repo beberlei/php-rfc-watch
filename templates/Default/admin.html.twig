@@ -29,8 +29,11 @@
                     </p>
                 </div>
                 <div class="flex">
+                    <form method="POST" action="{{ path('admin_delete_rfc', {'id': rfc.id}) }}">
                     <a class="text-bold rounded shadow bg-blue-500 p-1 text-white mr-4 no-underline" href="{{ path('admin_edit_rfc', {'id': rfc.id}) }}">Edit</a>
                     <a class="text-bold rounded shadow bg-blue-500 p-1 text-white mr-4 no-underline" href="{{ path('admin_export_rfc', {'id': rfc.id}) }}">Export</a>
+                    <button class="text-bold rounded shadow bg-blue-500 p-1 text-white mr-4 no-underline">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
