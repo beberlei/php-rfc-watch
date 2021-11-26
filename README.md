@@ -32,7 +32,7 @@ Open up `http://localhost:8000`.
 
 Import the current state by calling:
 
-    $ php bin/console rfc-watch:synchronize
+    $ php bin/console php-rfc-watch:synchronize
 
 ## Run with Caddy
 
