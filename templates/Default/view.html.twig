@@ -7,10 +7,8 @@
         </small>
     </p>
 
-    {% import 'Default/rfc_macros.html.twig' as rfcs %}
-
     <div class="flex justify-center">
-        {{ rfcs.rfc(rfc, logged_in) }}
+        {{ include('Default/rfc.html.twig', { rfc: rfc, logged_in: logged_in }) }}
     </div>
 
 {% endblock %}

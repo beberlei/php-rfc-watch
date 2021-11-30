@@ -1,0 +1,21 @@
+{% if rfc.discussions|length > 0 %}
+    <div class="text-xs text-gray-800 py-4">
+        <strong>Discussions:</strong>
+        <span>&nbsp;</span>
+        {% for discussionUrl in rfc.discussions %}
+            <a href="{{ discussionUrl }}" target="_blank" style="white-space: nowrap">
+                #{{ loop.index }}
+                {% if "externals.io" in discussionUrl %}
+                    Mailinglist
+                {% elseif "derickrethans.nl/phpinternalsnews" in discussionUrl %}
+                    PHP Internals News
+                {% elseif "reddit" in discussionUrl %}
+                    Reddit
+                {% else %}
+                    {{ discussionUrl }}
+                {% endif %}
+            </a>
+            {% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
