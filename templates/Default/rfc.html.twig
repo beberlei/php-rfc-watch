@@ -1,0 +1,61 @@
+{% import 'Default/rfc_macros.html.twig' as macros %}
+<div class="w-full md:w-1/2 p-2">
+    <div class="bg-white rounded shadow-lg md:flex-auto flex-none">
+        <div class="px-6 py-4">
+            {% if rfc.status == 'open' %}
+                <span class="inline-block bg-blue-500 text-white rounded-full px-3 mr-2 text-sm font-semibold">Active</span>
+            {% endif %}
+
+            <a class="font-bold hover:underline no-underline break-words" href="{{ path('view', {'slug': rfc.slug}) }}">{{ rfc.title }}</a>
+
+            <span class="text-gray text-xs">
+                    (<a class="hover:underline no-underline break-words" href="{{ rfc.url }}" target="_blank">View on PHP.net</a>)
+                </span>
+
+            {% if rfc.targetPhpVersion %}
+                <div class="float-right"><span class="badge badge-secondary">PHP {{ rfc.targetPhpVersion }}</span></div>
+            {% endif %}
+
+            {{ include('Default/rfc_discussion.html.twig', { rfc: rfc }) }}
+
+            {% for question in rfc.questions %}
+                <div class="{% if not loop.last%}mb-8{% endif %}">
+                    <div class="mb-2 break-words">
+                        {{ question.question }}
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="w-full">
+                            <div class="shadow w-full bg-grey-light rounded-sm flex items-stretch">
+                                {% for vote in question.results %}
+                                    {% set share = (vote.share * 100)|number_format(0) %}
+
+                                    {% if share > 0 %}
+                                        <div class="{{ macros.rfc_color(loop.index0) }} text-xs inline-block leading-none py-1 text-center text-white flex-none"
+                                             style="width: {{ share }}%">{{ share }} %
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for vote in question.results %}
+                        <div class="mb-1">
+                            <div class="{{ macros.rfc_color(loop.index0) }} rounded-sm mr-2 h-2 w-2 inline-block"></div>
+                            <span class="text-xs">{{ vote.option }}: <span class="font-normal">{{ vote.votes }}</span></span>
+                        </div>
+                    {% endfor %}
+
+                    <div class="text-gray text-xs mt-2 ml-4">
+                        Total number of votes cast: <span class="font-normal">{{ question.votes }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% if rfc.status == 'open' %}
+                {{ include('Default/rfc_community_vote.html.twig' , { rfc: rfc, logged_in: logged_in }) }}
+            {% endif %}
+        </div>
+    </div>
+</div>

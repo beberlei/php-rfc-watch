@@ -7,15 +7,14 @@
     </small>
 </p>
 
-{% import 'Default/rfc_macros.html.twig' as rfcs %}
 <div>
-    {{ rfcs.rfc_list("Currently Active RFCs", activeRfcs, logged_in) }}
+    {{ include('Default/rfcs.html.twig', {title: "Currently Active RFCs", rfcs: activeRfcs, logged_in: logged_in}) }}
 
     {% for phpVersion, rfcs in otherRfcs %}
-        {{ rfcs.rfc_list("Accepted RFCs for PHP " ~ phpVersion, rfcs, logged_in) }}
+        {{ include('Default/rfcs.html.twig', {title: "Accepted RFCs for PHP " ~ phpVersion, rfcs: rfcs, logged_in: logged_in}) }}
     {% endfor %}
 
-    {{ rfcs.rfc_list("Rejected RFCs", rejectedRfcs, logged_in) }}
+    {{ include('Default/rfcs.html.twig', {title: "Rejected RFCs", rfcs: rejectedRfcs, logged_in: logged_in}) }}
 </div>
 
 {% endblock %}
