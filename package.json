@@ -2,7 +2,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.0.0",
     "@symfony/webpack-encore": "0.28",
-    "node-sass": "4.14.1",
+    "node-sass": "7.0.0",
     "postcss-loader": "^3.0.0",
     "sass-loader": "7.0.3"
   },
