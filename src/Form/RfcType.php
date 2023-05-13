@@ -26,7 +26,7 @@ class RfcType extends AbstractType
             ->add('discussions', TextType::class, ['required' => false])
             ->add('rejected', CheckboxType::class, ['required' => false])
             ->add('status', ChoiceType::class, ['choices' => [Rfc::OPEN => Rfc::OPEN, Rfc::CLOSE => Rfc::CLOSE]])
-            ->add('voteList', CollectionType::class, [
+            ->add('votes', CollectionType::class, [
                 'entry_type' => VoteType::class,
                 'by_reference' => true,
             ])
