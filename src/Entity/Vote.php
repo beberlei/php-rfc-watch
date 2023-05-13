@@ -31,7 +31,7 @@ class Vote
     public string $question;
 
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="json")
      *
      * @var array<string,int>
      */

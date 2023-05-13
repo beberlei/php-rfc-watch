@@ -40,7 +40,7 @@ class Rfc
     public string $targetPhpVersion = '';
 
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="json")
      *
      * @var array<string>
      */
