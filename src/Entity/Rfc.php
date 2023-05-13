@@ -102,25 +102,27 @@ class Rfc
 
                 $total = array_sum($vote->currentVotes);
 
-                foreach ($vote->currentVotes as $option => $count) {
-                    $data['votes'] += $count;
-                    $data['results'][] = [
-                        'votes' => $count,
-                        'share' => $total > 0 ? $count / $total : 0,
-                        'option' => $option,
-                    ];
+                if ($total > 0) {
+                    foreach ($vote->currentVotes as $option => $count) {
+                        $data['votes'] += $count;
+                        $data['results'][] = [
+                            'votes' => $count,
+                            'share' => $total > 0 ? $count / $total : 0,
+                            'option' => $option,
+                        ];
 
-                    if ($option !== 'Yes') {
-                        continue;
+                        if ($option !== 'Yes') {
+                            continue;
+                        }
+
+                        $data['hasYes'] = true;
+
+                        if ($count / $total < $vote->passThreshold / 100) {
+                            continue;
+                        }
+
+                        $data['passing'] = true;
                     }
-
-                    $data['hasYes'] = true;
-
-                    if ($count / $total < $vote->passThreshold / 100) {
-                        continue;
-                    }
-
-                    $data['passing'] = true;
                 }
 
                 return $data;

@@ -1,6 +1,6 @@
 {% macro rfc_color(index) %}
     {% set colors = ['bg-green-400', 'bg-red-400', 'bg-blue-400', 'bg-teal-400', 'bg-orange-400', 'bg-purple-400', 'bg-pink-400', 'bg-yellow-400'] %}
-    {{ colors[index] }}
+    {{ colors[index % 8] }}
 {% endmacro %}
 
 {% macro tailwind_button_start(className, disabled, title, name, value) %}
