@@ -144,6 +144,18 @@
     "php": {
         "version": "7.4"
     },
+    "php-http/discovery": {
+        "version": "1.18",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.18",
+            "ref": "f45b5dd173a27873ab19f5e3180b2f661c21de02"
+        },
+        "files": [
+            "config/packages/http_discovery.yaml"
+        ]
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.1.0"
     },
@@ -258,6 +270,18 @@
         },
         "files": [
             "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "sentry/sentry-symfony": {
+        "version": "4.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "31024cb40a800443dc032ce8b463b73879a7942a"
+        },
+        "files": [
+            "config/packages/prod/sentry.yaml"
         ]
     },
     "slevomat/coding-standard": {

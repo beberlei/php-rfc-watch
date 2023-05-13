@@ -27,7 +27,8 @@
         "symfony/webpack-encore-bundle": "^1.13",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.15"
+        "doctrine/orm": "^2.15",
+        "sentry/sentry-symfony": "^4.8"
     },
     "scripts": {
         "auto-scripts": {
@@ -63,7 +64,8 @@
     "config": {
         "allow-plugins": {
             "symfony/flex": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true
         }
     }
 }
