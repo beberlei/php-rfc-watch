@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Gyro\MVC\Flash;
 use Gyro\MVC\FormRequest;
 use Gyro\MVC\RedirectRoute;
+use Laminas\Feed\Writer\Feed;
 use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Laminas\Feed\Writer\Feed;
 
 class DefaultController extends AbstractController
 {
@@ -139,7 +139,7 @@ class DefaultController extends AbstractController
      *
      * @Route("/admin/rfc/{id}", name="admin_edit_rfc", methods={"POST", "GET"})
      */
-    public function adminEditRfcAction(Rfc $rfc, FormRequest $request)
+    public function adminEditRfcAction(Rfc $rfc, FormRequest $request): array|RedirectRoute
     {
         if (! $request->handle(RfcType::class, $rfc)) {
             return ['rfc' => $rfc, 'form' => $request->createFormView()];
