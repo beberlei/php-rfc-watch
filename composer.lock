@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd3b46221ad839c3264ba90f0f8e1a38",
+    "content-hash": "a40ce26fdc59428c41887254093b53e3",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -2235,16 +2235,16 @@
         },
         {
             "name": "laminas/laminas-code",
-            "version": "4.10.0",
+            "version": "4.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-code.git",
-                "reference": "ad8b36073f9ac792716478befadca0798cc15635"
+                "reference": "169123b3ede20a9193480c53de2a8194f8c073ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/ad8b36073f9ac792716478befadca0798cc15635",
-                "reference": "ad8b36073f9ac792716478befadca0798cc15635",
+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/169123b3ede20a9193480c53de2a8194f8c073ec",
+                "reference": "169123b3ede20a9193480c53de2a8194f8c073ec",
                 "shasum": ""
             },
             "require": {
@@ -2294,7 +2294,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-03-08T11:55:01+00:00"
+            "time": "2023-05-14T12:05:38+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -11245,7 +11245,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2",
+        "php": "^8.1",
         "ext-json": "*"
     },
     "platform-dev": [],

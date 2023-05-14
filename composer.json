@@ -1,7 +1,7 @@
 {
     "name": "beberlei/phprfcwatch",
     "require": {
-        "php": "^8.2",
+        "php": "^8.1",
         "ext-json": "*",
         "symfony/flex": "^1.0",
         "sensio/framework-extra-bundle": "^5.1",
