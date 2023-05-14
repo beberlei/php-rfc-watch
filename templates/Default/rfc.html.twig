@@ -52,10 +52,6 @@
                     </div>
                 </div>
             {% endfor %}
-
-            {% if rfc.status == 'open' %}
-                {{ include('Default/rfc_community_vote.html.twig' , { rfc: rfc, logged_in: logged_in }) }}
-            {% endif %}
         </div>
     </div>
 </div>

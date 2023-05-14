@@ -11,7 +11,6 @@ use Gyro\MVC\Flash;
 use Gyro\MVC\FormRequest;
 use Gyro\MVC\RedirectRoute;
 use Laminas\Feed\Writer\Feed;
-use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,15 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private Client $redis;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        Client $redis
+        private EntityManagerInterface $entityManager,
     ) {
-        $this->entityManager = $entityManager;
-        $this->redis = $redis;
     }
 
     /**
@@ -49,9 +42,7 @@ class DefaultController extends AbstractController
         foreach ($rfcs as $rfc) {
             assert($rfc instanceof Rfc);
 
-            $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
-
-            $data[] = $this->convertRfcToViewModel($rfc, $yourVote);
+            $data[] = $this->convertRfcToViewModel($rfc);
         }
 
         $activeFilter = static fn ($item) => $item['status'] === 'open' && ! $item['rejected'];
@@ -92,16 +83,14 @@ class DefaultController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $yourVote = $githubUserId ? (int) $this->redis->zscore('rfc/' . $rfc->id, $githubUserId) : 0;
-
         return [
-            'rfc' => $this->convertRfcToViewModel($rfc, $yourVote),
+            'rfc' => $this->convertRfcToViewModel($rfc),
             'logged_in' => $githubUserId !== null,
         ];
     }
 
     /** @return array<string, mixed> */
-    private function convertRfcToViewModel(Rfc $rfc, int $yourVote): array
+    private function convertRfcToViewModel(Rfc $rfc): array
     {
         return [
             'id' => $rfc->id,
@@ -113,11 +102,6 @@ class DefaultController extends AbstractController
             'discussions' => $rfc->discussions,
             'questions' => $rfc->tallyQuestionResults(),
             'rejected' => $rfc->rejected,
-            'communityVote' => [
-                'up' => $this->redis->zcount('rfc/' . $rfc->id, 1, 1),
-                'down' => $this->redis->zcount('rfc/' . $rfc->id, -1, -1),
-                'you' => $yourVote,
-            ],
         ];
     }
 
@@ -169,35 +153,6 @@ class DefaultController extends AbstractController
     public function adminExportRfcAction(Rfc $rfc): array
     {
         return ['rfc' => $rfc];
-    }
-
-    /**
-     * @Route("/vote", name="vote")
-     */
-    public function voteAction(Request $request): \Generator
-    {
-        $session = $request->getSession();
-
-        $rfc = $this->entityManager->find(Rfc::class, $request->request->getInt('id'));
-
-        if (! $rfc || $rfc->status !== Rfc::OPEN) {
-            throw new NotFoundHttpException();
-        }
-
-        $githubUserId = $session->get('github_user_id');
-        $choice = $request->request->getInt('choice');
-
-        if (! in_array($choice, [1, -1], true)) {
-            throw new HttpException(400);
-        }
-
-        if ($githubUserId) {
-            $this->redis->zadd('rfc/' . $rfc->id, [$githubUserId => $choice]);
-        }
-
-        yield new Flash('info', 'Your community vote for the RFC "' . $rfc->title . '" has been registered.');
-
-        return new RedirectRoute('view', ['slug' => $rfc->getSlug()]);
     }
 
     /**
