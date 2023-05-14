@@ -29,7 +29,8 @@
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
-        "sentry/sentry-symfony": "^4.8"
+        "sentry/sentry-symfony": "^4.8",
+        "symfony/dotenv": "4.4.*"
     },
     "scripts": {
         "auto-scripts": {
@@ -38,7 +39,6 @@
         }
     },
     "require-dev": {
-        "symfony/dotenv": "^4.1",
         "symfony/maker-bundle": "^1.5",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/web-server-bundle": "4.4.*",
