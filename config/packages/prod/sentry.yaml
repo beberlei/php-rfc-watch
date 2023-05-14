@@ -3,9 +3,16 @@ sentry:
     options:
         traces_sample_rate: 1.0
         excluded_exceptions:
-            - Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-            - Symfony\Component\Security\Core\Exception\AccessDeniedException
+        integrations:
+          - 'Sentry\Integration\IgnoreErrorsIntegration'
 
+services:
+    Sentry\Integration\IgnoreErrorsIntegration:
+        arguments:
+            $options:
+                ignore_exceptions:
+                  - Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+                  - Symfony\Component\Security\Core\Exception\AccessDeniedException
 #    If you are using Monolog, you also need this additional configuration to log the errors correctly:
 #    https://docs.sentry.io/platforms/php/guides/symfony/#monolog-integration
 #    register_error_listener: false
