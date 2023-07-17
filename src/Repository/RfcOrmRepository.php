@@ -29,6 +29,10 @@ class RfcOrmRepository implements RfcRepository
 
     public function persist(Rfc $rfc): void
     {
+        if ($this->entityManager->contains($rfc)) {
+            return;
+        }
+
         $this->entityManager->persist($rfc);
     }
 
