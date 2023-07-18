@@ -100,6 +100,12 @@ class Synchronization
 
         $nodes = $xpath->evaluate('//form[@name="doodle__form"]');
 
+        if ($nodes->length === 0) {
+            // Do not store the RFC if it has not been persistet yet, there was no vote form found.
+            // maybe temporary breakage of the wiki page.
+            return $rfc;
+        }
+
         $first = true;
         foreach ($nodes as $form) {
             $rows = $xpath->evaluate('table[@class="inline"]/tbody/tr', $form);

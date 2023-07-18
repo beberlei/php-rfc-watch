@@ -35,6 +35,25 @@ class SynchronizationTest extends TestCase
         ], $rfcs);
     }
 
+    public function testSynchronizeRfcWithoutVotingPage(): void
+    {
+        $this->whenRfcFetcherUrlThenReturnHtmlDom(
+            'https://wiki.php.net/rfc/arrow_functions_v2',
+            'arrow_functions_no_vote.html'
+        );
+
+        \Phake::when($this->rfcRepository)->findOneByUrl('https://wiki.php.net/rfc/arrow_functions_v2')
+            ->thenReturn(null);
+
+        $rfcs = $this->service->synchronizeRfcs(['https://wiki.php.net/rfc/arrow_functions_v2']);
+
+        \Phake::verify($this->rfcRepository, \Phake::times(0))->persist($this->isInstanceOf(Rfc::class));
+
+        $rfc = current($rfcs);
+
+        assert($rfc instanceof Rfc);
+    }
+
     public function testSynchronizeRfc(): void
     {
         $this->whenRfcFetcherUrlThenReturnHtmlDom(

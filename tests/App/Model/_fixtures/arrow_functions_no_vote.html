@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PHP: rfc:arrow_functions_v2</title>
+
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="keywords" content="rfc,arrow_functions_v2"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/lib/exe/opensearch.php" title="PHP Wiki"/>
+<link rel="start" href="/"/>
+<link rel="contents" href="/rfc/arrow_functions_v2?do=index" title="Sitemap"/>
+<link rel="manifest" href="/lib/exe/manifest.php"/>
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="Current namespace" href="/feed.php?mode=list&amp;ns=rfc"/>
+<link rel="alternate" type="text/html" title="Plain HTML" href="/_export/xhtml/rfc/arrow_functions_v2"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/_export/raw/rfc/arrow_functions_v2"/>
+<link rel="canonical" href="https://wiki.php.net/rfc/arrow_functions_v2"/>
+<link rel="stylesheet" type="text/css" href="/lib/exe/css.php?t=phpnet&amp;tseed=bb98a79a04ccfbc5597904792b880cf8"/>
+<!--[if gte IE 9]><!-->
+<script type="text/javascript">/*<![CDATA[*/var NS='rfc';var JSINFO = {"id":"rfc:arrow_functions_v2","namespace":"rfc","ACT":"show","useHeadingNavigation":0,"useHeadingContent":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="/lib/exe/jquery.php?tseed=23f888679b4f1dc26eef34902aca964f"></script>
+<script type="text/javascript" charset="utf-8" src="/lib/exe/js.php?t=phpnet&amp;tseed=bb98a79a04ccfbc5597904792b880cf8"></script>
+<!--<![endif]-->
+  <link media='all' rel='stylesheet' href='//shared.php.net/styles/defaults.css?filemtime=1506087205'/>
+  <link media='all' rel='stylesheet' href='//shared.php.net/styles/wiki.css?filemtime=1550435250'/>
+
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,400italic,600italic|Source+Code+Pro&amp;subset=latin,latin-ext" rel="stylesheet">
+  <link rel="shortcut icon" href="//php.net/favicon.ico">
+<!--[if lt IE 9]>
+  <script src="//shared.php.net/js/html5shiv.js"></script>
+<![endif]-->
+  </head>
+<body id="">
+
+<div class="wrap">
+<header class='clearfix'>
+  <div id="mainmenu-toggle-overlay"></div>
+  <input type="checkbox" id="mainmenu-toggle">
+  <nav class="fullscreen">
+    <div class="mainscreen">
+      <a href="/" class="home"><img src="//php.net/images/logo.php?" width="48" height="24" alt="php"><span class="subdomain"></span></a>
+      <ul>
+        <li><a href="?do=login">Login</a></li>
+        <li><a href="?do=register">Register</a></li>
+      </ul>
+    </div>
+    <div class="secondscreen">
+      <form method="get" action="/start">
+        <input type="search" placeholder="Search" name="id" class="search">
+        <input type="hidden" name="do" value="search">
+      </form>
+    </div>
+  </nav>
+</header>
+<div id="flash-message"></div>
+<nav id="megadropdown"></nav>
+
+<section class="fullscreen clearfix">
+
+
+
+<section id="breadcrumbs">
+<nav>
+<span class="bchead">You are here: </span><span class="home"><bdi><a href="/start" class="wikilink1" title="start">start</a></bdi></span> › <bdi><a href="/rfc" class="wikilink1" title="rfc">rfc</a></bdi> › <bdi><span class="curid"><a href="/rfc/arrow_functions_v2" class="wikilink1" title="rfc:arrow_functions_v2">arrow_functions_v2</a></span></bdi></nav>
+</section>
+<section class="mainscreen">
+    <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+    <div id="dokuwiki__site"><div id="dokuwiki__top" class="site dokuwiki mode_show tpl_phpnet     ">
+
+
+        <div class="wrapper group">
+
+            
+            <!-- ********** CONTENT ********** -->
+            <div id="dokuwiki__content"><div class="pad group">
+
+                <div class="pageId"><span>rfc:arrow_functions_v2</span></div>
+
+                <div class="page group">
+                                                            <!-- wikipage start -->
+                                        
+<h1 class="sectionedit1" id="php_rfcarrow_functions_20">PHP RFC: Arrow Functions 2.0</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> Date: 2019-03-12</div>
+</li>
+<li class="level1"><div class="li"> Author: Nikita Popov <a href="mailto:&#x6e;&#x69;&#x6b;&#x69;&#x63;&#x40;&#x70;&#x68;&#x70;&#x2e;&#x6e;&#x65;&#x74;" class="mail" title="&#x6e;&#x69;&#x6b;&#x69;&#x63;&#x40;&#x70;&#x68;&#x70;&#x2e;&#x6e;&#x65;&#x74;">&#x6e;&#x69;&#x6b;&#x69;&#x63;&#x40;&#x70;&#x68;&#x70;&#x2e;&#x6e;&#x65;&#x74;</a></div>
+</li>
+<li class="level1"><div class="li"> Author: Levi Morrison <a href="mailto:&#x6c;&#x65;&#x76;&#x69;&#x6d;&#x40;&#x70;&#x68;&#x70;&#x2e;&#x6e;&#x65;&#x74;" class="mail" title="&#x6c;&#x65;&#x76;&#x69;&#x6d;&#x40;&#x70;&#x68;&#x70;&#x2e;&#x6e;&#x65;&#x74;">&#x6c;&#x65;&#x76;&#x69;&#x6d;&#x40;&#x70;&#x68;&#x70;&#x2e;&#x6e;&#x65;&#x74;</a></div>
+</li>
+<li class="level1"><div class="li"> Author: Bob Weinand <a href="mailto:&#x62;&#x77;&#x6f;&#x65;&#x62;&#x69;&#x40;&#x70;&#x68;&#x70;&#x2e;&#x6e;&#x65;&#x74;" class="mail" title="&#x62;&#x77;&#x6f;&#x65;&#x62;&#x69;&#x40;&#x70;&#x68;&#x70;&#x2e;&#x6e;&#x65;&#x74;">&#x62;&#x77;&#x6f;&#x65;&#x62;&#x69;&#x40;&#x70;&#x68;&#x70;&#x2e;&#x6e;&#x65;&#x74;</a></div>
+</li>
+<li class="level1"><div class="li"> Target version: PHP 7.4</div>
+</li>
+<li class="level1"><div class="li"> Implementation: <a href="https://github.com/php/php-src/pull/3941" class="urlextern" title="https://github.com/php/php-src/pull/3941" rel="nofollow">https://github.com/php/php-src/pull/3941</a></div>
+</li>
+<li class="level1"><div class="li"> Status: Voting</div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit2" id="introduction">Introduction</h2>
+<div class="level2">
+
+<p>
+Anonymous functions in PHP can be quite verbose, even when they only perform a simple operation.
+Partly this is due to a large amount of syntactic boilerplate, and party due to the need to manually
+import used variables. This makes code using simple closures hard to read and understand. This <abbr title="Request for Comments">RFC</abbr>
+proposes a more concise syntax for this pattern.
+</p>
+
+<p>
+As an example of the declaration overhead, consider this function that <a href="https://github.com/darkskillfr/near2u/blob/5a606fc9082c33c7270d37e4c7d29160586285f8/serveur/lib.php" class="urlextern" title="https://github.com/darkskillfr/near2u/blob/5a606fc9082c33c7270d37e4c7d29160586285f8/serveur/lib.php" rel="nofollow">I found online</a>:
+</p>
+<pre class="code php"><span class="kw2">function</span> array_values_from_keys<span class="br0">&#40;</span><span class="re0">$arr</span><span class="sy0">,</span> <span class="re0">$keys</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <a href="http://www.php.net/array_map"><span class="kw3">array_map</span></a><span class="br0">&#40;</span><span class="kw2">function</span> <span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="kw2">use</span> <span class="br0">&#40;</span><span class="re0">$arr</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="kw1">return</span> <span class="re0">$arr</span><span class="br0">&#91;</span><span class="re0">$x</span><span class="br0">&#93;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="sy0">,</span> <span class="re0">$keys</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+<p>
+The actual <code class="code php"><span class="re0">$arr</span><span class="br0">&#91;</span><span class="re0">$x</span><span class="br0">&#93;</span></code> operation performed by the closure is trivial, but is somewhat lost
+amidst the syntactic boilerplate. Arrow functions would reduce the function to the following:
+</p>
+<pre class="code php"><span class="kw2">function</span> array_values_from_keys<span class="br0">&#40;</span><span class="re0">$arr</span><span class="sy0">,</span> <span class="re0">$keys</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <a href="http://www.php.net/array_map"><span class="kw3">array_map</span></a><span class="br0">&#40;</span>fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$arr</span><span class="br0">&#91;</span><span class="re0">$x</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="re0">$keys</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+<p>
+The question of short closures has been extensively discussed in the past. A previous
+<a href="/rfc/short_closures" class="wikilink1" title="rfc:short_closures">short closures RFC</a> went through voting and was declined. This proposal
+tries to address some of the raised concerns with a different choice of syntax that is not
+subject to the limitations of the previous proposal.
+</p>
+
+<p>
+Additionally, this <abbr title="Request for Comments">RFC</abbr> includes a lengthy discussion of different syntax alternatives as well as
+binding semantics. Unfortunately short closures are a topic where we&#039;re unlikely to find a “perfect”
+solution, due to significant constraints on the syntax and implementation. This proposal makes the
+choice that we consider “least bad”. Short closures are critically overdue, and at some point we&#039;ll
+have to make a compromise here, rather than shelving the topic for another few years.
+</p>
+
+</div>
+
+<h2 class="sectionedit3" id="proposal">Proposal</h2>
+<div class="level2">
+
+<p>
+Arrow functions have the following basic form:
+</p>
+<pre class="code php">fn<span class="br0">&#40;</span>parameter_list<span class="br0">&#41;</span> <span class="sy0">=&gt;</span> expr</pre>
+<p>
+When a variable used in the expression is defined in the parent scope it will be implicitly captured
+by-value. In the following example the functions <code>$fn1</code> and <code>$fn2</code> behave the same:
+</p>
+<pre class="code php"><span class="re0">$y</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+&nbsp;
+<span class="re0">$fn1</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">+</span> <span class="re0">$y</span><span class="sy0">;</span>
+&nbsp;
+<span class="re0">$fn2</span> <span class="sy0">=</span> <span class="kw2">function</span> <span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="kw2">use</span> <span class="br0">&#40;</span><span class="re0">$y</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="re0">$x</span> <span class="sy0">+</span> <span class="re0">$y</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+<p>
+This also works if the arrow functions are nested:
+</p>
+<pre class="code php"><span class="re0">$z</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> fn<span class="br0">&#40;</span><span class="re0">$y</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span> <span class="sy0">+</span> <span class="re0">$z</span><span class="sy0">;</span></pre>
+<p>
+Here the outer function captures <code>$z</code>. The inner function then also captures <code>$z</code> from the outer
+function. The overall effect is that <code>$z</code> from the outer scope becomes available in the
+inner function.
+</p>
+
+</div>
+
+<h3 class="sectionedit4" id="function_signatures">Function signatures</h3>
+<div class="level3">
+
+<p>
+The arrow function syntax allows arbitrary function signatures, including parameter and return
+types, default values, variadics, as well as by-reference passing and returning. All of the
+following are valid examples of arrow functions:
+</p>
+<pre class="code php">fn<span class="br0">&#40;</span><a href="http://www.php.net/array"><span class="kw3">array</span></a> <span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span><span class="sy0">;</span>
+fn<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">:</span> int <span class="sy0">=&gt;</span> <span class="re0">$x</span><span class="sy0">;</span>
+fn<span class="br0">&#40;</span><span class="re0">$x</span> <span class="sy0">=</span> <span class="nu0">42</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span><span class="sy0">;</span>
+fn<span class="br0">&#40;</span><span class="sy0">&amp;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span><span class="sy0">;</span>
+fn<span class="sy0">&amp;</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span><span class="sy0">;</span>
+fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="sy0">,</span> <span class="sy0">...</span><span class="re0">$rest</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$rest</span><span class="sy0">;</span></pre>
+</div>
+
+<h3 class="sectionedit5" id="this_binding_and_static_arrow_functions">$this binding and static arrow functions</h3>
+<div class="level3">
+
+<p>
+Just like normal closures, the <code>$this</code> variable, the scope and the LSB scope are automatically bound when a short closure is created inside a class method. For normal closures, this can be prevented by prefixing them with <code>static</code>. For the sake of completeness this is also supported for arrow functions:
+</p>
+<pre class="code php"><span class="kw2">class</span> Test <span class="br0">&#123;</span>
+    <span class="kw2">public</span> <span class="kw2">function</span> method<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <a href="http://www.php.net/var_dump"><span class="kw3">var_dump</span></a><span class="br0">&#40;</span><span class="re0">$this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="re0">$fn</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// object(Test)#1 { ... }</span>
+&nbsp;
+        <span class="re0">$fn</span> <span class="sy0">=</span> static fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <a href="http://www.php.net/var_dump"><span class="kw3">var_dump</span></a><span class="br0">&#40;</span><span class="re0">$this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="re0">$fn</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// Error: Using $this when not in object context</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+<p>
+Static closures are rarely used: They&#039;re mainly used to prevent <code>$this</code> cycles, which make GC behavior less predictable. Most code need not concern itself with this.
+</p>
+
+<p>
+It has been suggested that we could use this opportunity to change the <code>$this</code> binding semantics towards only binding <code>$this</code> if it is actually used inside the closure. Apart from GC effects, this would result in the same behavior. Unfortunately PHP has some implicit uses of <code>$this</code>. For example <code>Foo::bar()</code> calls may inherit <code>$this</code> if it is compatible with the <code>Foo</code> scope. We could only carry out a conservative analysis of potential <code>$this</code> use, which would be unpredictable from a user perspective. As such, we prefer to keep the existing behavior of always binding <code>$this</code>.
+</p>
+
+</div>
+
+<h3 class="sectionedit6" id="by-value_variable_binding">By-value variable binding</h3>
+<div class="level3">
+
+<p>
+As already mentioned, arrow functions use by-value variable binding. This is roughly equivalent
+to performing a <code>use($x)</code> for every variable <code>$x</code> used inside the arrow function. A by-value
+binding means that it is not possible to modify any values from the outer scope:
+</p>
+<pre class="code php"><span class="re0">$x</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span><span class="sy0">++;</span> <span class="co1">// Has no effect</span>
+<span class="re0">$fn</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<a href="http://www.php.net/var_dump"><span class="kw3">var_dump</span></a><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// int(1)</span></pre>
+<p>
+Please see the discussion section for a discussion of other possible binding modes, and their
+tradeoffs.
+</p>
+
+<p>
+There is a small difference between the implicitly generated uses and explicit ones: The implicit
+uses will not generate an undefined variable notice if the variable is undefined at binding time.
+This means that the following code only generates one notice (when trying to use <code>$undef</code>),
+rather than two (when trying to bind <code>$undef</code> and when trying to use it):
+</p>
+<pre class="code php"><span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$undef</span><span class="sy0">;</span>
+<span class="re0">$fn</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+<p>
+The reason for this is that we cannot (due to references) always determine whether a variable is
+read or written or both. Consider the following somewhat contrived example:
+</p>
+<pre class="code php"><span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="re0">$str</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <a href="http://www.php.net/preg_match"><span class="kw3">preg_match</span></a><span class="br0">&#40;</span><span class="re0">$regex</span><span class="sy0">,</span> <span class="re0">$str</span><span class="sy0">,</span> <span class="re0">$matches</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span> <span class="br0">&#40;</span><span class="re0">$matches</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">%</span> <span class="nu0">7</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span></pre>
+<p>
+Here <code>$matches</code> is populated by <code>preg_match()</code> and needn&#039;t exist prior to the call. We would
+not want to generate a spurious undefined variable notice in this case.
+</p>
+
+<p>
+Finally, the automatic binding mechanism only considers variables that are used literally. That is,
+the following code will generate an undefined variable notice, because <code>$x</code> has no literal uses
+inside the function and thus hasn&#039;t been bound:
+</p>
+<pre class="code php"><span class="re0">$x</span> <span class="sy0">=</span> <span class="nu0">42</span><span class="sy0">;</span>
+<span class="re0">$y</span> <span class="sy0">=</span> <span class="st_h">'x'</span><span class="sy0">;</span>
+<span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$$y</span><span class="sy0">;</span></pre>
+<p>
+Support for this could be added by using a more general binding mechanism (bind everything
+rather than binding what is used) when variable variables are encountered. It&#039;s excluded here because
+it seems like an entirely unnecessary complication of the implementation, but it can be supported if
+people consider it necessary.
+</p>
+
+</div>
+
+<h3 class="sectionedit7" id="precedence">Precedence</h3>
+<div class="level3">
+
+<p>
+Arrow functions have lowest precedence. This means that the expression to the right of <code>=&gt;</code>
+will be consumed as far as possible:
+</p>
+<pre class="code php">fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">+</span> <span class="re0">$y</span>
+<span class="co1">// is</span>
+fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="br0">&#40;</span><span class="re0">$x</span> <span class="sy0">+</span> <span class="re0">$y</span><span class="br0">&#41;</span>
+<span class="co1">// not</span>
+<span class="br0">&#40;</span>fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="re0">$y</span></pre>
+</div>
+
+<h3 class="sectionedit8" id="backward_incompatible_changes">Backward Incompatible Changes</h3>
+<div class="level3">
+
+<p>
+Unfortunately the <code>fn</code> keyword must be a full keyword and not just a reserved function name.
+</p>
+
+<p>
+Ilija Tovilo analyzed the top 1,000 PHP repositories on GitHub to find usages of <code>fn</code>.
+<a href="https://gist.github.com/morrisonlevi/473a7e0cb6e59c830224b1c71b8da28c" class="urlextern" title="https://gist.github.com/morrisonlevi/473a7e0cb6e59c830224b1c71b8da28c" rel="nofollow">The gist</a> provides more
+information, but the rough findings are that all known existing usages of <code>fn</code> are in tests
+except one case where it is a namespace segment. (The namespace use happens to be in my own library,
+and I&#039;m happy to rename it.)
+</p>
+
+</div>
+
+<h2 class="sectionedit9" id="examples">Examples</h2>
+<div class="level2">
+
+<p>
+These examples are copied from the <a href="/rfc/arrow_functions" class="wikilink1" title="rfc:arrow_functions">previous version</a> of the arrow functions
+<abbr title="Request for Comments">RFC</abbr>.
+</p>
+
+<p>
+Taken from <a href="https://github.com/silexphp/Pimple/blob/62b5d317a83b02eea42b5b785b62a29fba458bcf/src/Pimple/Container.php#L242-L244" class="urlextern" title="https://github.com/silexphp/Pimple/blob/62b5d317a83b02eea42b5b785b62a29fba458bcf/src/Pimple/Container.php#L242-L244" rel="nofollow">silexphp/Pimple</a>:
+</p>
+<pre class="code php"><span class="re0">$extended</span> <span class="sy0">=</span> <span class="kw2">function</span> <span class="br0">&#40;</span><span class="re0">$c</span><span class="br0">&#41;</span> <span class="kw2">use</span> <span class="br0">&#40;</span><span class="re0">$callable</span><span class="sy0">,</span> <span class="re0">$factory</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="re0">$callable</span><span class="br0">&#40;</span><span class="re0">$factory</span><span class="br0">&#40;</span><span class="re0">$c</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="re0">$c</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// with arrow function:</span>
+<span class="re0">$extended</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="re0">$c</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$callable</span><span class="br0">&#40;</span><span class="re0">$factory</span><span class="br0">&#40;</span><span class="re0">$c</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="re0">$c</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+<p>
+This reduces the amount of boilerplate from 44 characters down to 8.
+</p>
+<hr />
+
+<p>
+Taken from <a href="https://github.com/doctrine/dbal/blob/master/lib/Doctrine/DBAL/Schema/PostgreSqlSchemaManager.php" class="urlextern" title="https://github.com/doctrine/dbal/blob/master/lib/Doctrine/DBAL/Schema/PostgreSqlSchemaManager.php" rel="nofollow">Doctrine DBAL</a>:
+</p>
+<pre class="code php"><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">existingSchemaPaths</span> <span class="sy0">=</span> <a href="http://www.php.net/array_filter"><span class="kw3">array_filter</span></a><span class="br0">&#40;</span><span class="re0">$paths</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span><span class="re0">$v</span><span class="br0">&#41;</span> <span class="kw2">use</span> <span class="br0">&#40;</span><span class="re0">$names</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <a href="http://www.php.net/in_array"><span class="kw3">in_array</span></a><span class="br0">&#40;</span><span class="re0">$v</span><span class="sy0">,</span> <span class="re0">$names</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// with arrow function</span>
+<span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">existingSchemaPaths</span> <span class="sy0">=</span> <a href="http://www.php.net/array_filter"><span class="kw3">array_filter</span></a><span class="br0">&#40;</span><span class="re0">$paths</span><span class="sy0">,</span> fn<span class="br0">&#40;</span><span class="re0">$v</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <a href="http://www.php.net/in_array"><span class="kw3">in_array</span></a><span class="br0">&#40;</span><span class="re0">$v</span><span class="sy0">,</span> <span class="re0">$names</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+<p>
+This reduces the amount of boilerplate from 31 characters down to 8.
+</p>
+<hr />
+
+<p>
+The complement function as found in many libraries:
+</p>
+<pre class="code php"><span class="kw2">function</span> complement<span class="br0">&#40;</span>callable <span class="re0">$f</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> <span class="kw2">function</span> <span class="br0">&#40;</span><span class="sy0">...</span><span class="re0">$args</span><span class="br0">&#41;</span> <span class="kw2">use</span> <span class="br0">&#40;</span><span class="re0">$f</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="sy0">!</span><span class="re0">$f</span><span class="br0">&#40;</span><span class="sy0">...</span><span class="re0">$args</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">// with arrow function:</span>
+<span class="kw2">function</span> complement<span class="br0">&#40;</span>callable <span class="re0">$f</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> fn<span class="br0">&#40;</span><span class="sy0">...</span><span class="re0">$args</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="sy0">!</span><span class="re0">$f</span><span class="br0">&#40;</span><span class="sy0">...</span><span class="re0">$args</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre><hr />
+
+<p>
+The following example was provided by <a href="https://gist.github.com/tpunt/b4f9bf30f43b9e148b73ce18245ab472" class="urlextern" title="https://gist.github.com/tpunt/b4f9bf30f43b9e148b73ce18245ab472" rel="nofollow">tpunt</a>:
+</p>
+<pre class="code php"><span class="re0">$result</span> <span class="sy0">=</span> Collection<span class="sy0">::</span><span class="me2">from</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="sy0">-&gt;</span><span class="me1">map</span><span class="br0">&#40;</span><span class="kw2">function</span> <span class="br0">&#40;</span><span class="re0">$v</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="re0">$v</span> <span class="sy0">*</span> <span class="nu0">2</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span>
+    <span class="sy0">-&gt;</span><span class="me1">reduce</span><span class="br0">&#40;</span><span class="kw2">function</span> <span class="br0">&#40;</span><span class="re0">$tmp</span><span class="sy0">,</span> <span class="re0">$v</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="re0">$tmp</span> <span class="sy0">+</span> <span class="re0">$v</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">echo</span> <span class="re0">$result</span><span class="sy0">;</span> <span class="co1">// 6</span>
+&nbsp;
+<span class="co1">// with arrow functions:</span>
+<span class="re0">$result</span> <span class="sy0">=</span> Collection<span class="sy0">::</span><span class="me2">from</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="sy0">-&gt;</span><span class="me1">map</span><span class="br0">&#40;</span>fn<span class="br0">&#40;</span><span class="re0">$v</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$v</span> <span class="sy0">*</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+    <span class="sy0">-&gt;</span><span class="me1">reduce</span><span class="br0">&#40;</span>fn<span class="br0">&#40;</span><span class="re0">$tmp</span><span class="sy0">,</span> <span class="re0">$v</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$tmp</span> <span class="sy0">+</span> <span class="re0">$v</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">echo</span> <span class="re0">$result</span><span class="sy0">;</span> <span class="co1">// 6</span></pre>
+</div>
+
+<h2 class="sectionedit10" id="vote">Vote</h2>
+<div class="level2">
+
+<p>
+Voting started 2019-04-17 and ends 2019-05-01. A 2/3 majority is required.
+</p>
+
+
+
+
+
+
+
+</div>
+
+<h2 class="sectionedit11" id="discussion">Discussion</h2>
+<div class="level2">
+
+</div>
+
+<h3 class="sectionedit12" id="syntax">Syntax</h3>
+<div class="level3">
+
+<p>
+The probably most desired syntax for arrow functions is <code>($x) =&gt; $x * $y</code> or <code>$x =&gt; $x * $y</code> for short. It is very concise, and used by a number of other programming languages, including JavaScript. However, using this syntax in PHP comes with some severe technical challenges. This section will discuss a number of possible syntaxes for arrow functions and what benefits and disadvantages they have.
+</p>
+
+</div>
+
+<h4 id="x_x_y">($x) =&gt; $x * $y</h4>
+<div class="level4">
+
+<p>
+This is both the most popular and the most technically infeasible syntax. The primary issue this choice has over all others is that <code>=&gt;</code> is already used in PHP for the purpose of specifying key-value pairs in array declarations and yield expressions. As such, the following code is ambiguous:
+</p>
+<pre class="code php"><span class="co1">// Array of arrow functions, or just a key-value map?</span>
+<span class="re0">$array</span> <span class="sy0">=</span> <span class="br0">&#91;</span>
+    <span class="re0">$a</span> <span class="sy0">=&gt;</span> <span class="re0">$a</span> <span class="sy0">+</span> <span class="re0">$b</span><span class="sy0">,</span>
+    <span class="re0">$x</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span><span class="sy0">,</span>
+<span class="br0">&#93;</span><span class="sy0">;</span></pre>
+<p>
+This kind of ambiguity is not a problem in and of itself. Expression syntax is full of ambiguities, which are resolved by precedence, associativity or other rules. For backwards compatibility reasons, we would have to define that the array as written above is just a key-value mapping, while an array containing closures would be written as follows:
+</p>
+<pre class="code php"><span class="re0">$array</span> <span class="sy0">=</span> <span class="br0">&#91;</span>
+    <span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=&gt;</span> <span class="re0">$a</span> <span class="sy0">+</span> <span class="re0">$b</span><span class="br0">&#41;</span><span class="sy0">,</span>
+    <span class="br0">&#40;</span><span class="re0">$x</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span><span class="br0">&#41;</span><span class="sy0">,</span>
+<span class="br0">&#93;</span><span class="sy0">;</span></pre>
+<p>
+The same distinction would exist for yield expression:
+</p>
+<pre class="code php"><span class="kw1">yield</span> <span class="re0">$foo</span> <span class="sy0">=&gt;</span> <span class="re0">$bar</span><span class="sy0">;</span> <span class="co1">// key-value yield</span>
+<span class="kw1">yield</span> <span class="br0">&#40;</span><span class="re0">$foo</span> <span class="sy0">=&gt;</span> <span class="re0">$bar</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// yield of arrow function</span></pre>
+<p>
+In fact, this kind of ambiguity already exists without arrow functions when yield and arrays are combined:
+</p>
+<pre class="code php"><span class="re0">$array</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="kw1">yield</span> <span class="re0">$k</span> <span class="sy0">=&gt;</span> <span class="re0">$v</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="co1">// is interpreted as</span>
+<span class="re0">$array</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span><span class="kw1">yield</span> <span class="re0">$k</span> <span class="sy0">=&gt;</span> <span class="re0">$v</span><span class="br0">&#41;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="co1">// but could also be interpreted as</span>
+<span class="re0">$array</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span><span class="kw1">yield</span> <span class="re0">$k</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$v</span><span class="br0">&#93;</span><span class="sy0">;</span></pre>
+<p>
+Unfortunately, the <code>$x =&gt; $y</code> syntax is also subject to the limitations that are described in the following section, which are ultimately much more problematic.
+</p>
+
+</div>
+
+<h4 id="x_x_y1">($x) ==&gt; $x * $y</h4>
+<div class="level4">
+
+<p>
+This is a category of possible syntaxes that includes <code>($x) ==&gt; $x * $y</code> (used by Hack), <code>($x) ~&gt; $x * $y</code> (previous short closure proposal), or any other syntax of the form <code>(params) SIGIL expr</code>. These avoid the ambiguity with array and yield syntax.
+</p>
+
+<p>
+While simple forms of this syntax like <code>($x, $y) ==&gt; $x + $y</code> are easy to support, permitting arbitrary function signatures to the left of <code>==&gt;</code> runs into considerable challenges in the parser implementation:
+</p>
+
+<p>
+The fundamental problem is that the start of many function signatures looks like an ordinary expression and we may only be able to detect that we&#039;re dealing with an array function when the parser sees the <code>==&gt;</code> symbol.
+</p>
+
+<p>
+Here are two examples of non-trivial cases where the part to the left of <code>==&gt;</code> is also a valid expression in itself:
+</p>
+<pre class="code php"><span class="br0">&#40;</span><span class="re0">$x</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">42</span><span class="br0">&#93;</span> <span class="sy0">+</span> <span class="br0">&#91;</span><span class="st0">&quot;foobar&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==&gt;</span> <span class="re0">$x</span><span class="sy0">;</span> <span class="co1">// Assignment expression</span>
+<span class="br0">&#40;</span>Type <span class="sy0">&amp;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">==&gt;</span> <span class="re0">$x</span><span class="sy0">;</span>               <span class="co1">// Constant lookup + bitwise and</span></pre>
+<p>
+These cases could be handled in the parser by accepting a general <code>expr ==&gt; expr</code> and later post-processing the left-hand side expression to interpret a bitwise and as a typed by-reference pass, and so on.
+</p>
+
+<p>
+A possibly more problematic example is the following:
+</p>
+<pre class="code php"><span class="re0">$a</span> ? <span class="br0">&#40;</span><span class="re0">$b</span><span class="br0">&#41;</span><span class="sy0">:</span> Type <span class="sy0">==&gt;</span> <span class="re0">$c</span> <span class="sy0">:</span> <span class="re0">$d</span><span class="sy0">;</span></pre>
+<p>
+While there is only one way this can be interpreted as valid code, the characters to the left of the arrow <code>$a ? ($b): Type</code> already form a ternary expression by themselves, which poses further challenges to a limited lookahead parser implementation.
+</p>
+
+<p>
+If we want to use this kind of syntax, we basically have a number of choices:
+</p>
+
+<p>
+1. Try to hack this into the current parser. I&#039;m not sure if this is even possible (at least
+no one has succeeded with supporting the full syntax yet), but even if it is, it would leave us
+with a major mess, that would get worse as new syntax for types is added. For example, if we
+support generics and union types, then the LHS of <code>(Foo&lt;int|string&gt; $bar) ==&gt; $bar</code> would be
+<code>((Foo &lt; int) | (string &gt; $bar))</code> when interpreted as an expression. Dealing with more and more
+of these cases does not seem practical.
+</p>
+
+<p>
+2. Switch to a more powerful parser. Currently we use a LALR(1) parser, but
+the parser generator we use (bison) also supports GLR parsing. The GLR parser essentially works by
+splitting the parser state into two every time an ambiguous state is encountered, and running two
+parsers in lock-step until one yields a parse error or they recombine.
+</p>
+
+<p>
+Using a GLR parser comes with two big disdvantages: The first is that splitting the parser state
+and running two parsers has a performance cost. This may be managable if the non-LR(1) portions are
+restricted to uncommon parts of the grammar. However, in this case the conflict arises at most
+<code>(</code> tokens inside an expression context, each of which requires a parser split. What is more
+problematic is that these splits can occur recursively. Consider the following example:
+</p>
+<pre class="code php"><span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="nu0">42</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="re0">$a</span> <span class="sy0">=</span> <span class="nu0">42</span><span class="br0">&#41;</span> <span class="sy0">==&gt;</span> <span class="re0">$a</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="co1">//  looks the same until here  ---^</span></pre>
+<p>
+This kind of code would split the parser at each <code>(</code>, resulting in a total of 2^5 parsers running
+at the same time. Once again, we can work around this. A default value cannot actually contain
+variables, so we could determine that <code>($a = ($a</code> cannot be a valid start of an arrow function and
+abandon one of the parsers at that point. This would require moving the restrictions on default
+values from the compiler (where they generate an “unsupported operation” error) into the parser
+(where they would generate a parse error on the <code>$a</code> token). Furthermore, this would pose a
+possible hazard to future extension: It doesn&#039;t seem inconceivable to me that we&#039;d want to relax the
+default value restrictions and allow code similar to the following at some point:
+</p>
+<pre class="code php"><span class="kw2">function</span> str_slice<span class="br0">&#40;</span><span class="re0">$str</span><span class="sy0">,</span> <span class="re0">$from</span><span class="sy0">,</span> <span class="re0">$to</span> <span class="sy0">=</span> <a href="http://www.php.net/strlen"><span class="kw3">strlen</span></a><span class="br0">&#40;</span><span class="re0">$str</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="coMULTI">/* ... */</span> <span class="br0">&#125;</span></pre>
+<p>
+Once this is allowed and variables can legally be part of default values, the problem of potential
+exponential parsing complexity could no longer be avoided.
+</p>
+
+<p>
+The second problem with GLR parsers is that they make it much harder to ensure that our language
+grammar is in fact unambiguous. Our current implementation is conflict-free under LALR(1), which
+gives us confidence that the grammar is well-defined and is interpreted in the desired way. Using a
+GLR parser requires the intentional introduction of parser conflicts, and makes it hard to verify
+that these conflicts have no effects beyond the desired ones.
+</p>
+
+<p>
+3. Use lexer lookahead. Instead of solving this problem at the parser level, we can deal with it in
+the lexer (this is what HHVM does for their <code>==&gt;</code> implementation). The basic idea is that we
+will replace the <code>&#039;(</code>&#039; token with a special <code>T_ARROW_START</code> token, if that parenthesis is part
+of an arrow function. To determine this, we would let the lexer run ahead and collect the tokens in
+a buffer (so we can replay them later), until we find the corresponding <code>)</code> and can check whether
+it is followed by <code>==&gt;</code>. A complication (and forward-compatibiltiy hazard) is that it is not
+sufficient to check for just <code>) ==&gt;</code>, as we also need to handle <code>): ?Type ==&gt;</code> and
+possible future extensions to the type system. 
+</p>
+
+<p>
+For reference, the HHVM implementation can be found here: <a href="https://github.com/facebook/hhvm/blob/50c593d591302bf1490c974dcbe0e02e6a4fc5f3/hphp/parser/scanner.cpp#L770" class="urlextern" title="https://github.com/facebook/hhvm/blob/50c593d591302bf1490c974dcbe0e02e6a4fc5f3/hphp/parser/scanner.cpp#L770" rel="nofollow">https://github.com/facebook/hhvm/blob/50c593d591302bf1490c974dcbe0e02e6a4fc5f3/hphp/parser/scanner.cpp#L770</a> Most of the relevant code is in the various <code>tryParse</code> functions.
+</p>
+
+<p>
+Using lexer lookahead is in principle a viable option. It should be noted that it does not work for
+the <code>=&gt;</code> based syntax, as we would not be able to distinguish between arrow functions and
+key-value pair in the lexer.
+</p>
+
+<p>
+4. Restrict the syntax. This is what the previous <a href="/rfc/short_closures" class="wikilink1" title="rfc:short_closures">short closures RFC</a> did,
+which disallows the use of parameter types, return types and default values inside short closures.
+As this removes the main points of complexity, a pure-parser implementation becomes possible.
+</p>
+
+<p>
+While this certainly solves the technical problems, I believe that that the inability to specify
+type hints (even for short closures) was a deal-breaker for many people, and the reason why the
+previous <abbr title="Request for Comments">RFC</abbr> ultimately failed.
+</p>
+
+<p>
+While I personally think that the ability to type arrow functions is not particularly important
+from a type safety perspective, it can be important for static analysis and IDE autocomplete
+support.
+</p>
+
+</div>
+
+<h4 id="fn_x_x_y">fn($x) =&gt; $x * $y</h4>
+<div class="level4">
+
+<p>
+The core problem with the previous syntax suggestions is that we need to parse the arrow function
+starting at the <code>(</code>, but only know it actually is one once we reach the <code>==&gt;</code>. The obvious
+solution to this problem is to modify the syntax to have a distinctive leading symbol. This <abbr title="Request for Comments">RFC</abbr>
+proposes <code>fn</code> as a short, yet readable possibility. The disadvantage is that <code>fn</code> must become
+a reserved keyword.
+</p>
+
+<p>
+There are of course also other syntax possibilities with leading symbols, especially once we open
+the can of unused unary operators:
+</p>
+<pre class="code php"><span class="kw2">function</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+\<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+^<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+&nbsp;
+<span class="sy0">*</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+$<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+<span class="sy0">%</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+<span class="sy0">&amp;</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+<span class="sy0">=</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span><span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+&nbsp;
+<span class="co1">// Not possible, because these are valid unary operators.</span>
+<span class="sy0">!</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+<span class="sy0">+</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+<span class="sy0">-</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+~<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+<span class="sy0">@</span><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+&nbsp;
+<span class="co1">// Not possible, because _() is a valid function name, used as an alias for gettext()</span>
+_<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span></pre>
+<p>
+I&#039;ve highlighted the first four examples as the only ones I would consider somewhat viable. <code>fn</code>
+is already proposed here. <code>function</code> would be the same syntax with an existing keyword. The
+disadvantage of course is that the keyword is quite long, and the big selling point of arrow
+functions is brevity. The <code>\($x) =&gt; $x * $y</code> syntax is included due to it&#039;s similarity to the
+Haskell lambda syntax (think of <code>\</code> as a poor man&#039;s <code>λ</code>). The <code>^</code> sigil is supported by Clang.
+</p>
+
+<p>
+Once we use a syntax with a leading symbol, it is tempting to drop the arrow entirely. Instead of
+<code>fn($x) ⇒ $x * $y</code>, couldn&#039;t we just use <code>fn($x) $x * $y</code>? Unfortunately this is not possible,
+because the interpretation of return types becomes ambiguous:
+</p>
+<pre class="code php">fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span><span class="sy0">:</span> T \T \T
+<span class="co1">// could be</span>
+fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span><span class="sy0">:</span> T\T <span class="br0">&#40;</span>\T<span class="br0">&#41;</span>
+<span class="co1">// or</span>
+fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span><span class="sy0">:</span> T <span class="br0">&#40;</span>\T\T<span class="br0">&#41;</span></pre>
+<p>
+It would be possible to resolve this ambiguity by lexing namespaced names as a single token
+(removing support for whitespace inside them). This would, however, be a breaking change.
+</p>
+
+</div>
+
+<h4 id="using_-_and_--_as_arrows">Using -&gt; and --&gt; as arrows</h4>
+<div class="level4">
+
+<p>
+As an alternative to <code>=&gt;</code> the use of <code>-&gt;</code> and <code>--&gt;</code> has been suggested. Any arrow syntax without a leading sigil would still be subject to the issues in the previous section, but these two in particular also conflict with existing syntax: <code>-&gt;</code> is already used for property access:
+</p>
+<pre class="code php"><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">-&gt;</span> <span class="re0">$x</span>
+<span class="co1">// already valid, more typically written as:</span>
+<span class="re0">$x</span><span class="sy0">-&gt;</span><span class="br0">&#123;</span><span class="re0">$x</span><span class="br0">&#125;</span></pre>
+<p>
+<code>--&gt;</code> is a combination of The post-decrement operator <code>--</code> and the greater-than operator <code>&gt;</code>:
+</p>
+<pre class="code php"><span class="re0">$x</span> <span class="sy0">--&gt;</span> <span class="re0">$x</span>
+<span class="co1">// already valid, more typically written as:</span>
+<span class="re0">$x</span><span class="sy0">--</span> <span class="sy0">&gt;</span> <span class="re0">$x</span></pre>
+<p>
+<code>--&gt;</code> would be valid when restricted to the form that uses parentheses, because <code>($x)--</code> is not legal code right now. Both arrows would be possible in conjunction with a leading symbol, but at that point any ambiguity is already resolved by the leading symbol and we may as well use <code>=&gt;</code>.
+</p>
+
+</div>
+
+<h4 id="different_parameter_list_separators">Different parameter list separators</h4>
+<div class="level4">
+
+<p>
+Some languages like Rust use a different kind of separator for parameter likes in closures. For
+example:
+</p>
+<pre class="code php"><span class="sy0">|</span><span class="re0">$x</span><span class="sy0">|</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span></pre>
+<p>
+The use of <code>|</code> would serve the same purpose as a leading sigil, as <code>|</code> is not a legal unary
+operator. However, the use of <code>|</code> does have some unfortunate interactions with union types and
+use of binary or in default values:
+</p>
+<pre class="code php"><span class="sy0">|</span>T1<span class="sy0">|</span>T2 <span class="re0">$x</span> <span class="sy0">=</span> A<span class="sy0">|</span>B<span class="sy0">|</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span></pre>
+<p>
+While I believe that there are no actual syntactical ambiguities here, it is rather confusing to
+read. Beyond that, the use of <code>|$x|</code> for parameter lists would be atypical for PHP.
+</p>
+
+</div>
+
+<h4 id="block-based_syntax">Block-based syntax</h4>
+<div class="level4">
+
+<p>
+A very different possibility to the ones discussed before are block-based notations, such as those
+used by Ruby or Swift. A possible syntax would be:
+</p>
+<pre class="code php"><span class="br0">&#123;</span> <span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">+</span> <span class="re0">$y</span> <span class="br0">&#125;</span></pre>
+<p>
+While this syntax has a leading <code>{</code>, it does not quite serve as a distinguishing sigil, because
+PHP supports the use of free-standing blocks. The following is legal PHP code:
+</p>
+<pre class="code php"><span class="br0">&#123;</span> <span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="re0">$y</span> <span class="br0">&#125;</span><span class="sy0">;</span></pre>
+<p>
+This means that we run into some of the same parsing issues as the syntax variants without a
+leading symbol. However, an easier workaround exists in this case: We can forbid the use of short
+closure syntax for expressions statements. This means that “free-standing” short closures would not
+be permitted, they need to be part of an expression in some way:
+</p>
+<pre class="code php"><span class="br0">&#123;</span> <span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">+</span> <span class="re0">$y</span> <span class="br0">&#125;</span><span class="sy0">;</span> <span class="co1">// ILLEGAL</span>
+<span class="re0">$fn</span> <span class="sy0">=</span> <span class="br0">&#123;</span> <span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">+</span> <span class="re0">$y</span> <span class="br0">&#125;</span><span class="sy0">;</span> <span class="co1">// legal</span></pre>
+<p>
+This generally makes the block-based syntax a viable candidate. Personally, I think it&#039;s not better
+than the <code>fn()</code> notation though, and becomes somewhat noisy especially when arrow functions are
+nested:
+</p>
+<pre class="code php">fn<span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> fn<span class="br0">&#40;</span><span class="re0">$y</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span>
+<span class="br0">&#123;</span> <span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="br0">&#123;</span> <span class="br0">&#40;</span><span class="re0">$y</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span> <span class="sy0">*</span> <span class="re0">$y</span> <span class="br0">&#125;</span> <span class="br0">&#125;</span></pre>
+</div>
+
+<h4 id="c_syntax">C++ syntax</h4>
+<div class="level4">
+
+<p>
+C++11 uses the following syntax for lambdas (C++20 extensions omitted for your sanity):
+</p>
+<pre class="code">[captures](params){body}</pre>
+
+<p>
+The captures here are similar to the <code>use()</code> list in PHP and additionally support <code>[=]</code> and
+<code>[&amp;]</code> to capture all variables by-value or by-reference, respectively.
+</p>
+
+<p>
+This syntax is not viable in PHP, because <code>[$x]($y)</code> is already valid syntax, so this would run
+into all the same parsing issues.
+</p>
+
+</div>
+
+<h4 id="miscellaneous">Miscellaneous</h4>
+<div class="level4">
+
+<p>
+It has been suggested to use the <code>\param_list =&gt; expr</code> syntax (without wrapping the parameters in parentheses), which is very close to the syntax used by Haskell. This syntax is ambiguous, because the <code>\</code> may also be part of a fully qualified type name:
+</p>
+<pre class="code php"><span class="br0">&#91;</span>\T <span class="sy0">&amp;</span><span class="re0">$x</span> <span class="sy0">=&gt;</span> <span class="re0">$y</span><span class="br0">&#93;</span>
+<span class="co1">// could be</span>
+<span class="br0">&#91;</span>\<span class="br0">&#40;</span>T <span class="sy0">&amp;</span><span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$y</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+<span class="co1">// or</span>
+<span class="br0">&#91;</span><span class="br0">&#40;</span>\T <span class="sy0">&amp;</span> <span class="re0">$x</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$y</span><span class="br0">&#93;</span></pre>
+</div>
+
+<h3 class="sectionedit13" id="binding_behavior">Binding behavior</h3>
+<div class="level3">
+
+<p>
+Next to syntax, the other contentious point with regards to short closures is the binding behavior.
+Short closures automatically bind used variables from the parent scope, the question is how exactly
+that binding works. There are basically three possibilities, which we&#039;ll call by-value,
+by-reference and by-variable binding here.
+</p>
+
+<p>
+By-value binding corresponds to <code>use($x)</code> and by-reference binding to <code>use(&amp;$x)</code>. The advantage
+of reference binding is that it allows you to modify variables inside the arrow function:
+</p>
+<pre class="code php"><span class="re0">$x</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$x</span><span class="sy0">++;</span>
+<span class="re0">$fn</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<a href="http://www.php.net/var_dump"><span class="kw3">var_dump</span></a><span class="br0">&#40;</span><span class="re0">$x</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// By-value: 1</span>
+              <span class="co1">// By-reference: 2</span></pre>
+<p>
+At least for arrow functions in their single expression form, the ability to change variables from
+the outer scope seems to be of limited usefulness. This would be more useful in conjunction with
+block form.
+</p>
+
+<p>
+Unfortunately it cannot be said that by-reference bindings are “strictly better” than by-value
+bindings, due to two main issues: The first is that by-reference bindings have a performance cost,
+because they require the creation of reference wrapper, and their subsequent dereferencing. It
+would be rather unfortunate if the choice between using an arrow function and using the full
+closure syntax would also have to take into account their different performance characteristics.
+</p>
+
+<p>
+The second and more important issue is that by-reference binding goes both ways: While it allows
+modifying a variable from inside the closure, it also means that the variable inside the closure
+can be changed from outside. The following example illustrates why this problematic, and why the
+use of implicit by-reference binding can cause highly non-intuitive behavior:
+</p>
+<pre class="code php"><span class="re0">$range</span> <span class="sy0">=</span> <a href="http://www.php.net/range"><span class="kw3">range</span></a><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="re0">$fns</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+<span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$range</span> <span class="kw1">as</span> <span class="re0">$i</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="re0">$fns</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$i</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$fns</span> <span class="kw1">as</span> <span class="re0">$fn</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">echo</span> <span class="re0">$fn</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="co1">// By-value:     1 2 3 4 5</span>
+<span class="co1">// By-reference: 5 5 5 5 5</span>
+<span class="co1">// By-variable:  5 5 5 5 5</span></pre>
+<p>
+If the arrow function uses by-value binding, everything works as expected. If it uses by-reference
+binding, what happens is the following: On the first loop iteration, the <code>$i</code> inside the closure
+is bound by-reference to the <code>$i</code> of the foreach loop. On the second iteration the value inside
+this reference is overwritten, and it is additionally bound to the <code>$i</code> in the new closure. After
+the loop has finished, we&#039;re left with all closures sharing a single reference, that contains the
+value it was assigned last.
+</p>
+
+<p>
+The third binding mode which hasn&#039;t been discussed yet and which is not currently available in PHP
+is the by-variable binding. This is a true scope binding, where variables in the outer scope and
+variables in the closure scope are shared. By-reference binding is an approximation of this
+behavior, but not quite the same, as the following variation of the previous example illustrates:
+</p>
+<pre class="code php"><span class="re0">$range</span> <span class="sy0">=</span> <a href="http://www.php.net/range"><span class="kw3">range</span></a><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="re0">$fns</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>      <span class="co1">// v-- added this</span>
+<span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$range</span> <span class="kw1">as</span> <span class="sy0">&amp;</span><span class="re0">$i</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="re0">$fns</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$i</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$fns</span> <span class="kw1">as</span> <span class="re0">$fn</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">echo</span> <span class="re0">$fn</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="co1">// By-value:     1 2 3 4 5</span>
+<span class="co1">// By-reference: 1 2 3 4 5</span>
+<span class="co1">// By-variable:  5 5 5 5 5</span></pre>
+<p>
+When iterating with foreach by-reference and using a by-reference binding the behavior now
+changes: The by-reference foreach performs a reference assignment (rather than a value assignment)
+on each iteration, which breaks the previous reference relationship. This means that each closure
+will now get it&#039;s own independent reference that refers to the corresponding array element.
+</p>
+
+<p>
+When using a by-variable binding, the way the assignment occurs does not matter: The <code>$i</code> in the
+outer code and the <code>$i</code>s in the closures are literally the same variables, so only the final
+value of <code>$i</code> at the time the closure is called is relevant.
+</p>
+
+<p>
+By-variable bindings would be hard to implement in PHP, and it would likely not be possible to make
+them as performant as by-value bindings.
+</p>
+
+<p>
+Due to the issue illustrated with the foreach examples above, I believe that the only binding type
+that is a viable default for PHP is by-value binding. However, it might be valuable to also allow
+explicitly switching to a by-reference binding, especially if block closures are allowed. This
+could looks something like this:
+</p>
+<pre class="code php"><span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw2">use</span><span class="br0">&#40;</span><span class="sy0">&amp;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// ...</span>
+<span class="br0">&#125;</span><span class="sy0">;</span></pre>
+<p>
+This would instruct PHP to bind all used variables by-reference rather than by-value.
+</p>
+
+</div>
+
+<h2 class="sectionedit14" id="future_scope">Future Scope</h2>
+<div class="level2">
+
+<p>
+These are some possible future extensions, but we don&#039;t necessarily endorse them.
+</p>
+
+</div>
+
+<h3 class="sectionedit15" id="multi-statement_bodies">Multi-statement bodies</h3>
+<div class="level3">
+
+<p>
+This <abbr title="Request for Comments">RFC</abbr> allows arrow functions to only have a single, implicitly returned expression. However, it
+is common in other languages to also support of form that accepts a code block with an arbitrary
+number of statements:
+</p>
+<pre class="code php">fn<span class="br0">&#40;</span>params<span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="br0">&#123;</span>
+    stmt1<span class="sy0">;</span>
+    stmt2<span class="sy0">;</span>
+    <span class="kw1">return</span> expr<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="co1">// or possibly just</span>
+fn<span class="br0">&#40;</span>params<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    stmt1<span class="sy0">;</span>
+    stmt2<span class="sy0">;</span>
+    <span class="kw1">return</span> expr<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+<p>
+This feature is omitted in this <abbr title="Request for Comments">RFC</abbr>, because the value-proposition of this syntax is much smaller:
+Once you have multiple statements, the relative overhead of the conventional closure syntax becomes
+small.
+</p>
+
+<p>
+An advantage of supporting this syntax is that it is possible to use a single closure syntax for
+all purposes (excluding cases that need to control binding behavior), rather than having to mix two
+different syntaxes depending on whether they use a single expression or multiple statements.
+</p>
+
+</div>
+
+<h3 class="sectionedit16" id="switching_the_binding_mode">Switching the binding mode</h3>
+<div class="level3">
+
+<p>
+Arrow functions use by-value binding by default, but could be extended with the possibility to
+capture variables by reference instead. This is particularly useful in conjunction with the previous
+section, as multi-statement bodies are more likely to be interested in modifying variables from the
+outer scope. A possible syntax would be:
+</p>
+<pre class="code php"><span class="re0">$a</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw2">use</span><span class="br0">&#40;</span><span class="sy0">&amp;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="re0">$a</span><span class="sy0">++;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="re0">$fn</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<a href="http://www.php.net/var_dump"><span class="kw3">var_dump</span></a><span class="br0">&#40;</span><span class="re0">$a</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// int(2)</span></pre>
+<p>
+Another possibility would be to keep by-value binding as the default, but allow using some
+explicitly specified variables by reference:
+</p>
+<pre class="code php"><span class="re0">$a</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="re0">$b</span> <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+<span class="re0">$fn</span> <span class="sy0">=</span> fn<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw2">use</span><span class="br0">&#40;</span><span class="sy0">&amp;</span><span class="re0">$a</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="re0">$a</span> <span class="sy0">+=</span> <span class="re0">$b</span><span class="sy0">;</span>
+<span class="br0">&#125;</span><span class="sy0">;</span>
+<span class="re0">$fn</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<a href="http://www.php.net/var_dump"><span class="kw3">var_dump</span></a><span class="br0">&#40;</span><span class="re0">$a</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// int(3)</span></pre>
+<p>
+In this example <code>$b</code> is still implicitly used by-value, but <code>$a</code> is explicitly used
+by-reference. However, this syntax may be confusing as it is very close to the normal closure
+syntax, which would <strong>not</strong> implicitly bind <code>$b</code>.
+</p>
+
+</div>
+
+<h3 class="sectionedit17" id="allow_arrow_notation_for_real_functions">Allow arrow notation for real functions</h3>
+<div class="level3">
+
+<p>
+It would be possible to allow using the arrow notation for normal functions and methods as well.
+This would reduce the boilerplate for single-expression functions like getters:
+</p>
+<pre class="code php"><span class="kw2">class</span> Test <span class="br0">&#123;</span>
+    <span class="kw2">private</span> <span class="re0">$foo</span><span class="sy0">;</span>
+    <span class="kw2">private</span> <span class="re0">$bar</span><span class="sy0">;</span>
+&nbsp;
+    fn getFoo<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">foo</span><span class="sy0">;</span>
+    fn getBar<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">=&gt;</span> <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">bar</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+<p>
+There are some possible variations of this, e.g. allow <code>=&gt;</code> but not <code>fn</code>.
+</p>
+
+</div>
+
+<h2 class="sectionedit18" id="changelog">Changelog</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> 2019-03-14: Clarify $this binding and explain why we&#039;re sticking with always-bind behavior.</div>
+</li>
+<li class="level1"><div class="li"> 2019-03-14: Mention <code>-&gt;</code>, <code>--&gt;</code>, <code>_()</code> and <code>\$x ⇒ $x</code>.</div>
+</li>
+</ul>
+
+</div>
+
+                    <!-- wikipage stop -->
+                                    </div>
+
+                <div class="docInfo"><bdi>rfc/arrow_functions_v2.txt</bdi> · Last modified: 2019/04/18 11:00 by <bdi>nikic</bdi></div>
+
+                            </div></div><!-- /content -->
+
+            <hr class="a11y" />
+
+            <!-- PAGE ACTIONS -->
+            <div id="dokuwiki__pagetools">
+                <h3 class="a11y">Page Tools</h3>
+                <div class="tools">
+                    <ul>
+                        <li><a href="/rfc/arrow_functions_v2?do=edit"  class="action source" accesskey="v" rel="nofollow" title="Show pagesource [V]"><span>Show pagesource</span></a></li><li><a href="/rfc/arrow_functions_v2?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]"><span>Old revisions</span></a></li><li><a href="/rfc/arrow_functions_v2?do=backlink"  class="action backlink" rel="nofollow" title="Backlinks"><span>Backlinks</span></a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="Back to top [T]"><span>Back to top</span></a></li>                    </ul>
+                </div>
+            </div>
+        </div><!-- /wrapper -->
+
+    </div></div><!-- /site -->
+
+    <div class="no"><img src="/lib/exe/indexer.php?id=rfc%3Aarrow_functions_v2&amp;1555971794" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no"></div>    <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</section>
+
+﻿<section class="secondscreen">
+  <!-- TOC START -->
+<div id="dw__toc" class="dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#php_rfcarrow_functions_20">PHP RFC: Arrow Functions 2.0</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#introduction">Introduction</a></div></li>
+<li class="level2"><div class="li"><a href="#proposal">Proposal</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#function_signatures">Function signatures</a></div></li>
+<li class="level3"><div class="li"><a href="#this_binding_and_static_arrow_functions">$this binding and static arrow functions</a></div></li>
+<li class="level3"><div class="li"><a href="#by-value_variable_binding">By-value variable binding</a></div></li>
+<li class="level3"><div class="li"><a href="#precedence">Precedence</a></div></li>
+<li class="level3"><div class="li"><a href="#backward_incompatible_changes">Backward Incompatible Changes</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#examples">Examples</a></div></li>
+<li class="level2"><div class="li"><a href="#vote">Vote</a></div></li>
+<li class="level2"><div class="li"><a href="#discussion">Discussion</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#syntax">Syntax</a></div></li>
+<li class="level3"><div class="li"><a href="#binding_behavior">Binding behavior</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#future_scope">Future Scope</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#multi-statement_bodies">Multi-statement bodies</a></div></li>
+<li class="level3"><div class="li"><a href="#switching_the_binding_mode">Switching the binding mode</a></div></li>
+<li class="level3"><div class="li"><a href="#allow_arrow_notation_for_real_functions">Allow arrow notation for real functions</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#changelog">Changelog</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</section>
+</section><!-- .fullscreen -->
+<footer>
+  <nav class="fullscreen">
+    <ul>
+      <li><a href="//php.net/copyright">Copyright © 2001-2019 The PHP Group</a></li>
+      <li><a href="//php.net/sites">Other PHP.net sites</a></li>
+      <li><a href="//php.net/privacy">Privacy policy</a></li>
+    </ul>
+  </nav>
+</footer>
+
+</div><!-- .wrap -->
+</body>
+</html>
