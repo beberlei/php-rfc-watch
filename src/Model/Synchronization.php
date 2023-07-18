@@ -109,7 +109,7 @@ class Synchronization
         $first = true;
         foreach ($nodes as $form) {
             $rows = $xpath->evaluate('table[@class="inline"]/tbody/tr', $form);
-            $voteId = $form->getAttribute('id');
+            $voteId = $this->extractVoteId($form);
 
             $vote = $rfc->getVoteById($voteId);
 
@@ -195,5 +195,10 @@ class Synchronization
         $this->rfcRepository->persist($rfc);
 
         return $rfc;
+    }
+
+    private function extractVoteId(\DOMElement $form): string
+    {
+        return str_replace(['.'], '', $form->getAttribute('id'));
     }
 }
