@@ -15,7 +15,7 @@ framework:
             App\Model\RunCommandMessage: sync
 
         buses:
-            default:
+            scheduler_default:
                 middleware:
                     - "Tideways\\SymfonyMessenger\\TidewaysMiddleware"
 
