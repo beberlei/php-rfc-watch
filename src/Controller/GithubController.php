@@ -23,9 +23,7 @@ class GithubController
         $this->urlGenerator = $urlGenerator;
     }
 
-    /**
-     * @Route("/login", name="login")
-     */
+    #[Route('/login', name: 'login')]
     public function authorizeAction(Request $request): RedirectResponse
     {
         $params = [
@@ -39,9 +37,7 @@ class GithubController
         return new RedirectResponse('https://github.com/login/oauth/authorize?' . http_build_query($params));
     }
 
-    /**
-     * @Route("/login_check", name="login_check")
-     */
+    #[Route('/login_check', name: 'login_check')]
     public function checkAction(Request $request): RedirectResponse
     {
         $session = $request->getSession();

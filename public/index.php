@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 use App\Kernel;
-use Symfony\Component\Debug\Debug;
 use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 if (file_exists(__DIR__ . '/../.env')) {
-    (new Dotenv())->load(__DIR__ . '/../.env', );
+    (new Dotenv())->load(__DIR__ . '/../.env');
 }
 
 $env = $_SERVER['APP_ENV'] ?? 'dev';

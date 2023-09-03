@@ -1,6 +1,6 @@
 security:
-    encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+    password_hashers:
+        Symfony\Component\Security\Core\User\InMemoryUser: plaintext
 
     providers:
         in_memory:
@@ -15,8 +15,8 @@ security:
             pattern: ^/admin
             http_basic:
                 realm: Secured Area
-        main:
-            anonymous: true
+        main: ~
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/, roles: PUBLIC_ACCESS }
