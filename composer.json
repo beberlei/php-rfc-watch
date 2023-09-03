@@ -41,7 +41,6 @@
     "require-dev": {
         "symfony/maker-bundle": "^1.5",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "symfony/web-server-bundle": "4.4.*",
         "symfony/stopwatch": "5.4.*",
         "symfony/web-profiler-bundle": "5.4.*"
     },
