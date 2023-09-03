@@ -27,9 +27,8 @@ class DefaultController extends AbstractController
 
     /**
      * @return array<string,mixed>
-     *
-     * @Route("/", name="homepage")
      */
+    #[Route('/', name: 'homepage')]
     public function indexAction(Request $request): array
     {
         $githubUserId = $request->getSession()->get('github_user_id');
@@ -68,9 +67,8 @@ class DefaultController extends AbstractController
 
     /**
      * @return array<string,mixed>
-     *
-     * @Route("/rfc/{slug}", name="view")
      */
+    #[Route('/rfc/{slug}', name: 'view')]
     public function viewAction(string $slug, Request $request): array
     {
         $githubUserId = $request->getSession()->get('github_user_id');
@@ -107,9 +105,8 @@ class DefaultController extends AbstractController
 
     /**
      * @return array<string,mixed>
-     *
-     * @Route("/admin", name="admin")
      */
+    #[Route('/admin', name: 'admin')]
     public function adminAction(): array
     {
         $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
@@ -120,9 +117,8 @@ class DefaultController extends AbstractController
 
     /**
      * @return array<string,mixed>|RedirectRoute
-     *
-     * @Route("/admin/rfc/{id}", name="admin_edit_rfc", methods={"POST", "GET"})
      */
+    #[Route('/admin/rfc/{id}', name: 'admin_edit_rfc', methods: ['POST', 'GET'])]
     public function adminEditRfcAction(Rfc $rfc, FormRequest $request): array|RedirectRoute
     {
         if (! $request->handle(RfcType::class, $rfc)) {
@@ -134,9 +130,7 @@ class DefaultController extends AbstractController
         return new RedirectRoute('admin');
     }
 
-    /**
-     * @Route("/admin/rfc/{id}/delete", name="admin_delete_rfc", methods={"POST"})
-     */
+    #[Route('/admin/rfc/{id}/delete', name: 'admin_delete_rfc', methods: ['POST'])]
     public function adminDeleteRfcAction(Rfc $rfc): RedirectRoute
     {
         $this->entityManager->remove($rfc);
@@ -147,9 +141,8 @@ class DefaultController extends AbstractController
 
     /**
      * @return array<string,mixed>
-     *
-     * @Route("/admin/rfc/{id}/export", name="admin_export_rfc", methods={"GET"})
      */
+    #[Route('/admin/rfc/{id}/export', name: 'admin_export_rfc', methods: ['GET'])]
     public function adminExportRfcAction(Rfc $rfc): array
     {
         return ['rfc' => $rfc];
@@ -167,9 +160,8 @@ class DefaultController extends AbstractController
 
     /**
      * @return array<string, mixed>
-     *
-     * @Route("/optin", name="optin")
      */
+    #[Route('/optin', name: 'optin')]
     public function optinAction(): array
     {
         return [];
@@ -177,9 +169,8 @@ class DefaultController extends AbstractController
 
     /**
      * @return array<string, mixed>
-     *
-     * @Route("/confirm", name="confirm")
      */
+    #[Route('/confirm', name: 'confirm')]
     public function confirmAction(): array
     {
         return [];
@@ -187,17 +178,14 @@ class DefaultController extends AbstractController
 
     /**
      * @return array<string, mixed>
-     *
-     * @Route("/unsubscribe", name="unsubscribe")
      */
+    #[Route('/unsubscribe', name: 'unsubscribe')]
     public function unsubscribeAction(): array
     {
         return [];
     }
 
-    /**
-     * @Route("/atom.xml", name="atom")
-     */
+    #[Route('/atom.xml', name: 'atom')]
     public function atomAction(): Response
     {
         $rfcRepository = $this->entityManager->getRepository(Rfc::CLASS);
