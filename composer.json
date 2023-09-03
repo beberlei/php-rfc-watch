@@ -7,20 +7,20 @@
         "ext-dom": "*",
         "symfony/flex": "^1.0",
         "sensio/framework-extra-bundle": "^5.1",
-        "symfony/asset": "^4.2",
-        "symfony/twig-bundle": "^4.2",
+        "symfony/asset": "^5.4",
+        "symfony/twig-bundle": "^5.4",
         "symfony/monolog-bundle": "^3.3",
         "symfony/swiftmailer-bundle": "^3.2",
-        "symfony/form": "^4.2",
-        "symfony/security-bundle": "^4.2",
-        "symfony/translation": "^4.2",
-        "symfony/validator": "^4.2",
-        "symfony/yaml": "^4.2",
+        "symfony/form": "^5.4",
+        "symfony/security-bundle": "^5.4",
+        "symfony/translation": "^5.4",
+        "symfony/validator": "^5.4",
+        "symfony/yaml": "^5.4",
         "phpunit/phpunit": "^9.5",
         "gyro/mvc-bundle": "^1.0-beta",
-        "symfony/templating": "^4.2",
+        "symfony/templating": "^5.4",
         "kriswallsmith/buzz": "0.13.*",
-        "symfony/css-selector": "^4.2",
+        "symfony/css-selector": "^5.4",
         "laminas/laminas-feed": "^2.10",
         "phake/phake": "^3.1",
         "composer/package-versions-deprecated": "^1.11",
@@ -31,7 +31,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
         "sentry/sentry-symfony": "^4.8",
-        "symfony/dotenv": "4.4.*"
+        "symfony/dotenv": "5.4.*"
     },
     "scripts": {
         "auto-scripts": {
@@ -43,8 +43,8 @@
         "symfony/maker-bundle": "^1.5",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/web-server-bundle": "4.4.*",
-        "symfony/stopwatch": "4.4.*",
-        "symfony/web-profiler-bundle": "4.4.*"
+        "symfony/stopwatch": "5.4.*",
+        "symfony/web-profiler-bundle": "5.4.*"
     },
     "autoload": {
         "psr-4": {
@@ -60,7 +60,7 @@
         "platform": {"php": "7.4"},
         "symfony": {
             "allow-contrib": true,
-            "require": "4.4.*"
+            "require": "5.4.*"
         }
     },
     "config": {
