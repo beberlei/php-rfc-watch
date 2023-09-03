@@ -10,7 +10,6 @@
         "symfony/asset": "^5.4",
         "symfony/twig-bundle": "^5.4",
         "symfony/monolog-bundle": "^3.3",
-        "symfony/swiftmailer-bundle": "^3.2",
         "symfony/form": "^5.4",
         "symfony/security-bundle": "^5.4",
         "symfony/translation": "^5.4",
