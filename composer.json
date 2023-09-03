@@ -33,7 +33,8 @@
         "symfony/dotenv": "^6.3",
         "symfony/config": "^6.3",
         "symfony/scheduler": "6.3.*",
-        "symfony/messenger": "6.3.*"
+        "symfony/messenger": "6.3.*",
+        "tideways/symfony-messenger-middleware": "^1.1"
     },
     "scripts": {
         "auto-scripts": {

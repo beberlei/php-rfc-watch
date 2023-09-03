@@ -14,6 +14,11 @@ framework:
             # 'App\Message\YourMessage': async
             App\Model\RunCommandMessage: sync
 
+        buses:
+            default:
+                middleware:
+                    - "Tideways\\SymfonyMessenger\\TidewaysMiddleware"
+
 # when@test:
 #    framework:
 #        messenger:
@@ -21,3 +26,6 @@ framework:
 #                # replace with your transport name here (e.g., my_transport: 'in-memory://')
 #                # For more Messenger testing tools, see https://github.com/zenstruck/messenger-test
 #                async: 'in-memory://'
+
+services:
+    "Tideways\\SymfonyMessenger\\TidewaysMiddleware": ~

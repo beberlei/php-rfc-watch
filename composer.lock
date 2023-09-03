@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ba24dade01378b84d909bc1fe182caa",
+    "content-hash": "18fd844c4b2019b98fa1ebba46045b83",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -10231,6 +10231,44 @@
                 }
             ],
             "time": "2021-07-28T10:34:58+00:00"
+        },
+        {
+            "name": "tideways/symfony-messenger-middleware",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tideways/symfony-messenger-middleware.git",
+                "reference": "25a591621ba06af119ca7b68ae2c52150424aeb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tideways/symfony-messenger-middleware/zipball/25a591621ba06af119ca7b68ae2c52150424aeb3",
+                "reference": "25a591621ba06af119ca7b68ae2c52150424aeb3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2|^8.0",
+                "symfony/messenger": "^4.3 || ^5.0 || ^6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tideways\\SymfonyMessenger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "mit"
+            ],
+            "description": "Provides a Middleware to integration Tideways into Symfony Messenger Processing",
+            "support": {
+                "issues": "https://github.com/tideways/symfony-messenger-middleware/issues",
+                "source": "https://github.com/tideways/symfony-messenger-middleware/tree/v1.1.1"
+            },
+            "time": "2023-04-27T13:56:17+00:00"
         },
         {
             "name": "twig/twig",
