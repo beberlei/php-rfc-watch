@@ -34,7 +34,8 @@
         "symfony/config": "^6.3",
         "symfony/scheduler": "6.3.*",
         "symfony/messenger": "6.3.*",
-        "tideways/symfony-messenger-middleware": "^1.1"
+        "tideways/symfony-messenger-middleware": "^1.1",
+        "symfony/runtime": "6.3.*"
     },
     "scripts": {
         "auto-scripts": {
@@ -69,7 +70,8 @@
         "allow-plugins": {
             "symfony/flex": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "symfony/runtime": true
         },
         "platform": {
             "ext-tideways": "1.0.0"
