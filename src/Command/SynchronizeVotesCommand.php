@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Model\Synchronization;
+use Buzz\Exception\RequestException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,7 +37,11 @@ class SynchronizeVotesCommand extends Command
         $urls = $input->getArgument('urls') ?: $this->synchronization->getRfcUrlsInVoting();
         $targetPhpVersion = $input->getOption('target');
 
-        $this->synchronization->synchronizeRfcs($urls, $targetPhpVersion);
+        try {
+            $this->synchronization->synchronizeRfcs($urls, $targetPhpVersion);
+        } catch (RequestException $e) {
+            // we can ignore them request/timeout exceptions
+        }
 
         return 0;
     }
