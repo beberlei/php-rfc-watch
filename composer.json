@@ -32,10 +32,10 @@
         "sentry/sentry-symfony": "^4.8",
         "symfony/dotenv": "^6.3",
         "symfony/config": "^6.3",
-        "symfony/scheduler": "6.3.*",
-        "symfony/messenger": "6.3.*",
+        "symfony/scheduler": "^6.3",
+        "symfony/messenger": "^6.3",
         "tideways/symfony-messenger-middleware": "^1.1",
-        "symfony/runtime": "6.3.*"
+        "symfony/runtime": "^6.3"
     },
     "scripts": {
         "auto-scripts": {
@@ -46,8 +46,8 @@
     "require-dev": {
         "symfony/maker-bundle": "^1.5",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "symfony/stopwatch": "6.3.*",
-        "symfony/web-profiler-bundle": "6.3.*"
+        "symfony/stopwatch": "^6.3",
+        "symfony/web-profiler-bundle": "^6.3"
     },
     "autoload": {
         "psr-4": {
@@ -63,7 +63,7 @@
         "platform": {"php": "7.4"},
         "symfony": {
             "allow-contrib": true,
-            "require": "6.3.*"
+            "require": "6.4.*"
         }
     },
     "config": {
