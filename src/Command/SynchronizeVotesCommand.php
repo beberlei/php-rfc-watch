@@ -6,6 +6,7 @@ namespace App\Command;
 
 use App\Model\Synchronization;
 use Buzz\Exception\RequestException;
+use Doctrine\DBAL\Exception\DriverException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -41,6 +42,8 @@ class SynchronizeVotesCommand extends Command
             $this->synchronization->synchronizeRfcs($urls, $targetPhpVersion);
         } catch (RequestException $e) {
             // we can ignore them request/timeout exceptions
+        } catch (DriverException $e) {
+            // we can ignore them database exceptions
         }
 
         return 0;
