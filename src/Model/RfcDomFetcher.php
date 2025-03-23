@@ -27,6 +27,7 @@ class RfcDomFetcher
         $content = $response->getContent();
         $dom = new DOMDocument();
         @$dom->loadHTML($content);
+
         return $dom;
     }
 }
