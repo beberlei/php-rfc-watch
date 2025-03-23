@@ -1,19 +1,21 @@
 {% import 'Default/rfc_macros.html.twig' as macros %}
-<div class="w-full md:w-1/2 p-2">
-    <div class="bg-white rounded shadow-lg md:flex-auto flex-none">
-        <div class="px-6 py-4">
+<div class="column is-half">
+    <div class="card">
+        <div class="card-content">
             {% if rfc.status == 'open' %}
-                <span class="inline-block bg-blue-500 text-white rounded-full px-3 mr-2 text-sm font-semibold">Active</span>
+                <span class="tag is-info mr-2">Active</span>
             {% endif %}
 
-            <a class="font-bold hover:underline no-underline break-words" href="{{ path('view', {'slug': rfc.slug}) }}">{{ rfc.title }}</a>
+            <a class="title is-4 has-text-dark hover-underline" href="{{ path('view', {'slug': rfc.slug}) }}">{{ rfc.title }}</a>
 
-            <span class="text-gray text-xs">
-                    (<a class="hover:underline no-underline break-words" href="{{ rfc.url }}" target="_blank">View on PHP.net</a>)
-                </span>
+            <span class="is-size-7">
+                (<a class="has-text-dark hover-underline" href="{{ rfc.url }}" target="_blank">View on PHP.net</a>)
+            </span>
 
             {% if rfc.targetPhpVersion %}
-                <div class="float-right"><span class="badge badge-secondary">PHP {{ rfc.targetPhpVersion }}</span></div>
+                <div class="is-pulled-right">
+                    <span class="tag is-secondary">PHP {{ rfc.targetPhpVersion }}</span>
+                </div>
             {% endif %}
 
             {{ include('Default/rfc_discussion.html.twig', { rfc: rfc }) }}

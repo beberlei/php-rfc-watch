@@ -4,26 +4,29 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Buzz\Browser;
 use DOMDocument;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class RfcDomFetcher
 {
-    private Browser $browser;
+    private HttpClientInterface $httpClient;
 
-    public function __construct(Browser $browser)
+    public function __construct(HttpClientInterface $httpClient)
     {
-        $this->browser = $browser;
+        $this->httpClient = $httpClient;
     }
 
     public function getRfcDom(string $url): DOMDocument
     {
-        $response = $this->browser->get($url);
+        $response = $this->httpClient->request('GET', $url);
 
         if ($response->getStatusCode() !== 200) {
             throw new \RuntimeException('could not fetch RFC from url ' . $url);
         }
 
-        return $response->toDomDocument();
+        $content = $response->getContent();
+        $dom = new DOMDocument();
+        @$dom->loadHTML($content);
+        return $dom;
     }
 }

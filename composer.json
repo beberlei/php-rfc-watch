@@ -16,7 +16,7 @@
         "symfony/validator": "^7.0",
         "symfony/yaml": "^7.0",
         "phpunit/phpunit": "^10.0",
-        "gyro/mvc-bundle": "^1.0-beta",
+        "gyro/mvc-bundle": "v1.0.0-beta8",
         "symfony/templating": "^6.4",
         "kriswallsmith/buzz": "0.13.*",
         "symfony/css-selector": "^7.0",
@@ -33,7 +33,8 @@
         "symfony/messenger": "^7.0",
         "tideways/symfony-messenger-middleware": "^1.1",
         "symfony/runtime": "^7.0",
-        "symfony/webpack-encore-bundle": "^2.2"
+        "symfony/webpack-encore-bundle": "^2.2",
+        "symfony/http-client": "^7.0"
     },
     "scripts": {
         "auto-scripts": {

@@ -8,42 +8,49 @@
         <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
         <link type="application/atom+xml" rel="alternate" href="/atom.xml" />
     </head>
-    <body class="bg-gray-200">
-        <nav class="flex flex-wrap bg-gray-800 p-2">
-            <div class="text-xs text-white">
-                <a target="_blank" href="https://tideways.com?pk_campaign=rfcwatch">PHP RFC Watch is sponsored by <img class="h-4 inline-block" src="/tideways.png" /> Tideways <span class="d-none d-lg-inline">- Profiling, Monitoring and Exception Tracking for PHP</span></a>
+    <body class="has-background-light">
+        <nav class="navbar is-dark">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <a target="_blank" href="https://tideways.com?pk_campaign=rfcwatch" class="has-text-white">
+                        PHP RFC Watch is sponsored by <img class="image is-16x16 is-inline-block" src="/tideways.png" /> Tideways 
+                        <span class="is-hidden-touch">- Profiling, Monitoring and Exception Tracking for PHP</span>
+                    </a>
+                </div>
             </div>
         </nav>
 
-        <main>
-            <div class="container mx-auto">
-                <div class="row mb-2">
-                    <div class="col-sm">
-                        <h1 class="text-center"><a class="text-4xl" href="/"><img class="h-10 inline-block" src="/php.svg"> RFC Watch</a></h1>
-                    </div>
+        <main class="container">
+            <div class="columns">
+                <div class="column">
+                    <h1 class="has-text-centered">
+                        <a class="is-size-1" href="/">
+                            <img class="image is-32x32 is-inline-block" src="/php.svg"> RFC Watch
+                        </a>
+                    </h1>
                 </div>
+            </div>
 
-                {% for message in app.flashes('info') %}
-                    <div class="rounded-md bg-blue-50 p-4">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <!-- Heroicon name: solid/information-circle -->
-                                <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-                                </svg>
+            {% for message in app.flashes('info') %}
+                <div class="notification is-info">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <span class="icon is-medium">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
                             </div>
-                            <div class="ml-3 flex-1 md:flex md:justify-between">
-                                <p class="text-sm text-blue-700">
+                            <div class="level-item">
+                                <p class="is-size-7">
                                     {{ message }}
                                 </p>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
+            {% endfor %}
 
-                {% block content %}{% endblock %}
-
-            </div>
+            {% block content %}{% endblock %}
         </main>
 
         <footer class="mt-10">

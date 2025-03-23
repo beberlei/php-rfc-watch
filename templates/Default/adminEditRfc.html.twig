@@ -1,19 +1,21 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <h1 class="uppercase text-xl font-bold">Admin: {{ rfc.title }}</h1>
+    <h1 class="title is-4 has-text-uppercase">Admin: {{ rfc.title }}</h1>
 
-    <div class="flex flex-wrap items-stretch">
-        <div class="w-full p-2">
-            <div class="rounded shadow bg-white p-4">
-                {% form_theme form 'tailwind_form_theme.html.twig' %}
-                {{ form(form) }}
+    <div class="columns">
+        <div class="column">
+            <div class="card">
+                <div class="card-content">
+                    {% form_theme form 'bulma_form_theme.html.twig' %}
+                    {{ form(form) }}
 
-                <ul>
-                {% for vote in rfc.votes %}
-                    <li>{{ vote.question }} {% if not vote.hide %}[Hide]{% endif %}</li>
-                {% endfor %}
-                </ul>
+                    <ul class="mt-4">
+                    {% for vote in rfc.votes %}
+                        <li>{{ vote.question }} {% if not vote.hide %}[Hide]{% endif %}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

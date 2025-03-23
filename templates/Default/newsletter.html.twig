@@ -2,7 +2,7 @@
 
 {% block content %}
 <form id="newsletter_signup" name="newsletter_signup" method="POST" action="#" onsubmit="document.newsletter_signup.action='https://newsletters.tideways.io/subscribe/e5e27371-8f4c-47dc-bf37-fba5591f47bd';">
-    <div class="mb-8 p-2">
+    <div class="content mb-6">
         <p>
             We send semi-automated updates whenever an RFC is accepted
             or rejected by voting. Stop with the constant refresh of
@@ -12,23 +12,31 @@
         </p>
     </div>
 
-    <div class="w-full md:w-1/2 mx-auto p-2">
-        <div class="rounded shadow-lg bg-white p-10">
-            <p class="mb-4">
-                <input type="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" placeholder="E-Mail address"/>
-            </p>
+    <div class="column is-half is-offset-one-quarter">
+        <div class="card">
+            <div class="card-content">
+                <div class="field">
+                    <div class="control">
+                        <input type="email" class="input" name="email" placeholder="E-Mail address"/>
+                    </div>
+                </div>
 
-            <div class="text-center mb-4">
-                <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="Signup for Notifications" />
+                <div class="field has-text-centered">
+                    <div class="control">
+                        <input class="button is-primary" type="submit" value="Signup for Notifications" />
+                    </div>
+                </div>
+
+                <div class="content">
+                    <p>
+                        By clicking on the Subscribe button I am giving my consent for Tideways to hold my email address for the purposes of contacting me with occasional information about PHP RFCs and Releases.
+                    </p>
+
+                    <p>
+                        You can unsubscribe with one click at any time and withdraw your consent. No spam. We will never share your e-mail address. <a href="https://tideways.com/privacy">Our Privacy Policy</a>
+                    </p>
+                </div>
             </div>
-
-            <p class="mb-4">
-                By clicking on the Subscribe button I am giving my consent for Tideways to hold my email address for the purposes of contacting me with occasional information about PHP RFCs and Releases.
-            </p>
-
-            <p class="mb-0">
-                You can unsubscribe with one click at any time and withdraw your consent. No spam. We will never share your e-mail address. <a href="https://tideways.com/privacy">Our Privacy Policy</a>
-            </p>
         </div>
     </div>
 </form>

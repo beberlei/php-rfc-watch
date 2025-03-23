@@ -6,40 +6,33 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class Vote
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
     public ?int $id = null;
 
-    /** @ORM\ManyToOne(targetEntity="Rfc", inversedBy="votes") */
+    #[ORM\ManyToOne(targetEntity: Rfc::class, inversedBy: 'votes')]
     public ?Rfc $rfc;
 
-    /** @ORM\Column(type="boolean") */
+    #[ORM\Column(type: 'boolean')]
     public bool $primaryVote = true;
 
-    /** @ORM\Column(type="string", nullable=true) */
+    #[ORM\Column(type: 'string', nullable: true)]
     public ?string $voteId = null;
 
-    /** @ORM\Column(type="string", nullable=true) */
+    #[ORM\Column(type: 'string', nullable: true)]
     public string $question;
 
-    /**
-     * @ORM\Column(type="json")
-     *
-     * @var array<string,int>
-     */
+    #[ORM\Column(type: 'json')]
+    /** @var array<string,int> */
     public array $currentVotes = [];
 
-    /** @ORM\Column(type="integer") */
+    #[ORM\Column(type: 'integer')]
     public int $passThreshold = 66;
 
-    /** @ORM\Column(type="boolean", nullable=true) */
+    #[ORM\Column(type: 'boolean', nullable: true)]
     public bool $hide = false;
 }

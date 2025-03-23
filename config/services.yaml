@@ -11,12 +11,17 @@ services:
         public: false       # Allows optimizing the container by removing unused services; this also means
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
+        bind:
+            $kernel: '@kernel'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
-        resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -33,3 +38,12 @@ services:
             - '%env(GITHUB_CLIENT_SECRET)%'
 
     Predis\Client: ~
+
+    App\Model\RfcDomFetcher:
+        arguments:
+            $httpClient: '@http_client'
+
+    App\Model\Synchronization:
+        arguments:
+            $rfcRepository: '@App\Repository\RfcRepository'
+            $rfcFetcher: '@App\Model\RfcDomFetcher'

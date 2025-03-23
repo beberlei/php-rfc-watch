@@ -1,40 +1,44 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <h1 class="uppercase text-xl font-bold">Admin</h1>
+    <h1 class="title is-4 has-text-uppercase">Admin</h1>
 
-    <div class="flex flex-wrap items-stretch">
+    <div class="columns is-multiline">
         {% for rfc in rfcs %}
-        <div class="w-1/3 p-2">
-            <div class="rounded shadow bg-white p-4">
-                <div class="card-header">{{ rfc.title }}</div>
-                <div class="text-sm text-gray-600">
-                    <p>
-                        <strong>Status:</strong>
-                        {{ rfc.status }}
-                    </p>
+        <div class="column is-4">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">{{ rfc.title }}</p>
+                </header>
+                <div class="card-content">
+                    <div class="content is-small">
+                        <p>
+                            <strong>Status:</strong>
+                            {{ rfc.status }}
+                        </p>
 
-                    <p>
-                        <strong>Target Version:</strong>
-                        {{ rfc.targetPhpVersion|default('unknown') }}
-                    </p>
+                        <p>
+                            <strong>Target Version:</strong>
+                            {{ rfc.targetPhpVersion|default('unknown') }}
+                        </p>
 
-                    <p>
-                        <strong>Discussions:</strong>
-                        {% for discussion in rfc.discussions %}
-                            <a href="{{ discussion }}">#{{ loop.index }}</a>
-                            {% else %}
-                            None
-                        {% endfor %}
-                    </p>
+                        <p>
+                            <strong>Discussions:</strong>
+                            {% for discussion in rfc.discussions %}
+                                <a href="{{ discussion }}">#{{ loop.index }}</a>
+                                {% else %}
+                                None
+                            {% endfor %}
+                        </p>
+                    </div>
                 </div>
-                <div class="flex">
-                    <form method="POST" action="{{ path('admin_delete_rfc', {'id': rfc.id}) }}">
-                    <a class="text-bold rounded shadow bg-blue-500 p-1 text-white mr-4 no-underline" href="{{ path('admin_edit_rfc', {'id': rfc.id}) }}">Edit</a>
-                    <a class="text-bold rounded shadow bg-blue-500 p-1 text-white mr-4 no-underline" href="{{ path('admin_export_rfc', {'id': rfc.id}) }}">Export</a>
-                    <button class="text-bold rounded shadow bg-blue-500 p-1 text-white mr-4 no-underline">Delete</button>
+                <footer class="card-footer">
+                    <form method="POST" action="{{ path('admin_delete_rfc', {'id': rfc.id}) }}" class="card-footer-item">
+                        <a class="button is-info mr-2" href="{{ path('admin_edit_rfc', {'id': rfc.id}) }}">Edit</a>
+                        <a class="button is-info mr-2" href="{{ path('admin_export_rfc', {'id': rfc.id}) }}">Export</a>
+                        <button class="button is-danger">Delete</button>
                     </form>
-                </div>
+                </footer>
             </div>
         </div>
         {% endfor %}

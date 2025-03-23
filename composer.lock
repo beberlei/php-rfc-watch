@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b0bca1e803e399830db08f2a19c308f",
+    "content-hash": "3920361531093a79a0562e1264113477",
     "packages": [
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
@@ -1573,27 +1573,35 @@
         },
         {
             "name": "gyro/mvc-bundle",
-            "version": "v1.0.0-beta2",
+            "version": "v1.0.0-beta8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gyro-project/mvc-bundle.git",
-                "reference": "8254f168cbe68620096fa2f87b18e4fb67741801"
+                "reference": "8ddfb5beb20350ff985519380ba6efcbe1ad8eb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gyro-project/mvc-bundle/zipball/8254f168cbe68620096fa2f87b18e4fb67741801",
-                "reference": "8254f168cbe68620096fa2f87b18e4fb67741801",
+                "url": "https://api.github.com/repos/gyro-project/mvc-bundle/zipball/8ddfb5beb20350ff985519380ba6efcbe1ad8eb6",
+                "reference": "8ddfb5beb20350ff985519380ba6efcbe1ad8eb6",
                 "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": "*",
+                "psr/container": "^1.1|^2.0",
+                "symfony/http-kernel": "~4.4|~5.4|~6.4|~7.0",
+                "symfony/polyfill-php80": "^1.31",
+                "technically/callable-reflection": "^0.4.1"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^8.2.1",
-                "nikic/php-parser": "^4.4",
+                "nikic/php-parser": "^4.4|^5.0",
                 "phake/phake": "^4.2.0",
-                "php": "~7.4|~8.0",
-                "phpunit/phpunit": "^9.4",
-                "symfony/symfony": "^4.4|^5.4",
+                "php": "~8.0",
+                "phpunit/phpunit": "^9.6|^10.5|^11.4",
+                "rector/rector": "^2.0",
+                "symfony/symfony": "~4.4|~5.4|~6.4|~7.0",
                 "twig/twig": "^1.44|^2.14|^3.1",
-                "vimeo/psalm": "4.15.0"
+                "vimeo/psalm": "^5.26|^6.9"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -1619,9 +1627,9 @@
             ],
             "support": {
                 "issues": "https://github.com/gyro-project/mvc-bundle/issues",
-                "source": "https://github.com/gyro-project/mvc-bundle/tree/v1.0.0-beta2"
+                "source": "https://github.com/gyro-project/mvc-bundle/tree/v1.0.0-beta8"
             },
-            "time": "2022-01-15T23:19:19+00:00"
+            "time": "2025-03-23T22:21:22+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
@@ -6081,6 +6089,176 @@
             "time": "2024-07-26T13:24:26+00:00"
         },
         {
+            "name": "symfony/http-client",
+            "version": "v7.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client.git",
+                "reference": "3ae495c67ba9c3b504fecd070a6c28b4143088cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/3ae495c67ba9c3b504fecd070a6c28b4143088cf",
+                "reference": "3ae495c67ba9c3b504fecd070a6c28b4143088cf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "psr/log": "^1|^2|^3",
+                "symfony/http-client-contracts": "^3.4.1",
+                "symfony/service-contracts": "^2.5|^3"
+            },
+            "conflict": {
+                "php-http/discovery": "<1.15",
+                "symfony/http-foundation": "<6.4"
+            },
+            "provide": {
+                "php-http/async-client-implementation": "*",
+                "php-http/client-implementation": "*",
+                "psr/http-client-implementation": "1.0",
+                "symfony/http-client-implementation": "3.0"
+            },
+            "require-dev": {
+                "amphp/amp": "^2.5",
+                "amphp/http-client": "^4.2.1",
+                "amphp/http-tunnel": "^1.0",
+                "amphp/socket": "^1.1",
+                "guzzlehttp/promises": "^1.4|^2.0",
+                "nyholm/psr7": "^1.0",
+                "php-http/httplug": "^1.0|^2.0",
+                "psr/http-client": "^1.0",
+                "symfony/dependency-injection": "^6.4|^7.0",
+                "symfony/http-kernel": "^6.4|^7.0",
+                "symfony/messenger": "^6.4|^7.0",
+                "symfony/process": "^6.4|^7.0",
+                "symfony/stopwatch": "^6.4|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\HttpClient\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides powerful methods to fetch HTTP resources synchronously or asynchronously",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "http"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/http-client/tree/v7.0.10"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-07-17T06:06:58+00:00"
+        },
+        {
+            "name": "symfony/http-client-contracts",
+            "version": "v3.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client-contracts.git",
+                "reference": "ee8d807ab20fcb51267fdace50fbe3494c31e645"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/ee8d807ab20fcb51267fdace50fbe3494c31e645",
+                "reference": "ee8d807ab20fcb51267fdace50fbe3494c31e645",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
+                "branch-alias": {
+                    "dev-main": "3.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\HttpClient\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Test/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to HTTP clients",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/http-client-contracts/tree/v3.5.2"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-12-07T08:49:48+00:00"
+        },
+        {
             "name": "symfony/http-foundation",
             "version": "v7.0.10",
             "source": {
@@ -9242,6 +9420,49 @@
                 }
             ],
             "time": "2024-05-31T14:55:39+00:00"
+        },
+        {
+            "name": "technically/callable-reflection",
+            "version": "0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/technically-php/callable-reflection.git",
+                "reference": "0634449080e030438f68127f84281fdbb85f9778"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/technically-php/callable-reflection/zipball/0634449080e030438f68127f84281fdbb85f9778",
+                "reference": "0634449080e030438f68127f84281fdbb85f9778",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "peridot-php/peridot": "^1.19"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Technically\\CallableReflection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Voskoboinyk",
+                    "email": "ivan@voskoboinyk.com"
+                }
+            ],
+            "description": "A handy library to simplify reflecting any callable or constructor. PHP8-ready!",
+            "support": {
+                "issues": "https://github.com/technically-php/callable-reflection/issues",
+                "source": "https://github.com/technically-php/callable-reflection/tree/0.4.1"
+            },
+            "time": "2023-03-14T16:42:34+00:00"
         },
         {
             "name": "theseer/tokenizer",

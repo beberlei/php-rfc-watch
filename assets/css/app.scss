@@ -1,6 +1,4 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "~bulma/bulma";
 
 .rfc-list > :nth-child(2n + 1) { order: 1; } /* 1st column */
 .rfc-list > :nth-child(2n + 2) { order: 2; } /* 2nd column */
@@ -16,4 +14,8 @@
 
 .rfc-list-header:hover > .rfc-anchor {
   display: inline;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
 }
