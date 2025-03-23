@@ -9,11 +9,12 @@
     <arg name="extensions" value="php"/>
 
     <rule ref="Doctrine">
+        <exclude name="Generic.Files.LineLength"/>
         <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName" />
-                <exclude name="SlevomatCodingStandard.Variables.UselessVariable.UselessVariable" /> <!-- this cannot be safely detected sadly -->
-                <exclude name="SlevomatCodingStandard.ControlStructures.UselessTernaryOperator.UselessTernaryOperator" /> <!-- i find this useful at time to increase clarity! -->
-                <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName" />
-                <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame" />
+        <exclude name="SlevomatCodingStandard.Variables.UselessVariable.UselessVariable" /> <!-- this cannot be safely detected sadly -->
+        <exclude name="SlevomatCodingStandard.ControlStructures.UselessTernaryOperator.UselessTernaryOperator" /> <!-- i find this useful at time to increase clarity! -->
+        <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName" />
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame" />
     </rule>
 
     <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction" />
