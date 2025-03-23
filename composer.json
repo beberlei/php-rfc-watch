@@ -1,41 +1,40 @@
 {
     "name": "beberlei/phprfcwatch",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-json": "*",
         "ext-tideways": "@stable",
         "ext-dom": "*",
         "symfony/flex": "^2.0",
-        "symfony/config": "^6.3",
-        "sensio/framework-extra-bundle": "^6.2",
-        "symfony/asset": "^6.3",
-        "symfony/twig-bundle": "^6.3",
-        "symfony/monolog-bundle": "^3.3",
-        "symfony/form": "^6.3",
-        "symfony/security-bundle": "^6.3",
-        "symfony/translation": "^6.3",
-        "symfony/validator": "^6.3",
-        "symfony/yaml": "^6.3",
-        "phpunit/phpunit": "^9.5",
-        "gyro/mvc-bundle": "^1.0-beta",
-        "symfony/templating": "^6.3",
+        "symfony/config": "^7.0",
+        "symfony/asset": "^7.0",
+        "symfony/twig-bundle": "^7.0",
+        "symfony/monolog-bundle": "^3.8",
+        "symfony/form": "^7.0",
+        "symfony/security-bundle": "^7.0",
+        "symfony/translation": "^7.0",
+        "symfony/validator": "^7.0",
+        "symfony/yaml": "^7.0",
+        "phpunit/phpunit": "^10.0",
+        "gyro/mvc-bundle": "v1.0.0-beta8",
+        "symfony/templating": "^6.4",
         "kriswallsmith/buzz": "0.13.*",
-        "symfony/css-selector": "^6.3",
+        "symfony/css-selector": "^7.0",
         "laminas/laminas-feed": "^2.10",
         "phake/phake": "^4.4",
         "predis/predis": "^1.1",
         "doctrine/coding-standard": "^9.0",
-        "symfony/webpack-encore-bundle": "^1.13",
-        "doctrine/doctrine-bundle": "^2.7",
-        "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.15",
-        "sentry/sentry-symfony": "^4.8",
-        "symfony/dotenv": "^6.3",
-        "symfony/config": "^6.3",
-        "symfony/scheduler": "^6.3",
-        "symfony/messenger": "^6.3",
+        "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^2.17",
+        "sentry/sentry-symfony": "^5.0",
+        "symfony/dotenv": "^7.0",
+        "symfony/scheduler": "^7.0",
+        "symfony/messenger": "^7.0",
         "tideways/symfony-messenger-middleware": "^1.1",
-        "symfony/runtime": "^6.3"
+        "symfony/runtime": "^7.0",
+        "symfony/webpack-encore-bundle": "^2.2",
+        "symfony/http-client": "^7.0"
     },
     "scripts": {
         "auto-scripts": {
@@ -44,10 +43,10 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.5",
-        "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "symfony/stopwatch": "^6.3",
-        "symfony/web-profiler-bundle": "^6.3"
+        "symfony/maker-bundle": "^1.52",
+        "doctrine/doctrine-fixtures-bundle": "^3.1",
+        "symfony/stopwatch": "^7.0",
+        "symfony/web-profiler-bundle": "^7.0"
     },
     "autoload": {
         "psr-4": {
@@ -60,10 +59,10 @@
         }
     },
     "extra": {
-        "platform": {"php": "7.4"},
+        "platform": {"php": "8.2"},
         "symfony": {
             "allow-contrib": true,
-            "require": "6.4.*"
+            "require": "7.0.*"
         }
     },
     "config": {

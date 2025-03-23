@@ -1,11 +1,11 @@
 {% if rfcs|length > 0 %}
     <div>
-        <h2 id="{{ title }}" class="text-lg font-semibold mb-2 p-2 uppercase rfc-list-header">
+        <h2 id="{{ title }}" class="title is-3 mb-4 mt-6 p-2 is-uppercase rfc-list-header">
             {{ title }}
-            <a href="#{{ title }}" class="rfc-anchor text-gray-600 ml-4">¶</a>
+            <a href="#{{ title }}" class="rfc-anchor has-text-grey ml-4">¶</a>
         </h2>
 
-        <div class="rfc-list flex flex-col flex-wrap items-start mb-10">
+        <div class="rfc-list  mb-10">
             {% for rfc in rfcs %}
                 {{ include('Default/rfc.html.twig', {rfc: rfc, logged_in: logged_in}) }}
             {% endfor %}

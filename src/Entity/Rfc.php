@@ -8,58 +8,48 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class Rfc
 {
     public const OPEN = 'open';
     public const CLOSE = 'close';
     public const ABORTED = 'aborted';
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
     public ?int $id;
 
-    /** @ORM\Column(type="string") */
+    #[ORM\Column(type: 'string')]
     public string $url = '';
 
-    /** @ORM\Column(type="string") */
+    #[ORM\Column(type: 'string')]
     public string $title = '';
 
-    /** @ORM\Column(type="string") */
+    #[ORM\Column(type: 'string')]
     public string $status = self::OPEN;
 
-    /** @ORM\Column(type="datetime", nullable=true) */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     public ?\DateTime $closeDate;
 
-    /** @ORM\Column(type="string") */
+    #[ORM\Column(type: 'string')]
     public string $targetPhpVersion = '';
 
-    /**
-     * @ORM\Column(type="json")
-     *
-     * @var array<string>
-     */
+    #[ORM\Column(type: 'json')]
+    /** @var array<string> */
     public array $discussions = [];
 
-    /**
-     * @ORM\OneToMany(targetEntity="Vote", mappedBy="rfc", indexBy="voteId", cascade={"PERSIST"})
-     *
-     * @var Collection<string, Vote>
-     */
+    #[ORM\OneToMany(targetEntity: Vote::class, mappedBy: 'rfc', indexBy: 'voteId', cascade: ['persist'])]
+    /** @var Collection<string, Vote> */
     public Collection $votes;
 
-    /** @ORM\Column(type="datetime") */
+    #[ORM\Column(type: 'datetime')]
     public \DateTime $firstVote;
 
-    /** @ORM\Column(type="boolean") */
+    #[ORM\Column(type: 'boolean')]
     public bool $rejected = false;
 
-    /** @ORM\Column(type="datetime") */
+    #[ORM\Column(type: 'datetime')]
     public \DateTime $created;
 
     public function __construct()

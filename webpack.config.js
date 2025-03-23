@@ -9,7 +9,6 @@ Encore
     .addStyleEntry('css/app', './assets/css/app.scss')
     .enableReactPreset()
     .enableSassLoader()
-    .enablePostCssLoader()
     .addExternals({
         Config: JSON.stringify({}),
     })

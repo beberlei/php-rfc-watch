@@ -1,57 +1,58 @@
 {% import 'Default/rfc_macros.html.twig' as macros %}
-<div class="w-full md:w-1/2 p-2">
-    <div class="bg-white rounded shadow-lg md:flex-auto flex-none">
-        <div class="px-6 py-4">
-            {% if rfc.status == 'open' %}
-                <span class="inline-block bg-blue-500 text-white rounded-full px-3 mr-2 text-sm font-semibold">Active</span>
-            {% endif %}
 
-            <a class="font-bold hover:underline no-underline break-words" href="{{ path('view', {'slug': rfc.slug}) }}">{{ rfc.title }}</a>
+<div class="card">
+    <div class="card-content">
+        {% if rfc.status == 'open' %}
+            <span class="tag is-info mr-2">Active</span>
+        {% endif %}
 
-            <span class="text-gray text-xs">
-                    (<a class="hover:underline no-underline break-words" href="{{ rfc.url }}" target="_blank">View on PHP.net</a>)
-                </span>
+        <a class="title is-4 has-text-dark hover-underline" href="{{ rfc.url }}">{{ rfc.title }}</a>
 
-            {% if rfc.targetPhpVersion %}
-                <div class="float-right"><span class="badge badge-secondary">PHP {{ rfc.targetPhpVersion }}</span></div>
-            {% endif %}
+        <span class="is-size-7">
+            (<a class="has-text-dark hover-underline" href="{{ path('view', {'slug': rfc.slug}) }}" target="_blank">Permalink</a>)
+        </span>
 
-            {{ include('Default/rfc_discussion.html.twig', { rfc: rfc }) }}
+        {% if rfc.targetPhpVersion %}
+            <div class="is-pulled-right">
+                <span class="tag is-secondary">PHP {{ rfc.targetPhpVersion }}</span>
+            </div>
+        {% endif %}
 
-            {% for question in rfc.questions %}
-                <div class="{% if not loop.last%}mb-8{% endif %}">
-                    <div class="mb-2 break-words">
-                        {{ question.question }}
-                    </div>
+        {{ include('Default/rfc_discussion.html.twig', { rfc: rfc }) }}
 
-                    <div class="mb-2">
-                        <div class="w-full">
-                            <div class="shadow w-full bg-grey-light rounded-sm flex items-stretch">
-                                {% for vote in question.results %}
-                                    {% set share = (vote.share * 100)|number_format(0) %}
+        {% for question in rfc.questions %}
+            <div class="{% if not loop.last%}mb-6{% endif %}">
+                <div class="mb-2 has-text-break">
+                    {{ question.question }}
+                </div>
 
-                                    {% if share > 0 %}
-                                        <div class="{{ macros.rfc_color(loop.index0) }} text-xs inline-block leading-none py-1 text-center text-white flex-none"
-                                             style="width: {{ share }}%">{{ share }} %
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
+                <div class="mb-2">
+                    <div class="is-fullwidth">
+                        <div class=" p-0 is-flex is-size-7 is-align-items-stretch" style="width: 100%">
+                            {% for vote in question.results %}
+                                {% set share = (vote.share * 100)|number_format(0) %}
+
+                                {% if share > 0 %}
+                                    <div class="{{ macros.rfc_color(loop.index0) }} is-inline-block has-text-white has-text-centered"
+                                         style="width: {{ share }}%">{{ share }} %
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                    </div>
-
-                    {% for vote in question.results %}
-                        <div class="mb-1">
-                            <div class="{{ macros.rfc_color(loop.index0) }} rounded-sm mr-2 h-2 w-2 inline-block"></div>
-                            <span class="text-xs">{{ vote.option }}: <span class="font-normal">{{ vote.votes }}</span></span>
-                        </div>
-                    {% endfor %}
-
-                    <div class="text-gray text-xs mt-2 ml-4">
-                        Total number of votes cast: <span class="font-normal">{{ question.votes }}</span>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+
+                {% for vote in question.results %}
+                    <div class="mb-1">
+                        <div class="{{ macros.rfc_color(loop.index0) }} is-inline-block mr-2" style="width: 8px; height: 8px;"></div>
+                        <span class="is-size-6">{{ vote.option }}: <span class="has-text-weight-normal">{{ vote.votes }}</span></span>
+                    </div>
+                {% endfor %}
+
+                <div class="has-text-grey is-size-7 mt-2 ml-4">
+                    Total number of votes cast: <span class="has-text-weight-normal">{{ question.votes }}</span>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 </div>

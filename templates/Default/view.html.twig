@@ -1,13 +1,13 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <p class="mb-4 text-center">
+    <p class="mb-4  has-text-centered">
         <small>
             <a class="underline" href="{{ path('notify') }}">Subscribe to RFC vote notifications</a>
         </small>
     </p>
 
-    <div class="flex justify-center">
+    <div class="column is-three-fifths is-offset-one-fifth">
         {{ include('Default/rfc.html.twig', { rfc: rfc, logged_in: logged_in }) }}
     </div>
 
