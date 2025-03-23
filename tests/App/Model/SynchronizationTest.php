@@ -78,11 +78,11 @@ class SynchronizationTest extends TestCase
         $this->assertEquals('7.4', $rfc->targetPhpVersion);
 
         $this->assertTrue(
-            isset($rfc->votes['doodle__form__add_arrow_functions_as_described_in_php_7.4']),
-            'Collection has key "doodle__form__add_arrow_functions_as_described_in_php_7.4"'
+            isset($rfc->votes['doodle__form__add_arrow_functions_as_described_in_php_74']),
+            'Collection has key "doodle__form__add_arrow_functions_as_described_in_php_74"'
         );
 
-        $vote = $rfc->votes['doodle__form__add_arrow_functions_as_described_in_php_7.4'];
+        $vote = $rfc->votes['doodle__form__add_arrow_functions_as_described_in_php_74'];
 
         $this->assertEquals('Add arrow functions as described in PHP 7.4?', $vote->question);
         $this->assertEquals(['Yes' => 37, 'No' => 7], $vote->currentVotes);

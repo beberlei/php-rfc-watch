@@ -148,9 +148,8 @@ class DefaultController extends AbstractController
 
     /**
      * @return array<string, mixed>
-     *
-     * @Route("/notify", name="notify")
      */
+    #[Route("/notify", name: "notify")]
     public function newsletterAction(): array
     {
         return [];
