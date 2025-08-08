@@ -46,7 +46,9 @@
         "symfony/maker-bundle": "^1.52",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "symfony/stopwatch": "^7.0",
-        "symfony/web-profiler-bundle": "^7.0"
+        "symfony/web-profiler-bundle": "^7.0",
+        "friendsofphp/php-cs-fixer": "^3.66",
+        "slevomat/coding-standard": "^7.2"
     },
     "autoload": {
         "psr-4": {
