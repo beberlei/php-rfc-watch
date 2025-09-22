@@ -24,7 +24,7 @@ class Vote
     public ?string $voteId = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    public string $question;
+    public ?string $question = null;
 
     #[ORM\Column(type: 'json')]
     /** @var array<string,int> */
